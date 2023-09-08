@@ -1,0 +1,114 @@
+   <style type="text/css">
+     @media(max-width: 768px){
+      .checkout-v2-wrapper.co-section--content_wrapper{
+        margin-top: 68px;
+
+      }
+     }
+   </style>
+
+
+   <div class="layout widget-type_system_widget_v4_bottom_navigation_bar_1" style="--hide-personal:false; --show-catalog-instead-home:false; --bage-bg:#7188D4; --bage-bg-is-dark:true; --bage-bg-minor-shade:#8095d9; --bage-bg-minor-shade-is-dark:true; --bage-bg-major-shade:#8ea0dd; --bage-bg-major-shade-is-dark:true; --bage-bg-half-shade:#b8c4ea; --bage-bg-half-shade-is-light:true; --layout-wide-bg:true; --layout-pt:0.5rem; --layout-pb:0.5rem; --hide-desktop:true; --hide-mobile:false;">
+  <div class="layout__content">
+    <div class="navigation-bar favorites">
+  
+  
+  
+
+  
+    <a href="{% url 'accounts:home' %}" class="navigation-bar__item navigation-bar__item-home is-active is-cur-page">
+      <span class="navigation-bar__icon icon-home"></span>
+      <span class="navigation-bar__title"></span>
+    </a>
+  
+
+  
+
+  <div class="navigation-bar__item" data-show-navigation-bar-panel="search">
+    <span class="navigation-bar__icon icon-search"></span>
+    <span class="navigation-bar__title"></span>
+  </div>
+  {% if request.user.is_authenticated %}
+  <a href="javascript:open_window('{% url 'accounts:cart_page' %}',700,300);" class="navigation-bar__item navigation-bar__item-cart ">
+    <span class="navigation-bar__icon icon-cart">
+      {% if request.user.is_authenticated %}
+      {% with  request.user.profile.get_cart_product_count as count_cart %}
+      {% if count_cart == 0 or count_cart is None %}
+      <span class="navigation-bar__bage cart-empty" data-cart-positions-count="">{{count_cart}}</span>
+      {% else %}
+      <span class="navigation-bar__bage" data-cart-positions-count="">{{count_cart}}</span>
+      {% endif %}
+    
+      {% endwith %}
+      {% else %}
+      {% endif %}
+    </span>
+    <span class="navigation-bar__title"></span>
+  </a>
+  
+        <a href="{% url 'accounts:favorite' %}" class="navigation-bar__item navigation-bar__item-favorites ">
+          <span class="navigation-bar__icon icon-favorites">
+            <span class="navigation-bar__bage favorites-empty" data-ui-favorites-counter="">0</span>
+          </span>
+          <span class="navigation-bar__title"></span>
+        </a>
+    {% else %}
+    <a href="{% url 'accounts:login_page' %}" class="navigation-bar__item navigation-bar__item-cart ">
+    <span class="navigation-bar__icon icon-cart">
+      {% if request.user.is_authenticated %}
+      {% with  request.user.profile.get_cart_product_count as count_cart %}
+      {% if count_cart == 0 or count_cart is None %}
+      <span class="navigation-bar__bage cart-empty" data-cart-positions-count="">{{count_cart}}</span>
+      {% else %}
+      <span class="navigation-bar__bage" data-cart-positions-count="">{{count_cart}}</span>
+      {% endif %}
+    
+      {% endwith %}
+      {% else %}
+      {% endif %}
+    </span>
+    <span class="navigation-bar__title"></span>
+  </a>
+  
+        <a href="{% url 'accounts:login_page' %}" class="navigation-bar__item navigation-bar__item-favorites ">
+          <span class="navigation-bar__icon icon-favorites">
+            <span class="navigation-bar__bage favorites-empty" data-ui-favorites-counter="">0</span>
+          </span>
+          <span class="navigation-bar__title"></span>
+        </a>
+        {% endif %}
+  
+
+   {% if request.user.is_authenticated %}
+    <a href="{% url 'accounts:my_account' %}" class="navigation-bar__item navigation-bar__item-profile">
+      <span class="navigation-bar__icon icon-user"></span>
+      <span class="navigation-bar__title"></span>
+    </a>
+    {% else %}
+     <a href="{% url 'accounts:login_page' %}" class="navigation-bar__item navigation-bar__item-profile">
+      <span class="navigation-bar__icon icon-user"></span>
+      <span class="navigation-bar__title"></span>
+    </a>
+    {% endif %}
+  
+</div>
+
+
+
+<div class="navigation-bar-panel navigation-bar-search" data-navigation-bar-panel="search">
+  <div action="" method="get">
+    <input type="hidden" name="lang" value="ru">
+    <div class="navigation-bar-search__controls">
+      <input class="form-control navigation-bar-search__field header__search-field_main" type="text" name="q" value="" placeholder="Поиск" autocomplete="off" data-search-field="" inprocess="false">
+      <button type="button" class="button navigation-bar-panel__hide-btn js-hide-navigation-bar-panel">
+        <span class="icon icon-times"></span>
+      </button>
+    </div>
+    <div class="navigation-bar-search__results header__search__results" data-search-result=""></div>
+  </div>
+</div>
+
+
+  </div>
+</div>
+

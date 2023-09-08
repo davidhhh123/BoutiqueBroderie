@@ -1,0 +1,437 @@
+{% load static %}
+
+<html lang="en">
+<head>
+	<html class="desktop landscape" style="--color-btn-bg:#7188D4; --color-btn-bg-is-dark:true; --bg:#FFFFFF; --bg-is-dark:false; --color-text: var(--color-text-dark); --color-text-minor-shade: var(--color-text-dark-minor-shade); --color-text-major-shade: var(--color-text-dark-major-shade); --color-text-half-shade: var(--color-text-dark-half-shade); --color-notice-warning-is-dark:false; --color-notice-success-is-dark:false; --color-notice-error-is-dark:false; --color-notice-info-is-dark:false; --color-form-controls-bg:var(--bg); --color-form-controls-bg-disabled:var(--bg-minor-shade); --color-form-controls-border-color:var(--bg-half-shade); --color-form-controls-color:var(--color-text); --is-editor:false; --vh:568px; --fixed-panels-bottom-offset:0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>
+  .fc.old-theme-fix {
+    overflow: visible;
+  }
+  .fc.old-theme-fix:after {
+    clear: both;
+    display: block;
+    content: '';
+  }
+  .tt-dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+    min-width: 160px;
+    margin-top: 2px;
+    padding: 5px 5px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+
+  }
+  .twitter-typeahead {
+    display: inherit !important;
+  }
+  .twitter-typeahead .tt-query, .twitter-typeahead .tt-hint {
+    margin-bottom: 0;
+  }
+  .tt-suggestion, .tt-footer {
+    display: block;
+    padding: 1px 0px 1px 10px;
+  }
+  .tt-suggestion.tt-is-under-cursor, .tt-footer.tt-is-under-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion.tt-is-under-cursor a, .tt-footer.tt-is-under-cursor a {
+    color: #fff;
+  }
+  .tt-suggestion.tt-cursor, .tt-footer.tt-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion p, .tt-footer p {
+    margin: 0;
+  }
+</style><style>
+  .spinner-container, .spinner {
+    position: absolute;
+    left:     0;
+    bottom:   0;
+    height:   100%;
+    width:    100%;
+  }
+
+  .spinner-container {
+    z-index:  900;
+    overflow: hidden;
+
+    &.animate .spinner {
+      &.slide-up {
+        opacity: 0;
+      }
+
+      &.fade-in {
+        opacity: 0;
+      }
+    }
+  }
+
+  .spinner {
+    height:   100%;
+    opacity:  0.6;
+    background: #fff;
+
+    &.slide-up {
+      @include transition-property(opacity, bottom);
+      @include transition-duration(0.3s);
+    }
+
+    &.fade-in {
+      @include transition-property(opacity);
+      @include transition-duration(1s);
+    }
+
+    .spin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+
+  .spinner {
+    background: rgba(255, 255, 255, 0);
+  }
+  .next_p, .finish_p{
+            width: 100px;
+    height: 45px;
+    
+    position: relative;
+    margin-top: 40px;
+    margin-left: calc(100% - 100px);
+    border: 1px solid #7c7c7c;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 40px;
+    cursor: pointer;
+
+          }
+          .svg_icon{
+            margin-left:10px;position: absolute;padding-top: 20px;
+          }
+            
+          .images_view_item{
+            width: calc(100% - 230px);
+    height: 124px;
+    margin-left: 230px;
+    position: absolute;
+    overflow-wrap: break-word;          }
+          .item_im{
+            width: 100px;height: 100px;background: red;position: relative;float: left;margin-left: 10px;margin-top: 10px;
+          }
+             .close_icon_ff, .close_icon_gg{
+                 position: absolute;
+    margin-top: 10px;
+    margin-left: 0;
+    color: #e37e7e;z-index: 999999999999;
+
+            }
+          .item_im img{
+            width: 100px;height: 100%;
+            object-fit: cover;
+          }
+          .item_im .close_ic{
+            width: 20px;height: 20px;position: absolute;display: inline-block;cursor: pointer;
+          }
+    .button_add_color, .button_add_size, .button_sub_category {
+            width: 95px;
+    height: 40px;
+    
+    position: relative;
+    margin-top: 20px;
+    
+    border: 1px solid #7c7c7c;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 35px;
+    cursor: pointer;
+
+          }
+    .button_sub_category{
+      width: 200px;
+    }
+    .category_class{
+      margin-top: 10px;
+    }
+          
+
+  .spinner-screen {
+    position: fixed;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+  }</style>
+  <style type="text/css">span.im-caret {
+    -webkit-animation: 1s blink step-end infinite;
+    animation: 1s blink step-end infinite;
+}
+
+@keyframes blink {
+    from, to {
+        border-right-color: black;
+    }
+    50% {
+        border-right-color: transparent;
+    }
+}
+
+@-webkit-keyframes blink {
+    from, to {
+        border-right-color: black;
+    }
+    50% {
+        border-right-color: transparent;
+    }
+}
+
+span.im-static {
+    color: grey;
+}
+
+div.im-colormask {
+    display: inline-block;
+    border-style: inset;
+    border-width: 2px;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+div.im-colormask > input {
+    position: absolute;
+    display: inline-block;
+    background-color: transparent;
+    color: transparent;
+    -webkit-appearance: caret;
+    -moz-appearance: caret;
+    appearance: caret;
+    border-style: none;
+    left: 0; /*calculated*/
+}
+
+div.im-colormask > input:focus {
+    outline: none;
+}
+
+div.im-colormask > input::-moz-selection{
+    background: none;
+}
+
+div.im-colormask > input::selection{
+    background: none;
+}
+div.im-colormask > input::-moz-selection{
+    background: none;
+}
+
+div.im-colormask > div {
+    color: black;
+    display: inline-block;
+    width: 100px; /*calculated*/
+}</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="{% static "img/favicon.ico" %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/mdb.lite.css" %}">
+    <link href="{% static "froala_editor/css/froala_editor.min.css" %}" type="text/css" media="all" rel="stylesheet"/>
+    <link href="{% static "froala_editor/css/froala_style.min.css" %}" type="text/css" media="all" rel="stylesheet"/>
+    <link href="{% static "css/emoji.css" %}" type="text/css" media="all" rel="stylesheet"/>
+    <link href="{% static "froala_editor/css/plugins/emoticons.min.css" %}" type="text/css" media="all"
+          rel="stylesheet"/>
+    <title>Добавить Блог</title>
+    {{ form.media }}
+</head>
+<style>
+    .searchbar {
+        margin-bottom: auto;
+        margin-top: auto;
+        height: 60px;
+        background-color: #353b48;
+        border-radius: 30px;
+        padding: 10px;
+    }
+
+    .search_input {
+        color: white;
+        border: 0;
+        outline: 0;
+        background: none;
+        width: 0;
+        caret-color: transparent;
+        line-height: 40px;
+        transition: width 0.4s linear;
+    }
+
+    .searchbar:hover > .search_input {
+        padding: 0 10px;
+        width: 200px;
+        caret-color: red;
+        transition: width 0.4s linear;
+    }
+
+    .searchbar:hover > .search_icon {
+        background: white;
+        color: #e74c3c;
+    }
+
+    .search_icon {
+        height: 40px;
+        width: 40px;
+        float: right;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        color: white;
+        text-decoration: none;
+    }
+</style>
+ <body class="adaptive settings_loaded" data-multi-lang="false" data-theme-template="account.orders2">
+    <noscript>
+<div class="njs-alert-overlay">
+  <div class="njs-alert-wrapper">
+    <div class="njs-alert">
+      <p></p>
+    </div>
+  </div>
+</div>
+</noscript>
+
+    <div class="page_layout page_layout-clear">
+      <header>
+      
+        <div class="layout widget-type_system_widget_v4_header_1" style="--logo-img:&#39;https://static.insales-cdn.com/files/1/7649/24960481/original/Frame.png&#39;; --logo-max-width:160px; --hide-menu-photo:false; --hide-search:false; --hide-language:false; --hide-compare:true; --hide-personal:false; --hide-favorite:false; --hide-total-price:false; --bage-bg:#7188D4; --bage-bg-is-dark:true; --bage-bg-minor-shade:#8095d9; --bage-bg-minor-shade-is-dark:true; --bage-bg-major-shade:#8ea0dd; --bage-bg-major-shade-is-dark:true; --bage-bg-half-shade:#b8c4ea; --bage-bg-half-shade-is-light:true; --bg-top-panel:#E5EBFF; --bg-top-panel-is-light:true; --bg-top-panel-minor-shade:#e5ebff; --bg-top-panel-minor-shade-is-light:true; --bg-top-panel-major-shade:#e4eaff; --bg-top-panel-major-shade-is-light:true; --bg-top-panel-half-shade:#d9e2ff; --bg-top-panel-half-shade-is-light:true; --menu-grid-list-min-width:220px; --menu-grid-list-row-gap:3rem; --menu-grid-list-column-gap:3rem; --subcollections-items-limit:10; --menu-img-ratio:1; --live-search:true; --header-wide-bg:true; --header-top-pt:0.5vw; --header-top-pb:0.5vw; --header-main-pt:1vw; --header-main-pb:2vw; --header-wide-content:false; --hide-desktop:false; --hide-mobile:false;">
+{% include 'layouts/header.html' %}
+
+      
+      </header>
+      <main>
+        <div class="layout">
+          <div class="layout__content">
+            <div class="checkout-v2-wrapper co-section--content_wrapper">
+              
+              {% include 'layouts/admin_profile_tabs.html' %}
+                
+<div class="co-checkout-block--padded">
+  
+  <div  class="display_step1">
+        
+
+        <div class="container overflow-y: scroll;" style="margin-bottom: 250px;">
+      <h2 id="post-header">Добавить Блог</h2>
+    <form method="POST" class="post-form" enctype="multipart/form-data">
+
+        {% csrf_token %}
+   <p style="font-weight: bold;padding-top: 20px;">Название блога  (русский)</p>
+  <input type="Name" class="form-control" name="Name_ru" id="Name_blog_ru" placeholder="Product Name..." required="" style="width: 100%;" value="{{ post.name_ru }}">
+    <p style="font-weight: bold;padding-top: 20px;">Название блога  (Английский)</p>
+  <input type="Name" class="form-control" name="Name_en" id="Name_blog_ru" placeholder="Product Name..." required="" style="width: 100%;" value="{{ post.name_en }}">
+    <p style="font-weight: bold;padding-top: 20px;">Название блога  (Армянский)</p>
+  <input type="Name" class="form-control" name="Name_am" id="Name_blog_ru" placeholder="Product Name..." required="" style="width: 100%;" value="{{ post.name_am }}">
+  <p style="font-weight: bold;padding-top: 20px;">Описание (русский)</p>
+        {{ form.as_p }}
+       
+      
+
+
+         <div style="width: 100%;position: relative;margin-top: 25px;padding-bottom: 50px;"><p style="font-weight: bold;padding-top: 20px;">Добавить видео (не обязательно) </p>
+         	<input type="file" name="file" id="file_inp_video"  multiple="multiple" >
+</div>
+        <button class="finish_p" type="submit" >Добавить</button>
+
+    </form>
+
+</div>
+        
+   </div></div></div></div></div></main>
+ {% include 'layouts/aside.html' %}
+    {% include 'layouts/footer.html' %}</div>
+      <link href="{% static 'css/my_accounts_features.css' %}" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static "js/popper.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/mdb.min.js" %}"></script>
+<script type="text/javascript" src="{% static "froala_editor/js/froala_editor.min.js" %}"></script>
+<script type="text/javascript" src="{% static "froala_editor/js/plugins/emoticons.min.js" %}"></script>
+<script type="text/javascript" src="{% static "froala_editor/js/plugins/entities.min.js" %}"></script>
+<script src="{% static 'js/my-layout.js' %}"></script>
+  <link href="{% static 'css/core-css.css' %}" rel="stylesheet" type="text/css">
+  
+  
+    <script type="text/javascript">
+    
+  </script>
+  <script src="{% static 'js/splide.min.js' %}"></script>
+  <link href="{% static 'css/splide.min.css' %}" rel="stylesheet" type="text/css">
+  <script src="{% static 'js/lazyload.min.js' %}"></script>
+  <script src="{% static 'js/jquery.cut-list.js' %}"></script>
+  <link href="{% static 'css/jquery.cut-list.css' %}" rel="stylesheet" type="text/css">
+  <script src="{% static 'js/microAlert.js' %}"></script>
+  <link href="{% static 'css/microAlert.css' %}" rel="stylesheet" type="text/css"><script src="{% static 'js/bodyScrollLock.min.js' %}"></script><script src="{% static 'js/js.cookie.min.js' %}"></script>
+  <link href="{% static 'css/my_accounts.css' %}" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+  <link href="{% static 'css/my_accounts_features.css' %}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" class="font-main" href="./Idea_files/stylesheet.css" media="all" onload="this.media=&#39;all&#39;">
+
+
+
+
+
+
+
+  <link rel="preload" class="font-main" as="style" href="./Idea_files/stylesheet.css">
+
+  <link rel="stylesheet" class="font-main" href="{% static 'css/stylesheet.css' %}" media="all" onload="this.media=&#39;all&#39;">
+
+
+
+
+
+
+
+<link rel="preload" as="style" href="{% static 'css/style.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}" media="all" onload="this.media=&#39;all&#39;">
+
+
+
+
+
+
+
+
+
+
+<link href="{% static 'css/theme.css' %}" rel="stylesheet" type="text/css" onload="document.body.classList.add(&#39;settings_loaded&#39;);">
+
+
+  <script src="{% static 'js/theme.js' %}" charset="utf-8"></script>
+
+
+</body>
+
+
+
+</html>
+ 

@@ -1,0 +1,143 @@
+{% extends 'template_eng/orders.html' %}
+{% load static %}
+{% load mathfilters %}
+  {% load rate %}
+
+{% block content %}
+ {% with rate=request|Get_pay_rate %}
+  <div class="infinite-container" >
+
+
+
+     {% for checkout in checkouts %}
+     <div class="infinite-item">
+
+  
+  <div class="cart-item " id="cart-item25" data-product-id="336490978" data-item-id="573211243">
+      
+      <a href="{% url 'accounts:orders_view' checkout.pk %}" class="item-title" style="">
+
+      order_id:{{ checkout.pk }}       {% if checkout.assembled == "assembled" %}
+      {% if checkout.status == "send" or checkout.status   == "collectionsend" %}
+
+
+           
+{% else %}
+
+Order collected
+ {% endif %}
+
+{% else %}
+{% if checkout.status == "joint" or checkout.status == "joint_green" %}
+Joint delivery
+{% else %}
+{% endif %}
+
+{% endif %}
+
+
+      </a>
+     <a href="{% url 'accounts:order_detalis' checkout.order_id %}"   style="width: 130px;margin-top: 35px;margin-left: 15px;">view check</a>
+
+     
+     
+
+     
+     
+
+      <div class="item-price">
+               <span class="price" data-cart-item-price=""> {{ checkout.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+      </div>
+      <div class="item-counter ">
+        
+        
+      </div>
+      <div class="item-total" data-cart-item-total-price=""> {{ checkout.price|div:rate.0|floatformat:2  }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</div>
+       <div class="item-link" data-cart-item-total-price=""> 
+
+       {% if checkout.status == "collectionpay" %}<a href="{% url 'accounts:collection_view' %}">
+            <p style="
+">View order</p></a>{% else %}<a href="{% url 'accounts:orders_view' checkout.pk %}">
+            <p style="
+">View order</p></a>{% endif %}  </div>
+      <div class="item-delete">
+        
+         
+        
+        
+        <!-- a -n  button style  -->
+
+
+ 
+
+{% if checkout.status == "send" or checkout.status == "collectionsend" %}
+            <button class="button js-item-change" type="button" data-item_change="25">Sent</button>
+{% else %}
+
+{% if checkout.delivery_check.pay_status == "dontpay" %}
+{% if checkout.assembled == "assembled" %}
+{% if checkout.status == "collectionpay"  %}
+<a href="{% url 'accounts:collection_view' %}">
+            <button class="button js-item-change" type="button" data-item_change="25">Pay for shipping</button>  </a>
+   
+    {% else %}
+     <a href="{% url 'accounts:checkout_delivery' checkout.delivery_check.pk %}">
+            <button class="button js-item-change" type="button" data-item_change="25">Pay for shipping</button>  </a><span style="margin-top: 5px;"> {{ checkout.delivery_check.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+    {% endif  %}
+
+{% else %}
+{% if checkout.status == "not_payjoint" or checkout.status == "collectionnotpay" or checkout.status == "notpay" %}
+<button class="button js-item-change" type="button" data-item_change="25">Not paid</button>
+
+{% else %}
+<button class="button js-item-change" type="button" data-item_change="25">Order Processing</button>
+{% endif %}
+  
+
+{% endif %}
+
+{% else %}
+
+ <button class="button js-item-change" type="button" data-item_change="25">Awaiting shipment</button>
+
+
+    
+   
+  
+ 
+
+{% endif %}
+
+          
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+       
+        
+      </div>
+    </div>
+
+
+</div>
+  {% endfor %}
+   
+       
+   
+  </div>
+
+  {% if checkouts.has_next %}
+    <a class="infinite-more-link" href="?page={{ checkouts.next_page_number }}">More</a>
+  {% endif %}
+
+  {% endwith %}
+{% endblock %}

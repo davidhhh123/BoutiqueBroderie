@@ -1,0 +1,3112 @@
+{% load static %}
+ {% load mathfilters %}
+  {% load rate %}
+  {% load all_go %}
+<!DOCTYPE html>
+<html style="--color-btn-bg:#7188D4; --color-btn-bg-is-dark:true; --bg:#FFFFFF; --bg-is-dark:false; --color-text: var(--color-text-dark); --color-text-minor-shade: var(--color-text-dark-minor-shade); --color-text-major-shade: var(--color-text-dark-major-shade); --color-text-half-shade: var(--color-text-dark-half-shade); --color-notice-warning-is-dark:false; --color-notice-success-is-dark:false; --color-notice-error-is-dark:false; --color-notice-info-is-dark:false; --color-form-controls-bg:var(--bg); --color-form-controls-bg-disabled:var(--bg-minor-shade); --color-form-controls-border-color:var(--bg-half-shade); --color-form-controls-color:var(--color-text); --is-editor:false; --vh:568px; --fixed-panels-bottom-offset:0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta data-config="{&quot;money_with_currency_format&quot;:{&quot;delimiter&quot;:&quot; &quot;,&quot;separator&quot;:&quot;.&quot;,&quot;format&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;show_price_without_cents&quot;:1},&quot;currency_code&quot;:&quot;RUR&quot;,&quot;default_currency&quot;:{&quot;title&quot;:&quot;Российский рубль&quot;,&quot;code&quot;:&quot;RUR&quot;,&quot;rate&quot;:1.0,&quot;format_string&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;price_separator&quot;:&quot;&quot;,&quot;is_default&quot;:true,&quot;price_delimiter&quot;:&quot;&quot;,&quot;show_price_with_delimiter&quot;:true,&quot;show_price_without_cents&quot;:true},&quot;facebook&quot;:{&quot;pixelActive&quot;:false,&quot;currency_code&quot;:&quot;RUB&quot;,&quot;use_variants&quot;:null},&quot;vk&quot;:{&quot;pixel_active&quot;:null,&quot;price_list_id&quot;:null},&quot;new_ya_metrika&quot;:false,&quot;ecommerce_data_container&quot;:&quot;dataLayer&quot;,&quot;common_js_version&quot;:null,&quot;vue_ui_version&quot;:null,&quot;feedback_captcha_enabled&quot;:&quot;1&quot;,&quot;account_id&quot;:1215183,&quot;hide_items_out_of_stock&quot;:false,&quot;forbid_order_over_existing&quot;:false,&quot;minimum_items_price&quot;:null,&quot;enable_comparison&quot;:true,&quot;locale&quot;:&quot;ru&quot;,&quot;client_group&quot;:null,&quot;consent_to_personal_data&quot;:{&quot;active&quot;:false,&quot;obligatory&quot;:true,&quot;description&quot;:&quot;Настоящим подтверждаю, что я ознакомлен и согласен с условиями \u003ca href=&#39;/page/oferta&#39; target=&#39;blank&#39;\u003eоферты и политики конфиденциальности\u003c/a\u003e.&quot;},&quot;recaptcha_key&quot;:&quot;6Lc0T0YUAAAAAAVNiH-_bnSC4E-YHMFTeYOqZyRx&quot;,&quot;checkout_float_order_content_block&quot;:false,&quot;sber_id_app_id&quot;:&quot;5b5a3c11-72e5-4871-8649-4cdbab3ba9a4&quot;,&quot;theme_generation&quot;:4,&quot;quick_checkout_captcha_enabled&quot;:false,&quot;max_order_lines_count&quot;:500}" name="shop-config" content=""><meta name="js-evnvironment" content="production"><meta name="default-locale" content="ru"><meta name="insales-redefined-api-methods" content="[]">
+       
+
+    <!-- meta -->
+<title>{{ product.name_en }} 
+</title><meta name="description" content="boutiquebroderie">
+<meta data-config="{&quot;static-versioned&quot;: &quot;1.38&quot;}" name="theme-meta-data" content="">
+<meta name="robots" content="index,follow">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://boutiquebroderie.com">
+    <meta property="og:title" content="boutiquebroderie">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/icons.css">
+<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32275806.ico">
+    
+    
+    
+
+
+<style type="text/css">
+    .icon-cart:before {
+    content: "\E80D";
+}
+ .item-counter {
+    grid-area: counter;
+    justify-self: self-end;
+    align-self: center;
+}
+ .counter {
+    display: flex;
+}
+.item-counter .counter-input, .item-counter .counter-input_two {
+    text-align: center;
+    border-radius: 0;
+    width: 4rem;
+    font-size: 1rem;
+    outline: none;
+    box-shadow: none;
+    height: 40px !important;
+    background: var(--bg-major-shade);
+    border: 2px solid var(--bg-major-shade);
+    margin-left: -2px;
+    margin-right: -2px;
+    color: var(--color-text);
+}
+.item-counter .counter-button {
+    font-size: 1rem;
+    line-height: 0;
+    height: 40px !important;
+    width: 2rem;
+    
+    
+}
+.comments, .video_fields{
+
+    padding-left: var(--layout-side-padding);
+    padding-right: var(--layout-side-padding);
+    margin-top: var(--layout-mt);
+    margin-bottom: var(--layout-mb);
+
+}
+.comments-list {
+    max-height: 500px;
+    height: 500px;
+    overflow-y: auto;
+}
+@media screen and (max-width: 767px){
+.comments,.video_fields {
+    --layout-side-padding: var(--layout-side-padding-mobile);
+}}
+@media screen and (max-width: 767px){
+.comments,.video_fields {
+    margin-top: calc(var(--layout-mt) * var(--layout-adaptive-vertical-indents-factor-decrease));
+    margin-bottom: calc(var(--layout-mb) * var(--layout-adaptive-vertical-indents-factor-decrease));
+}
+}
+ .comments li {
+    margin-left: 1rem;
+    text-decoration: none;
+}
+.comments li {
+    padding-bottom: 2rem;
+    margin-bottom: 3rem;
+}
+
+figure {
+    margin: 0;
+}
+.comments-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.comment {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+.comment-media {
+    max-width: 60px;
+    flex: 0 0 6rem;
+    height: 60px;
+    overflow: hidden;
+}
+.comment-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.comment-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 0rem 0 0 1.7rem;}
+.ratings-container {
+    display: flex;
+    align-items: center;
+    margin-left: 1px;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+}
+.ratings-full {
+    margin-right: 0;
+}
+.comment-rating .ratings-full {
+    margin-top: -32px;
+}
+.ratings-full {
+    cursor: pointer;
+}
+.ratings, .ratings-full {
+    font-family: "riode";
+}
+.ratings-full, .ratings {
+    position: relative;
+    font-family: 'riode';
+}
+.ratings {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.comment-user {
+    margin-bottom: 1rem;
+}
+.comment-date {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: .9rem;
+    color: #999;
+    line-height: 1;
+}
+.text-dark {
+    color: #222 !important;
+}
+.text-uppercase {
+    text-transform: uppercase !important;
+}
+.font-weight-semi-bold {
+    font-weight: 600 !important;
+}
+
+.comment p, .card-reviews .comment p {
+    margin-bottom: 0;
+}
+.comment-rating {
+    position: absolute;
+    right: 0;
+    top: 3rem;
+    font-size: 1.2rem;
+}
+.mt-5 {
+    margin-top: 2.5rem !important;
+}
+.btn.btn-link {
+    padding: 0;
+}
+.btn-icon-left i {
+    margin-right: 0.7rem;
+    margin-left: 0;
+}
+.btn_comments{
+    display: inline-block;
+    border: 2px solid #e4eaec;
+    background-color: #e4eaec;
+    color: #222;
+    outline: 0;
+    padding: 1.22em 2.78em;
+    font-weight: 700;
+    font-size: .9rem;
+    font-family: Poppins,sans-serif;
+    letter-spacing: 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+    text-align: center;
+    transition: color 0.3s,border-color 0.3s,background-color 0.3s,box-shadow 0.3s;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+
+</style>
+
+
+<!-- icons-->
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/default-skin.min.css">
+<style media="screen">
+  @supports (content-visibility: hidden) {
+    body:not(.settings_loaded) {
+      content-visibility: hidden;
+    }
+  }
+  @supports not (content-visibility: hidden) {
+    body:not(.settings_loaded) {
+      visibility: hidden;
+    }
+  }
+  .pswp__bg {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.pswp__zoom-wrap .pswp__img {
+    object-fit: contain;
+    background-color: transparent;
+    background: transparent;
+}
+.pswp__img--placeholder--blank {
+    background-color: #F2F3F5;
+}
+.pswp{
+    z-index: 99999999999999999;
+}
+.d-icon-times:before {
+    content: "\f343";
+}
+[class^="d-icon-"]::before, [class*=" d-icon-"]::before {
+    font-family: 'riode' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.display_none{
+    display: none !important;
+}
+.product-image-full {
+    display: block;
+    position: absolute;
+    padding: 0rem;
+    right: 0rem;
+    bottom: 0rem;
+    color: black;
+    font-size: 1.5rem;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity .3s;
+    z-index: 1;
+   
+}
+:hover>.product-image-full {
+    opacity: 1;
+}
+button.pswp__button--close:hover {
+    background-position: 0 -44px;
+}
+.pswp__ui--fit .pswp__caption, .pswp__ui--fit .pswp__top-bar {
+     background-color: transparent; 
+}
+.ratings:before {
+    content: "" "" "" "" "";
+    color: #d26e4b;
+    font-family: "riode";
+}
+.ratings-full:before {
+    content: "" "" "" "" "";
+    color: rgba(0,0,0,0.16);
+    font-family: "riode";
+}
+#product-tab-reviews .ratings-full, .card-reviews .ratings-full {
+    margin-right: 0;
+}
+.iframe_video{
+    max-width: 427px;
+    width: 100%;
+    max-height: 240px;height: 240px;
+}
+.zoom {
+            
+            position: relative;
+        }
+.zoom img {
+            display: block;
+
+        }
+        .splide__sr{
+  display: none !important;
+
+}
+
+        .zoom img::selection { background-color: transparent; }
+
+
+        @media screen and (max-width: 767px){
+.widget-type_system_widget_v4_product_4 .product__one-photo {
+    margin: 0 auto !important ;
+}}
+.widget-type_system_widget_v4_product_4 .product .splide__pagination {
+    justify-content: center !important;
+    display: block;
+   
+}
+.sales_prop{margin-top: 20px;position: absolute;}
+@media(max-width: 1210px){
+    .sales_prop{margin-top: 64px;position: absolute;}
+
+}
+@media(max-width: 1024px){
+    .sales_prop{margin-top: 20px;position: absolute;}
+
+}
+@media(max-width: 480px){
+    .sales_prop{margin-top: 132px !important;position: absolute;}
+
+}
+.max_count_error{
+    display: none;
+}
+.comments .file-input-wrappers img {
+    height: 100%;
+}
+.comments-list{
+    max-height: 500px;
+    height: 500px;
+    overflow-y: auto;
+
+}
+.comments .btn-play {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.comments .file-input-wrappers>* {
+    width: 6rem;
+    height: 6rem;
+    margin-right: 1rem;
+    cursor: zoom-in;
+}
+.comments .file-input-wrappers {
+    display: flex;
+}
+.images_inputs img{
+    width: 70px;height: 70px;object-fit: contain;margin-left: 5px;
+}
+</style>
+
+  </head>
+  {% with rate=request|Get_pay_rate %}
+  <body data-multi-lang="false" data-theme-template="index" data-sidebar-type="sticky" data-sidebar-position="left" class="settings_loaded">
+    <div class="preloader">
+      <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    </div>
+    <noscript>
+<div class="njs-alert-overlay">
+  <div class="njs-alert-wrapper">
+    <div class="njs-alert">
+      <p></p>
+    </div>
+  </div>
+</div>
+
+</noscript>
+
+<div class="pswp " tabindex="-1" role="dialog" aria-hidden="false" style="position: fixed; opacity: 1;">
+
+        <!-- Background of PhotoSwipe. It's a separate element as animating opacity is faster than rgba(). -->
+        <div class="pswp__bg" style="opacity: 1;"></div>
+
+        <!-- Slides wrapper with overflow:hidden. -->
+        <div class="pswp__scroll-wrap">
+
+            <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+            <div class="pswp__container" style="">
+                <div class="pswp__item" style="display: block;"></div>
+                <div class="pswp__item" style=""><div class="pswp__zoom-wrap" style=""><div class="pswp__img pswp__img--placeholder pswp__img--placeholder--blank" style="display: none;"></div><img class="pswp__img pswp__img_main" src="{{ product.avatar_p.url }}" alt="" style="display: block; width: calc(100% - 40px); height: calc(100%  - 40px);margin-top: 20px;margin-left: 20px; "></div></div>
+                <div class="pswp__item" style="display: block; transform: translate3d(700px, 0px, 0px);"></div>
+            </div>
+
+            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+            <div class="pswp__ui pswp__ui--one-slide pswp__ui--fit">
+
+                <div class="pswp__top-bar">
+
+                    <!--  Controls are self-explanatory. Order can be changed. -->
+
+                    <div class="pswp__counter">1 / 1</div>
+
+                    <button class="pswp__button pswp__button--close d-icon-times" aria-label="Close (Esc)" style="font-size: 35px;color: white;"></button>
+
+                    <button class="pswp__button pswp__button--zoom" aria-label="Zoom in/out"></button>
+
+                    <div class="pswp__preloader">
+                        <div class="loading-spin"></div>
+                    </div>
+                </div>
+
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div>
+                </div>
+
+                <button class="pswp__button--arrow--left" aria-label="Previous (arrow left)"></button>
+                <button class="pswp__button--arrow--right" aria-label="Next (arrow right)"></button>
+
+                <div class="pswp__caption pswp__caption--fake"><div class="pswp__caption__center"></div></div><div class="pswp__caption pswp__caption--empty">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page_layout page_layout_sticky_left ">
+      <header>
+      
+        <div class="layout widget-type_system_widget_v4_header_1" style="--logo-img:&#39;https://static.insales-cdn.com/files/1/7649/24960481/original/Frame.png&#39;; --logo-max-width:160px; --hide-menu-photo:false; --hide-search:false; --hide-language:false; --hide-compare:true; --hide-personal:false; --hide-favorite:false; --hide-total-price:false; --bage-bg:#7188D4; --bage-bg-is-dark:true; --bage-bg-minor-shade:#8095d9; --bage-bg-minor-shade-is-dark:true; --bage-bg-major-shade:#8ea0dd; --bage-bg-major-shade-is-dark:true; --bage-bg-half-shade:#b8c4ea; --bage-bg-half-shade-is-light:true; --bg-top-panel:#E5EBFF; --bg-top-panel-is-light:true; --bg-top-panel-minor-shade:#e5ebff; --bg-top-panel-minor-shade-is-light:true; --bg-top-panel-major-shade:#e4eaff; --bg-top-panel-major-shade-is-light:true; --bg-top-panel-half-shade:#d9e2ff; --bg-top-panel-half-shade-is-light:true; --menu-grid-list-min-width:220px; --menu-grid-list-row-gap:3rem; --menu-grid-list-column-gap:3rem; --subcollections-items-limit:10; --menu-img-ratio:1; --live-search:true; --header-wide-bg:true; --header-top-pt:0.5vw; --header-top-pb:0.5vw; --header-main-pt:1vw; --header-main-pb:2vw; --header-wide-content:false; --hide-desktop:false; --hide-mobile:false;">
+{% include 'layouts/header_eng.html' %}
+
+      
+      </header>
+
+      
+
+
+
+
+<!--main-->
+ <main>
+        
+  <div class="layout widget-type_system_widget_v4_breadcrumbs_1" style="--delemeter:1; --breadcrumb-color:#757C8E; --breadcrumb-color-is-dark:true; --breadcrumb-color-minor-shade:#838a9a; --breadcrumb-color-minor-shade-is-dark:true; --breadcrumb-color-major-shade:#9197a5; --breadcrumb-color-major-shade-is-dark:true; --breadcrumb-color-half-shade:#babec7; --breadcrumb-color-half-shade-is-light:true; --layout-wide-bg:false; --layout-pt:1vw; --layout-pb:1vw; --align:start; --layout-wide-content:false; --layout-edge:false; --hide-desktop:false; --hide-mobile:false;">
+  <div class="layout__content">
+    
+
+<div class="breadcrumb-wrapper delemeter_1">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item home">
+      <a class="breadcrumb-link" title="Главная" href="/">Главная</a>
+    </li>
+    
+      
+      
+      
+        
+        
+        
+      
+        
+        
+          <li class="breadcrumb-item" data-breadcrumbs="2">
+            <a class="breadcrumb-link" title="Новинки" href="#">{{ product.name_en }}</a>
+          </li>
+          
+        
+        
+      
+    
+  </ul>
+</div>
+
+
+
+
+  </div>
+</div>
+
+
+  <div class="layout widget-type_system_widget_v4_product_4" style="--display-property-color:text; --show-selected-variant-photos:false; --product-hide-variants-title:false; --product-hide-sku:false; --product-hide-compare:true; --product-hide-short-description:false; --product-hide-full-description:false; --product-hide-rating:true; --rating-color:#7188D4; --rating-color-is-dark:true; --rating-color-minor-shade:#8095d9; --rating-color-minor-shade-is-dark:true; --rating-color-major-shade:#8ea0dd; --rating-color-major-shade-is-dark:true; --rating-color-half-shade:#b8c4ea; --rating-color-half-shade-is-light:true; --sticker-font-size:0.9rem; --video-before-image:false; --img-ratio:1; --img-fit:contain; --manager-photo:&#39;https://static.insales-cdn.com/files/1/7896/14147288/original/manager.png&#39;; --layout-wide-bg:false; --layout-pt:1.5vw; --layout-pb:2.5vw; --layout-wide-content:false; --layout-edge:false; --hide-desktop:false; --hide-mobile:false;">
+  <div class="layout__content">
+    
+
+<div data-product-id="336490359" data-gallery-type="all-photos" class="product is-zero-count-shown without-old-price without-sku is-available product-inited" data-variant-photos="" data-variant-id="573209396" data-variant-first-img-id="618751824">
+  <div class="product__area-photo splide splide_main" style="height: fit-content;">
+    <div class="splide__track" id="splide-track">
+    
+      
+      
+<ul class="splide__list">
+    <li class="splide__slide">
+      <div class="product__one-photo">
+        <div class="img-ratio img-ratio_cover product__photo" data-fslightbox="product-photos-lightbox-618751824" data-type="image" href="#">
+          <div class="img-ratio__inner">
+            <picture><source srcset="{{ product.zoom_image.url }}" type="image/webp">
+                <span class='zoom zoom_images_main' id='ex1'>
+         <img src="{{ product.zoom_image.url }}" alt="many_photos" title="Роликовые коньки">
+        <p>Hover</p>
+    </span>
+
+
+               
+
+
+
+            </picture>
+
+          </div>
+        </div>
+        <div href="#" class="product-image-full" img_src="{{ product.zoom_image.url }}" style="cursor: pointer;"><i class="d-icon-zoom"></i></div>
+        
+  <div class="stickers">
+    
+    <div class="sticker sticker-sale" data-product-card-sale-value="" data-sticker-title="sticker-sale">{% if product.sale > 0 %}-{{product.sale}} % {% else %}{% endif %}</div>
+    <div class="sticker sticker-preorder" data-sticker-title="sticker-preorder">Предзаказ</div>
+  </div>
+
+      </div>
+
+
+
+</li>
+ {% for image in  images %}
+  <li class="splide__slide">
+      <div class="product__one-photo">
+        <div class="img-ratio img-ratio_cover product__photo" data-fslightbox="product-photos-lightbox-618751824" data-type="image" href="#">
+          <div class="img-ratio__inner">
+            <picture><source srcset="{{ image.avatar_e.url }}" type="image/webp">
+                <span class='zoom zoom_images_main' id='ex1'>
+         <img src="{{ image.avatar_e.url }}" alt="many_photos" title="Роликовые коньки">
+        <p>Hover</p>
+    </span>
+
+
+               
+
+
+
+            </picture>
+
+          </div>
+        </div>
+        <div href="#" class="product-image-full" img_src="{{ image.avatar_e.url }}" style="cursor: pointer;"><i class="d-icon-zoom"></i></div>
+        
+  <div class="stickers">
+    
+    <div class="sticker sticker-sale" data-product-card-sale-value="" data-sticker-title="sticker-sale"></div>
+    <div class="sticker sticker-preorder" data-sticker-title="sticker-preorder">Предзаказ</div>
+  </div>
+
+      </div>
+
+</li>
+    {% endfor %}
+     </ul>
+  </div>
+    
+  </div>
+
+  <div action="#" method="post" class="product__area-form product-form">
+    <div class="product-form__area-rating">
+      
+    </div>
+
+    <div class="product-form__area-sku">
+      
+        <div class="product__sku">
+          <span data-product-card-sku="{&quot;skuLabel&quot;: &quot;арт. &quot;}"></span>
+        </div>
+      
+    </div>
+
+    <div class="product-form__area-title" style="padding-bottom: 2px;">
+      <h1 class="product__title heading">
+        {{ product.name_en }} 
+      </h1>
+       <span>
+Are available:<span style="font-weight: bold;">yes</span></span>
+       
+
+        {% if product.counter_props.all %}
+          
+    {% for prop in product.counter_props.all %}
+  <div style="font-weight: 600;"> от {{ prop.counter_prop }} pcs price for 1 pcs  
+{% if  prop.counter_price_sale %}
+
+{{ prop.counter_price_sale|div:rate.0|floatformat:2 }}
+{% else %}
+{{ prop.counter_price|div:rate.0|floatformat:2 }}
+  
+{% endif %}
+
+
+&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</div>
+  {% endfor %}
+ 
+
+
+        {% else %}
+        {% endif %}
+
+
+
+        
+        
+<span class="max_count_error" style="color: red;font-weight: 600;">максимальное количество  </span>
+    </div>
+
+    <div class="product-form__area-price">
+      <div class="product__price">
+   {% if product.price %}
+{% if product.sale_price  %}
+               
+              
+              <span class="product__price-cur">{{product.sale_price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+                 <span class="product__price-old">{{product.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               
+              {% else %}
+              <span class="product__price-cur">{{product.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+             
+              {% endif %}
+              
+{% elif product.price_pcs %}
+ {% if product.sale_price_pcs  %}
+              
+              
+              <span class="product__price-cur">{{product.sale_price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+                <span class="product__price-old">{{product.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               
+              {% else %}
+              <span class="product__price-cur">{{product.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+             
+              {% endif %}
+{% elif product.price_size %}
+{% if product.sale_price_size  %}
+               
+              
+              <span class="product__price-cur">{{product.sale_price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               <span class="product__price-old">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               
+              {% else %}
+              <span class="product__price-cur">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+             
+              {% endif %}
+{% else %}
+{% if product.counter_props.all %}
+{% with firstname=product.count|checkcounters:product.product.pk %}
+    {% if firstname is not None %}
+     <span class="product__price-cur">{{firstname|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+   
+  <span class="product__price-old">{{product.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+             
+    {% else %}
+    <span class="product__price-cur">{{product.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+      
+             
+    {% endif %}
+  {% endwith %}
+{% else %}
+<span class="product__price-cur">{{product.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+      
+{% endif %}
+{% endif %}
+
+
+        
+      </div>
+    </div>
+
+    <div class="product-form__area-variants-bundle">
+      
+        
+          <input type="hidden" name="variant_id" value="573209396">
+        
+      
+    </div>
+ <div class="product-form__area-controls">
+      <div class="product__controls">
+        <div class="product__controls-left">
+          <div class="product__buy-btn-area" id="product-detail-buy-area" style="height: auto; --product-buy-fixed-position:61.7812px;">
+            <div class="product__buy-btn-area-inner">
+              <div class="add-cart-counter" data-add-cart-counter="{&quot;step&quot;: &quot;1&quot;}" data-add-cart-counter-max-quantity="null" data-add-cart-counter-is-ready="">
+
+                <button type="button" class="button button_size-l add-cart-counter__btn" data-add-cart-counter-btn="" product_pk = "{{ product.pk }}">
+                  <span class="button__icon icon-cart"></span>
+                  <span class="add-cart-counter__btn-label">Add Cart</span>
+                </button>
+
+                <div class="add-cart-counter__controls">
+                  <button data-add-cart-counter-minus="" class="button button_size-l  add-cart-counter__controls-btn" type="button">-</button>
+                  <a href="#" class="button button_size-l  add-cart-counter__detail">
+                  <span class="add-cart-counter__detail-text">В корзине <span data-add-cart-counter-count="">0</span> шт</span>
+                  <span class="add-cart-counter__detail-dop-text">Перейти</span>
+                  </a>
+                  <button data-add-cart-counter-plus="" class="button button_size-l  add-cart-counter__controls-btn" type="button">+</button>
+                </div>
+              </div>
+              <button data-product-card-preorder="" class="button button_size-l button_wide product__preorder-btn" type="button" data-preorder-product-name="Роликовые коньки" data-preorder-variant="">Предзаказ</button>
+            </div>
+
+            <span class="button button_size-l product__not-available">Нет в наличии</span>
+
+            {% if request.user.is_superuser %}
+             <span class="button button_size-l favorites_btn add_sales_btn favorites-not-added" data-ui-favorites-trigger="336490359"  style="font-size: 10px;">
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 128 128" width="128" height="128">    <path d="M 79.605469 6.5703125 C 76.811719 6.40625 74.075391 7.3242187 71.900391 9.1992188 L 67.199219 13.199219 C 65.299219 14.799219 62.599219 14.799219 60.699219 13.199219 L 56 9.1992188 C 53.2 6.7992188 49.2 5.9992187 45.5 7.1992188 C 41.8 8.3992187 39.099219 11.299609 38.199219 15.099609 L 36.800781 21.099609 C 36.200781 23.499609 33.999609 25.100391 31.599609 24.900391 L 25.5 24.400391 C 21.7 24.100391 17.999219 25.800391 15.699219 28.900391 C 13.399219 32.000391 13.000391 35.999609 14.400391 39.599609 L 16.699219 45.300781 C 17.599219 47.600781 16.799219 50.2 14.699219 51.5 L 9.5 54.699219 C 6.2 56.699219 4.3007813 60.199609 4.3007812 64.099609 C 4.3007812 67.999609 6.3 71.5 9.5 73.5 L 14.699219 76.699219 C 16.799219 77.999219 17.599219 80.600391 16.699219 82.900391 L 14.400391 88.599609 C 12.900391 92.199609 13.399219 96.200781 15.699219 99.300781 C 17.999219 102.40078 21.6 104.10078 25.5 103.80078 L 31.599609 103.30078 C 34.099609 103.10078 36.300781 104.69961 36.800781 107.09961 L 38.199219 113.09961 C 39.099219 116.79961 41.8 119.8 45.5 121 C 46.6 121.4 47.800391 121.5 48.900391 121.5 C 51.500391 121.5 54 120.60039 56 118.90039 L 60.699219 114.90039 C 62.599219 113.30039 65.299219 113.30039 67.199219 114.90039 L 71.900391 118.90039 C 74.800391 121.40039 78.800391 122.2 82.400391 121 C 86.100391 119.8 88.799219 116.89961 89.699219 113.09961 L 91.099609 107.09961 C 91.699609 104.69961 93.900781 103.10078 96.300781 103.30078 L 102.40039 103.80078 C 106.20039 104.10078 109.89922 102.40078 112.19922 99.300781 C 114.49922 96.200781 114.9 92.199609 113.5 88.599609 L 111.19922 82.900391 C 110.29922 80.500391 111.09922 77.899609 113.19922 76.599609 L 118.40039 73.400391 C 121.70039 71.400391 123.59961 67.9 123.59961 64 C 123.59961 60.1 121.60039 56.599609 118.40039 54.599609 L 113.19922 51.400391 C 111.09922 50.100391 110.29922 47.499219 111.19922 45.199219 L 113.5 39.5 C 115 35.9 114.49922 31.900781 112.19922 28.800781 C 109.89922 25.700781 106.30039 24.000781 102.40039 24.300781 L 96.300781 24.800781 C 93.800781 25.000781 91.599609 23.4 91.099609 21 L 89.699219 15 C 88.799219 11.3 86.100391 8.2996094 82.400391 7.0996094 C 81.475391 6.7996094 80.536719 6.625 79.605469 6.5703125 z M 48.570312 12.777344 C 49.83125 12.707031 51.049609 13.1 52.099609 14 L 56.800781 18 C 60.900781 21.5 66.899609 21.5 71.099609 18 L 75.800781 14 C 77.200781 12.8 78.899609 12.5 80.599609 13 C 82.299609 13.5 83.500391 14.899609 83.900391 16.599609 L 85.300781 22.599609 C 86.600781 27.899609 91.400781 31.4 96.800781 31 L 102.90039 30.5 C 104.70039 30.4 106.30078 31.1 107.30078 32.5 C 108.30078 33.9 108.60039 35.700781 107.90039 37.300781 L 105.59961 43 C 103.49961 48 105.4 53.699609 110 56.599609 L 115.19922 59.800781 C 116.69922 60.700781 117.59961 62.299609 117.59961 64.099609 C 117.59961 65.899609 116.69922 67.400391 115.19922 68.400391 L 110.09961 71.5 C 105.49961 74.3 103.59922 80.099609 105.69922 85.099609 L 108 90.800781 C 108.7 92.400781 108.50039 94.199609 107.40039 95.599609 C 106.30039 96.999609 104.7 97.799609 103 97.599609 L 96.900391 97.099609 C 91.500391 96.699609 86.600391 100.2 85.400391 105.5 L 84 111.5 C 83.6 113.2 82.399219 114.49961 80.699219 115.09961 C 78.999219 115.59961 77.300391 115.29961 75.900391 114.09961 L 71.199219 110.09961 C 67.099219 106.59961 61.100391 106.59961 56.900391 110.09961 L 52.199219 114.09961 C 50.799219 115.29961 49.100391 115.59961 47.400391 115.09961 C 45.700391 114.59961 44.499609 113.2 44.099609 111.5 L 42.699219 105.5 C 41.499219 100.5 37.1 97.099609 32 97.099609 L 31.099609 97.099609 L 25 97.599609 C 23.2 97.699609 21.599609 96.999609 20.599609 95.599609 C 19.599609 94.199609 19.3 92.400781 20 90.800781 L 22.300781 85.099609 C 24.400781 80.099609 22.500391 74.4 17.900391 71.5 L 12.699219 68.300781 C 11.199219 67.400781 10.300781 65.8 10.300781 64 C 10.300781 62.2 11.199219 60.699219 12.699219 59.699219 L 17.900391 56.5 C 22.500391 53.7 24.400781 47.900391 22.300781 42.900391 L 20 37.300781 C 19.3 35.700781 19.499609 33.9 20.599609 32.5 C 21.599609 31.1 23.3 30.3 25 30.5 L 31.099609 31 C 36.499609 31.4 41.399609 27.899609 42.599609 22.599609 L 44 16.599609 C 44.4 14.899609 45.600781 13.6 47.300781 13 C 47.725781 12.875 48.15 12.800781 48.570312 12.777344 z M 51 42 C 46 42 42 46 42 51 C 42 56 46 60 51 60 C 56 60 60 56 60 51 C 60 46 56 42 51 42 z M 78.863281 44.050781 C 78.100781 44.100781 77.350781 44.449609 76.800781 45.099609 L 54.800781 70 C 53.700781 71.2 53.799609 73.099219 55.099609 74.199219 C 55.699609 74.699219 56.399609 75 57.099609 75 C 57.899609 75 58.800391 74.7 59.400391 74 L 81.400391 49.099609 C 82.300391 47.699609 82.2 45.800781 81 44.800781 C 80.4 44.250781 79.625781 44.000781 78.863281 44.050781 z M 51 48 C 52.7 48 54 49.3 54 51 C 54 52.7 52.7 54 51 54 C 49.3 54 48 52.7 48 51 C 48 49.3 49.3 48 51 48 z M 77 68 C 72 68 68 72 68 77 C 68 82 72 86 77 86 C 82 86 86 82 86 77 C 86 72 82 68 77 68 z M 77 74 C 78.7 74 80 75.3 80 77 C 80 78.7 78.7 80 77 80 C 75.3 80 74 78.7 74 77 C 74 75.3 75.3 74 77 74 z M 49 78 A 3 3 0 0 0 46 81 A 3 3 0 0 0 49 84 A 3 3 0 0 0 52 81 A 3 3 0 0 0 49 78 z"/></svg></span>
+
+<div class="sales_prop display_none" >
+     <input type="Number" class="form-control" name="Name" id="sales" placeholder="Скидка" required="">
+     <span class="cut-block__controls-link _hide button-link js-hide-cut-block add_sales">
+                Add
+              </span>
+    
+
+</div>
+        
+            {% else %}
+
+            <span class="button button_size-l favorite_on favorites_btn favorites-not-added" data-ui-favorites-trigger="336490359" pk="{{ product.pk }}">
+            <span class="btn-icon icon-favorites-o"></span>
+            <span class="btn-icon icon-favorites-f"></span>
+            </span>
+            {% endif %}
+            
+
+            
+            
+            
+          </div>
+        </div>
+         <div class="product__controls-right">
+
+          
+            <div class="product__buy-one-click">
+              <span class="button-link" data-quick-checkout="[data-product-id=&#39;336490359&#39;]">
+               <div class="item-counter ">
+
+                {% if product.price_size %}
+                <style type="text/css">
+                    .widget-type_system_widget_v4_product_4 .add-cart-counter {
+   
+    
+    min-width: calc(var(--buy-btn-min-width) - 1rem) !important;
+}
+                </style>
+                 <div class="counter" data-quantity="" data-quantity-change-init="true">
+          <button type="button" data-quantity-change="-1" class="counter-button button button_size-s is-count-down "><span class="icon icon-minus"></span></button>
+          <input type="text" value="{{ product.min_size }} sm" name="cart[quantity][573211243]" pk="{{product.pk}}" class="counter-input counter_size form-control form-control_size-s" min="{{ product.min_size }}" style="width: 5rem;">
+          <button type="button" data-quantity-change="1" pk="{{product.pk}}" class="counter-button button button_size-s is-count-up "><span class="icon icon-plus"></span></button>
+        </div>
+
+      {% elif product.price_pcs %}
+
+      <div class="item-counter ">
+          <div class="counter" data-quantity="" data-quantity-change-init="true">
+          <button type="button" data-quantity-change="-1" class="counter-button button button_size-s is-count-down_count "><span class="icon icon-minus"></span></button>
+          <input type="text" value="1" name="cart[quantity][573211243]" pk="{{product.pk}}" class="counter-input_two form-control form-control_size-s" min="1">
+          <button type="button" data-quantity-change="1" pk="{{product.pk}}" class="counter-button button button_size-s is-count-up_count "><span class="icon icon-plus"></span></button>
+          <span style="margin-top: 5px;margin-left: 5px;">pcs</span>
+        </div>
+        
+      </div>
+        {% else %}
+         <div class="counter" data-quantity="" data-quantity-change-init="true">
+          <button type="button" data-quantity-change="-1" class="counter-button button button_size-s is-count-down "><span class="icon icon-minus"></span></button>
+          <input type="text" value="1" name="cart[quantity][573211243]" pk="{{product.pk}}" class="counter-input form-control counters form-control_size-s" min="1" status="1">
+          <button type="button" data-quantity-change="1"  pk="{{product.pk}}" class="counter-button button button_size-s is-count-up "><span class="icon icon-plus"></span></button>
+        </div>
+        {% endif %}
+      </div>
+              </span>
+            </div>
+          
+        </div>
+       
+
+        
+       
+        
+
+
+
+
+      </div>
+    </div>
+
+     <div class="product-form__area-short-description">
+         {% if product.size_pcs %}
+         <div class="item-counter ">
+          <div class="counter" data-quantity="" data-quantity-change-init="true">
+          <button type="button" data-quantity-change="-1" class="counter-button button button_size-s is-count-down_count "><span class="icon icon-minus"></span></button>
+          <input type="text" value="1" name="cart[quantity][573211243]" pk="{{product.pk}}" class="counter-input_two form-control form-control_size-s" min="1">
+          <button type="button" data-quantity-change="1" pk="{{product.pk}}" class="counter-button button button_size-s is-count-up_count "><span class="icon icon-plus"></span></button>
+          <span style="margin-top: 5px;margin-left: 5px;">pcs</span>
+        </div>
+        
+      </div>
+        {% else %}
+        
+      {% endif %}
+      
+        <div class="product__short-description static-text">
+          
+        </div>
+      
+    </div>
+  </div>
+
+ <div class="product__area-description" style="padding-top: 10px;">
+    
+      
+        <div class="product__full-description static-text">
+          <div class="product__block-title">
+Description</div>
+          <div class="cut-block js-cut-block is-hidden is-full" data-max-height="70">
+            <div class="cut-block__content-wrapper" style="height: 100%;max-height: 400px;">
+              <div class="cut-block__content">
+                <div class="product__description-content static-text">
+                  <p>{{ product.description_eng|urlize|linebreaks }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="cut-block__controls">
+              <span class="cut-block__controls-link _show button-link js-show-cut-block" >
+                Show
+              </span>
+              <span class="cut-block__controls-link _hide button-link js-hide-cut-block">
+                Hide on
+              </span>
+            </div>
+          </div>
+        </div>
+      
+    
+  </div>
+
+  <div class="product__area-properties">
+    
+
+    
+  </div>
+
+
+  <div class="product__area-calculate-delivery">
+    <div class="product__calculate-delivery">
+      
+
+      
+
+
+    </div>
+  </div>
+</div>
+
+
+  </div>
+</div>
+
+{% if product.video_link %}
+<div class="video_fields">
+     <div class="product__block-title" style="font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;">
+            Video
+            
+          </div>
+          <iframe class="iframe_video"  src="{{product.video_link}}"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+{% elif product.video %}
+<div class="video_fields">
+     <div class="product__block-title" style="font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;">
+            Video
+            
+          </div>
+         <video class="iframe_video" controls>
+  <source src="{{product.video.url}}" type="video/mp4"></video>
+</div>{% endif %}
+
+<div class="layout widget-type_system_widget_v4_products_related_1" style="--hide-title:false; --hide-description:true; --hide-variants:true; --hide-variants-title:true; --hide-sku:true; --align-title:left; --count_special_products:12; --slide-width:180px; --img-ratio:1; --img-fit:contain; --product-desc-limit:10; --product-border-radius:4px; --sticker-font-size:0.9rem; --layout-wide-bg:false; --slide-gap:30rem; --layout-pt:2.5vw; --layout-pb:3vw; --layout-wide-content:false; --layout-edge:false; --hide-desktop:false; --hide-mobile:false; --slide-width-mobile:150px;">
+  <div class="layout__content">
+    
+
+
+
+<div class="special-products js-special-products">
+  <div class="special-products__head">
+    <div class="h2 special-products__title heading">
+You may also like</div>
+    <div class="special-products__slider-controls">
+      <div class="special-products__slider-arrow special-products__slider-arrow-prev js-move-slide is-disabled">
+        <span class="special-products__slider-arrow-icon icon-arrow-left"></span>
+      </div>
+      <div class="special-products__slider-arrow special-products__slider-arrow-next js-move-slide">
+        <span class="special-products__slider-arrow-icon icon-arrow-right"></span>
+      </div>
+    </div>
+  </div>
+ <div class="splide splide_two js-collections-slider splide--slide splide--ltr splide--draggable is-active" data-slide-min-width="205" data-slide-min-width-mobile="130" data-slide-gap="24" data-slide-gap-mobile="20" data-mobile-right-padding="30" id="splide02" style="visibility: visible;">
+
+
+
+   
+    <div class="splide__track" id="splide-track">
+      <div class="splide__list"  id="splide02-list" style="transform: translateX(0px);">
+      
+      
+      {% for product_rec in product_recommendation %}
+     <div class="splide__slide is-visible" id="splide02-slide02" style="margin-right: 24px; width: 220px;" aria-hidden="false" tabindex="0">
+        <div action="#" method="post" data-product-id="336490608" class="product-preview is-zero-count-shown with-sale-value with-old-price without-sku is-available product-inited">
+          <div class="product-preview__content">
+            <div class="product-preview__area-photo">
+              <div class="product-preview__photo">
+                
+                  <span class="button button_size-s favorites_btn favorites-not-added" pk="{{ product_rec.pk }}">
+                    <span class="btn-icon icon-favorites-o"></span>
+                    <span class="btn-icon icon-favorites-f"></span>
+                  </span>
+                
+                <div class="img-ratio img-ratio_cover">
+                  <div class="img-ratio__inner">
+                    
+                    <a href="{% url 'accounts:product_detalis_view' product_rec.pk %}">
+                      
+                      
+
+                      <picture>
+                        <source media="(min-width:481px)" data-srcset="{{ product_rec.avatar_p.url }}" type="image/webp" class="lazyload" srcset="{{ product_rec.avatar_p.url }}">
+                        <source media="(max-width:480px)" data-srcset="{{ product_rec.avatar_p.url }}" type="image/webp" class="lazyload" srcset="{{ product_rec.avatar_p.url }}">
+
+                        <img data-src="{{ product_rec.avatar_p.url }}" class="lazyload loaded" alt="Велосипед" loading="lazy" src="{{ product_rec.avatar_p.url }}" data-ll-status="loaded">
+                      </picture>
+                    </a>
+                  </div>
+                </div>
+                <div class="product-preview__available">
+                  <span data-product-card-available="{
+                    &quot;availableText&quot;: &quot;В наличии&quot;,
+                    &quot;notAvailableText&quot;: &quot;Нет в наличии&quot;
+                    }">В наличии</span>
+                </div>
+                <div class="stickers">
+                  
+                  <div class="sticker sticker-sale" data-product-card-sale-value="" data-sticker-title="sticker-sale">{% if product.sale > 0 %}-{{product.sale}} %{% else %}{% endif %}</div>
+                  <div class="sticker sticker-preorder" data-sticker-title="sticker-preorder">Предзаказ</div>
+                </div>
+              </div>
+            </div>
+            <div class="product-preview__area-sku">
+              <div class="product-preview__sku">
+                
+                <span data-product-card-sku="{
+                  &quot;skuLabel&quot;: &quot;арт. &quot;
+                  }"></span>
+                
+              </div>
+            </div>
+
+            <div class="product-preview__area-title">
+              <div class="product-preview__title">
+                <a href="{% url 'accounts:product_detalis_view' product_rec.pk %}">{{ product_rec.name_am }}</a>
+              </div>
+            </div>
+
+            <div class="product-preview__area-description">
+              
+            </div>
+
+            <div class="product-preview__area-variants">
+              
+                <input type="hidden" name="variant_id" value="573210084">
+              
+            </div>
+
+            <div class="product-preview__area-bottom">
+              <div class="product-preview__price">
+
+                <span class="product-preview__price-old" data-product-card-old-price="">18 000&nbsp;₽</span>
+                <span class="product-preview__price-cur" data-product-card-price-from-cart="">16 000&nbsp;₽</span>
+              </div>
+
+              <div class="product-preview__price-cur product-preview__price-range">
+                
+               
+
+
+{% if product.price %}
+{% if product.sale_price  %}
+               <span class="product-preview__price-old">{{product.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              
+              <span class="product-preview__price-cur">{{product.sale_price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               
+              {% else %}
+              <span class="product-preview__price-cur">{{product.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+             
+              {% endif %}
+{% elif product.price_pcs %}
+ {% if product.sale_price_pcs  %}
+               <span class="product-preview__price-old">{{product.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              
+              <span class="product-preview__price-cur">{{product.sale_price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               
+              {% else %}
+              <span class="product-preview__price-cur">{{product.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+             
+              {% endif %}
+{% elif product.price_size %}
+{% if product.sale_price_size  %}
+               <span class="product-preview__price-old">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              
+              <span class="product-preview__price-cur">{{product.sale_price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               
+              {% else %}
+              <span class="product-preview__price-cur">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+             
+              {% endif %}
+{% else %}
+{% if product.counter_props.all %}
+{% with firstname=product.count|checkcounters:product.product.pk %}
+    {% if firstname is not None %}
+     <span class="product-preview__price-cur">{{firstname|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+   
+
+             
+    {% else %}
+    <span class="product-preview__price-cur">{{product.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+      
+             
+    {% endif %}
+  {% endwith %}
+{% else %}
+<span class="product-preview__price-cur">{{product.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+      
+{% endif %}
+{% endif %}
+              
+              
+              </div>
+
+              <div class="product-preview__controls">
+                <div class="add-cart-counter" data-add-cart-counter="" data-add-cart-counter-max-quantity="null" data-add-cart-counter-is-ready="">
+                    {% if product.price_pcs or product.price_size %}
+ <a href="{% url 'accounts:product_detalis_view' product.pk %}" class="button add-cart-counter__btn "  data-add-cart-counter-btn="">
+<span class="add-cart-counter__btn-icon icon-cart"></span>
+                </a>
+{% else %}
+ <button type="button" class="button add-cart-counter__btn add_cart_btn_counter_ind" pk = "{{product.pk}}"  {% if product.price %}
+ind="count"
+
+{% else %}
+{% if product.counter_props.all %}
+ind="counter"
+{% else %}
+ind="count"
+{% endif %}
+{% endif %} data-add-cart-counter-btn="">
+<span class="add-cart-counter__btn-icon icon-cart"></span>
+                </button>
+{% endif %}
+
+                  
+                  <div class="add-cart-counter__controls">
+                    <button data-add-cart-counter-minus="" class="button add-cart-counter__controls-btn" type="button">-</button>
+                    <a href="https://demo-idea.myinsales.ru/cart_items" class="button add-cart-counter__detail">
+                      <span class="add-cart-counter__detail-text">
+                        <span class="add-cart-counter__detail-label">В корзине</span>
+                        <span data-add-cart-counter-count="" class="add-cart-counter__detail-count">0</span>
+                        шт
+                      </span>
+                      <span class="add-cart-counter__detail-dop-text">Перейти</span>
+                    </a>
+                    <button data-add-cart-counter-plus="" class="button add-cart-counter__controls-btn" type="button">+</button>
+                  </div>
+                </div>
+
+                <button data-product-card-preorder="" class="button button_wide product-preview__preorder-btn" type="button" data-preorder-product-name="Велосипед" data-preorder-variant="">Предзаказ</button>
+
+                <a href="https://demo-idea.myinsales.ru/collection/frontpage/product/velosiped" class="button button_wide product-preview__detail-btn">Подробнее</a>
+
+                <a href="https://demo-idea.myinsales.ru/collection/frontpage/product/velosiped" class="button button_wide product-preview__detail-select-btn">Выбрать</a>
+              </div>
+             </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      
+      
+      
+    
+      
+      </div>
+    </div>
+   
+    
+
+  </div>
+</div>
+
+
+
+
+
+
+  </div>
+</div>
+
+
+
+      </main>
+<link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/product_page.css" rel="stylesheet" type="text/css">
+
+
+      
+     {% include 'layouts/aside_eng.html' %}
+      
+
+    {% include 'layouts/footer_eng.html' %}
+    <style type="text/css">
+        .widget-type_system_widget_v4_product_4 .product .splide__pagination {
+    justify-content: center !important;
+    display: flex;
+   
+}
+    </style>
+    </div>
+    
+    <div data-fixed-panels="bottom">
+      
+        
+
+      
+    </div>
+
+   
+
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my-layout.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/core-css.css" rel="stylesheet" type="text/css">
+  
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/splide.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/splide.min.css" rel="stylesheet" type="text/css">
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/lazyload.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/main.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/photoswipe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/photoswipe-ui-default.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.zoom.js"></script>
+  
+
+
+  
+
+<script>
+        $(document).ready(function(){
+            $('.zoom_images_main').zoom();
+          
+        });
+    </script>
+<script>
+     if ($(".cut-block__content-wrapper").height()>400){
+         $(".js-show-cut-block").css("display", "block")
+
+    }
+      $(".js-show-cut-block").on("click", function(){
+        $(".cut-block__content-wrapper").css({"overflow": "visible","max-height":"800px"})
+        $(this).css("display", "none")
+         $(".js-hide-cut-block").css("display", "block")
+
+    })
+    $(".js-hide-cut-block").on("click", function(){
+         $(".cut-block__content-wrapper").css({"overflow": "hidden","max-height":"400px"})
+        $(this).css("display", "none")
+         $(".js-show-cut-block").css("display", "block")
+
+    })
+      
+    document.addEventListener('DOMContentLoaded', function () {
+ var splide_main= new Splide('.splide_main', {
+    
+    
+    focus  : 'center',
+    perPage: 1,
+    
+  }).mount();
+    var splide_rec= new Splide('.splide_two', {
+       
+    
+    drag:'free',
+    arrows: false,
+    focus:'left',
+perMove: 1,
+        pagination: false,
+        autoplay:true,
+    
+    
+    focus  : 'center',
+    perPage: 3,
+    breakpoints: {
+          500: {
+            start: 0,
+            perPage:2,
+            
+          }
+        }
+    
+  }).mount();
+    $(".special-products__slider-arrow-next").on("click", function(){
+        
+        splide_rec.go('+1')
+
+    })
+     
+     $(".special-products__slider-arrow-prev").on("click", function(){
+        
+        splide_rec.go('-1')
+
+    })
+     
+});
+
+
+var rate = parseFloat("{{rate.0|floatformat:2}}").toFixed(2)
+var product_count = 1
+var count_sys = 1
+
+{% if rate.1 == 'ARM' %}
+
+var pay_icon="֏"
+{% elif rate.1 == "ENG" %}
+var pay_icon="$"
+{% else %}
+var pay_icon="₽"
+{% endif %}
+{% if product.sale_price %}
+var product_price = parseFloat("{{ product.sale_price|div:rate.0|floatformat:2 }}").toFixed(2)
+{% else %}
+var product_price = parseFloat("{{ product.price|div:rate.0|floatformat:2 }}").toFixed(2)
+{% endif %}
+
+
+
+var price_total=parseFloat("{{ product.price|div:rate.0|floatformat:2 }}").toFixed(2)
+//lav chi ashxatum
+function check_max_count(pk,size,callback){
+  
+  var data = new FormData()
+  data.append("pk", pk)
+  if (size=="size"){
+    data.append("size", 1)
+
+  }
+ var call = $.ajax({
+
+
+              
+            url: '/api/check_max_count_product/',
+            method: "POST",
+            data: data,
+            success: function(data){
+              callback(data);
+              
+
+                
+                
+                
+                
+                
+
+            },
+            error: function(data){},
+            processData: false,
+            contentType: false,
+        })
+
+  
+
+}
+var max_pcs = parseInt("{{product.pcs}}")
+{% if product.counter_props.all %}
+var counter_arr = []
+
+console.log(max_pcs)
+ {% for prop in product.counter_props.all %}
+ {% if prop.counter_price_sale %}
+  counter_arr.push({"counter":parseInt("{{ prop.counter_prop }}"),"price":parseFloat("{{ prop.counter_price_sale|div:rate.0|floatformat:2 }}").toFixed(2) })
+ {% else %}
+  counter_arr.push({"counter":parseInt("{{ prop.counter_prop }}"),"price":parseFloat("{{ prop.counter_price|div:rate.0|floatformat:2 }}").toFixed(2) })
+ {% endif %}
+
+
+  {% endfor %}
+ 
+  counter_arr.sort((a, b) => a.counter - b.counter);
+
+console.log(counter_arr)
+
+$(".is-count-up ").on("click", function(){
+
+    
+    if (product_count+1>max_pcs){
+            check_max_count($(this).attr("pk"),1, function(data){
+            console.log(data.max_count, "ok")
+            $(".counter-input").val(data.max_count)
+             $(".max_count_error").text("maximum quantity of goods` "+ String(data.max_count)+" pcs")
+            $(".max_count_error").css("display", "block")
+            
+product_count=data.max_count
+      var new_price = product_price*product_count
+    price_total = new_price
+    $(".counter-input").val(product_count)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+
+          })
+
+    }
+    else{
+        product_count++;
+        var index = counter_arr.findIndex(p => p.counter == product_count);
+    console.log(index)
+    if (index != -1){
+        product_price = counter_arr[index]["price"]
+
+    }
+
+    
+       
+
+
+    var this_count = $("#in_stock option:checked").attr("value")
+    
+    console.log(product_price, "product_price")
+
+    var new_price = product_price*product_count
+    price_total = new_price
+    $(".counter-input").val(product_count)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+
+    }
+    
+})
+
+  $(".is-count-down ").on("click", function(){
+
+    if(!(product_count<=1)){
+        $(".max_count_error").css("display", "none")
+        product_count--;
+    var index = counter_arr.findIndex(p => p.counter > product_count);
+    if (index > 0 ){
+        product_price = counter_arr[index-1]["price"]
+
+    }
+    else if (index == 0){
+        product_price = counter_arr[index]["price"]
+
+    }
+    else{
+
+    }
+    console.log(index)
+
+    var new_price = product_price*product_count
+    price_total = new_price
+
+    $(".counter-input").val(product_count)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+         
+        
+    }
+   
+   
+})
+   $(".counter-input").on("change", function(){
+    product_count = parseInt($(this).val())
+    if (product_count>max_pcs){
+            check_max_count($(this).attr("pk"),1, function(data){
+            console.log(data.max_count, "ok")
+            $(".counter-input").val(data.max_count)
+             $(".max_count_error").text("maximum quantity of goods` "+ String(data.max_count)+" pcs")
+            $(".max_count_error").css("display", "block")
+            product_count=data.max_count
+            
+
+       var new_price = product_price*product_count
+    price_total = new_price
+    $(".counter-input").val(product_count)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+
+
+          })
+
+    }
+    else{
+         $(".max_count_error").css("display", "none")
+    var index = counter_arr.findLastIndex(p => product_count>=p.counter);
+    if (index != -1){
+        product_price = counter_arr[index]["price"]
+
+    }
+    console.log(index)
+    var new_price = product_price*product_count
+    price_total = new_price
+    $(".counter-input").val(product_count)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+    
+       
+
+
+    var this_count = $("#in_stock option:checked").attr("value")
+
+}
+
+
+
+  })
+{% elif product.price_pcs  %}
+var price_pcs = parseFloat("{{ product.price_pcs|div:rate.0|floatformat:2 }}").toFixed(2)
+var max_pcs = parseInt("{{product.pcs}}")
+{% if product.sale > 0 %}
+
+price_pcs = parseFloat("{{ product.sale_price_pcs|div:rate.0|floatformat:2 }}").toFixed(2)
+
+{% else %}
+{% endif %}
+$(".is-count-up_count ").on("click", function(){
+
+    
+    if (count_sys+1>max_pcs){
+            check_max_count($(this).attr("pk"),1, function(data){
+            console.log(data.max_count, "ok")
+            $(".counter-input_two").val(data.max_count)
+             $(".max_count_error").text("maximum quantity of goods` "+ String(data.max_count)+" pcs")
+            $(".max_count_error").css("display", "block")
+            
+count_sys=data.max_count
+      var new_price = price_pcs*count_sys
+    price_total = new_price
+    $(".counter-input_two").val(count_sys)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+    $(".counter-input").val("0")
+
+
+          })
+
+    }
+    else{
+        count_sys++;
+        $(".max_count_error").css("display", "none")
+    
+    console.log(price_pcs, "product_price")
+
+    var new_price = price_pcs*count_sys
+    price_total = new_price
+    $(".counter-input_two").val(count_sys)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+    $(".counter-input").val("0")
+
+    }
+    
+})
+    $(".is-count-down_count").on("click", function(){
+    console.log("product_count",product_count)
+
+    if(!(count_sys<=1)){
+        $(".max_count_error").css("display", "none")
+        count_sys--;
+    
+    
+    
+
+    var new_price = price_pcs*count_sys
+    price_total = new_price
+
+    $(".counter-input_two").val(count_sys)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+         
+        
+    }
+   
+   
+})
+$(".counter-input_two").on("change", function(){
+    count_sys = parseInt($(this).val())
+    if (count_sys>max_pcs){
+            check_max_count($(this).attr("pk"),1, function(data){
+            console.log(data.max_count, "ok")
+            $(".counter-input_two").val(data.max_count)
+             $(".max_count_error").text("maximum quantity of goods` "+ String(data.max_count)+" pcs")
+            $(".max_count_error").css("display", "block")
+            count_sys=data.max_count
+             var new_price = price_pcs*count_sys
+    price_total = new_price
+    $(".counter-input_two").val(count_sys)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+    
+            
+
+       //all_price+= product_price
+
+        //$(".total-amount").text(String(all_price)+" ₽")
+        //status_div.attr("status", "block")
+
+
+          })
+
+    }
+    else{
+         $(".max_count_error").css("display", "none")
+    
+    
+    var new_price = price_pcs*count_sys
+    price_total = new_price
+    $(".counter-input_two").val(count_sys)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+    
+       
+
+
+    var this_count = $("#in_stock option:checked").attr("value")
+
+}
+
+
+
+  })
+
+
+{% elif product.price_size %}
+
+var size_arr = []
+var min_size = parseInt("{{ product.min_size }}")
+var max_size = parseInt("{{product.max_size}}")
+var product_price = parseFloat("{{ product.price_size|div:rate.0|floatformat:2 }}").toFixed(2)
+product_count = min_size
+{% if product.sale > 0 %}
+product_price = parseFloat("{{ product.sale_price_size|div:rate.0|floatformat:2 }}").toFixed(2)
+
+
+{% else %}
+{% endif %}
+
+
+
+ 
+
+
+  $(".is-count-up ").on("click", function(){
+    
+
+    
+    if (product_count+10>max_size){
+            check_max_count($(this).attr("pk"),"size", function(data){
+            console.log(data.max_count, "ok")
+            $(".counter-input").val(data.max_count)
+             $(".max_count_error").text("Maximum product length "+ String(data.max_count)+" sm")
+            $(".max_count_error").css("display", "block")
+            
+
+        var this_count = $("#in_stock option:checked").attr("value")
+        product_count = data.max_count
+    
+    console.log(product_price, "product_price")
+
+    var new_price = (product_price*product_count/(min_size)).toFixed(2);
+    price_total = new_price
+    $(".counter-input").val(String(product_count)+" sm")
+    $(".is-count-up_count").attr("disabled", "disabled")
+    $(".is-count-down_count").attr("disabled", "disabled")
+    $(".counter-input_two").attr("disabled", "disabled")
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+
+          })
+
+    }
+    else{
+        product_count+=10;
+        $(".max_count_error").css("display", "none")
+    
+    
+       
+
+
+    var this_count = $("#in_stock option:checked").attr("value")
+    
+    console.log(product_price, "product_price")
+
+    var new_price = (product_price*product_count/(min_size)).toFixed(2);
+    price_total = new_price
+    $(".counter-input").val(String(product_count)+" sm")
+    $(".is-count-up_count").attr("disabled", "disabled")
+    $(".is-count-down_count").attr("disabled", "disabled")
+    $(".counter-input_two").attr("disabled", "disabled")
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+
+    }
+    
+})
+
+
+   $(".is-count-down ").on("click", function(){
+    console.log("product_count",product_count)
+
+    if(!(product_count<=min_size)){
+        $(".max_count_error").css("display", "none")
+        product_count-=10;
+    
+
+    var new_price = (product_price*product_count/(min_size)).toFixed(2);
+    price_total = new_price
+
+    $(".counter-input").val(product_count)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+         
+        
+    }
+   
+   
+})
+
+
+$(".counter-input").on("change", function(){
+    product_count = parseInt($(this).val())
+    console.log(product_count, "product_count")
+    if (product_count>max_size){
+            check_max_count($(this).attr("pk"),"size", function(data){
+            console.log(data.max_count, "ok")
+            $(".counter-input").val(String(data.max_count)+" sm")
+             $(".max_count_error").text("Maximum product length "+ String(data.max_count)+" sm")
+            $(".max_count_error").css("display", "block")
+            product_count = data.max_count
+            var new_price = (product_price*product_count/(min_size)).toFixed(2);
+    price_total = new_price
+    $(".counter-input").val(String(product_count)+" sm")
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+
+       //all_price+= product_price
+
+        //$(".total-amount").text(String(all_price)+" ₽")
+        //status_div.attr("status", "block")
+
+
+          })
+
+    }
+    else{
+         $(".max_count_error").css("display", "none")
+    
+    
+    var new_price = (product_price*product_count/(min_size)).toFixed(2);
+    price_total = new_price
+    $(".counter-input").val(String(product_count)+" sm")
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+    
+       
+
+
+    var this_count = $("#in_stock option:checked").attr("value")
+
+}
+
+
+
+  })
+
+
+{% else %}
+
+{% if product.sale > 0 %}
+product_price = parseFloat("{{ product.sale_price|div:rate.0|floatformat:2 }}").toFixed(2)
+
+{% else %}
+{% endif %}
+$(".is-count-up ").on("click", function(){
+    if (product_count+1>max_pcs){
+            check_max_count($(this).attr("pk"),1, function(data){
+            console.log(data.max_count, "ok")
+            $(".counter-input_two").val(data.max_count)
+             $(".max_count_error").text("maximum quantity of goods"+ String(data.max_count)+" pcs")
+            $(".max_count_error").css("display", "block")
+            
+
+       //all_price+= product_price
+
+        //$(".total-amount").text(String(all_price)+" ₽")
+        //status_div.attr("status", "block")
+
+
+          })
+
+    }
+    else{
+
+    product_count++;
+    var new_price = product_price*product_count
+    $(".counter-input").val(product_count)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)}
+})
+$(".is-count-down ").on("click", function(){
+    console.log("product_count",product_count)
+
+    if(!(product_count<=1)){
+        $(".max_count_error").css("display", "none")
+        product_count--;
+    
+
+    var new_price  = product_price*product_count
+    price_total = new_price
+
+    $(".counter-input").val(product_count)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+         
+        
+    }
+   
+   
+})
+ $(".counter-input").on("change", function(){
+    product_count = parseInt($(this).val())
+    if (product_count>max_pcs){
+            check_max_count($(this).attr("pk"),1, function(data){
+            console.log(data.max_count, "ok")
+            $(".counter-input").val(data.max_count)
+             $(".max_count_error").text("maximum quantity of goods"+ String(data.max_count)+" pcs")
+            $(".max_count_error").css("display", "block")
+           var new_price = product_price*max_pcs
+    price_total = new_price
+    $(".counter-input").val(max_pcs)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+            
+
+       //all_price+= product_price
+
+        //$(".total-amount").text(String(all_price)+" ₽")
+        //status_div.attr("status", "block")
+
+
+          })
+
+    }
+    else{
+         $(".max_count_error").css("display", "none")
+    
+    
+    var new_price = product_price*product_count
+    price_total = new_price
+    $(".counter-input").val(product_count)
+    $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
+   
+    
+       
+
+
+    var this_count = $("#in_stock option:checked").attr("value")
+
+}
+ 
+
+
+
+  })
+
+
+{% endif %}
+$(".pswp__button--close").on("click", function(){
+    $(".pswp").removeClass("pswp--supports-fs pswp--open pswp--notouch pswp--css_animation pswp--svg pswp--zoom-allowed pswp--visible pswp--animated-in pswp--has_mouse")
+})
+$(".product-image-full").on("click", function(){
+    $(".pswp__img_main").attr("src", $(this).attr("img_src"))
+    $(".pswp").addClass("pswp--supports-fs pswp--open pswp--notouch pswp--css_animation pswp--svg pswp--zoom-allowed pswp--visible pswp--animated-in pswp--has_mouse")
+})
+
+  try {
+  let widget = '.widget-type_system_widget_v4_header_1';
+  let $widget = $('.widget-type_system_widget_v4_header_1');
+
+  $(".js-show-review-form ").on("click", function () {
+    console.log(this)
+    $(this)
+      .toggleClass("is-hide")
+      .parents(".product__reviews")
+      .find(".reviews-wrapper")
+      .toggleClass("is-hide");
+    $(this).parents(".product__reviews").find(".notice-success").hide();
+  });
+  
+
+{% if request.user.is_superuser %}
+  $(".add_sales").on("click", function(){
+    var sales = $("#sales").val()
+    var pk = "{{ product.pk }}"
+    var data = new FormData()
+    data.append("sales", sales)
+    data.append("pk", pk)
+
+    $.ajax({
+
+
+              
+            url: '/api/add_sales/',
+            method: "POST",
+            data: data,
+            success: function(data){
+                location.replace("/shop/products/"+String("{{product.pk}}"+"/"))
+                
+                
+                
+
+             
+               
+                  
+                
+
+            },
+            error: function(daa){},
+            processData: false,
+            contentType: false,
+        })
+
+  })
+  {% else %}
+  {% endif %}
+  $(".button.button_size-l.favorites_btn").on("click", function(){
+             
+              var indicator = ""
+        var name = ""
+        var data = new FormData()
+         var pk = $(this).attr("pk")
+         
+        
+     
+     
+       
+        
+       
+      
+        
+        
+            
+            data.append("pk", pk)
+           
+            
+
+            
+
+            
+
+     $.ajax({
+
+
+              
+            url: '/api/add_favorite_products/',
+            method: "POST",
+            data: data,
+            success: function(data){
+                location.replace('/favorite/');
+                
+                
+
+             
+               
+                  
+                
+
+            },
+            error: function(daa){},
+            processData: false,
+            contentType: false,
+        })
+
+
+            
+       
+            
+            
+            
+        
+
+       })
+
+    
+ $(".button.button_size-l.add-cart-counter__btn").on("click", function(){
+             
+              var indicator = ""
+        var name = ""
+        var data = new FormData()
+         var pk = $(this).attr("product_pk")
+
+         var count_size = $(".counter-input.form-control.form-control_size-s").val()
+         var count = $(".counter-input_two.form-control.form-control_size-s").val()
+         console.log(count, "count", $(".counter-input.form-control.form-control_size-s").attr("status"))
+        
+     
+     
+       
+        
+       
+      
+        
+        
+            
+            data.append("pk", pk)
+
+            
+            if ($(".counter-input_two.form-control.form-control_size-s").length>0 ){
+                 data.append("count", $(".counter-input_two.form-control.form-control_size-s").val())
+                 
+                 data.append("indicator", "price_size")
+                 console.log("count_size", $(".counter-input_two.form-control.form-control_size-s").val())
+
+
+            }
+            else if ($(".counter-input.counter_size.form-control.form-control_size-s").length>0){
+
+                
+                data.append("count_size", count_size)
+                data.append("indicator", "size")
+                console.log($(".counter-input.form-control.form-control_size-s.counter_size"), "aaaaaaaaaaaaa", count_size)
+               
+
+            }
+            else{
+                
+                {% if product.counter_props.all %}
+                data.append("indicator", "counter")
+                data.append("count", $(".counter-input.form-control.counters.form-control_size-s").val())
+                {% else %}
+                data.append("indicator", "count")
+                data.append("count", $(".counter-input.form-control.counters.form-control_size-s").val())
+                {% endif %}
+                console.log("b")
+
+            }
+            
+           
+            
+            
+
+            
+
+            
+
+     $.ajax({
+
+
+              
+            url: '/api/add_cart_product/',
+            method: "POST",
+            data: data,
+            success: function(data){
+                if (data.data!=0){
+
+                 $(".icon.icon-cart .header__control-bage").text(parseInt($("span.header__control-bage.cart-empty").text())+1)
+                  $(".navigation-bar__icon.icon-cart .navigation-bar__bage").text($(".icon.icon-cart .header__control-bage").text())
+                  console.log(data.price_total/rate, "data.price_total)")
+                  if (parseInt(data.min_size) !=  1){
+                     
+
+                         $(".header__control-btn.header__cart .header__control-text").text(String((parseFloat($(".header__control-btn.header__cart .header__control-text").text())+parseFloat($(".product__price-cur").text().slice(0,-2))).toFixed(2))+" "+pay_icon)
+
+
+                  }
+                  else{
+                     $(".header__control-btn.header__cart .header__control-text").text(String((parseFloat($(".header__control-btn.header__cart .header__control-text").text())+parseFloat(data.price_total/rate)).toFixed(2))+" "+pay_icon)
+
+                  }
+                 
+                 
+                 
+                }
+                open_window('/cart_page/',700,300);
+                
+                
+
+             
+               
+                  
+                
+
+            },
+            error: function(daa){},
+            processData: false,
+            contentType: false,
+        })
+
+
+            
+       
+            
+            
+            
+        
+
+       })
+
+
+
+
+
+
+
+
+
+
+  /* eslint-disable linebreak-style */
+$(function() {
+  function getWidget(item) {
+    return item.closest('.layout');
+  }
+
+  var mobilePoint = 768;
+  $(document).ready(function() {
+   
+
+    if ($(window).width() >= mobilePoint) {
+      $(widget).find(".js-cut-list").cutList({
+        moreBtnTitle: '<span class="icon-ellipsis-h"></span>',
+        alwaysVisibleElem: '.is-current'
+      });
+    }
+
+    $(window).on('load', function() {
+      $(widget).find(".js-cut-list").resize();
+    });
+
+    $(window).on('resize', function() {
+      let collections_menu = $(widget).find(".header__collections");
+      let collections_menu_content = collections_menu.find(".header__collections-content");
+
+      if (collections_menu.is(".is-show")) {
+        let max_height = $(window).height() - collections_menu.offset().top - 20;
+        collections_menu_content.css("maxHeight", max_height);
+      }
+    });
+
+    if ($(widget).find(".header__collections .is-current").length) {
+      $(widget).find(".header__collections .is-current").addClass("is-show-mobile");
+      $(widget).find(".header__collections > .header__collections-item.is-current").addClass("is-show");
+    }
+
+    $(widget).find(".js-show-header-collections").on("click", function() {
+      let thisWidget = getWidget($(this));
+
+      thisWidget.each(function(index, el) {
+        let lazyLoadCollectionList = new LazyLoad({
+          container: $(el).get(0),
+          elements_selector: '.lazyload'
+        });
+
+        try {
+          lazyLoadCollectionList.loadAll()
+        } catch (e) {
+          console.log(e)
+        }
+      });
+
+      let collections_menu = thisWidget.find(".header__collections");
+      let collections_menu_content = collections_menu.find(".header__collections-content");
+
+      if (collections_menu.is(".is-show")) {
+        collections_menu.removeClass("is-show");
+      } else {
+        collections_menu.addClass("is-show");
+
+        let max_height = $(window).height() - collections_menu.offset().top - 20;
+        collections_menu_content.css("maxHeight", max_height);
+      }
+
+      $(this).toggleClass("is-active");
+      thisWidget.find(".header__collections-overlay").toggleClass("is-show");
+    });
+
+    $(document).on("click", function(event) {
+      let thisWidget = getWidget($(event.target).closest('.layout'));
+
+      if ($(event.target).closest(".js-show-header-collections").length || $(event.target).closest(".header__collections-content").length) {
+        return;
+      }
+
+      thisWidget.find(".header__collections.is-show").removeClass("is-show");
+      thisWidget.find(".header__collections-overlay.is-show").removeClass("is-show");
+      thisWidget.find(".js-show-header-collections").removeClass("is-active");
+    });
+
+    $(widget).find(".js-show-mobile-submenu").on("click", function() {
+      $(this).parents(".header__collections-item:first").toggleClass("is-show-mobile");
+    });
+
+    $(widget).find(".js-show-mobile-menu").on("click", function() {
+      let thisWidget = getWidget($(event.target).closest('.layout'));
+
+      thisWidget.find(".header").addClass("is-show-mobile");
+    });
+
+    $(widget).find(".js-hide-mobile-menu").on("click", function() {
+      let thisWidget = getWidget($(event.target).closest('.layout'));
+
+      thisWidget.find(".header").removeClass("is-show-mobile");
+    });
+
+    $(widget).find(".js-show-mobile-search").on("click", function() {
+      $(this).parents(".header__search").toggleClass("is-show-mobile").find(".header__search-field").focus();
+    });
+
+    $(widget).find(".js-show-more-subcollections").on("click", function() {
+      let thisWidget = getWidget($(this));
+
+      let collections_menu = thisWidget.find(".header__collections-menu");
+      let limit = collections_menu.attr("data-subcollections-items-limit");
+      let collection_elem = $(this).parents(".header__collections-item.is-level-1");
+
+      if ($(this).is(".is-active")) {
+        $(this).removeClass("is-active");
+        collection_elem.find('.header__collections-submenu .header__collections-item:nth-child(n+' + (parseInt(limit) + 1) + ')').addClass("is-hide");
+      } else {
+        $(this).addClass("is-active");
+        collection_elem.find(".header__collections-submenu .header__collections-item").removeClass("is-hide");
+      }
+    });
+  });
+
+ 
+
+  function configureSubcollectionsItemsLimit(limit) {
+    let collections_menu = $(widget).find(".header__collections-menu");
+    collections_menu.attr("data-subcollections-items-limit", limit);
+
+    $(widget).find(".header__collections-submenu").each(function() {
+      let collection_elem = $(this).parents(".header__collections-item.is-level-1");
+      let collection_elem_more_controls = collection_elem.find(".header__collections-show-more");
+
+      $(this).find(".header__collections-item").removeClass("is-hide");
+      $(this).find('.header__collections-item:nth-child(n+' + (parseInt(limit) + 1) + ')').addClass("is-hide");
+      collection_elem_more_controls.find(".js-show-more-subcollections").removeClass("is-active");
+
+      if ($(this).find(".header__collections-item").length > parseInt(limit)) {
+        collection_elem_more_controls.addClass("is-show");
+      } else {
+        collection_elem_more_controls.removeClass("is-show");
+      }
+    });
+  }
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_header_1" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_alerts';
+  let $widget = $('.widget-type_system_widget_v4_alerts');
+  let alertsSettings = $widget.find('[data-micro-alerts-settings]').data('micro-alerts-settings');
+
+function replaceAlertCheckIcon(message) {
+  let iconCheck = '<span class="icon-check" style="margin-right:5px;"></span>';
+  if (message.indexOf('✓') != -1 ) {
+    return message.replace(/✓/gi, iconCheck);
+  } else {
+    return `${iconCheck} ${message}`;
+  }
+}
+
+function replaceAlertWarningIcon(message) {
+  let iconWarning = '<span class="icon-exclamation-triangle" style="margin-right:5px;"></span>';
+  if (message.indexOf('⚠') != -1 ) {
+    return message.replace(/⚠/gi, iconWarning);
+  } else {
+    return `${iconWarning} ${message}`;
+  }
+}
+
+
+
+if (window.location.pathname == '/' && Cookies.get('lite_preorder')) {
+  let success_feedback = alertsSettings['success_preorder'];
+
+  microAlert(replaceAlertCheckIcon(success_feedback), 5000, {
+    modificator: 'success-notice'
+  });
+  Cookies.remove('lite_preorder');
+}
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_alerts" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_callback_modal_1';
+  let $widget = $('.widget-type_system_widget_v4_callback_modal_1');
+  $(document).ready(function() {
+  $(widget).find(".js-hide-modal").on("click", function() {
+    $(widget).removeClass("is-show-fullscreen");
+  });
+
+  $(widget).on("click", function(event) {
+    if ($(event.target).closest(widget + ' .layout__content').length) {
+      return;
+    }
+
+    $(widget).removeClass("is-show-fullscreen");
+  });
+});
+
+
+
+
+$(window).on("scroll", function() {
+  clearTimeout(scroll_timeout);
+  scroll_timeout = setTimeout( function() {
+    showButtonOnTop($widget.find(".js-go-top-page"));
+  }, 50);
+});
+
+function showButtonOnTop(btn) {
+  if ($(window).scrollTop() >= $(window).height()) {
+    btn.addClass("is-show");
+  } else {
+    btn.removeClass("is-show");
+  }
+}
+
+
+
+let scroll_timeout;
+
+$(window).on("scroll", function() {
+  clearTimeout(scroll_timeout);
+  scroll_timeout = setTimeout( function() {
+    showCartFixedBtn($widget.find(".js-cart-fixed-btn"));
+  }, 50);
+});
+
+function showCartFixedBtn(btn) {
+  if ($(window).scrollTop() >= 100) {
+    btn.addClass("is-show");
+  } else {
+    btn.removeClass("is-show");
+  }
+}
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_cart_fixed_button_1" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_bottom_navigation_bar_1';
+  let $widget = $('.widget-type_system_widget_v4_bottom_navigation_bar_1');
+  $(function() {
+  let location_path = window.location.pathname;
+
+  if (location_path.indexOf('client_account') !== -1) {
+    $widget.find(".navigation-bar__item-profile").addClass("is-active is-cur-page");
+  }
+
+  $widget.find("[data-show-navigation-bar-panel]").on("click", function() {
+    let navigation_bar_item = $(this);
+    let panel_name = navigation_bar_item.data("showNavigationBarPanel");
+    let panel = $widget.find('[data-navigation-bar-panel="' + panel_name + '"]');
+
+    if (panel.is(".is-show")) {
+      bodyScrollLock.clearAllBodyScrollLocks();
+      panel.removeClass("is-show");
+      $('header').css('display', 'block');
+
+      navigation_bar_item.removeClass("is-active");
+      $widget.find(".navigation-bar__item.is-cur-page").addClass("is-active");
+    } else {
+      let targetElement = panel.get(0);
+      if (targetElement) {
+        bodyScrollLock.disableBodyScroll(targetElement);
+      }
+
+      $('header').css('display', 'none');
+
+      let panel_bottom_pos = navigation_bar_item.parents(".layout").innerHeight();
+      $widget.find('[data-navigation-bar-panel].is-show').removeClass("is-show");
+      panel.css("bottom", panel_bottom_pos).addClass("is-show");
+
+      if (panel_name == "search") {
+        setTimeout(function() {
+          panel.find("[data-search-field]").focus();
+        }, 500);
+      }
+
+      $widget.find(".navigation-bar__item.is-active").removeClass("is-active");
+      navigation_bar_item.addClass("is-active");
+    }
+  });
+
+  $widget.find(".navigation-bar__item-home").on("click", function() {
+    if (location_path == "/") {
+      $widget.find('.navigation-bar-panel.is-show').removeClass("is-show");
+      $widget.find(".navigation-bar__item.is-active").removeClass("is-active");
+      $widget.find(".navigation-bar__item.is-cur-page").addClass("is-active");
+    }
+  });
+
+  $widget.find(".js-hide-navigation-bar-panel").on("click", function() {
+    $widget.find('[data-navigation-bar-panel].is-show').removeClass("is-show");
+    $widget.find(".navigation-bar__item.is-active").removeClass("is-active");
+    $widget.find(".navigation-bar__item.is-cur-page").addClass("is-active");
+    bodyScrollLock.clearAllBodyScrollLocks();
+    $('header').css('display', 'block');
+  });
+
+  $widget.find(".collections__menu .is-current").addClass("is-show");
+  $widget.find(".js-show-submenu").on("click", function() {
+    let cur_item = $(this).parents(".collections__item:first");
+    cur_item.toggleClass("is-show");
+  });
+
+  $widget.find(".js-show-collections-search").on("click", function() {
+    let search_block = $(this).parents(".collections-search");
+    search_block.toggleClass("is-show");
+
+    if (search_block.is(".is-show")) {
+      setTimeout(function() {
+        search_block.find(".collections-search__field").focus();
+      }, 50);
+    }
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_bottom_navigation_bar_1" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_benefits_4';
+  let $widget = $('.widget-type_system_widget_v4_benefits_4');
+  $(function() {
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload'
+    });
+
+    fixBlocks(el)
+  });
+
+  let resizeTimer;
+  $(window).on('resize', function(e) {
+
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      $widget.each(function(index, el) {
+        fixBlocks(el)
+      });
+
+    }, 550);
+
+  });
+
+ 
+
+
+  function fixBlocks(el) {
+    let initialSize = getComputedStyle($(el)[0]).getPropertyValue('--grid-list-min-width').replace('px', '');
+    let columnSize = getComputedStyle($(el)[0]).getPropertyValue('--grid-list-column-gap').replace('rem', '');
+    let $benefitList = $(el).find('.grid-list');
+    let containerSize = $benefitList.width()
+    let blocksLength = $benefitList.data('block-length')
+
+    $benefitList.css('--grid-list-min-width', adaptiveSize(containerSize, +initialSize, blocksLength, columnSize * 16) + 'px')
+  }
+
+  function adaptiveSize(containerSize, blockSize, blocksLength, columnSize) {
+    let currentLine = Math.floor(containerSize / (blockSize + columnSize));
+    let delta = blocksLength % currentLine;
+    let addBlocks = 0;
+
+    if (delta > 0) {
+      addBlocks = currentLine - delta;
+    }
+
+    return addBlocks == 0 || currentLine > blocksLength ? containerSize / currentLine - columnSize : blockSize * (currentLine / addBlocks);
+  }
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_benefits_4" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_collections_on_index_2';
+  let $widget = $('.widget-type_system_widget_v4_collections_on_index_2');
+  /* eslint-disable linebreak-style */
+$(function() {
+  var isTouch = !!('ontouchstart' in window || navigator.msMaxTouchPoints);
+  var mobile_point = 767;
+
+  if (isTouch) {
+    $(widget).find(".collection-preview").addClass("is-touch");
+  }
+
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload',
+      use_native: 'loading' in document.createElement('img')
+    });
+  });
+
+  $(function() {
+    let specialCollections = $widget.find(".js-collections");
+
+    if ($(window).width() < mobile_point) {
+      let slider_mobile_right_padding;
+      let slide_width_mobile;
+      let slide_gap_mobile = specialCollections.find(".js-collections-slider").attr("data-slide-gap-mobile") / 2;
+
+      $(window).on("resize", function() {
+        slide_width_mobile = specialCollections.find(".splide__slide").width();
+        slider_mobile_right_padding = slide_width_mobile * 0.5 + slide_gap_mobile;
+        specialCollections.find(".js-collections-slider").attr("data-mobile-right-padding", slider_mobile_right_padding);
+      });
+    }
+
+    specialCollections.each(function() {
+      let collections_block = $(this);
+      let slider_block = collections_block.find(".js-collections-slider");
+      let slide_min_width = 160;
+      let slide_min_width_mobile = 130;
+      let slide_gap = 30;
+      let slide_gap_mobile = 15;
+      let slider_mobile_right_padding;
+
+      if (slider_block.is("[data-slide-min-width]")) {
+        slide_min_width = parseInt(slider_block.attr("data-slide-min-width"));
+      } else {
+        slider_block.attr("data-slide-min-width", slide_min_width);
+      }
+
+      if (slider_block.is("[data-slide-min-width-mobile]")) {
+        slide_min_width_mobile = parseInt(slider_block.attr("data-slide-min-width-mobile"));
+      } else {
+        slider_block.attr("data-slide-min-width-mobile", slide_min_width_mobile);
+      }
+
+      if (slider_block.is("[data-slide-gap]")) {
+        slide_gap = parseInt(slider_block.attr("data-slide-gap"));
+      } else {
+        slider_block.attr("data-slide-gap", slide_gap);
+      }
+
+      if (slider_block.is("[data-slide-gap-mobile]")) {
+        slide_gap_mobile = parseInt(slider_block.attr("data-slide-gap-mobile"));
+      } else {
+        slider_block.attr("data-slide-gap-mobile", slide_gap_mobile);
+      }
+
+      if (slider_block.is("[data-mobile-right-padding]")) {
+        slider_mobile_right_padding = parseInt(slider_block.attr("data-mobile-right-padding"));
+      } else {
+        slider_block.attr("data-mobile-right-padding", slider_mobile_right_padding);
+      }
+
+      let init_slide_min_width = isMobileWidth() ? slide_min_width_mobile : slide_min_width;
+      let init_slide_gap = isMobileWidth() ? slide_gap_mobile : slide_gap;
+
+      let mobile_left_padding = 5;
+      let mobile_right_padding = `${slider_mobile_right_padding + init_slide_gap}px`;
+
+      slider_block[0].splide = new Splide(slider_block[0], {
+        perPage: getSlidesPerView(slider_block, init_slide_min_width, init_slide_gap),
+        gap: init_slide_gap,
+        perMove: 1,
+        breakpoints: {
+          768: {
+            padding: {
+              left: mobile_left_padding,
+              right: mobile_right_padding
+            }
+          }
+        }
+      });
+
+      let tempWindowWidth = $(window).width()
+      $(window).on("resize", function() {
+        if (tempWindowWidth == $(window).width()) {
+          return false
+        }
+        tempWindowWidth = $(window).width()
+        let slide_min_width = parseInt(slider_block.attr("data-slide-min-width"));
+        let slide_min_width_mobile = parseInt(slider_block.attr("data-slide-min-width-mobile"));
+        let slide_gap = parseInt(slider_block.attr("data-slide-gap"));
+        let slide_gap_mobile = parseInt(slider_block.attr("data-slide-gap-mobile"));
+        let slider_mobile_right_padding = parseInt(slider_block.attr("data-mobile-right-padding"));
+
+        let init_slide_min_width = isMobileWidth() ? slide_min_width_mobile : slide_min_width;
+        let init_slide_gap = isMobileWidth() ? slide_gap_mobile : slide_gap;
+
+        if (isMobileWidth()) {
+          slide_gap_mobile = slide_gap_mobile / 2;
+
+          slider_block[0].splide.options = {
+            gap: slide_gap_mobile,
+            perPage: getSlidesPerView(slider_block, init_slide_min_width, init_slide_gap),
+            padding: {
+              left: 0,
+              right: slider_mobile_right_padding
+            }
+          };
+        } else {
+          slider_block[0].splide.options = {
+            gap: init_slide_gap,
+            perPage: getSlidesPerView(slider_block, init_slide_min_width, init_slide_gap)
+          };
+        }
+
+        configureDragOption(slider_block);
+      });
+
+      slider_block[0].splide.on('arrows:updated', function() {
+        let collections = slider_block.parents(".js-collections");
+        let prev_btn = collections.find(".collections__slider-arrow-prev");
+        let next_btn = collections.find(".collections__slider-arrow-next");
+
+        if (collections.find(".splide__arrow--prev").prop("disabled") === true) {
+          prev_btn.addClass("is-disabled");
+        } else {
+          prev_btn.removeClass("is-disabled");
+        }
+
+        if (collections.find(".splide__arrow--next").prop("disabled") === true) {
+          next_btn.addClass("is-disabled");
+        } else {
+          next_btn.removeClass("is-disabled");
+        }
+      });
+
+      slider_block[0].splide.on('mounted updated', function() {
+        displaySliderControls(slider_block);
+      });
+
+      slider_block[0].splide.on('mounted', function() {
+        configureDragOption(slider_block);
+      });
+
+      slider_block[0].splide.mount();
+
+      $widget.find(".js-move-slide").on("click", function() {
+        let slider_node = $(this).parents(".js-collections").find(".js-collections-slider");
+
+        if (slider_node.length) {
+          let sliderInst = slider_node[0].splide;
+
+          if ($(this).is(".collections__slider-arrow-prev")) {
+            sliderInst.go('-');
+          }
+
+          if ($(this).is(".collections__slider-arrow-next")) {
+            sliderInst.go('+');
+          }
+        }
+      });
+    });
+  });
+
+ 
+
+  function updateSpecialCollectionSlider(slider, data) {
+    let sliderInst = slider[0].splide;
+
+    let slide_min_width = parseInt(slider.attr("data-slide-min-width"));
+    let slide_min_width_mobile = parseInt(slider.attr("data-slide-min-width-mobile"));
+    let slide_gap = parseInt(slider.attr("data-slide-gap"));
+    let slide_gap_mobile = parseInt(slider.attr("data-slide-gap-mobile"));
+    let slider_mobile_right_padding = parseInt(slider.attr("data-mobile-right-padding"));
+
+    if (data.setting_name == 'slide-width') {
+      let new_slide_min_width = parseInt(data.value);
+      slider.attr("data-slide-min-width", new_slide_min_width);
+
+      if (!isMobileWidth()) {
+        let new_per_page = getSlidesPerView(slider, new_slide_min_width, slide_gap);
+        sliderInst.options = {
+          perPage: new_per_page
+        };
+      }
+    } else if (data.setting_name == 'slide-width-mobile') {
+      let new_slide_min_width_mobile = parseInt(data.value);
+      slider.attr("data-slide-min-width-mobile", new_slide_min_width_mobile);
+
+      if (isMobileWidth()) {
+        let new_per_page = getSlidesPerView(slider, new_slide_min_width_mobile, slide_gap_mobile);
+        sliderInst.options = {
+          perPage: new_per_page
+        };
+      }
+    } else if (data.setting_name == 'slide-gap') {
+      let new_slide_gap = parseInt(data.value);
+      let new_per_page = getSlidesPerView(slider, slide_min_width, new_slide_gap);
+      slider.attr("data-slide-gap", new_slide_gap);
+
+      if (!isMobileWidth()) {
+        sliderInst.options = {
+          gap: new_slide_gap,
+          perPage: new_per_page,
+        };
+      }
+    } else if (data.setting_name == 'slide-gap-mobile') {
+      let new_slide_gap_mobile = parseInt(data.value);
+      let new_per_page = getSlidesPerView(slider, slide_min_width_mobile, new_slide_gap_mobile);
+      slider.attr("data-slide-gap-mobile", new_slide_gap_mobile);
+
+      if (isMobileWidth()) {
+        let mobile_left_padding = slider.parents(".layout").css("--layout-side-padding");
+        let mobile_right_padding = `${slider_mobile_right_padding + new_slide_gap_mobile}px`;
+
+        sliderInst.options = {
+          gap: new_slide_gap_mobile,
+          perPage: new_per_page,
+          padding: {
+            left: mobile_left_padding,
+            right: mobile_right_padding
+          }
+        };
+      }
+    } else {
+      setTimeout(function() {
+        let init_slide_min_width = isMobileWidth() ? slide_min_width_mobile : slide_min_width;
+        let init_slide_gap = isMobileWidth() ? slide_gap_mobile : slide_gap;
+
+        let new_per_page = getSlidesPerView(slider, init_slide_min_width, init_slide_gap);
+        sliderInst.options = {
+          perPage: new_per_page
+        };
+      }, 0);
+    }
+
+    configureDragOption(slider);
+  }
+
+  function getSlidesPerView(sliderBlock, slideMinWidth, slideGap) {
+    let right_padding = 0;
+
+    if (sliderBlock.is("[data-mobile-right-padding]") && isMobileWidth()) {
+      right_padding = parseInt(sliderBlock.data("mobileRightPadding")) + slideGap;
+    }
+
+    return Math.floor((sliderBlock.width() + slideGap - right_padding) / (slideMinWidth + slideGap));
+  }
+
+  function displaySliderControls(slider) {
+    let sliderInst = slider[0].splide;
+    let collections = slider.parents(".js-collections");
+    let slider_arrow = collections.find(".collections__slider-arrow");
+
+    if (sliderInst.length <= sliderInst.options.perPage) {
+      slider_arrow.addClass("is-hide");
+      slider.addClass("is-hide-paging");
+    } else {
+      slider_arrow.removeClass("is-hide");
+      slider.removeClass("is-hide-paging");
+    }
+  }
+
+  function configureDragOption(slider) {
+    if (slider[0].splide.length <= slider[0].splide.options.perPage) {
+      slider[0].splide.options = {
+        drag: false
+      };
+    } else {
+      slider[0].splide.options = {
+        drag: true
+      };
+    }
+  }
+
+  function isMobileWidth() {
+    return $(window).width() <= mobile_point;
+  }
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_collections_on_index_2" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_video_clip';
+  let $widget = $('.widget-type_system_widget_v4_video_clip');
+  /* eslint-disable linebreak-style */
+$widget.each(function(index, el) {
+  new LazyLoad({
+    container: $(el).get(0),
+    elements_selector: '.lazyload'
+  });
+});
+
+function getWidget(item) {
+  return item.closest('.layout');
+}
+
+$(function() {
+  let previewImg = $widget.find(".banner-list__item-image .picture");
+  let iframeVideo = $widget.find(".banner-list__item-image iframe");
+
+  $widget.find(".banner-preview__play-btn").on("click", function(event) {
+    let thisWidget = getWidget($(this));
+    let slider_node = thisWidget.find(".picture");
+    let slider_btn = thisWidget.find(".banner-preview__play-btn");
+    slider_node.addClass("hidden");
+    slider_btn.addClass("hidden");
+    event.preventDefault();
+    if (thisWidget.find(".banner-list__item-image .picture").hasClass("hidden")) {
+      thisWidget.find(".banner-list__item-image iframe").show();
+    }
+  });
+  iframeVideo.hide();
+  $(previewImg).on('load', function() {
+    iframeVideo.show();
+  });
+});
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_video_clip" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_banner_list_23';
+  let $widget = $('.widget-type_system_widget_v4_banner_list_23');
+  $(function() {
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload'
+    });
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_banner_list_23" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_banner_list_27';
+  let $widget = $('.widget-type_system_widget_v4_banner_list_27');
+  $(function() {
+  var mobile_point = 767;
+  var bannerBlockList = $(widget).find(".banner-list");
+
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload'
+    });
+  });
+
+  bannerBlockList.each(function() {
+    let slider_block = $(this).find(".js-banner-list-slider");
+    initBannerListSlider(slider_block);
+  });
+
+  function initBannerListSlider(sliderBlock) {
+    let slide_min_width = 250;
+    let slide_min_width_mobile = 160;
+    let slide_gap = 30;
+
+    if (sliderBlock.is("[data-slide-min-width]")) {
+      slide_min_width = parseInt(sliderBlock.data("slideMinWidth"));
+    } else {
+      sliderBlock.data("slideMinWidth", slide_min_width);
+    }
+
+    if (sliderBlock.is("[data-slide-min-width-mobile]")) {
+      slide_min_width_mobile = parseInt(sliderBlock.data("slideMinWidthMobile"));
+    } else {
+      sliderBlock.data("slideMinWidthMobile", slide_min_width_mobile);
+    }
+
+    if (sliderBlock.is("[data-slide-gap]")) {
+      slide_gap = parseInt(sliderBlock.data("slideGap"));
+    } else {
+      sliderBlock.data("slideGap", slide_gap);
+    }
+
+    sliderBlock[0].splide = new Splide(sliderBlock[0], {
+      perPage: getSlidesPerView(sliderBlock, isMobileWidth() ? slide_min_width_mobile : slide_min_width, slide_gap),
+      gap: slide_gap,
+      perMove: 1
+    });
+
+    $(window).on("resize", function() {
+      let slide_min_width = parseInt(sliderBlock[0].dataset.slideMinWidth);
+      let slide_gap = parseInt(sliderBlock[0].dataset.slideGap);
+      let slide_min_width_mobile = parseInt(sliderBlock[0].dataset.slideMinWidthMobile);
+
+      sliderBlock[0].splide.options = {perPage: getSlidesPerView(sliderBlock, isMobileWidth() ? slide_min_width_mobile : slide_min_width, slide_gap)};
+      configureDragOption(sliderBlock);
+    });
+
+    sliderBlock[0].splide.on( 'arrows:updated', function() {
+      let banner_list = sliderBlock.parents(".banner-list");
+      let prev_btn = banner_list.find(".banner-list__arrow-prev");
+      let next_btn = banner_list.find(".banner-list__arrow-next");
+
+      if (banner_list.find(".splide__arrow--prev").prop("disabled") === true) {
+        prev_btn.addClass("is-disabled");
+      } else {
+        prev_btn.removeClass("is-disabled");
+      }
+
+      if (banner_list.find(".splide__arrow--next").prop("disabled") === true) {
+        next_btn.addClass("is-disabled");
+      } else {
+        next_btn.removeClass("is-disabled");
+      }
+    });
+
+    sliderBlock[0].splide.on( 'mounted updated', function() {
+      displaySliderControls(sliderBlock);
+    });
+
+    sliderBlock[0].splide.on( 'mounted', function() {
+      configureDragOption(sliderBlock);
+    });
+
+    sliderBlock[0].splide.mount();
+
+    sliderBlock.parents(".banner-list").find(".js-move-slide").on("click", function() {
+      let slider_node = $(this).parents(".banner-list").find(".js-banner-list-slider");
+
+      if (slider_node.length) {
+        let sliderInst = slider_node[0].splide;
+
+        if ($(this).is(".banner-list__arrow-prev")) {
+          sliderInst.go( '-' );
+        }
+
+        if ($(this).is(".banner-list__arrow-next")) {
+          sliderInst.go( '+' );
+        }
+      }
+    });
+  }
+
+  function updateBannerListSlider(slider, data) {
+    let sliderInst = slider[0].splide;
+
+    let slide_min_width = parseInt(slider.data("slideMinWidth"));
+    let slide_gap = parseInt(slider.data("slideGap"));
+    let slide_min_width_mobile = parseInt(slider.data("slideMinWidthMobile"));
+
+    if (data.setting_name == 'slide-width') {
+      let new_slide_min_width = parseInt(data.value);
+      let new_per_page = getSlidesPerView(slider, new_slide_min_width, slide_gap);
+      slider.attr("data-slide-min-width", new_slide_min_width);
+
+      sliderInst.options = { perPage: new_per_page };
+
+      if (!isMobileWidth()) {
+        let new_per_page = getSlidesPerView(slider, new_slide_min_width, slide_gap);
+        sliderInst.options = { perPage: new_per_page };
+      }
+    } else if (data.setting_name == 'slide-width-mobile') {
+      let new_slide_min_width_mobile = parseInt(data.value);
+      slider.attr("data-slide-min-width-mobile", new_slide_min_width_mobile);
+
+      if (isMobileWidth()) {
+        let new_per_page = getSlidesPerView(slider, new_slide_min_width_mobile, slide_gap);
+        sliderInst.options = { perPage: new_per_page };
+      }
+
+
+    } else if (data.setting_name == 'slide-gap') {
+      let new_slide_gap = parseInt(data.value);
+      let new_per_page = getSlidesPerView(slider, slide_min_width, new_slide_gap);
+      slider.attr("data-slide-gap", new_slide_gap);
+
+      sliderInst.options = { gap: new_slide_gap, perPage: new_per_page };
+    } else {
+      setTimeout(function() {
+        let new_per_page = getSlidesPerView(slider, isMobileWidth() ? slide_min_width_mobile : slide_min_width, slide_gap);
+        sliderInst.options = { perPage: new_per_page };
+      }, 0);
+    }
+
+    configureDragOption(slider);
+  }
+
+  function getSlidesPerView(sliderBlock, slideMinWidth, slideGap) {
+    return Math.floor((sliderBlock.width() + slideGap) / (slideMinWidth + slideGap));
+  }
+
+  
+
+  function displaySliderControls(slider) {
+    let sliderInst = slider[0].splide;
+    let slider_arrows = slider.parents(".banner-list").find(".banner-list__arrow");
+
+    if (sliderInst.length <= sliderInst.options.perPage) {
+      slider_arrows.addClass("is-hide");
+      slider.addClass("is-hide-paging");
+    } else {
+      slider_arrows.removeClass("is-hide");
+      slider.removeClass("is-hide-paging");
+    }
+  }
+
+  function configureDragOption(slider) {
+    if (slider[0].splide.length <= slider[0].splide.options.perPage) {
+      slider[0].splide.options = { drag: false };
+    } else {
+      slider[0].splide.options = { drag: true };
+    }
+  }
+  function isMobileWidth() {
+    return $(window).width() <= mobile_point;
+  }
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_banner_list_27" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_footer_19';
+  let $widget = $('.widget-type_system_widget_v4_footer_19');
+  $(function() {
+  $(widget).find(".js-show-mobile-submenu").on("click", function() {
+    $(this).parents(".menu-item:first").toggleClass("is-show-mobile");
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_footer_19" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_promo_slider_18';
+  let $widget = $('.widget-type_system_widget_v4_promo_slider_18');
+  $(function() {
+  let initPromoSlider = function(slider) {
+    let is_autoplay = slider.data("autoplay");
+    let autoplay_delay = slider.data("autoplayDelay");
+
+    slider[0].splide = new Splide(slider[0], {
+      rewind: true,
+      autoplay: !!is_autoplay,
+      interval: autoplay_delay ? parseInt(autoplay_delay) * 1000 : 5000
+    });
+
+    slider[0].splide.on( 'mounted updated', function() {
+      displaySliderControls(slider);
+    });
+
+    slider[0].splide.mount();
+  }
+
+  let updatePromoSlider = function(slider, data) {
+    let sliderInst = slider[0].splide;
+
+    if (data.setting_name == 'autoplay') {
+      slider.data("autoplay", data.value);
+
+      sliderInst.destroy();
+      initPromoSlider(slider);
+    } else if (data.setting_name == 'autoplay-delay') {
+      slider.data("autoplayDelay", data.value);
+
+      sliderInst.destroy();
+      initPromoSlider(slider);
+    } else {
+      setTimeout(function() { sliderInst.refresh() }, 0);
+    }
+  }
+
+  let displaySliderControls = function(slider) {
+    let sliderInst = slider[0].splide;
+
+    if (sliderInst.length <= sliderInst.options.perPage) {
+      slider.addClass("is-hide-controls");
+    } else {
+      slider.removeClass("is-hide-controls");
+    }
+  }
+
+  $(function() {
+    $widget.each(function(index, el) {
+      new LazyLoad({
+        container: $(el).get(0),
+        elements_selector: '.lazyload'
+      });
+    });
+
+    $widget.find(".js-promo-slider").each(function() {
+      initPromoSlider($(this));
+    });
+  });
+
+
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_promo_slider_18" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_special_products_20';
+  let $widget = $('.widget-type_system_widget_v4_special_products_20');
+  $(function() {
+  var mobile_point = 767;
+
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload',
+      use_native: 'loading' in document.createElement('img')
+    });
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_special_products_20" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_sidebar_social_1';
+  let $widget = $('.widget-type_system_widget_v4_sidebar_social_1');
+  $(function() {
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload'
+    });
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_sidebar_social_1" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_widget_v4_special_products_tabs_4_a3cabb735dc2d527c18cf4e9fa66a72f';
+  let $widget = $('.widget-type_widget_v4_special_products_tabs_4_a3cabb735dc2d527c18cf4e9fa66a72f');
+  $(function() {
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload'
+    });
+  });
+
+  $(function() {
+    function isMobileWidth() {
+      return $(window).width() <= 767;
+    }
+
+    function grid_list_columns_mobile() {
+      $('[data-tabs-item]').each(function() {
+        let list = $(this).data('tabs-item')
+        let data_blocks_size = Math.ceil($(this).parents('.tabs:first').find(`#${list} .grid-list`).attr('data-blocks-size'));
+
+        if (isMobileWidth()) {
+          $widget.find('.grid-list').css({
+            gridTemplateColumns: `repeat(${data_blocks_size}, minmax(calc(var(--grid-list-min-width) - 30px), 1fr))`
+          });
+        } else {
+          $widget.find('.grid-list').css({
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(var(--grid-list-min-width), 100%), 1fr))'
+          });
+        }
+      });
+    }
+
+    grid_list_columns_mobile();
+    window.addEventListener('resize', grid_list_columns_mobile);
+    window.addEventListener('orientationchange', grid_list_columns_mobile);
+
+    $widget.find("[data-tabs-item]").on("click", function() {
+      const tabs = $(this).closest(".tabs");
+      const tab_item_id = $(this).data("tabsItem");
+      const open_tab = tabs.find('#' + tab_item_id);
+
+      if (open_tab.length) {
+        tabs.find(".tabs__item.is-active, .tabs__head-item.is-active").removeClass("is-active");
+        tabs.find('#' + tab_item_id).addClass("is-active");
+        $(this).addClass("is-active");
+      }
+    });
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_widget_v4_special_products_tabs_4_a3cabb735dc2d527c18cf4e9fa66a72f" throwed an error: "' + error.stack + '"')
+}
+
+</script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/style.css" media="all" onload="this.media=&#39;all&#39;">
+
+
+
+
+
+
+
+
+
+
+<link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/theme.css" rel="stylesheet" type="text/css" onload="document.body.classList.add(&#39;settings_loaded&#39;);">
+
+
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/theme.js" charset="utf-8"></script>
+
+  
+{% endwith %}
+</body></html>

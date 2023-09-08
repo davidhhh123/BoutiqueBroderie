@@ -1,0 +1,179 @@
+{% extends 'template_rus/my_products.html' %}
+{% load static %}
+  {% load mathfilters %}
+  {% load rate %}
+  {% load all_go %}
+
+{% block content %}
+ {% with rate=request|Get_pay_rate %}
+  <div class="infinite-container" >
+    
+       {% for product in products %}
+    <div class="infinite-item"> <div class="cart-item " id="cart-item{{product.pk}}" data-product-id="336490978" data-item-id="573211243">
+      <div class="item-image">
+        <div class="img-ratio img-ratio_cover img-ratio_cart">
+          <div class="img-ratio__inner">
+            {% if product.avatar_p  %}
+             <img title="Инструменты" alt="Инструменты" src="{{product.avatar_p.url}}" class="item-image">
+            {% else %}
+             <img title="Инструменты" alt="Инструменты" src="{% static 'images/GRBD_SET_TIFFANY_big.jpg' %}" class="item-image">
+            {% endif %}
+           
+            
+          </div>
+        </div>
+      </div>
+      <a href="{% url 'accounts:product_detalis_view' product.pk %}" class="item-title">
+      {{product.name_ru}}
+      
+      </a>
+      <div class="item-price">
+        
+{% if product.price %}
+{% if product.sale_price  %}
+               <span class="product-preview__price-old">{{product.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              
+              <span class="product-preview__price-cur">{{product.sale_price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               
+              {% else %}
+              <span class="product-preview__price-cur">{{product.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+             
+              {% endif %}
+{% elif product.price_pcs %}
+ {% if product.sale_price_pcs  %}
+               <span class="product-preview__price-old">{{product.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              
+              <span class="product-preview__price-cur">{{product.sale_price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               
+              {% else %}
+              <span class="product-preview__price-cur">{{product.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+             
+              {% endif %}
+{% elif product.price_size %}
+{% if product.sale_price_size  %}
+               <span class="product-preview__price-old">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              
+              <span class="product-preview__price-cur">{{product.sale_price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               
+              {% else %}
+              <span class="product-preview__price-cur">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+             
+              {% endif %}
+{% else %}
+{% if product.counter_props.all %}
+{% with firstname=product.count|checkcounters:product.product.pk %}
+    {% if firstname is not None %}
+     <span class="product-preview__price-cur">{{firstname|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+   
+
+             
+    {% else %}
+    <span class="product-preview__price-cur">{{product.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+      
+             
+    {% endif %}
+  {% endwith %}
+{% else %}
+<span class="product-preview__price-cur">{{product.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+      
+{% endif %}
+{% endif %}
+      </div>
+      <div class="item-counter ">
+        <div class="counter" data-quantity="" data-quantity-change-init="true">
+         
+          <input type="checkbox" value="1" name="cart[quantity][573211243]" class="check-input form-control form-control_size-s" pk = "{{ product.pk }}">
+        
+        </div>
+      </div>
+      <div class="item-total" data-cart-item-total-price="">
+
+                
+{% if product.price %}
+{% if product.sale_price  %}
+               <span class="product-preview__price-old">{{product.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              
+              <span class="product-preview__price-cur">{{product.sale_price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               
+              {% else %}
+              <span class="product-preview__price-cur">{{product.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+             
+              {% endif %}
+{% elif product.price_pcs %}
+ {% if product.sale_price_pcs  %}
+               <span class="product-preview__price-old">{{product.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              
+              <span class="product-preview__price-cur">{{product.sale_price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               
+              {% else %}
+              <span class="product-preview__price-cur">{{product.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+             
+              {% endif %}
+{% elif product.price_size %}
+{% if product.sale_price_size  %}
+               <span class="product-preview__price-old">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              
+              <span class="product-preview__price-cur">{{product.sale_price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               
+              {% else %}
+              <span class="product-preview__price-cur">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+             
+              {% endif %}
+{% else %}
+{% if product.counter_props.all %}
+{% with firstname=product.count|checkcounters:product.product.pk %}
+    {% if firstname is not None %}
+     <span class="product-preview__price-cur">{{firstname|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+   
+
+             
+    {% else %}
+    <span class="product-preview__price-cur">{{product.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+      
+             
+    {% endif %}
+  {% endwith %}
+{% else %}
+<span class="product-preview__price-cur">{{product.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+      
+{% endif %}
+{% endif %}
+
+
+      </div>
+      <div class="item-delete">
+        
+          <span class="button favorites_btn favorites-not-added" data-ui-favorites-trigger="336490978">
+            
+            <span class="btn-text" data-ui-favorites-trigger-added-text="В избранном" data-ui-favorites-trigger-not-added-text="В избранное"><label for="checkbox_turn_onoff{{ product.pk }}" class="switch" {{product.active}}>
+              {% if product.active == True %}
+              aaa
+               <input type="checkbox" id="checkbox_turn_onoff{{ product.pk }}" pk = "{{ product.pk }}" class="checkbox_turn_onoff" checked="checked">
+              {% else %}
+               <input type="checkbox" id="checkbox_turn_onoff{{ product.pk }}" pk = "{{ product.pk }}" class="checkbox_turn_onoff">
+              {% endif %}
+ 
+
+  <span class="slider round"></span>
+</label></span>
+          </span>
+        
+        <button class="button js-item-delete" type="button" data-item_delete="{{ product.pk }}"><span class="icon icon-trash"></span> Удалить</button>
+        <!-- a -n  button style  -->
+<a href="{% url 'accounts:change_product_page' product.pk  %}">
+         <button class="button js-item-change" type="button" data-item_change="{{ product.pk }}">Изменить</button></a>
+        
+      </div>
+    </div>
+  </div>
+
+    {% endfor %}
+   
+  </div>
+
+  {% if products.has_next %}
+    <a class="infinite-more-link" href="?page={{ products.next_page_number }}">More</a>
+  {% endif %}
+
+  {% endwith %}
+{% endblock %}

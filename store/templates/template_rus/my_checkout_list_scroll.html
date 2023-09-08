@@ -1,0 +1,121 @@
+{% extends 'template_rus/my_checkout_list.html' %}
+{% load static %}
+
+{% block content %}
+
+  <div class="infinite-container" >
+     {% for checkout in checkouts %}
+     <div class="infinite-item">
+
+
+ 
+     <div class="cart-item cart-item_order{{checkout.delivery_check.pk}} " id="cart-item25" data-product-id="336490978" data-item-id="573211243">
+      
+      <a href="{% url 'accounts:order_detalis' checkout.order_id %}" class="item-title" style="">
+      order_id:{{ checkout.pk }}
+        {% if checkout.status == "joint" %}
+     Совместная доставка
+      {% elif  checkout.status == "collectionpay"  %}
+      Дозаказ
+
+      {% endif %}
+      
+      </a>
+      <div class="item-price">
+        <span class="price" data-cart-item-price=""> {{ checkout.price|floatformat:2 }}&nbsp;֏</span>
+      </div>
+     <div class="item-counter status_viewer" id="cart_counter{{ checkout.pk }}">
+  
+
+
+
+{% if checkout.status == "send" or checkout.status == "collectionsend" %}
+             <p style="font-weight: bold; color: #1dbb1d;">Отправлено</p>
+{% else %}
+
+  {% if checkout.delivery_check.pay_status == "dontpay" %}
+    {% if checkout.assembled == "assembled" %}
+    <p style="font-weight: bold;color: #ffd226;">Заказ собран</p>
+    {% else %}
+
+    <p style="font-weight: bold;color: red;">Новый заказ</p>
+    {% endif %}
+  {% else %}
+  {% if checkout.status == "collectionpay"  %}
+ {% if checkout.assembled == "assembled" %}
+    <p style="font-weight: bold;color: #ffd226;">Заказ собран</p>
+    {% else %}
+    <p style="font-weight: bold;color: red;">Новый заказ</p>
+
+    
+    {% endif %}
+  {% else %}
+   <p style="font-weight: bold;color: #ffd226;">Ожидает отправки</p>
+  {% endif %}
+
+ 
+
+  {% endif %}
+{% endif %}
+
+
+       
+       
+      </div>
+      <div class="item-total" data-cart-item-total-price="">{{checkout.price|floatformat:2}}&nbsp;֏</div>
+       
+      
+      <div class="item-delete">
+        
+         
+       
+
+<a href="{% url 'accounts:orders_view' checkout.pk %}">
+         <button class="button js-item-change" type="button" data-item_change="{{ checkout.product.pk }}">Посмотреть {% if checkout.status == "collectionpay" %}Дозаказ{% elif checkout.status == "pay"  %}заказ{% else %}{% endif %}</button></a>
+          {% if checkout.status == "joint" %}
+          <a href="{% url 'accounts:change_delivery_price' checkout.pk %}">
+         <button class="button js-item-change" type="button" data-item_change="{{ checkout.product.pk }}">Изменить цену доставки {% if checkout.status == "collectionpay" %}Дозаказ{% elif checkout.status == "pay"  %}заказ{% else %}{% endif %}</button></a>
+         {% else %}
+          {% if checkout.assembled == "assembled" %}
+          {% else %}
+         <button class="button js-item-assembled assembled_on{{checkout.delivery_check.pk}}" type="button" pk="{{ checkout.pk }}" item_pk = "{{checkout.delivery_check.pk}}">Заказ собран</button>
+         {% endif %}
+          
+          {% if checkout.delivery_check.pay_status == "delyverypay"   %}
+          {% if checkout.status == "send" or checkout.status == "collectionsend" %}
+            
+          
+          {% else %}
+          {% if checkout.assembled == "assembled" %}
+          <button class="button js-item checkbox_turn_onoff send_on{{ checkout.delivery_check.pk }}" type="button" pk="{{ checkout.delivery_check.pk }}">Отправить</button>
+          {% else %}
+          {% endif %}
+          {% endif %}
+         
+         {% else %}
+         
+          {% endif  %}
+         {% endif %}
+         <a href="{% url 'accounts:order_detalis' checkout.order_id %}">
+         <button class="button js-item-change" type="button" >Посмотреть чек</button></a>
+       
+
+        
+        
+      </div>
+    </div>
+</div>
+    {% endfor %}
+  </div>
+
+   
+
+
+
+  {% if checkouts.has_next %}
+    <a class="infinite-more-link" href="?page={{ checkouts.next_page_number }}"></a>
+  {% endif %}
+
+
+
+    {% endblock %}

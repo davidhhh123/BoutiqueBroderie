@@ -1,0 +1,212 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block content %}
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css'>
+
+<style type="text/css">
+    
+    .w-1\/3 {
+    width: 25%;
+    margin-top: 40px;
+}
+@media (max-width: 1199px){
+.lg\:w-8\/12 {
+   width: calc(100% - 10px);
+}}
+.md\:py-8 {
+    padding-bottom: 100px;
+}
+@media (max-width: 1199px){
+.w-1\/3 {
+    width: 33.333333%;
+}}
+@media (min-width: 768px){
+.md\:py-8 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.md\:ml-16 {
+     margin-left: 0rem; 
+}
+.vghy99{
+  margin-top: -10px;
+}
+}
+@media(max-width: 1023px){
+  
+.lg\:w-8\/12{
+  width: calc(100% - 10px);
+    margin-left: 5px;
+}}
+
+
+.pb-full {
+    padding-bottom: 100%;
+}
+.user_name_playlist {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: -30px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+}
+#pageWrapper {
+   
+    padding: 0;
+    
+}
+@media (min-width: 1024px){
+.lg\:w-8\/12 {
+    width: calc(100% - 10px);
+}}
+audio, canvas, embed, iframe, img, object, svg, video {
+    display: inline-block;
+    vertical-align: middle;
+}
+</style>
+    <main id="pageWrapper">
+       
+     
+               
+                
+                            <div class="lg:w-8/12 lg:mx-auto mb-8  a278kk main_name" style="margin-top: 85px;
+
+">
+
+  
+
+    <!-- posts -->
+    <div class="px-px md:px-3">
+
+      <!-- user following for mobile only -->
+    
+      <!-- insta freatures -->
+     
+    <div class="flex flex-wrap -mx-px md:-mx-3 ">
+       <div class="w-1/3 p-px md:px-3 " tabindex="0"  {% if playlists.0.poster.url != None %} data-full = "{{ playlists.0.poster.url }}"  {% else %} data-full = "{% static 'images/playlist.png' %}"  data_id = "{{ playlists.0.name }}" {% endif %} data_post_id = "#" heart_c="0" name="#aw" id="#aw">
+         <a href="{% url 'accounts:myplaylist' playlists.0.pk  %}">
+     
+    
+
+   
+          
+            <article class="post bg-gray-100 text-white relative pb-full md:mb-6"style="background: #0c0c0c;" >
+             
+
+              
+              <img class="w-full h-full absolute left-0 top-0 object-cover" src="/assets/images/Apple-Music-Web-1.jpg" alt="image" width="{{ im.x }}" height ="{{ im.y }}">
+              
+              <!-- overlay-->
+              <div class="user_name_playlist">My playlist</div>
+              <div class="overlay bg-gray-800 bg-opacity-25 w-full h-full absolute 
+                                left-0 top-0 hidden">
+                <div class="flex justify-center items-center 
+                                    space-x-4 h-full">
+                  <span class="p-2">
+                    <i class="fas fa-heart"></i>
+                    120K
+                  </span>
+
+                  <span class="p-2">
+                    <i class="fas fa-comment"></i>
+                    3,909
+                  </span>
+                </div>
+              </div>
+
+            </article>
+          </a>
+         
+        </div>
+   
+        
+   {% for column in playlists_add %}
+      <div class="w-1/3 p-px md:px-3 " tabindex="0"  {% if column.poster.url != None %} data-full = "{{ column.poster.url }}"  {% else %} data-full = "{% static 'images/playlist.png' %}"  data_id = "{{ column.name }}" {% endif %} data_post_id = "#" heart_c="0" name="#aw" id="#aw">
+         <a href="{% url 'accounts:myplaylist' column.pk  %}">
+     
+    
+
+   
+          
+            <article class="post bg-gray-100 text-white relative pb-full md:mb-6"style="background: #0c0c0c;" >
+              {% if column.poster.url != None %}
+
+              {% thumbnail column.poster "200x200" crop="center" as im %}
+              <img class="w-full h-full absolute left-0 top-0 object-cover" src="{{ im.url }}" alt="image" width="{{ im.x }}" height ="{{ im.y }}">
+              {% endthumbnail %}
+              {% else %}
+               <img class="w-full h-full absolute left-0 top-0 object-cover" src="{% static 'images/playlist (1).png' %}" alt="image" width="200" height ="200">
+              {% endif %}
+              <div class="user_name_playlist">{{ column.name }}</div>
+              <!-- overlay-->
+              <div class="overlay bg-gray-800 bg-opacity-25 w-full h-full absolute 
+                                left-0 top-0 hidden">
+                <div class="flex justify-center items-center 
+                                    space-x-4 h-full">
+                  <span class="p-2">
+                    <i class="fas fa-heart"></i>
+                    120K
+                  </span>
+
+                  <span class="p-2">
+                    <i class="fas fa-comment"></i>
+                    3,909
+                  </span>
+                </div>
+              </div>
+
+            </article>
+          </a>
+         
+        </div>
+
+
+
+   
+        
+      
+       
+
+
+  {% endfor %}
+
+
+        <!-- column -->
+        
+      
+
+      </div>
+
+
+  
+  
+
+        <!-- column -->
+        
+      
+
+      
+    </div>
+  </div>
+  
+                           
+                       
+                  
+           
+      
+       
+    </main>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@5.0.2/dist/amplitude.min.js"></script>
+    <script src="{% static 'js/wavesurfer.min.js' %}"></script>
+   
+{% endblock %}

@@ -1,0 +1,91 @@
+ <style type="text/css">
+   .co-menu-toggle:after {
+    content: none !important;
+    
+}
+ </style>
+ <div class="co-sidebar--menu"><input class="co-menu-switcher" id="co-menu-toggle" type="checkbox"><label class="co-menu-toggle" data-title="Личный кабинет" for="co-menu-toggle"><svg width="30" height="30" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<style>.cls-1{fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style>
+</defs>
+<title/>
+<g id="chevron-bottom">
+<line class="cls-1" x1="16" x2="7" y1="20.5" y2="11.5"/>
+<line class="cls-1" x1="25" x2="16" y1="11.5" y2="20.5"/>
+</g>
+</svg></label><div class="co-menu co-menu--personal co-checkout-block--padded">
+
+
+
+                 {% if request.user.is_superuser %}
+                 <div class="co-menu-item co-menu-item--personal">
+   <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:my_checkout_products' %}" style="margin-top: 10px;padding-bottom: 10px;">История заказов</a>
+ </div>
+                  <div class="co-menu-item co-menu-item--personal">
+   <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:add_product_page' %}">Добавить Товар</a>
+ </div>
+           <div class="co-menu-item co-menu-item--personal">
+     <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:add_product_page_size' %}">Добавить Товар (размер)</a>
+ </div>
+ <div class="co-menu-item co-menu-item--personal">
+     <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:my_products' %}" style="width: 210px;" style="margin-top: 10px;padding-bottom: 10px;">Мои Товары</a>
+ </div>
+
+         
+          
+         
+          
+        <div class="co-menu-item co-menu-item--personal">
+   <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:add_day_of_products' %}" style="width: 210px;" style="margin-top: 10px;padding-bottom: 10px;">Добавить товары дня</a>
+ </div>
+         
+           <div class="co-menu-item co-menu-item--personal">
+    <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:add_blog' %}" style="margin-top: 10px;padding-bottom: 10px;">Блог</a>
+ </div>
+  <div class="co-menu-item co-menu-item--personal">
+     <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:add_slides' %}" style="width: 210px;" style="margin-top: 10px;padding-bottom: 10px;">Слайды</a>
+ </div>
+  <div class="co-menu-item co-menu-item--personal">
+    
+                     <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:add_brand' %}" style="width: 210px;" style="margin-top: 10px;padding-bottom: 10px;">Бренды</a>
+ </div>
+   <div class="co-menu-item co-menu-item--personal">
+  <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:add_zones' %}" style="width: 210px;" style="margin-top: 10px;padding-bottom: 10px;">Зоны доставки</a>
+ </div>
+   <div class="co-menu-item co-menu-item--personal">
+    <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:add_price_for_shipping' %}" style="width: 210px;" style="margin-top: 10px;padding-bottom: 10px;">Цены за доставку</a>
+ </div>
+    <div class="co-menu-item co-menu-item--personal">
+    <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:delivery_box_money' %}" style="width: 210px;" style="margin-top: 10px;padding-bottom: 10px;">Масса упаковки</a>
+ </div>
+ 
+ <div class="co-menu-item co-menu-item--personal">
+   <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:max_per_order' %}" style="width: 210px;" style="margin-top: 10px;padding-bottom: 10px;">Минимальная сумма заказа</a>
+ </div>
+           
+           
+       
+
+
+                  
+                   
+                {% else %}
+                <div class="co-menu-item co-menu-item--personal"><a class="co-menu-link co-menu-link--personal co-link co-link--active co-menu-link--active" href="{% url 'accounts:orders' %}">История заказов</a></div><div class="co-menu-item co-menu-item--personal"><a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:address_book' %}">Адрес доставки</a></div>
+
+
+                {% endif %}
+                  <div class="co-menu-item co-menu-item--personal">
+
+                <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:sign_out' %}">Выход</a>
+              </div>
+              </div></div>
+              
+              <div class="co-section--content">
+                <!--
+                <div class="co-section--checkout_header co-checkout-block--padded">
+                  <h1 class="co-checkout-title co-title co-title--h1">
+                    
+История заказов
+
+                  </h1>
+                </div>-->

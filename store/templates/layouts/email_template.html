@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f1f1f1;
+    }
+
+    .container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      margin: 0;
+      color: #333333;
+    }
+
+    .order-details {
+      margin-bottom: 20px;
+    }
+
+    .order-details h2 {
+      margin-top: 0;
+      font-size: 20px;
+      color: #333333;
+    }
+
+    .order-summary {
+      margin-bottom: 20px;
+    }
+
+    .order-summary table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .order-summary th,
+    .order-summary td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    .order-summary th {
+      background-color: #f8f8f8;
+      color: #7188D4;
+    }
+
+    .order-summary td.product-name {
+      width: 60%;
+    }
+
+    .order-summary td.product-price,
+    .order-summary td.product-quantity,
+    .order-summary td.product-total {
+      text-align: right;
+    }
+
+    .order-summary td.product-total {
+      font-weight: bold;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #f8f8f8;
+    }
+
+    .footer p {
+      margin: 0;
+      color: #777777;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header">
+  <img src="photo_2023-07-12_16-09-02.jpg" alt="Logo" style="max-width: 200px;">
+  <h1>Order Confirmation - boutiquebroderie.com</h1>
+</div>
+    </div>
+
+    <div class="order-details">
+      <h2>Order Details</h2>
+      <p><strong>Order Number:</strong> 123456789</p>
+      <p><strong>Date:</strong> July 14, 2023</p>
+    </div>
+
+    <div class="order-summary">
+      <table>
+       <thead>
+  <tr>
+    <th>Product</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Sale</th>
+    <th>Total</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="product-name">Product 1</td>
+    <td class="product-price">$10.00</td>
+    <td class="product-quantity">1</td>
+    <td class="product-sale">-</td>
+    <td class="product-total">$10.00</td>
+  </tr>
+  <tr>
+    <td class="product-name">Product 2</td>
+    <td class="product-price">$20.00</td>
+    <td class="product-quantity">2</td>
+    <td class="product-sale">10%</td>
+    <td class="product-total">$36.00</td>
+  </tr>
+  <tr>
+    <td class="product-name">Product 3</td>
+    <td class="product-price">$15.00</td>
+    <td class="product-quantity">1</td>
+    <td class="product-sale">-</td>
+    <td class="product-total">$15.00</td>
+  </tr>
+</tbody>
+
+        <tfoot>
+          <tr>
+            <td colspan="3"><strong>Total:</strong></td>
+            <td><strong>$65.00</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="footer">
+     <p>Thank you for your order! If you have any questions, please contact our customer support.</p>
+  <a href="https://www.boutiquebroderie.com" style="display: inline-block; padding: 10px 20px; background-color: #7188D4; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 20px;">Back to Shop</a>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript logic (if any)
+  </script>
+</body>
+
+</html>

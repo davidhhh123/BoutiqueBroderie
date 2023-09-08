@@ -1,0 +1,181 @@
+<div class="mobile-menu-wrapper">
+		<div class="mobile-menu-overlay">
+		</div>
+		<!-- End Overlay -->
+		<a class="mobile-menu-close" href="#"><i class="d-icon-times"></i></a>
+		<!-- End CloseButton -->
+		<div class="mobile-menu-container scrollable">
+			
+			<!-- End Search Form -->
+			<ul class="mobile-menu mmenu-anim">
+				<li>
+					<a href="#">Home</a>
+				</li>
+				<li>
+					<a href="#" class="active">Categories<span class="toggle-btn"></span></a>
+					<ul>
+						<li>
+							<a href="#">
+								Variations 1
+							<span class="toggle-btn"></span></a>
+							<ul>
+								<li><a href="#">Banner With Sidebar</a></li>
+								<li><a href="#">Boxed Banner</a></li>
+								<li><a href="#">Infinite Ajaxscroll</a></li>
+								<li><a href="#">Horizontal Filter</a></li>
+								<li><a href="#">Navigation Filter<span class="tip tip-hot">Hot</span></a></li>
+
+								<li><a href="#">Off-Canvas Filter</a></li>
+								<li><a href="#">Right Toggle Sidebar</a></li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+				<li><a href="#">About<span class="toggle-btn"></span></a></li>
+				<li><a href="#">Contact us<span class="toggle-btn"></span></a></li>
+				<li><a href="{% url 'accounts:my_store' %}">My Store<span class="toggle-btn"></span></a></li>
+				  {% if request.user.profile.profile_type == "salesman" %}
+                                <li>
+                                   
+                                    <a href="{% url 'accounts:my_store' %}">My Store</a>
+                                   
+                                    
+                                  
+                                </li>
+                                <li>
+                                   
+                                   <a href="{% url 'accounts:my_product' %}">My Products</a>
+                                   
+                                    
+                                  
+                                </li>
+                                  {% else %}
+                                    {% endif %}
+				<li>
+    <a href="/messager/"><div class="notify">
+      {% if  mes_len != 0 %}
+                   <div class="notification" style="color: white;
+    text-align: center;
+    font-size: 12px;">{{ mes_len }}</div>
+
+                  {% else %}
+                  <div class="notification" style="color: white;
+    text-align: center;
+    font-size: 12px; display: none;">0</div>
+                  {% endif %}
+    
+     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 512 512" style="width: 26px;"><title>ionicons-v5-n</title><path d="M53.12,199.94l400-151.39a8,8,0,0,1,10.33,10.33l-151.39,400a8,8,0,0,1-15-.34L229.66,292.45a16,16,0,0,0-10.11-10.11L53.46,215A8,8,0,0,1,53.12,199.94Z" style="fill:none;stroke:#32b0ca;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><line x1="460" y1="52" x2="227" y2="285" style="fill:none;stroke:#32b0ca;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/></svg><span style="margin-left: 10px;position: absolute;margin-top: 2px;" class="">Messenger</span></a></li>
+
+
+				
+				
+				<!--<li>
+					
+					<a href="https://d-themes.com/html/riode/product.html">Products<span class="toggle-btn"></span></a>
+					<ul>
+						<li>
+							<a href="https://d-themes.com/html/riode/shop.html#">Product Pages<span class="toggle-btn"></span></a>
+							<ul>
+								<li><a href="https://d-themes.com/html/riode/product-simple.html">Simple Product</a></li>
+								<li><a href="https://d-themes.com/html/riode/product.html">Variable Product</a></li>
+								<li><a href="https://d-themes.com/html/riode/product-sale.html">Sale Product</a></li>
+								<li><a href="https://d-themes.com/html/riode/product-featured.html">Featured &amp; On Sale</a></li>
+
+								<li><a href="https://d-themes.com/html/riode/product-left-sidebar.html">With Left Sidebar</a></li>
+								<li><a href="https://d-themes.com/html/riode/product-right-sidebar.html">With Right Sidebar</a></li>
+								<li><a href="https://d-themes.com/html/riode/product-sticky-cart.html">Add Cart Sticky<span class="tip tip-hot">Hot</span></a></li>
+								<li><a href="https://d-themes.com/html/riode/product-tabinside.html">Tab Inside</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="https://d-themes.com/html/riode/shop.html#">Product Layouts<span class="toggle-btn"></span></a>
+							<ul>
+								<li><a href="https://d-themes.com/html/riode/product-grid.html">Grid Images<span class="tip tip-new">New</span></a></li>
+								<li><a href="https://d-themes.com/html/riode/product-masonry.html">Masonry</a></li>
+								<li><a href="https://d-themes.com/html/riode/product-gallery.html">Gallery Type</a></li>
+								<li><a href="https://d-themes.com/html/riode/product-full.html">Full Width Layout</a></li>
+								<li><a href="https://d-themes.com/html/riode/product-sticky.html">Sticky Info</a></li>
+								<li><a href="https://d-themes.com/html/riode/product-sticky-both.html">Left &amp; Right Sticky</a></li>
+								<li><a href="https://d-themes.com/html/riode/product-horizontal.html">Horizontal Thumb</a></li>
+
+								<li><a href="https://d-themes.com/html/riode/shop.html#">Build Your Own</a></li>
+							</ul>
+						</li>
+
+					</ul>
+				</li>
+				-->
+				<!--
+				<li>
+					<a href="https://d-themes.com/html/riode/shop.html#">Pages<span class="toggle-btn"></span></a>
+					<ul>
+						<li><a href="https://d-themes.com/html/riode/about-us.html">About</a></li>
+						<li><a href="https://d-themes.com/html/riode/contact-us.html">Contact Us</a></li>
+						<li><a href="https://d-themes.com/html/riode/account.html">Login</a></li>
+						<li><a href="https://d-themes.com/html/riode/faq.html">FAQs</a></li>
+						<li><a href="https://d-themes.com/html/riode/error-404.html">Error 404</a></li>
+						<li><a href="https://d-themes.com/html/riode/coming-soon.html">Coming Soon</a></li>
+					</ul>
+				</li>-->
+				<!--
+				<li>
+					<a href="https://d-themes.com/html/riode/blog-classic.html">Blog<span class="toggle-btn"></span></a>
+					<ul>
+						<li><a href="https://d-themes.com/html/riode/blog-classic.html">Classic</a></li>
+						<li><a href="https://d-themes.com/html/riode/blog-listing.html">Listing</a></li>
+						<li>
+							<a href="https://d-themes.com/html/riode/shop.html#">Grid<span class="toggle-btn"></span></a>
+							<ul>
+								<li><a href="https://d-themes.com/html/riode/blog-grid-2col.html">Grid 2 columns</a></li>
+								<li><a href="https://d-themes.com/html/riode/blog-grid-3col.html">Grid 3 columns</a></li>
+								<li><a href="https://d-themes.com/html/riode/blog-grid-4col.html">Grid 4 columns</a></li>
+								<li><a href="https://d-themes.com/html/riode/blog-grid-sidebar.html">Grid sidebar</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="https://d-themes.com/html/riode/shop.html#">Masonry<span class="toggle-btn"></span></a>
+							<ul>
+								<li><a href="https://d-themes.com/html/riode/blog-masonry-2col.html">Masonry 2 columns</a></li>
+								<li><a href="https://d-themes.com/html/riode/blog-masonry-3col.html">Masonry 3 columns</a></li>
+								<li><a href="https://d-themes.com/html/riode/blog-masonry-4col.html">Masonry 4 columns</a></li>
+								<li><a href="https://d-themes.com/html/riode/blog-masonry-sidebar.html">Masonry sidebar</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="https://d-themes.com/html/riode/shop.html#">Mask<span class="toggle-btn"></span></a>
+							<ul>
+								<li><a href="https://d-themes.com/html/riode/blog-mask-grid.html">Blog mask grid</a></li>
+								<li><a href="https://d-themes.com/html/riode/blog-mask-masonry.html">Blog mask masonry</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="https://d-themes.com/html/riode/post-single.html">Single Post</a>
+						</li>
+					</ul>
+				</li>
+				<li>-->
+					<!--
+					<a href="https://d-themes.com/html/riode/shop.html#">Elements<span class="toggle-btn"></span></a>
+					<ul>
+						<li><a href="https://d-themes.com/html/riode/element-products.html">Products</a></li>
+						<li><a href="https://d-themes.com/html/riode/element-typography.html">Typography</a></li>
+						<li><a href="https://d-themes.com/html/riode/element-titles.html">Titles</a></li>
+						<li><a href="https://d-themes.com/html/riode/element-categories.html">Product Category</a></li>
+						<li><a href="https://d-themes.com/html/riode/element-buttons.html">Buttons</a></li>
+						<li><a href="https://d-themes.com/html/riode/element-accordions.html">Accordions</a></li>
+						<li><a href="https://d-themes.com/html/riode/element-alerts.html">Alert &amp; Notification</a></li>
+						<li><a href="https://d-themes.com/html/riode/element-tabs.html">Tabs</a></li>
+						<li><a href="https://d-themes.com/html/riode/element-testimonials.html">Testimonials</a></li>
+						<li><a href="https://d-themes.com/html/riode/element-blog-posts.html">Blog Posts</a></li>
+						<li><a href="https://d-themes.com/html/riode/element-instagrams.html">Instagrams</a></li>
+						<li><a href="https://d-themes.com/html/riode/element-cta.html">Call to Action</a></li>
+						<li><a href="https://d-themes.com/html/riode/element-icon-boxes.html">Icon Boxes</a></li>
+						<li><a href="https://d-themes.com/html/riode/element-icons.html">Icons</a></li>
+					</ul>
+				</li>
+				<li><a href="https://d-themes.com/buynow/riodehtml" target="_blank">Buy Riode!</a></li>
+			</ul>-->
+			<!-- End MobileMenu -->
+		</div>
+</div>

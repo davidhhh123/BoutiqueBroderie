@@ -1,0 +1,1908 @@
+{% load static %}
+{% load i18n %}
+{% load all_go %}
+{% load mathfilters %}
+  {% load rate %}
+
+<!DOCTYPE html>
+
+<html style="--color-btn-bg:#7188D4; --color-btn-bg-is-dark:true; --bg:#FFFFFF; --bg-is-dark:false; --color-text: var(--color-text-dark); --color-text-minor-shade: var(--color-text-dark-minor-shade); --color-text-major-shade: var(--color-text-dark-major-shade); --color-text-half-shade: var(--color-text-dark-half-shade); --color-notice-warning-is-dark:false; --color-notice-success-is-dark:false; --color-notice-error-is-dark:false; --color-notice-info-is-dark:false; --color-form-controls-bg:var(--bg); --color-form-controls-bg-disabled:var(--bg-minor-shade); --color-form-controls-border-color:var(--bg-half-shade); --color-form-controls-color:var(--color-text); --is-editor:false; --vh:568px; --fixed-panels-bottom-offset:0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta data-config="{&quot;money_with_currency_format&quot;:{&quot;delimiter&quot;:&quot; &quot;,&quot;separator&quot;:&quot;.&quot;,&quot;format&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;show_price_without_cents&quot;:1},&quot;currency_code&quot;:&quot;RUR&quot;,&quot;default_currency&quot;:{&quot;title&quot;:&quot;Российский рубль&quot;,&quot;code&quot;:&quot;RUR&quot;,&quot;rate&quot;:1.0,&quot;format_string&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;price_separator&quot;:&quot;&quot;,&quot;is_default&quot;:true,&quot;price_delimiter&quot;:&quot;&quot;,&quot;show_price_with_delimiter&quot;:true,&quot;show_price_without_cents&quot;:true},&quot;facebook&quot;:{&quot;pixelActive&quot;:false,&quot;currency_code&quot;:&quot;RUB&quot;,&quot;use_variants&quot;:null},&quot;vk&quot;:{&quot;pixel_active&quot;:null,&quot;price_list_id&quot;:null},&quot;new_ya_metrika&quot;:false,&quot;ecommerce_data_container&quot;:&quot;dataLayer&quot;,&quot;common_js_version&quot;:null,&quot;vue_ui_version&quot;:null,&quot;feedback_captcha_enabled&quot;:&quot;1&quot;,&quot;account_id&quot;:1215183,&quot;hide_items_out_of_stock&quot;:false,&quot;forbid_order_over_existing&quot;:false,&quot;minimum_items_price&quot;:null,&quot;enable_comparison&quot;:true,&quot;locale&quot;:&quot;ru&quot;,&quot;client_group&quot;:null,&quot;consent_to_personal_data&quot;:{&quot;active&quot;:false,&quot;obligatory&quot;:true,&quot;description&quot;:&quot;Настоящим подтверждаю, что я ознакомлен и согласен с условиями \u003ca href=&#39;/page/oferta&#39; target=&#39;blank&#39;\u003eоферты и политики конфиденциальности\u003c/a\u003e.&quot;},&quot;recaptcha_key&quot;:&quot;6Lc0T0YUAAAAAAVNiH-_bnSC4E-YHMFTeYOqZyRx&quot;,&quot;checkout_float_order_content_block&quot;:false,&quot;sber_id_app_id&quot;:&quot;5b5a3c11-72e5-4871-8649-4cdbab3ba9a4&quot;,&quot;theme_generation&quot;:4,&quot;quick_checkout_captcha_enabled&quot;:false,&quot;max_order_lines_count&quot;:500}" name="shop-config" content=""><meta name="js-evnvironment" content="production"><meta name="default-locale" content="ru"><meta name="insales-redefined-api-methods" content="[]">
+        <!--InsalesCounter -->
+        <script type="text/javascript" async="" src="{% static 'js/insales_counter.js' %}"></script>
+        <!-- /InsalesCounter -->
+
+    <!-- meta -->
+<title>Պատվերի վճարում
+</title>
+
+
+<meta name="description" content="boutiquebroderie">
+<meta data-config="{&quot;static-versioned&quot;: &quot;1.38&quot;}" name="theme-meta-data" content="">
+<meta name="robots" content="index,follow">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<!-- canonical url-->
+
+<!-- rss feed-->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://boutiquebroderie.com">
+    <meta property="og:title" content="boutiquebroderie">
+
+
+    
+    
+    
+
+
+<style>
+  .fc.old-theme-fix {
+    overflow: visible;
+  }
+  .fc.old-theme-fix:after {
+    clear: both;
+    display: block;
+    content: '';
+  }
+  .tt-dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+    min-width: 160px;
+    margin-top: 2px;
+    padding: 5px 5px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+
+  }
+  .twitter-typeahead {
+    display: inherit !important;
+  }
+  .twitter-typeahead .tt-query, .twitter-typeahead .tt-hint {
+    margin-bottom: 0;
+  }
+  .tt-suggestion, .tt-footer {
+    display: block;
+    padding: 1px 0px 1px 10px;
+  }
+  .tt-suggestion.tt-is-under-cursor, .tt-footer.tt-is-under-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion.tt-is-under-cursor a, .tt-footer.tt-is-under-cursor a {
+    color: #fff;
+  }
+  .tt-suggestion.tt-cursor, .tt-footer.tt-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion p, .tt-footer p {
+    margin: 0;
+  }
+</style><style>
+  .spinner-container, .spinner {
+    position: absolute;
+    left:     0;
+    bottom:   0;
+    height:   100%;
+    width:    100%;
+  }
+
+  .spinner-container {
+    z-index:  900;
+    overflow: hidden;
+
+    &.animate .spinner {
+      &.slide-up {
+        opacity: 0;
+      }
+
+      &.fade-in {
+        opacity: 0;
+      }
+    }
+  }
+
+  .spinner {
+    height:   100%;
+    opacity:  0.6;
+    background: #fff;
+
+    &.slide-up {
+      @include transition-property(opacity, bottom);
+      @include transition-duration(0.3s);
+    }
+
+    &.fade-in {
+      @include transition-property(opacity);
+      @include transition-duration(1s);
+    }
+
+    .spin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+
+  .spinner {
+    background: rgba(255, 255, 255, 0);
+  }
+
+  .spinner-screen {
+    position: fixed;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+  }
+
+.display_none{
+
+  display: none !important;
+}
+.info_item{
+  border-color: #7188d4 !important;
+  max-width: 100%;
+  margin-top: 10px;position: relative;
+
+}
+.my_info_container{
+   display: flex;
+    width: 100%;
+    flex-wrap: wrap;overflow-y: auto;max-height: 300px;
+
+}
+.co-button--checkout#add_collection, .co-button--checkout#create_order_collection {
+    width: 100%;
+    margin: 1rem 0;
+    height: var(--controls-height-l);
+}
+.error_window{
+  display: none;color: red;
+}
+
+   
+</style>
+
+
+<!-- icons-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/icons.css">
+<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32275806.ico"><style media="screen">
+  @supports (content-visibility: hidden) {
+    body:not(.settings_loaded) {
+      content-visibility: hidden;
+    }
+  }
+  @supports not (content-visibility: hidden) {
+    body:not(.settings_loaded) {
+      visibility: hidden;
+    }
+  }
+</style>
+
+  </head>
+  {% with rate=request|Get_pay_rate %}
+  <body data-multi-lang="false" data-theme-template="index" data-sidebar-type="sticky" data-sidebar-position="left" class="settings_loaded">
+    <div class="preloader">
+      <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    </div>
+    <noscript>
+<div class="njs-alert-overlay">
+  <div class="njs-alert-wrapper">
+    <div class="njs-alert">
+      <p></p>
+    </div>
+  </div>
+</div>
+
+</noscript>
+
+    <div class="page_layout page_layout-clear ">
+      <header>
+      
+        <div class="layout widget-type_system_widget_v4_header_1" style="--logo-img:&#39;https://static.insales-cdn.com/files/1/7649/24960481/original/Frame.png&#39;; --logo-max-width:160px; --hide-menu-photo:false; --hide-search:false; --hide-language:false; --hide-compare:true; --hide-personal:false; --hide-favorite:false; --hide-total-price:false; --bage-bg:#7188D4; --bage-bg-is-dark:true; --bage-bg-minor-shade:#8095d9; --bage-bg-minor-shade-is-dark:true; --bage-bg-major-shade:#8ea0dd; --bage-bg-major-shade-is-dark:true; --bage-bg-half-shade:#b8c4ea; --bage-bg-half-shade-is-light:true; --bg-top-panel:#E5EBFF; --bg-top-panel-is-light:true; --bg-top-panel-minor-shade:#e5ebff; --bg-top-panel-minor-shade-is-light:true; --bg-top-panel-major-shade:#e4eaff; --bg-top-panel-major-shade-is-light:true; --bg-top-panel-half-shade:#d9e2ff; --bg-top-panel-half-shade-is-light:true; --menu-grid-list-min-width:220px; --menu-grid-list-row-gap:3rem; --menu-grid-list-column-gap:3rem; --subcollections-items-limit:10; --menu-img-ratio:1; --live-search:true; --header-wide-bg:true; --header-top-pt:0.5vw; --header-top-pb:0.5vw; --header-main-pt:1vw; --header-main-pb:2vw; --header-wide-content:false; --hide-desktop:false; --hide-mobile:false;">
+{% include 'layouts/header_arm.html' %}
+
+      
+      </header>
+
+      
+
+
+
+
+<!--main-->
+        <main>
+           
+        <div class="layout">
+          <div class="layout__content">
+            <div class="checkout-v2-wrapper co-section--checkout_content">
+              <div class="co-section--checkout_order co-section--checkout_order_sided">
+                <div class="co-section--checkout_header co-checkout-block--padded">
+                  <div class="decorated-title-wrapper co-checkout-title">
+                    <h1 class="decorated-title co-title co-title--h1">
+                     Պատվերի հաստատում
+                    </h1>
+                  </div>
+                </div>
+                <div class="co-sidebar-wrapper"><button class="co-sidebar-toggler js-co-sidebar-toggler"><span><span class="co-icon halfling-shopping-cart"></span><span class="co-sidebar-toggler_title">Ձեր պատվերը</span><span class="co-icon halfling-menu-down"></span></span><span class="co-basket_total-price co-price--current">{{ sums|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% else %}₽{% endif %}</span></button><div class="co-sidebar co-sidebar--hidden@sm js-co-sidebar co-sidebar--fixed"><div class="co-basket co-checkout-block--padded"><div class="co-basket_item-list">
+
+{% for order_product in order_products %}
+                  <div class="co-basket_item"><div class="co-basket_item-image_container"><div class="co-basket_item-image"><img alt="image" src="{{order_product.product.avatar_p.url}}"></div></div><div class="co-basket_item-description">{{order_product.product.name_am}}</div><div class="co-basket_item-total"><span class="co-basket_item-count">{% if order_product.count_size %}{{order_product.count_size}} см{% else %}{{order_product.count}}{% endif %}</span> x <span class="co-basket_item-price co-price--current">
+
+
+                   {% if order_product.indicator == "size" %}
+
+        
+
+      
+        
+              
+{% if order_product.product.sale_price_size %}
+{{ order_product.product.sale_price_size|div:rate.0|floatformat:2 }}
+{% else %}
+{{ order_product.product.price_size|div:rate.0|floatformat:2 }}
+{% endif %}
+
+
+
+
+
+
+
+
+   
+{% elif  order_product.indicator == "counter" %}
+
+{% with firstname=order_product.count|checkcounters:order_product.product.pk %}
+    {% if firstname is not None %}
+    
+      {{firstname|div:rate.0|floatformat:2}}
+
+      
+
+             
+    {% else %}
+    
+     {{order_product.product.price|div:rate.0|floatformat:2}}
+
+      
+             
+    {% endif %}
+  {% endwith %}
+{% elif  order_product.indicator == "size_pcs" %}
+  {% if order_product.product.sale_price_pcs %}
+  {{ order_product.product.sale_price_pcs|div:rate.0|floatformat:2 }}
+  {% else %}
+  {{ order_product.product.price_pcs|div:rate.0|floatformat:2 }}
+  {% endif %}
+
+     
+
+
+{% elif  order_product.indicator == "count" %}
+ {% if order_product.product.sale_price %}
+  {{ order_product.product.sale_price|div:rate.0|floatformat:2 }}
+  {% else %}
+  {{ order_product.product.price|div:rate.0|floatformat:2 }}
+  {% endif %}
+
+     
+
+
+{% else %}
+{% endif %}
+
+
+
+
+
+
+&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span></div></div>
+{% endfor %}
+
+
+                </div>
+
+
+  <div class="co-basket_subtotal-list"><div class="co-basket_subtotal"><div class="co-basket_subtotal-title">Ապրանքների գինը</div><div class="co-basket_subtotal-price co-price--current" id="items_price">{{ sums|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</div><div id="order_items_price" style="display:none">{{ sums|div:rate.0|floatformat:2 }}</div></div><div id="discounts-block"></div><div style="display: none"><div class="co-basket_subtotal" id="discount-subtotal-sample"><div class="co-basket_subtotal-title discount-subtotal-description"></div><div class="co-basket_subtotal-price co-price--current discount-subtotal-amount"></div></div></div>
+
+                  <div class="co-basket_subtotal box_mass_basket"><div class="co-basket_subtotal-title">Տուփի զանգվածը</div><div class="co-basket_subtotal-price co-price--current delivery_price_box" id="delivery_price">
+                    {{box_mass}}&nbsp;գ
+                  </div></div>
+                    <div class="co-basket_subtotal"><div class="co-basket_subtotal-title">Ընդհանուր զանգվածը</div><div class="co-basket_subtotal-price co-price--current delivery_price_main" id="delivery_price">
+                    {{ mass }}&nbsp;գ
+                  </div></div>
+
+{% if user_info  %}
+
+ <div class="co-basket_subtotal"></div><div class="co-basket_subtotal" id="payment_way_block" style="display:none;"><div class="co-basket_subtotal-title">Վճարման տարբերակ</div><div class="co-basket_subtotal-price co-price--current" id="payment_gateway_price">0&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</div></div></div><div class="co-basket_total"><div class="co-basket_total-title">Ընդհանուր գինը:</div><div class="co-basket_total-price co-price--current" id="total_price">{{ sums|add:shipping_price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</div></div>
+
+
+
+                     <div class="co-basket_total delivery_basket"><div class="co-basket_total-title">Առաքման գինը:</div><div class="co-basket_total-price co-price--current" id="total_mass">{{ shipping_price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</div></div>
+
+{% else %}
+ <div class="co-basket_subtotal"></div><div class="co-basket_subtotal" id="payment_way_block" style="display:none;"><div class="co-basket_subtotal-title">Վճարման տարբերակ</div><div class="co-basket_subtotal-price co-price--current" id="payment_gateway_price">0&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</div></div></div><div class="co-basket_total"><div class="co-basket_total-title">Ընդհանուր գինը:</div><div class="co-basket_total-price co-price--current" id="total_price">{{ sums|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</div></div>
+
+
+
+                     <div class="co-basket_total delivery_basket"><div class="co-basket_total-title">Առաքման գինը:</div><div class="co-basket_total-price co-price--current" id="total_mass">0&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</div></div>
+{% endif %}
+
+                  <div style="margin-top: 20px;color: red;" class="alert_warning">
+                    <p >Կարևոր է</p>
+
+                    <p>Այս էտապում դուք տեսնում եք առաքման արժեքը որպես ինֆորմացիա․
+                      Առաքման համար վճարումը կատարվում է առանձին , անձնական կաբինետից․
+                    </p>
+                    </div>
+
+                </div></div></div>
+
+                  
+                <div class="co-notice--danger co-notice--flash" id="checkout_order_errors" style="display: none"></div><div id="order_form" class="co-checkout-order_form co-checkout-block--padded" data-onepage-checkout="true" data-checkout2="true" data-has-payment-rules="false" data-client-identifier="email" data-use-mask="1" action="/new_order" accept-charset="UTF-8" method="post"><div class="co-delivery_method-list co-checkout-block"><div class="co-checkout-block"><div class="co-client"><div class="co-client-logged"> Գնորդ </div>
+
+                  
+                  <div class="co-customer co-checkout-block" style="display: none;">
+
+                    <div class="co-checkout-block"><div class="co-input co-input--required co-input--text co-input--name  co-input--nested"><label class="co-input-label" for="username_id">Անուն Ազգանուն</label><input class="co-input-field js-input-field" autocomplete="off" type="text" id="username_id" name="shipping_address[name]" value="superuser"><div class="co-input-notice co-notice--danger">Поле не заполнено</div></div>
+                    <div class="co-input co-input--required co-input--text co-input--email  co-input--nested"><label class="co-input-label" for="email_id">Email</label><input class="co-input-field js-input-field" autocomplete="off" type="email" id="email_id" name="shipping_address[name]" value="superuser"><div class="co-input-notice co-notice--danger">Поле не заполнено</div></div>
+
+
+                    <div class="co-input co-input--required co-input--tel co-input--phone  co-input--nested"><label class="co-input-label" for="phone_id">Հեռախոսահամար</label>
+
+
+                      <input class="co-input-field js-input-field" autocomplete="off" type="tel" id="phone_id" name="shipping_address[phone]" value=""><div class="co-input-description">օրինակ: +37498777777</div><p class="error_window"></p><div class="co-input-notice co-notice--danger">Поле не заполнено</div></div>
+
+                      <div class="co-input co-input--required co-input--text co-input--email  co-input--nested"><label class="co-input-label" for="country_id">Երկիր</label><select id="countrys" name="countrys" style="width: 100%;height: 40px;">
+                          {% for country in zone_countries %}
+                          <option value="{{country.country}}">{{country.country}}</option>
+                          {% endfor %}
+                          
+                        </select>
+<div class="co-input-notice co-notice--danger">Поле не заполнено</div></div>
+                       <div class="co-input co-input--required co-input--text co-input--email  co-input--nested"><label class="co-input-label" for="state_id">Մարզ, համայնք</label><input class="co-input-field js-input-field" autocomplete="off" type="state" id="state_id" name="shipping_address[name]" value="superuser"><div class="co-input-notice co-notice--danger">Поле не заполнено</div></div>
+                        <div class="co-input co-input--required co-input--text co-input--email  co-input--nested"><label class="co-input-label" for="city_id">Բնակության վայր(Քաղաք , գյուղ)</label><input class="co-input-field js-input-field" autocomplete="off" type="stament_address" id="city_id" name="shipping_address[name]" value="superuser"><div class="co-input-notice co-notice--danger">Поле не заполнено</div></div>
+                          <div class="co-input co-input--required co-input--text co-input--email  co-input--nested"><label class="co-input-label" for="address_id">Հասցեն</label><input class="co-input-field js-input-field" autocomplete="off" type="address" id="address_id" name="shipping_address[name]" value="superuser"><div class="co-input-notice co-notice--danger">Поле не заполнено</div></div>
+                            <div class="co-input co-input--required co-input--text co-input--email  co-input--nested"><label class="co-input-label" for="index_id">ինդեքս</label><input class="co-input-field js-input-field" autocomplete="off" type="index" id="index_id" name="shipping_address[name]" value="superuser"><div class="co-input-notice co-notice--danger">Поле не заполнено</div></div>
+                             </div></div>
+<div class="my_info_container" >
+ 
+  {% for info in user_info %}
+  
+
+<label class="co-payment_method  co-input-wrapper co-toggable_field co-toggable_field--bordered juridical individual  info_item" for="info_id{{info.pk}}"><span class="co-payment_method-input co-toggable_field-input  co-toggable_field-input--radio"><input class="radio_button js-input-field radio_contact" data-payment-id="1576667" data-payment-position="1" id="info_id{{info.pk}}" name="info" pk="{{info.pk}}" rel="#summ_1576667" type="radio" value="1576667" style="cursor: pointer; opacity: 1;" {% if forloop.counter0 == 0 %}checked="checked"{% else %}{% endif %} ><span></span></span>
+
+  <span class="co-payment_method-information co-toggable_field-information information_main{{info.pk}}"><span class="co-payment_method-title co-toggable_field-title co-input-title info_username">{{info.username}}</span><span class="co-payment_method-description co-toggable_field-description co-input-description info_email" id="payment_description_1576667">{{info.email}}</span>
+  <span class="co-payment_method-description co-toggable_field-description co-input-description info_phone_number" id="payment_description_1576667">{{info.phone_number}}</span>
+<span class="co-payment_method-description co-toggable_field-description co-input-description info_address" id="payment_description_1576667">{{info.address}}</span></span><span class="co-toggable_field-price co-price--current change_info" id="summ_1576667"  pk="{{ info.pk }}" data-price="0" style="display: block;font-size: 15px;" info='{"username":"{{ info.username }}","email":"{{ info.email }}","phone_number":"{{ info.phone_number }}","address":"{{ info.address }}","country":"{{ info.country }}","city":"{{ info.city }}","state":"{{ info.state }}","index":"{{ info.index }}"}'>Փոխել</span></label>
+
+
+{% endfor %}
+  
+</div>
+ 
+                    <button class="co-button co-button--checkout js-button-order_user_submit create_user_order" id="create_user_order" type="submit" style="margin-top: 10px;">Նոր հասցե</button>
+                    <button class="co-button co-button--checkout js-button-order_user_submit create_user_info display_none" id="create_user_order" type="submit" style="margin-top: 10px;">Նոր հասցե</button>
+                       <button class="co-button co-button--checkout js-button-order_user_submit change_user_info display_none" id="create_user_order" type="submit" style="margin-top: 10px;">Փոխել</button>
+                        <button class="co-button co-button--checkout js-button-order_user_submit change_user_info_cancel display_none" id="create_user_order" type="submit" style="margin-top: 10px;">չեղարկել</button>
+
+                    
+
+
+                </div></div>
+                <div class="shipping_container">
+                  <h2 class="co-title co-title--h2">Առաքման տարբերակ</h2>
+                  <div class="co-tabs-content co-tabs-content--active"><label class="co-delivery_method co-input-wrapper co-toggable_field co-toggable_field--bordered co-delivery_method--for_individual co-delivery_method--for_juridical" for="order_delivery_variant_id_3310713"><span class="radio co-delivery_method-input co-toggable_field-input co-toggable_field-input--radio"><input class="radio_button js-input-field" data-delivery-id="3310713" id="order_delivery_variant_id_3310713" name="order[delivery_variant_id]" rel="#price_3310713" type="radio" value="3310713" style="cursor: pointer; opacity: 1;" checked="checked"><span></span></span><span class="co-toggable_field-information co-delivery_method-information"><span class="co-delivery_method-title co-toggable_field-title co-input-title" id="delivery_title_3310713">Փոստ</span><span class="co-delivery_method-description co-toggable_field-description co-input-description" id="delivery_description_3310713">Առաքում փոստով</span><span class="co-delivery_method-description co-toggable_field-description co-input-description" id="delivery_outlet_3310713"></span><span class="co-delivery_method-description co-toggable_field-description co-input-description" id="delivery_interval_3310713"></span><span class="co-delivery_method-description co-toggable_field-description co-input-description" id="delivery_details_3310713"></span><div id="delivery_error_3310713" style="color: red;"></div><span></span></span><span class="co-delivery_method-price delivery_price_main co-toggable_field-price co-price--current" id="price_3310713" data-price="{{shipping_price}}"> {% if user_info  %}+ {{shipping_price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}{% else %}{% endif %}</span><span class="co-delivery_method-price co-toggable_field-price co-price--current" id="price_range_3310713" style="display: none"></span></label><div class="co-modal co-modal--outlet co-modal--fixed co-modal--hide"><div class="co-modal-wrapper"><div class="co-modal-header-container"><button class="co-modal-close js-modal-close co-icon co-modal-close-icon"></button><div><h3 class="co-modal-title co-title co-title--h2"></h3></div><button class="co-modal-select-point co-icon"></button></div><div class="co-form--outlet co-modal-outlet_form co-modal-body js-modal-body"></div></div></div><div class="co-overlay"></div></div></div><div class="co-checkout-block"><div class="co-input co-input--textarea co-input--comment co-input--nested co-input--empty_nested"><label class="co-input-label" for="order_comment"><label for="order_comment">Պատվերի մեկնաբանություն</label></label><textarea rows="2" class="co-input-field js-input-field" autocomplete="off" name="order[comment]" id="order_comment"></textarea></div></div><div class="co-checkout-block"><div class="co-input co-input--text co-input--nested co-input--empty_nested" id="delivery-date-calendar-block" style="display: none;"><label class="co-input-label" for="order_delivery_date" id="delivery-date-calendar-label">Дата доставки</label><input class="co-input-field js-input-field" id="delivery-date-calendar" name="order[delivery_date]" readonly="true"></div><div class="co-input co-input--select co-input--nested" id="delivery-time-intervals-block" style="display: none;"><label class="co-input-label" for="order_delivery_time_interval" id="delivery-time-intervals-label">Время доставки</label><div class="co-input-select"><select class="co-input-field js-input-field" id="delivery-time-intervals-select" name="order[delivery_time_interval]"></select></div></div></div>
+                </div>
+
+                    <div class="variants payment_variants co-payment_method-list co-checkout-block" data-payment-gateways="{&quot;1576667&quot;:{&quot;id&quot;:1576667,&quot;selected&quot;:false,&quot;position&quot;:1,&quot;title&quot;:&quot;Наличным курьеру&quot;,&quot;description&quot;:&quot;Наличными курьеру&quot;,&quot;price&quot;:0.0,&quot;margin&quot;:&quot;0.0&quot;}}" id="payment_gateways" style="position: relative; z-index: inherit;">
+                      <div class="co-input co-input--required co-input--radio"><h3 class="co-title co-title--h2 co-input-label">Վճարման տարբերակ</h3><label class="co-payment_method  co-input-wrapper co-toggable_field co-toggable_field--bordered juridical individual" for="order_payment_gateway_id_1576667"><span class="co-payment_method-input co-toggable_field-input  co-toggable_field-input--radio"><input class="radio_button js-input-field" data-payment-id="1576667" data-payment-position="1" id="order_payment_gateway_id_1576667" name="order[payment_gateway_id]" rel="#summ_1576667" type="radio" value="1576667" style="cursor: pointer; opacity: 1;" checked="checked"><span></span></span><span class="co-payment_method-information co-toggable_field-information"><span class="co-payment_method-title co-toggable_field-title co-input-title">Վճարում քարտով</span><span class="co-payment_method-description co-toggable_field-description co-input-description" id="payment_description_1576667">Visa, Mastercard, ARCA, Мир</span></span><span class="co-toggable_field-price co-price--current" id="summ_1576667" data-price="0" style="display: none;">0&nbsp;₽</span></label><div id="payments-not-available" style="display: none;">Visa, Mastercard</div></div></div>
+
+                        <label class="co-payment_method  co-input-wrapper co-toggable_field co-toggable_field--bordered juridical individual" for="order_variant2"><span class="co-payment_method-input co-toggable_field-input  co-toggable_field-input--radio"><input class="radio_button js-input-field" data-payment-id="1576667" data-payment-position="1" id="order_variant2" name="order_variant" rel="#summ_1576667" type="radio" value="1576667" style="cursor: pointer; opacity: 1;" checked="checked"><span></span></span><span class="co-payment_method-information co-toggable_field-information"><span class="co-payment_method-title co-toggable_field-title co-input-title">Պատվիրել հիմա</span><span class="co-payment_method-description co-toggable_field-description co-input-description" id="payment_description_1576667">Պատվիրել հիմա</span></span><span class="co-toggable_field-price co-price--current" id="summ_1576667" data-price="0" style="display: none;">0&nbsp;₽</span></label>
+
+
+
+                    <div class="co-checkout-block"></div><div class="consent_to_personal_data_checkbox co-checkout-block"></div><button class="co-button co-button--checkout js-button-checkout_submit add_checkout checkout_main" id="create_order"  type="button">Հաստատել պատվերը</button>
+                    
+
+
+                    <input type="hidden" name="order[viewed_product_ids]" value="[336488638,336490359,336488093,336487982]"></div><div id="picker-container"></div><div class="co-modal co-modal--login co-modal--fixed co-modal--hide"><div class="co-modal-wrapper"><button class="co-modal-close co-icon halfling-remove js-modal-close"></button><h3 class="co-modal-title co-title co-title--h2">Для постоянных покупателей</h3><div class="co-form--login co-modal-login_form js-modal-body"><div class="co-input co-input--required co-input--email"><input class="co-input-field js-input-field" name="email" placeholder="Телефон или Email" type="text"></div><div class="co-input co-input--required co-input--password"><input class="co-input-field js-input-field" name="psw" placeholder="Пароль" type="password"><div class="co-input-notice co-notice--danger">Сочетание логина и пароля не подходит</div></div><button class="co-modal-button co-button js-modal-submit--login" data-checkout-path="/new_order" data-login="/client_account/session" type="submit">Войти</button><a class="co-button--password_recover" href="/client_account/password/change">Восстановить пароль</a></div></div></div><div class="co-overlay"></div><script>window.CURRENCY_FORMAT = "{\"delimiter\":\" \",\"separator\":\".\",\"format\":\"%n %u\",\"unit\":\"₽\",\"show_price_without_cents\":1}"</script>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </main>
+<link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/favorites.css" rel="stylesheet" type="text/css">
+
+
+     
+      
+
+    {% include 'layouts/footer_arm.html' %}
+    </div>
+    
+    <div data-fixed-panels="bottom">
+      
+      
+      
+    </div>
+
+      
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my-layout.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/core-css.css" rel="stylesheet" type="text/css">
+  
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/checkout.css" rel="stylesheet" type="text/css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
+  
+
+  
+
+<script>
+  const phoneInputField = document.querySelector("#phone_id");
+   const phoneInput = window.intlTelInput(phoneInputField, {
+     utilsScript:
+       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+   });
+
+  var switchs = false
+  var counter_info = parseInt("{{user_info_len}}")
+  var template_info = `<label class="co-payment_method  co-input-wrapper co-toggable_field co-toggable_field--bordered juridical individual  info_item" for="info_id#info_pk"><span class="co-payment_method-input co-toggable_field-input  co-toggable_field-input--radio"><input class="radio_button js-input-field radio_contact" data-payment-id="1576667" data-payment-position="1" id="info_id#info_pk" name="info" pk="#info_pk" rel="#summ_1576667" type="radio" value="1576667" style="cursor: pointer; opacity: 1;" checked="checked"><span></span></span><span class="co-payment_method-information co-toggable_field-information information_main#info_pk""><span class="co-payment_method-title co-toggable_field-title co-input-title  info_username">#username</span><span class="co-payment_method-description co-toggable_field-description co-input-description info_email" id="payment_description_1576667">#email</span>
+  <span class="co-payment_method-description co-toggable_field-description co-input-description info_phone_number" id="payment_description_1576667">#phone_number</span>
+<span class="co-payment_method-description co-toggable_field-description co-input-description info_address" id="payment_description_1576667">#address</span></span><span class="co-toggable_field-price co-price--current change_info" id="summ_1576667"  pk="#info_pk" data-price="0" style="display: block;font-size: 15px;" info='{"username":"username_information","email":"email_information","phone_number":"phone_number_information","address":"address_information","country":"country_information","city":"city_information","state":"state_information","index":"index_information"}'>Փոխել</span></label>`
+$(".create_user_order").on("click", function(){
+  $(".co-customer.co-checkout-block").css("display", "block")
+  $(this).addClass("display_none")
+  $(".my_info_container").addClass("display_none")
+  $(".change_user_info_cancel").removeClass("display_none")
+  
+  $(".create_user_info").removeClass("display_none")
+})
+var shipping_price = parseFloat("{{shipping_price|div:rate.0|floatformat:2}}")
+var box_mass = parseFloat("{{box_mass}}")
+var all_price = parseFloat("{{sums|div:rate.0|floatformat:2}}")+shipping_price
+console.log(parseFloat("{{sums|div:rate.0|floatformat:2}}"))
+all_price = all_price.toFixed(2)
+var collection_indikator=0
+{% if rate.1 == 'ARM' %}
+
+var pay_icon="֏"
+{% elif rate.1 == "ENG" %}
+var pay_icon="$"
+{% else %}
+var pay_icon="₽"
+{% endif %}
+var rate=parseFloat("{{rate.0|floatformat:2}}")
+$(document).on("change",".radio_contact", function(){
+  var pk = $(this).attr("pk")
+  var data = new FormData()
+  data.append("pk",pk)
+  
+  data.append("mass", "{{ mass }}")
+  if (collection_indikator==0){
+   $.ajax({
+
+
+              
+            url: '/api/get_ship_price/',
+            method: "POST",
+            data: data,
+            success: function(data){
+                $(".delivery_price_main").html(String(parseFloat(data.price/rate).toFixed(2)) + pay_icon)
+                all_price=(parseFloat("{{ sums|div:rate.0|floatformat:2 }}") + parseFloat(data.price/rate))
+                $("#total_price").html(String(all_price.toFixed(2)) + pay_icon)
+
+                shipping_price = parseFloat(data.price/rate)
+                
+                
+                
+
+            },
+            error: function(data){},
+            processData: false,
+            contentType: false,
+        })
+  }
+})
+$(".create_user_info").on("click", function(){
+  var [username, email, phone_number,address, country, state, city, index]=[$("#username_id").val(),$("#email_id").val(),$("#phone_id").val(),$("#address_id").val(),$("#countrys").val(),$("#state_id").val(),$("#city_id").val(),$("#index_id").val() ]
+
+const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+if (phoneInput.isValidNumber()) {
+      
+      validation = true
+    } else {
+      validation = false
+      
+      const errorCode = phoneInput.getValidationError();
+      error_text = ""
+      
+        
+         if (errorMap[errorCode] == "Invalid number"){
+            error_text = "Հեռախոսահամարը պետք է լինի թվեր"
+          }
+          else if(errorMap[errorCode] == "Too short"){
+            error_text = "Հեռախոսահամարը կարճ է"
+
+          }
+          else if(errorMap[errorCode] == "Too long"){
+            error_text = "Հեռախոսահամարը երկար  է"
+            
+          }
+          else if(errorMap[errorCode] == "Invalid number"){
+            error_text = "Հեռախոսահամարը սխալ է"
+            
+          }
+          else{
+            error_text = "Երկրի կոդը սխալ է"
+
+          }
+          
+        
+       
+        $(".error_window").text(error_text)
+        $(".error_window").css("display", "block")
+        
+      
+      
+     
+    }
+
+  var data = new FormData()
+  data.append("username",username)
+  data.append("email",email)
+  data.append("phone_number",phone_number)
+  data.append("address",address)
+  data.append("country",country)
+  data.append("state",state)
+  data.append("city",city)
+  data.append("index",index)
+  if (validation){
+   $.ajax({
+
+
+              
+            url: '/api/add_user_info/',
+            method: "POST",
+            data: data,
+            success: function(data){
+                console.log(data)
+                counter_info++;
+                
+                 
+                
+                template_infos = template_info.replace("#username", username)
+                template_infos = template_infos.replace("#email", email)
+                template_infos = template_infos.replace("#phone_number", phone_number)
+                template_infos = template_infos.replace("#address", address)
+                template_infos = template_infos.replaceAll("#info_pk", data.info_pk)
+               
+               
+                template_infos = template_infos.replace("username_information", username)
+                template_infos = template_infos.replace("email_information", email)
+                template_infos = template_infos.replace("phone_number_information",phone_number)
+                template_infos = template_infos.replace("index_information", index)
+                template_infos = template_infos.replace("address_information", address)
+                template_infos = template_infos.replace("city_information", city)
+                template_infos = template_infos.replace("country_information", country)
+                template_infos = template_infos.replace("state_information", state)
+                
+                
+                 $(".my_info_container").append(template_infos)
+                $(".create_user_info").addClass("display_none")
+                $(".create_user_order").removeClass("display_none")
+                
+                $(".my_info_container").removeClass("display_none")
+                $(".co-customer.co-checkout-block").css("display", "none")
+                $(".change_user_info_cancel").addClass("display_none")
+                $(".error_window").css("display", "none")
+
+
+                //location.replace("/my_product/")
+                
+                
+
+            },
+            error: function(data){},
+            processData: false,
+            contentType: false,
+        })
+  }
+
+
+
+  console.log(username, email, phone_number, address, country, state, city, index) 
+})
+$(document).on("click", ".change_user_info_cancel", function(){
+   $(".create_user_info").addClass("display_none")
+                $(".create_user_order").removeClass("display_none")
+                
+                $(".my_info_container").removeClass("display_none")
+                $(".co-customer.co-checkout-block").css("display", "none")
+                $(".change_user_info").addClass("display_none")
+                $(".change_user_info_cancel").addClass("display_none")
+
+})
+$(document).on("click",".change_user_info", function(){
+  var [username, email, phone_number,address, country, state, city, index]=[$("#username_id").val(),$("#email_id").val(),$("#phone_id").val(),$("#address_id").val(),$("#countrys").val(),$("#state_id").val(),$("#city_id").val(),$("#index_id").val() ]
+
+
+
+  var data = new FormData()
+  var pk = $(this).attr("pk")
+  data.append("username",username)
+  data.append("email",email)
+  data.append("phone_number",phone_number)
+  data.append("address",address)
+  data.append("country",country)
+  data.append("state",state)
+  data.append("city",city)
+  data.append("index",index)
+  data.append("pk", pk)
+     $.ajax({
+
+
+              
+            url: '/api/change_user_info/',
+            method: "POST",
+            data: data,
+            success: function(data){
+                console.log(data)
+                counter_info++;
+                var info_main = $(".information_main"+String(pk))
+                info_main.find(".info_username").text(username)
+                info_main.find(".info_email").text(email)
+                info_main.find(".info_phone_number").text(phone_number)
+                info_main.find(".info_address").text(address)
+
+                
+                $(".create_user_info").addClass("display_none")
+                $(".create_user_order").removeClass("display_none")
+                
+                $(".my_info_container").removeClass("display_none")
+                $(".co-customer.co-checkout-block").css("display", "none")
+                $(".change_user_info").addClass("display_none")
+                $(".change_user_info_cancel").addClass("display_none")
+
+                //location.replace("/my_product/")
+                
+                
+
+            },
+            error: function(data){},
+            processData: false,
+            contentType: false,
+        })
+
+
+
+  console.log(username, email, phone_number, address, country, state, city, index) 
+})
+$(document).on("click",".change_info", function(){
+  console.log($(this).attr("info"))
+  var data = JSON.parse($(this).attr("info"))
+   $(".my_info_container").addClass("display_none")
+  
+  $(".change_user_info").removeClass("display_none")
+  $(".change_user_info_cancel").removeClass("display_none")
+
+   $(".create_user_info").addClass("display_none")
+  $(".create_user_order").addClass("display_none")
+
+   $(".co-customer.co-checkout-block").css("display", "block")
+   $(".change_user_info").attr("pk", $(this).attr("pk"))
+  
+
+
+  
+  var [username, email, phone_number,address, country, state, city, index]=[$("#username_id").val(data["username"]),$("#email_id").val(data["email"]),$("#phone_id").val(data["phone_number"]),$("#address_id").val(data["address"]),$("#countrys").val(data["country"]),$("#state_id").val(data["state"]),$("#city_id").val(data["city"]),$("#index_id").val(data["index"]) ]
+})
+
+
+
+
+
+
+$("#create_order").on("click", function(){
+  
+   var comment = $("#order_comment").val()
+
+  var data = new FormData()
+if (comment.length>0){
+  data.append("comment", comment)
+    
+  }
+  
+  
+      if ($("#order_variant2:checked").length>0){
+    data.append("contact_pk", $(".radio_contact:checked").eq(0).attr("pk"))
+
+  }
+  
+ if ($(".info_item") != undefined){
+  if($(".info_item").length>0){
+
+        
+
+
+    $.ajax({
+
+
+              
+            url: '/api/add_check_api/',
+            method: "POST",
+            data: data,
+            success: function(data){
+             
+              if (data.PaymentID!=undefined){
+                var url = `https://servicestest.ameriabank.am/VPOS/Payments/Pay?id=`+String(data.PaymentID)
+                location.replace(url)
+
+              }
+
+                
+                
+
+            },
+            error: function(data){},
+            processData: false,
+            contentType: false,
+        })
+  
+}
+else{
+    alert("Խնդրում ենք ավելացնել hաճախորդի հասցե")
+  }
+
+
+
+}
+else{
+    alert("Խնդրում ենք ավելացնել hաճախորդի հասցե")
+
+}
+  
+
+})
+   $(".co-sidebar-toggler.js-co-sidebar-toggler").on("click", function(){
+    console.log("aaaaaaaaaa")
+    if (switchs == true){
+      switchs = false
+      $(this).removeClass("co-sidebar-toggler--opend")
+    $(".co-sidebar.js-co-sidebar").addClass("co-sidebar--hidden@sm")
+
+    }
+    else{
+      switchs = true
+      $(this).addClass("co-sidebar-toggler--opend")
+    $(".co-sidebar.js-co-sidebar").removeClass("co-sidebar--hidden@sm")
+    }
+    
+
+    
+   
+    
+   })
+   
+  try {
+  let widget = '.widget-type_system_widget_v4_header_1';
+  let $widget = $('.widget-type_system_widget_v4_header_1');
+  /* eslint-disable linebreak-style */
+
+
+$(function() {
+  function getWidget(item) {
+    return item.closest('.layout');
+  }
+
+  var mobilePoint = 768;
+  $(document).ready(function() {
+   
+
+    if ($(window).width() >= mobilePoint) {
+      $(widget).find(".js-cut-list").cutList({
+        moreBtnTitle: '<span class="icon-ellipsis-h"></span>',
+        alwaysVisibleElem: '.is-current'
+      });
+    }
+
+    $(window).on('load', function() {
+      $(widget).find(".js-cut-list").resize();
+    });
+
+    $(window).on('resize', function() {
+      let collections_menu = $(widget).find(".header__collections");
+      let collections_menu_content = collections_menu.find(".header__collections-content");
+
+      if (collections_menu.is(".is-show")) {
+        let max_height = $(window).height() - collections_menu.offset().top - 20;
+        collections_menu_content.css("maxHeight", max_height);
+      }
+    });
+
+    if ($(widget).find(".header__collections .is-current").length) {
+      $(widget).find(".header__collections .is-current").addClass("is-show-mobile");
+      $(widget).find(".header__collections > .header__collections-item.is-current").addClass("is-show");
+    }
+
+    $(widget).find(".js-show-header-collections").on("click", function() {
+      let thisWidget = getWidget($(this));
+
+      thisWidget.each(function(index, el) {
+        let lazyLoadCollectionList = new LazyLoad({
+          container: $(el).get(0),
+          elements_selector: '.lazyload'
+        });
+
+        try {
+          lazyLoadCollectionList.loadAll()
+        } catch (e) {
+          console.log(e)
+        }
+      });
+
+      let collections_menu = thisWidget.find(".header__collections");
+      let collections_menu_content = collections_menu.find(".header__collections-content");
+
+      if (collections_menu.is(".is-show")) {
+        collections_menu.removeClass("is-show");
+      } else {
+        collections_menu.addClass("is-show");
+
+        let max_height = $(window).height() - collections_menu.offset().top - 20;
+        collections_menu_content.css("maxHeight", max_height);
+      }
+
+      $(this).toggleClass("is-active");
+      thisWidget.find(".header__collections-overlay").toggleClass("is-show");
+    });
+
+    $(document).on("click", function(event) {
+      let thisWidget = getWidget($(event.target).closest('.layout'));
+
+      if ($(event.target).closest(".js-show-header-collections").length || $(event.target).closest(".header__collections-content").length) {
+        return;
+      }
+
+      thisWidget.find(".header__collections.is-show").removeClass("is-show");
+      thisWidget.find(".header__collections-overlay.is-show").removeClass("is-show");
+      thisWidget.find(".js-show-header-collections").removeClass("is-active");
+    });
+
+    $(widget).find(".js-show-mobile-submenu").on("click", function() {
+      $(this).parents(".header__collections-item:first").toggleClass("is-show-mobile");
+    });
+
+    $(widget).find(".js-show-mobile-menu").on("click", function() {
+      let thisWidget = getWidget($(event.target).closest('.layout'));
+
+      thisWidget.find(".header").addClass("is-show-mobile");
+    });
+
+    $(widget).find(".js-hide-mobile-menu").on("click", function() {
+      let thisWidget = getWidget($(event.target).closest('.layout'));
+
+      thisWidget.find(".header").removeClass("is-show-mobile");
+    });
+
+    $(widget).find(".js-show-mobile-search").on("click", function() {
+      $(this).parents(".header__search").toggleClass("is-show-mobile").find(".header__search-field").focus();
+    });
+
+    $(widget).find(".js-show-more-subcollections").on("click", function() {
+      let thisWidget = getWidget($(this));
+
+      let collections_menu = thisWidget.find(".header__collections-menu");
+      let limit = collections_menu.attr("data-subcollections-items-limit");
+      let collection_elem = $(this).parents(".header__collections-item.is-level-1");
+
+      if ($(this).is(".is-active")) {
+        $(this).removeClass("is-active");
+        collection_elem.find('.header__collections-submenu .header__collections-item:nth-child(n+' + (parseInt(limit) + 1) + ')').addClass("is-hide");
+      } else {
+        $(this).addClass("is-active");
+        collection_elem.find(".header__collections-submenu .header__collections-item").removeClass("is-hide");
+      }
+    });
+  });
+
+ 
+
+  function configureSubcollectionsItemsLimit(limit) {
+    let collections_menu = $(widget).find(".header__collections-menu");
+    collections_menu.attr("data-subcollections-items-limit", limit);
+
+    $(widget).find(".header__collections-submenu").each(function() {
+      let collection_elem = $(this).parents(".header__collections-item.is-level-1");
+      let collection_elem_more_controls = collection_elem.find(".header__collections-show-more");
+
+      $(this).find(".header__collections-item").removeClass("is-hide");
+      $(this).find('.header__collections-item:nth-child(n+' + (parseInt(limit) + 1) + ')').addClass("is-hide");
+      collection_elem_more_controls.find(".js-show-more-subcollections").removeClass("is-active");
+
+      if ($(this).find(".header__collections-item").length > parseInt(limit)) {
+        collection_elem_more_controls.addClass("is-show");
+      } else {
+        collection_elem_more_controls.removeClass("is-show");
+      }
+    });
+  }
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_header_1" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_alerts';
+  let $widget = $('.widget-type_system_widget_v4_alerts');
+  let alertsSettings = $widget.find('[data-micro-alerts-settings]').data('micro-alerts-settings');
+
+function replaceAlertCheckIcon(message) {
+  let iconCheck = '<span class="icon-check" style="margin-right:5px;"></span>';
+  if (message.indexOf('✓') != -1 ) {
+    return message.replace(/✓/gi, iconCheck);
+  } else {
+    return `${iconCheck} ${message}`;
+  }
+}
+
+function replaceAlertWarningIcon(message) {
+  let iconWarning = '<span class="icon-exclamation-triangle" style="margin-right:5px;"></span>';
+  if (message.indexOf('⚠') != -1 ) {
+    return message.replace(/⚠/gi, iconWarning);
+  } else {
+    return `${iconWarning} ${message}`;
+  }
+}
+
+
+
+if (window.location.pathname == '/' && Cookies.get('lite_preorder')) {
+  let success_feedback = alertsSettings['success_preorder'];
+
+  microAlert(replaceAlertCheckIcon(success_feedback), 5000, {
+    modificator: 'success-notice'
+  });
+  Cookies.remove('lite_preorder');
+}
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_alerts" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_callback_modal_1';
+  let $widget = $('.widget-type_system_widget_v4_callback_modal_1');
+  $(document).ready(function() {
+  $(widget).find(".js-hide-modal").on("click", function() {
+    $(widget).removeClass("is-show-fullscreen");
+  });
+
+  $(widget).on("click", function(event) {
+    if ($(event.target).closest(widget + ' .layout__content').length) {
+      return;
+    }
+
+    $(widget).removeClass("is-show-fullscreen");
+  });
+});
+
+
+
+
+$(window).on("scroll", function() {
+  clearTimeout(scroll_timeout);
+  scroll_timeout = setTimeout( function() {
+    showButtonOnTop($widget.find(".js-go-top-page"));
+  }, 50);
+});
+
+function showButtonOnTop(btn) {
+  if ($(window).scrollTop() >= $(window).height()) {
+    btn.addClass("is-show");
+  } else {
+    btn.removeClass("is-show");
+  }
+}
+
+
+
+let scroll_timeout;
+
+$(window).on("scroll", function() {
+  clearTimeout(scroll_timeout);
+  scroll_timeout = setTimeout( function() {
+    showCartFixedBtn($widget.find(".js-cart-fixed-btn"));
+  }, 50);
+});
+
+function showCartFixedBtn(btn) {
+  if ($(window).scrollTop() >= 100) {
+    btn.addClass("is-show");
+  } else {
+    btn.removeClass("is-show");
+  }
+}
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_cart_fixed_button_1" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_bottom_navigation_bar_1';
+  let $widget = $('.widget-type_system_widget_v4_bottom_navigation_bar_1');
+  $(function() {
+  let location_path = window.location.pathname;
+
+  if (location_path.indexOf('client_account') !== -1) {
+    $widget.find(".navigation-bar__item-profile").addClass("is-active is-cur-page");
+  }
+
+  $widget.find("[data-show-navigation-bar-panel]").on("click", function() {
+    let navigation_bar_item = $(this);
+    let panel_name = navigation_bar_item.data("showNavigationBarPanel");
+    let panel = $widget.find('[data-navigation-bar-panel="' + panel_name + '"]');
+
+    if (panel.is(".is-show")) {
+      bodyScrollLock.clearAllBodyScrollLocks();
+      panel.removeClass("is-show");
+      $('header').css('display', 'block');
+
+      navigation_bar_item.removeClass("is-active");
+      $widget.find(".navigation-bar__item.is-cur-page").addClass("is-active");
+    } else {
+      let targetElement = panel.get(0);
+      if (targetElement) {
+        bodyScrollLock.disableBodyScroll(targetElement);
+      }
+
+      $('header').css('display', 'none');
+
+      let panel_bottom_pos = navigation_bar_item.parents(".layout").innerHeight();
+      $widget.find('[data-navigation-bar-panel].is-show').removeClass("is-show");
+      panel.css("bottom", panel_bottom_pos).addClass("is-show");
+
+      if (panel_name == "search") {
+        setTimeout(function() {
+          panel.find("[data-search-field]").focus();
+        }, 500);
+      }
+
+      $widget.find(".navigation-bar__item.is-active").removeClass("is-active");
+      navigation_bar_item.addClass("is-active");
+    }
+  });
+
+  $widget.find(".navigation-bar__item-home").on("click", function() {
+    if (location_path == "/") {
+      $widget.find('.navigation-bar-panel.is-show').removeClass("is-show");
+      $widget.find(".navigation-bar__item.is-active").removeClass("is-active");
+      $widget.find(".navigation-bar__item.is-cur-page").addClass("is-active");
+    }
+  });
+
+  $widget.find(".js-hide-navigation-bar-panel").on("click", function() {
+    $widget.find('[data-navigation-bar-panel].is-show').removeClass("is-show");
+    $widget.find(".navigation-bar__item.is-active").removeClass("is-active");
+    $widget.find(".navigation-bar__item.is-cur-page").addClass("is-active");
+    bodyScrollLock.clearAllBodyScrollLocks();
+    $('header').css('display', 'block');
+  });
+
+  $widget.find(".collections__menu .is-current").addClass("is-show");
+  $widget.find(".js-show-submenu").on("click", function() {
+    let cur_item = $(this).parents(".collections__item:first");
+    cur_item.toggleClass("is-show");
+  });
+
+  $widget.find(".js-show-collections-search").on("click", function() {
+    let search_block = $(this).parents(".collections-search");
+    search_block.toggleClass("is-show");
+
+    if (search_block.is(".is-show")) {
+      setTimeout(function() {
+        search_block.find(".collections-search__field").focus();
+      }, 50);
+    }
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_bottom_navigation_bar_1" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_benefits_4';
+  let $widget = $('.widget-type_system_widget_v4_benefits_4');
+  $(function() {
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload'
+    });
+
+    fixBlocks(el)
+  });
+
+  let resizeTimer;
+  $(window).on('resize', function(e) {
+
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      $widget.each(function(index, el) {
+        fixBlocks(el)
+      });
+
+    }, 550);
+
+  });
+
+ 
+
+
+  function fixBlocks(el) {
+    let initialSize = getComputedStyle($(el)[0]).getPropertyValue('--grid-list-min-width').replace('px', '');
+    let columnSize = getComputedStyle($(el)[0]).getPropertyValue('--grid-list-column-gap').replace('rem', '');
+    let $benefitList = $(el).find('.grid-list');
+    let containerSize = $benefitList.width()
+    let blocksLength = $benefitList.data('block-length')
+
+    $benefitList.css('--grid-list-min-width', adaptiveSize(containerSize, +initialSize, blocksLength, columnSize * 16) + 'px')
+  }
+
+  function adaptiveSize(containerSize, blockSize, blocksLength, columnSize) {
+    let currentLine = Math.floor(containerSize / (blockSize + columnSize));
+    let delta = blocksLength % currentLine;
+    let addBlocks = 0;
+
+    if (delta > 0) {
+      addBlocks = currentLine - delta;
+    }
+
+    return addBlocks == 0 || currentLine > blocksLength ? containerSize / currentLine - columnSize : blockSize * (currentLine / addBlocks);
+  }
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_benefits_4" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_collections_on_index_2';
+  let $widget = $('.widget-type_system_widget_v4_collections_on_index_2');
+  /* eslint-disable linebreak-style */
+$(function() {
+  var isTouch = !!('ontouchstart' in window || navigator.msMaxTouchPoints);
+  var mobile_point = 767;
+
+  if (isTouch) {
+    $(widget).find(".collection-preview").addClass("is-touch");
+  }
+
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload',
+      use_native: 'loading' in document.createElement('img')
+    });
+  });
+
+  $(function() {
+    let specialCollections = $widget.find(".js-collections");
+
+    if ($(window).width() < mobile_point) {
+      let slider_mobile_right_padding;
+      let slide_width_mobile;
+      let slide_gap_mobile = specialCollections.find(".js-collections-slider").attr("data-slide-gap-mobile") / 2;
+
+      $(window).on("resize", function() {
+        slide_width_mobile = specialCollections.find(".splide__slide").width();
+        slider_mobile_right_padding = slide_width_mobile * 0.5 + slide_gap_mobile;
+        specialCollections.find(".js-collections-slider").attr("data-mobile-right-padding", slider_mobile_right_padding);
+      });
+    }
+
+    specialCollections.each(function() {
+      let collections_block = $(this);
+      let slider_block = collections_block.find(".js-collections-slider");
+      let slide_min_width = 160;
+      let slide_min_width_mobile = 130;
+      let slide_gap = 30;
+      let slide_gap_mobile = 15;
+      let slider_mobile_right_padding;
+
+      if (slider_block.is("[data-slide-min-width]")) {
+        slide_min_width = parseInt(slider_block.attr("data-slide-min-width"));
+      } else {
+        slider_block.attr("data-slide-min-width", slide_min_width);
+      }
+
+      if (slider_block.is("[data-slide-min-width-mobile]")) {
+        slide_min_width_mobile = parseInt(slider_block.attr("data-slide-min-width-mobile"));
+      } else {
+        slider_block.attr("data-slide-min-width-mobile", slide_min_width_mobile);
+      }
+
+      if (slider_block.is("[data-slide-gap]")) {
+        slide_gap = parseInt(slider_block.attr("data-slide-gap"));
+      } else {
+        slider_block.attr("data-slide-gap", slide_gap);
+      }
+
+      if (slider_block.is("[data-slide-gap-mobile]")) {
+        slide_gap_mobile = parseInt(slider_block.attr("data-slide-gap-mobile"));
+      } else {
+        slider_block.attr("data-slide-gap-mobile", slide_gap_mobile);
+      }
+
+      if (slider_block.is("[data-mobile-right-padding]")) {
+        slider_mobile_right_padding = parseInt(slider_block.attr("data-mobile-right-padding"));
+      } else {
+        slider_block.attr("data-mobile-right-padding", slider_mobile_right_padding);
+      }
+
+      let init_slide_min_width = isMobileWidth() ? slide_min_width_mobile : slide_min_width;
+      let init_slide_gap = isMobileWidth() ? slide_gap_mobile : slide_gap;
+
+      let mobile_left_padding = 5;
+      let mobile_right_padding = `${slider_mobile_right_padding + init_slide_gap}px`;
+
+      slider_block[0].splide = new Splide(slider_block[0], {
+        perPage: getSlidesPerView(slider_block, init_slide_min_width, init_slide_gap),
+        gap: init_slide_gap,
+        perMove: 1,
+        breakpoints: {
+          768: {
+            padding: {
+              left: mobile_left_padding,
+              right: mobile_right_padding
+            }
+          }
+        }
+      });
+
+      let tempWindowWidth = $(window).width()
+      $(window).on("resize", function() {
+        if (tempWindowWidth == $(window).width()) {
+          return false
+        }
+        tempWindowWidth = $(window).width()
+        let slide_min_width = parseInt(slider_block.attr("data-slide-min-width"));
+        let slide_min_width_mobile = parseInt(slider_block.attr("data-slide-min-width-mobile"));
+        let slide_gap = parseInt(slider_block.attr("data-slide-gap"));
+        let slide_gap_mobile = parseInt(slider_block.attr("data-slide-gap-mobile"));
+        let slider_mobile_right_padding = parseInt(slider_block.attr("data-mobile-right-padding"));
+
+        let init_slide_min_width = isMobileWidth() ? slide_min_width_mobile : slide_min_width;
+        let init_slide_gap = isMobileWidth() ? slide_gap_mobile : slide_gap;
+
+        if (isMobileWidth()) {
+          slide_gap_mobile = slide_gap_mobile / 2;
+
+          slider_block[0].splide.options = {
+            gap: slide_gap_mobile,
+            perPage: getSlidesPerView(slider_block, init_slide_min_width, init_slide_gap),
+            padding: {
+              left: 0,
+              right: slider_mobile_right_padding
+            }
+          };
+        } else {
+          slider_block[0].splide.options = {
+            gap: init_slide_gap,
+            perPage: getSlidesPerView(slider_block, init_slide_min_width, init_slide_gap)
+          };
+        }
+
+        configureDragOption(slider_block);
+      });
+
+      slider_block[0].splide.on('arrows:updated', function() {
+        let collections = slider_block.parents(".js-collections");
+        let prev_btn = collections.find(".collections__slider-arrow-prev");
+        let next_btn = collections.find(".collections__slider-arrow-next");
+
+        if (collections.find(".splide__arrow--prev").prop("disabled") === true) {
+          prev_btn.addClass("is-disabled");
+        } else {
+          prev_btn.removeClass("is-disabled");
+        }
+
+        if (collections.find(".splide__arrow--next").prop("disabled") === true) {
+          next_btn.addClass("is-disabled");
+        } else {
+          next_btn.removeClass("is-disabled");
+        }
+      });
+
+      slider_block[0].splide.on('mounted updated', function() {
+        displaySliderControls(slider_block);
+      });
+
+      slider_block[0].splide.on('mounted', function() {
+        configureDragOption(slider_block);
+      });
+
+      slider_block[0].splide.mount();
+
+      $widget.find(".js-move-slide").on("click", function() {
+        let slider_node = $(this).parents(".js-collections").find(".js-collections-slider");
+
+        if (slider_node.length) {
+          let sliderInst = slider_node[0].splide;
+
+          if ($(this).is(".collections__slider-arrow-prev")) {
+            sliderInst.go('-');
+          }
+
+          if ($(this).is(".collections__slider-arrow-next")) {
+            sliderInst.go('+');
+          }
+        }
+      });
+    });
+  });
+
+ 
+
+  function updateSpecialCollectionSlider(slider, data) {
+    let sliderInst = slider[0].splide;
+
+    let slide_min_width = parseInt(slider.attr("data-slide-min-width"));
+    let slide_min_width_mobile = parseInt(slider.attr("data-slide-min-width-mobile"));
+    let slide_gap = parseInt(slider.attr("data-slide-gap"));
+    let slide_gap_mobile = parseInt(slider.attr("data-slide-gap-mobile"));
+    let slider_mobile_right_padding = parseInt(slider.attr("data-mobile-right-padding"));
+
+    if (data.setting_name == 'slide-width') {
+      let new_slide_min_width = parseInt(data.value);
+      slider.attr("data-slide-min-width", new_slide_min_width);
+
+      if (!isMobileWidth()) {
+        let new_per_page = getSlidesPerView(slider, new_slide_min_width, slide_gap);
+        sliderInst.options = {
+          perPage: new_per_page
+        };
+      }
+    } else if (data.setting_name == 'slide-width-mobile') {
+      let new_slide_min_width_mobile = parseInt(data.value);
+      slider.attr("data-slide-min-width-mobile", new_slide_min_width_mobile);
+
+      if (isMobileWidth()) {
+        let new_per_page = getSlidesPerView(slider, new_slide_min_width_mobile, slide_gap_mobile);
+        sliderInst.options = {
+          perPage: new_per_page
+        };
+      }
+    } else if (data.setting_name == 'slide-gap') {
+      let new_slide_gap = parseInt(data.value);
+      let new_per_page = getSlidesPerView(slider, slide_min_width, new_slide_gap);
+      slider.attr("data-slide-gap", new_slide_gap);
+
+      if (!isMobileWidth()) {
+        sliderInst.options = {
+          gap: new_slide_gap,
+          perPage: new_per_page,
+        };
+      }
+    } else if (data.setting_name == 'slide-gap-mobile') {
+      let new_slide_gap_mobile = parseInt(data.value);
+      let new_per_page = getSlidesPerView(slider, slide_min_width_mobile, new_slide_gap_mobile);
+      slider.attr("data-slide-gap-mobile", new_slide_gap_mobile);
+
+      if (isMobileWidth()) {
+        let mobile_left_padding = slider.parents(".layout").css("--layout-side-padding");
+        let mobile_right_padding = `${slider_mobile_right_padding + new_slide_gap_mobile}px`;
+
+        sliderInst.options = {
+          gap: new_slide_gap_mobile,
+          perPage: new_per_page,
+          padding: {
+            left: mobile_left_padding,
+            right: mobile_right_padding
+          }
+        };
+      }
+    } else {
+      setTimeout(function() {
+        let init_slide_min_width = isMobileWidth() ? slide_min_width_mobile : slide_min_width;
+        let init_slide_gap = isMobileWidth() ? slide_gap_mobile : slide_gap;
+
+        let new_per_page = getSlidesPerView(slider, init_slide_min_width, init_slide_gap);
+        sliderInst.options = {
+          perPage: new_per_page
+        };
+      }, 0);
+    }
+
+    configureDragOption(slider);
+  }
+
+  function getSlidesPerView(sliderBlock, slideMinWidth, slideGap) {
+    let right_padding = 0;
+
+    if (sliderBlock.is("[data-mobile-right-padding]") && isMobileWidth()) {
+      right_padding = parseInt(sliderBlock.data("mobileRightPadding")) + slideGap;
+    }
+
+    return Math.floor((sliderBlock.width() + slideGap - right_padding) / (slideMinWidth + slideGap));
+  }
+
+  function displaySliderControls(slider) {
+    let sliderInst = slider[0].splide;
+    let collections = slider.parents(".js-collections");
+    let slider_arrow = collections.find(".collections__slider-arrow");
+
+    if (sliderInst.length <= sliderInst.options.perPage) {
+      slider_arrow.addClass("is-hide");
+      slider.addClass("is-hide-paging");
+    } else {
+      slider_arrow.removeClass("is-hide");
+      slider.removeClass("is-hide-paging");
+    }
+  }
+
+  function configureDragOption(slider) {
+    if (slider[0].splide.length <= slider[0].splide.options.perPage) {
+      slider[0].splide.options = {
+        drag: false
+      };
+    } else {
+      slider[0].splide.options = {
+        drag: true
+      };
+    }
+  }
+
+  function isMobileWidth() {
+    return $(window).width() <= mobile_point;
+  }
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_collections_on_index_2" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_video_clip';
+  let $widget = $('.widget-type_system_widget_v4_video_clip');
+  /* eslint-disable linebreak-style */
+$widget.each(function(index, el) {
+  new LazyLoad({
+    container: $(el).get(0),
+    elements_selector: '.lazyload'
+  });
+});
+
+function getWidget(item) {
+  return item.closest('.layout');
+}
+
+$(function() {
+  let previewImg = $widget.find(".banner-list__item-image .picture");
+  let iframeVideo = $widget.find(".banner-list__item-image iframe");
+
+  $widget.find(".banner-preview__play-btn").on("click", function(event) {
+    let thisWidget = getWidget($(this));
+    let slider_node = thisWidget.find(".picture");
+    let slider_btn = thisWidget.find(".banner-preview__play-btn");
+    slider_node.addClass("hidden");
+    slider_btn.addClass("hidden");
+    event.preventDefault();
+    if (thisWidget.find(".banner-list__item-image .picture").hasClass("hidden")) {
+      thisWidget.find(".banner-list__item-image iframe").show();
+    }
+  });
+  iframeVideo.hide();
+  $(previewImg).on('load', function() {
+    iframeVideo.show();
+  });
+});
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_video_clip" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_banner_list_23';
+  let $widget = $('.widget-type_system_widget_v4_banner_list_23');
+  $(function() {
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload'
+    });
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_banner_list_23" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_banner_list_27';
+  let $widget = $('.widget-type_system_widget_v4_banner_list_27');
+  $(function() {
+  var mobile_point = 767;
+  var bannerBlockList = $(widget).find(".banner-list");
+
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload'
+    });
+  });
+
+  bannerBlockList.each(function() {
+    let slider_block = $(this).find(".js-banner-list-slider");
+    initBannerListSlider(slider_block);
+  });
+
+  function initBannerListSlider(sliderBlock) {
+    let slide_min_width = 250;
+    let slide_min_width_mobile = 160;
+    let slide_gap = 30;
+
+    if (sliderBlock.is("[data-slide-min-width]")) {
+      slide_min_width = parseInt(sliderBlock.data("slideMinWidth"));
+    } else {
+      sliderBlock.data("slideMinWidth", slide_min_width);
+    }
+
+    if (sliderBlock.is("[data-slide-min-width-mobile]")) {
+      slide_min_width_mobile = parseInt(sliderBlock.data("slideMinWidthMobile"));
+    } else {
+      sliderBlock.data("slideMinWidthMobile", slide_min_width_mobile);
+    }
+
+    if (sliderBlock.is("[data-slide-gap]")) {
+      slide_gap = parseInt(sliderBlock.data("slideGap"));
+    } else {
+      sliderBlock.data("slideGap", slide_gap);
+    }
+
+    sliderBlock[0].splide = new Splide(sliderBlock[0], {
+      perPage: getSlidesPerView(sliderBlock, isMobileWidth() ? slide_min_width_mobile : slide_min_width, slide_gap),
+      gap: slide_gap,
+      perMove: 1
+    });
+
+    $(window).on("resize", function() {
+      let slide_min_width = parseInt(sliderBlock[0].dataset.slideMinWidth);
+      let slide_gap = parseInt(sliderBlock[0].dataset.slideGap);
+      let slide_min_width_mobile = parseInt(sliderBlock[0].dataset.slideMinWidthMobile);
+
+      sliderBlock[0].splide.options = {perPage: getSlidesPerView(sliderBlock, isMobileWidth() ? slide_min_width_mobile : slide_min_width, slide_gap)};
+      configureDragOption(sliderBlock);
+    });
+
+    sliderBlock[0].splide.on( 'arrows:updated', function() {
+      let banner_list = sliderBlock.parents(".banner-list");
+      let prev_btn = banner_list.find(".banner-list__arrow-prev");
+      let next_btn = banner_list.find(".banner-list__arrow-next");
+
+      if (banner_list.find(".splide__arrow--prev").prop("disabled") === true) {
+        prev_btn.addClass("is-disabled");
+      } else {
+        prev_btn.removeClass("is-disabled");
+      }
+
+      if (banner_list.find(".splide__arrow--next").prop("disabled") === true) {
+        next_btn.addClass("is-disabled");
+      } else {
+        next_btn.removeClass("is-disabled");
+      }
+    });
+
+    sliderBlock[0].splide.on( 'mounted updated', function() {
+      displaySliderControls(sliderBlock);
+    });
+
+    sliderBlock[0].splide.on( 'mounted', function() {
+      configureDragOption(sliderBlock);
+    });
+
+    sliderBlock[0].splide.mount();
+
+    sliderBlock.parents(".banner-list").find(".js-move-slide").on("click", function() {
+      let slider_node = $(this).parents(".banner-list").find(".js-banner-list-slider");
+
+      if (slider_node.length) {
+        let sliderInst = slider_node[0].splide;
+
+        if ($(this).is(".banner-list__arrow-prev")) {
+          sliderInst.go( '-' );
+        }
+
+        if ($(this).is(".banner-list__arrow-next")) {
+          sliderInst.go( '+' );
+        }
+      }
+    });
+  }
+
+  function updateBannerListSlider(slider, data) {
+    let sliderInst = slider[0].splide;
+
+    let slide_min_width = parseInt(slider.data("slideMinWidth"));
+    let slide_gap = parseInt(slider.data("slideGap"));
+    let slide_min_width_mobile = parseInt(slider.data("slideMinWidthMobile"));
+
+    if (data.setting_name == 'slide-width') {
+      let new_slide_min_width = parseInt(data.value);
+      let new_per_page = getSlidesPerView(slider, new_slide_min_width, slide_gap);
+      slider.attr("data-slide-min-width", new_slide_min_width);
+
+      sliderInst.options = { perPage: new_per_page };
+
+      if (!isMobileWidth()) {
+        let new_per_page = getSlidesPerView(slider, new_slide_min_width, slide_gap);
+        sliderInst.options = { perPage: new_per_page };
+      }
+    } else if (data.setting_name == 'slide-width-mobile') {
+      let new_slide_min_width_mobile = parseInt(data.value);
+      slider.attr("data-slide-min-width-mobile", new_slide_min_width_mobile);
+
+      if (isMobileWidth()) {
+        let new_per_page = getSlidesPerView(slider, new_slide_min_width_mobile, slide_gap);
+        sliderInst.options = { perPage: new_per_page };
+      }
+
+
+    } else if (data.setting_name == 'slide-gap') {
+      let new_slide_gap = parseInt(data.value);
+      let new_per_page = getSlidesPerView(slider, slide_min_width, new_slide_gap);
+      slider.attr("data-slide-gap", new_slide_gap);
+
+      sliderInst.options = { gap: new_slide_gap, perPage: new_per_page };
+    } else {
+      setTimeout(function() {
+        let new_per_page = getSlidesPerView(slider, isMobileWidth() ? slide_min_width_mobile : slide_min_width, slide_gap);
+        sliderInst.options = { perPage: new_per_page };
+      }, 0);
+    }
+
+    configureDragOption(slider);
+  }
+
+  function getSlidesPerView(sliderBlock, slideMinWidth, slideGap) {
+    return Math.floor((sliderBlock.width() + slideGap) / (slideMinWidth + slideGap));
+  }
+
+  
+
+  function displaySliderControls(slider) {
+    let sliderInst = slider[0].splide;
+    let slider_arrows = slider.parents(".banner-list").find(".banner-list__arrow");
+
+    if (sliderInst.length <= sliderInst.options.perPage) {
+      slider_arrows.addClass("is-hide");
+      slider.addClass("is-hide-paging");
+    } else {
+      slider_arrows.removeClass("is-hide");
+      slider.removeClass("is-hide-paging");
+    }
+  }
+
+  function configureDragOption(slider) {
+    if (slider[0].splide.length <= slider[0].splide.options.perPage) {
+      slider[0].splide.options = { drag: false };
+    } else {
+      slider[0].splide.options = { drag: true };
+    }
+  }
+  function isMobileWidth() {
+    return $(window).width() <= mobile_point;
+  }
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_banner_list_27" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_footer_19';
+  let $widget = $('.widget-type_system_widget_v4_footer_19');
+  $(function() {
+  $(widget).find(".js-show-mobile-submenu").on("click", function() {
+    $(this).parents(".menu-item:first").toggleClass("is-show-mobile");
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_footer_19" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_promo_slider_18';
+  let $widget = $('.widget-type_system_widget_v4_promo_slider_18');
+  $(function() {
+  let initPromoSlider = function(slider) {
+    let is_autoplay = slider.data("autoplay");
+    let autoplay_delay = slider.data("autoplayDelay");
+
+    slider[0].splide = new Splide(slider[0], {
+      rewind: true,
+      autoplay: !!is_autoplay,
+      interval: autoplay_delay ? parseInt(autoplay_delay) * 1000 : 5000
+    });
+
+    slider[0].splide.on( 'mounted updated', function() {
+      displaySliderControls(slider);
+    });
+
+    slider[0].splide.mount();
+  }
+
+  let updatePromoSlider = function(slider, data) {
+    let sliderInst = slider[0].splide;
+
+    if (data.setting_name == 'autoplay') {
+      slider.data("autoplay", data.value);
+
+      sliderInst.destroy();
+      initPromoSlider(slider);
+    } else if (data.setting_name == 'autoplay-delay') {
+      slider.data("autoplayDelay", data.value);
+
+      sliderInst.destroy();
+      initPromoSlider(slider);
+    } else {
+      setTimeout(function() { sliderInst.refresh() }, 0);
+    }
+  }
+
+  let displaySliderControls = function(slider) {
+    let sliderInst = slider[0].splide;
+
+    if (sliderInst.length <= sliderInst.options.perPage) {
+      slider.addClass("is-hide-controls");
+    } else {
+      slider.removeClass("is-hide-controls");
+    }
+  }
+
+  $(function() {
+    $widget.each(function(index, el) {
+      new LazyLoad({
+        container: $(el).get(0),
+        elements_selector: '.lazyload'
+      });
+    });
+
+    $widget.find(".js-promo-slider").each(function() {
+      initPromoSlider($(this));
+    });
+  });
+
+
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_promo_slider_18" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_special_products_20';
+  let $widget = $('.widget-type_system_widget_v4_special_products_20');
+  $(function() {
+  var mobile_point = 767;
+
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload',
+      use_native: 'loading' in document.createElement('img')
+    });
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_special_products_20" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_sidebar_social_1';
+  let $widget = $('.widget-type_system_widget_v4_sidebar_social_1');
+  $(function() {
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload'
+    });
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_sidebar_social_1" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_widget_v4_special_products_tabs_4_a3cabb735dc2d527c18cf4e9fa66a72f';
+  let $widget = $('.widget-type_widget_v4_special_products_tabs_4_a3cabb735dc2d527c18cf4e9fa66a72f');
+  $(function() {
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload'
+    });
+  });
+
+  $(function() {
+    function isMobileWidth() {
+      return $(window).width() <= 767;
+    }
+
+    function grid_list_columns_mobile() {
+      $('[data-tabs-item]').each(function() {
+        let list = $(this).data('tabs-item')
+        let data_blocks_size = Math.ceil($(this).parents('.tabs:first').find(`#${list} .grid-list`).attr('data-blocks-size'));
+
+        if (isMobileWidth()) {
+          $widget.find('.grid-list').css({
+            gridTemplateColumns: `repeat(${data_blocks_size}, minmax(calc(var(--grid-list-min-width) - 30px), 1fr))`
+          });
+        } else {
+          $widget.find('.grid-list').css({
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(var(--grid-list-min-width), 100%), 1fr))'
+          });
+        }
+      });
+    }
+
+    grid_list_columns_mobile();
+    window.addEventListener('resize', grid_list_columns_mobile);
+    window.addEventListener('orientationchange', grid_list_columns_mobile);
+
+    $widget.find("[data-tabs-item]").on("click", function() {
+      const tabs = $(this).closest(".tabs");
+      const tab_item_id = $(this).data("tabsItem");
+      const open_tab = tabs.find('#' + tab_item_id);
+
+      if (open_tab.length) {
+        tabs.find(".tabs__item.is-active, .tabs__head-item.is-active").removeClass("is-active");
+        tabs.find('#' + tab_item_id).addClass("is-active");
+        $(this).addClass("is-active");
+      }
+    });
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_widget_v4_special_products_tabs_4_a3cabb735dc2d527c18cf4e9fa66a72f" throwed an error: "' + error.stack + '"')
+}
+
+</script>
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/style.css" media="all" onload="this.media=&#39;all&#39;">
+
+
+
+
+
+
+
+
+
+
+<link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/theme.css" rel="stylesheet" type="text/css" onload="document.body.classList.add(&#39;settings_loaded&#39;);">
+
+
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/theme.js" charset="utf-8"></script>
+
+  
+{% endwith %}
+</body></html>

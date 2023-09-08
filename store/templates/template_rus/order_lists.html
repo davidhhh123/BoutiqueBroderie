@@ -1,0 +1,325 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en" class="wf-poppins-n4-active wf-poppins-n6-active wf-poppins-n7-active wf-poppins-n5-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+	<title></title>
+
+	
+
+	<!-- Favicon -->
+	
+
+	 <script src="{% static 'js/webfont.js' %}"></script><script>
+        WebFontConfig = {
+            google: { families: [ 'Poppins:300,400,500,600,700,800' ] }
+        };
+        ( function ( d ) {
+            var wf = d.createElement( 'script' ), s = d.scripts[ 0 ];
+            wf.src = '{% static 'js/webfont.js' %}';
+            wf.async = true;
+            s.parentNode.insertBefore( wf, s );
+        } )( document );
+    </script>
+
+
+
+	 <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.min.css' %}">
+
+    <!-- Plugins CSS File -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/magnific-popup.min.css' %}">
+
+	<!-- Main CSS File -->
+ <link rel="stylesheet" type="text/css" href="{% static 'css/style.min.css' %}">
+
+   
+
+    
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="loaded">
+	<div class="page-wrapper">
+		 {% include 'layouts/header.html' %}
+        <!-- End Header -->
+		<main class="main account">
+			<nav class="breadcrumb-nav">
+				<div class="container">
+					<ul class="breadcrumb">
+						<li><a href="https://d-themes.com/html/riode/demo1.html"><i class="d-icon-home"></i></a></li>
+						<li>Account</li>
+					</ul>
+				</div>
+			</nav>
+			<div class="page-content mt-4 mb-10 pb-6">
+				<div class="container">
+					<h2 class="title title-center mb-10">My Account</h2>
+					<div class="tab tab-vertical gutter-lg">
+						<ul class="nav nav-tabs mb-4 col-lg-3 col-md-4" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" href="#orders">Orders</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#dashboard">Refund & Disputes</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#downloads">Deleted orders</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#address">
+Shipping address</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#account">Account details</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">Logout</a>
+							</li>
+						</ul>
+						<div class="tab-content col-lg-9 col-md-8">
+							<div class="tab-pane " id="dashboard">
+                                {{ request.user.profile.profile_type }}
+                                {% if request.user.profile.profile_type == "salesman"  %}
+                                {% else %}
+                                <p class="mb-0">
+                                    Hello <span>User</span> (not <span>User</span>? <a href="https://d-themes.com/html/riode/account.html#" class="text-primary">Log out</a>)
+                                </p>
+                                <p class="mb-8">
+                                    From your account dashboard you can view your <a href="https://d-themes.com/html/riode/account.html#orders" class="link-to-tab text-primary">recent orders</a>, manage your shipping and billing
+                                        addresses,<br>and edit your password and account details.
+                                </p>
+                                <a href="https://d-themes.com/html/riode/shop.html" class="btn btn-dark btn-rounded">Go To Shop<i class="d-icon-arrow-right"></i></a>
+                                {% endif %}
+								
+							</div>
+							<div class="tab-pane active in" id="orders">
+                                <table class="order-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="pl-2">Order</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Total</th>
+                                            <th class="pr-2">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	{% for product in profile.Products_orders.all %}
+
+
+                                    	
+                                        <tr>
+                                            <td class="order-number"><a href="#">#{{ product.pk }}</a></td>
+                                            <td class="order-date"><time>{{ product.date_ordered }}</time></td>
+                                            <td class="order-status"><span>On hold</span></td>
+                                            <td class="order-total"><span>${{ product.product.price }}</ for 5 items</span></td>
+                                            <td class="order-action"><a href="{% url 'accounts:product_detalis_view' product.product.pk  %}" class="btn btn-primary btn-link btn-underline">View</a></td>
+                                        </tr>
+                                        {% endfor %}
+                                       </tbody>
+                                </table>
+							</div>
+							<div class="tab-pane" id="downloads">
+								<p class="mb-4 text-body">No downloads available yet.</p>
+								<a href="https://d-themes.com/html/riode/account.html#" class="btn btn-primary btn-link btn-underline">Browser Products<i class="d-icon-arrow-right"></i></a>
+							</div>
+							<div class="tab-pane" id="address">
+								<form action="https://d-themes.com/html/riode/account.html#" class="form">
+									<label style="padding-bottom: 10px;font-weight: bold;">
+Contact Information</label>
+									<div class="row">
+										<div class="col-sm-6">
+											<label>Name *</label>
+											<input type="text" class="form-control" name="reciver_name" required="" value = "{{ profile.receiver }}">
+										</div>
+										<div class="col-sm-6">
+											<label>Number *</label>
+											<input type="text" class="form-control" name="number_phone" required="" value = "{{ profile.phone_number }}">
+										</div>
+									</div>
+
+									<label style="font-weight: bold;">Address *</label>
+									<input type="text" class="form-control mb-0" name="address_my" required="" value = "{{ profile.shipping_address }}">
+									<small class="d-block form-text mb-7">Country / County / City / House</small>
+
+									<label>Zip Code *</label>
+									<input type="email" class="form-control" name="zip_code" required="" value = "{{ profile.zipcode }}">
+                                  
+
+									<button type="button" class="btn btn-primary btn_changes_address">SAVE CHANGES</button>
+								</form>
+								
+							</div>
+							<div class="tab-pane" id="account">
+								<form action="https://d-themes.com/html/riode/account.html#" class="form">
+									<div class="row">
+										<div class="col-sm-6">
+											<label>First Name *</label>
+											<input type="text" class="form-control" name="first_name" required="" value = "{{ profile.user }}">
+										</div>
+										<div class="col-sm-6">
+											<label>Last Name *</label>
+											<input type="text" class="form-control" name="last_name" required="">
+										</div>
+									</div>
+
+									<label>Display Name *</label>
+									<input type="text" class="form-control mb-0" name="display_name" required="" value = "{{ profile.user }}">
+									<small class="d-block form-text mb-7">This will be how your name will be displayed
+										in the account section and in reviews</small>
+
+									<label>Email Address *</label>
+									<input type="email" class="form-control" name="email" required="">
+                                    <fieldset>
+                                        <legend>Password Change</legend>
+                                        <label>Current password (leave blank to leave unchanged)</label>
+                                        <input type="password" class="form-control" name="current_password" >
+
+                                        <label>New password (leave blank to leave unchanged)</label>
+                                        <input type="password" class="form-control" name="new_password">
+
+                                        <label>Confirm new password</label>
+                                        <input type="password" class="form-control" name="confirm_password">
+                                    </fieldset>
+
+									<button type="button" class="btn btn-primary btn_save_changes">SAVE CHANGES</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!-- End Main -->
+		 {% include 'layouts/footer.html' %}
+		<!-- End Footer -->
+	<div class="minipopup-area"></div></div>
+	<!-- Sticky Footer -->
+	 {% include 'layouts/mobile_tab.html' %}
+	<!-- Scroll Top -->
+	<a id="scroll-top" href="https://d-themes.com/html/riode/account.html#top" title="Top" role="button" class="scroll-top"><i class="d-icon-arrow-up"></i></a>
+
+	<!-- MobileMenu -->
+{% include 'layouts/header_mobile.html' %}
+	<!-- Plugins JS File -->
+	 <script src="{% static 'js/jquery.min.js.Без названия' %}"></script>
+  <script src="{% static 'js/jquery.elevatezoom.min.js.Без названия' %}"></script>
+     <script src="{% static 'js/imagesloaded.pkgd.min.js.Без названия' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js.Без названия' %}"></script>
+    <!-- Main JS File -->
+    <script src="{% static 'js/main.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript">
+        $(".btn_save_changes").on("click", function(){
+            var reciver_name = $("input[name='reciver_name']").val()
+            var number_phone = $("input[name='number_phone']").val()
+            var my_address = $("input[name='address_my']").val()
+
+            console.log(reciver_name, number_phone, my_address)
+            
+
+            var data = new FormData()
+        
+        
+        
+        
+            
+            data.append("reciver_name", reciver_name)
+            data.append("number_phone", number_phone)
+            data.append("address_my", address_my)
+             data.append("zip_code", zip_code)
+            
+            
+
+            
+            
+
+             $.ajax({
+
+
+              
+            url: '/api/change_account/',
+            method: "POST",
+            data: data,
+            success: function(data){
+                if (data.success!=0){
+                    console.log("success")
+                }
+
+                    
+                   
+                
+
+             
+               
+                  
+                
+
+            },
+            error: function(daa){},
+            processData: false,
+            contentType: false,
+        })
+
+        })
+        $(".btn_changes_address").on("click", function(){
+        	var reciver_name = $("input[name='reciver_name']").val()
+            var number_phone = $("input[name='number_phone']").val()
+            var address_my = $("input[name='address_my']").val()
+            var zip_code = $("input[name='zip_code']").val()
+
+            console.log(reciver_name, number_phone, address_my, zip_code)
+            
+
+            
+        
+        
+        
+        
+            
+           
+        	var data_address = new FormData()
+        	 data_address.append("reciver_name", reciver_name)
+            data_address.append("number_phone", number_phone)
+            data_address.append("address_my", address_my)
+             data_address.append("zip_code", zip_code)
+
+        	if (address_my.length>0 && number_phone.length>0 && reciver_name.length>0 && zip_code.length>0){
+        		$.ajax({
+
+
+              
+            url: '/api/change_shipping_address/',
+            method: "POST",
+            data: data_address,
+            success: function(data){
+                if (data.success!=0){
+                    console.log("success")
+                    $(".my_home_address").html(address_my)
+                }
+
+                    
+                   
+                
+
+             
+               
+                  
+                
+
+            },
+            error: function(daa){},
+            processData: false,
+            contentType: false,
+        })
+        		
+        	}
+        })
+    </script>
+
+
+</body></html>
