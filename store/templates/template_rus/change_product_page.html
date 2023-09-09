@@ -378,17 +378,17 @@ in_stock "  id="in_stock_for_catrgories" class="category_class" style="    heigh
 
 <div class="inputs_properties">
   <p style="font-weight: bold;padding-top: 40px;"  class="important_label">Название Продукта  (армянский)</p>
-  <input type="Name"  class="form-control" name="Name" id="Name_product_am" placeholder="Product Name..." required="" style="width: 100%;" value="{{ product.name_am }}">
+  <input type="Name"  class="form-control" name="Name" id="Name_product_am" placeholder="Название Продукта  (армянский)" required="" style="width: 100%;" value="{{ product.name_am }}">
    <p style="font-weight: bold;padding-top: 40px;"  class="important_label">Название Продукта (русский)</p>
-  <input type="Name" class="form-control" name="Name" id="Name_product_ru" placeholder="Product Name..." required="" style="width: 100%;"  value="{{ product.name_ru }}">
+  <input type="Name" class="form-control" name="Name" id="Name_product_ru" placeholder="Название Продукта  (русский)" required="" style="width: 100%;"  value="{{ product.name_ru }}">
    <p style="font-weight: bold;padding-top: 40px;"  class="important_label">Название Продукта (английский)</p>
-  <input type="Name" class="form-control" name="Name" id="Name_product_en" placeholder="Product Name..." required="" style="width: 100%;" value="{{ product.name_en }}">
+  <input type="Name" class="form-control" name="Name" id="Name_product_en" placeholder="Название Продукта  (английский)" required="" style="width: 100%;" value="{{ product.name_en }}">
   <p style="font-weight: bold;padding-top: 70px;"  class="important_label">Описание (армянский)</p>
-  <textarea rows="10" cols="10" type="Description" class="form-control" style="width: 100%;" name="Description" id="Description_am" placeholder="Description..." required="">{{ product.description_arm }}</textarea>
+  <textarea rows="10" cols="10" type="Description" class="form-control" style="width: 100%;" name="Description" id="Description_am" placeholder="Описание (армянский)" required="">{{ product.description_arm }}</textarea>
   <p style="font-weight: bold;padding-top: 50px;"  class="important_label">Описание (русский)</p>
- <textarea rows="10" cols="10" type="Description" class="form-control" style="width: 100%;" name="Description" id="Description_ru" placeholder="Description..." required="">{{ product.description_rus }}</textarea>
+ <textarea rows="10" cols="10" type="Description" class="form-control" style="width: 100%;" name="Description" id="Description_ru" placeholder="Описание (русский)" required="">{{ product.description_rus }}</textarea>
   <p style="font-weight: bold;padding-top: 50px;"  class="important_label">Описание (английский)</p>
-  <textarea rows="10" cols="10" type="Description" class="form-control" style="width: 100%;" name="Description" id="Description_en" placeholder="Description..." required="">{{ product.description_eng }}</textarea>
+  <textarea rows="10" cols="10" type="Description" class="form-control" style="width: 100%;" name="Description" id="Description_en" placeholder="Описание (английский)" required="">{{ product.description_eng }}</textarea>
 
 
 
@@ -414,8 +414,8 @@ in_stock "  id="in_stock_for_catrgories" class="category_class" style="    heigh
  {% else %}
  {% endif %}
  
-<p style="font-weight: bold;padding-top: 20px;">SKU code</p>
-<input type="Name" class="form-control" name="Name" id="Code_product_SKU" placeholder="SKU Code..." required="" style="width: 100%;" value="{{product.SKU_code}}">
+<p style="font-weight: bold;padding-top: 20px;">Такс код</p>
+<input type="Name" class="form-control" name="Name" id="Code_product_SKU" placeholder="Такс код" required="" style="width: 100%;" value="{{product.SKU_code}}">
 
   <div style="width: 100%;position: relative;margin-top: 25px;padding-bottom: 50px;"><p style="font-weight: bold;padding-top: 20px;">Добавить картинки (<span class="obj_span_min" 
 >min 1</span>,  <span class="obj_span_max" 
@@ -482,7 +482,7 @@ in_stock "  id="in_stock_for_catrgories" class="category_class" style="    heigh
   <p style="font-weight: bold;padding-top: 70px;">Добавите цену на  количество</p>
   
    <p style="padding-top: 20px;">Указать цену на </p>
-    <input type="Number" class="form-control" name="Name" id="prop_counter" placeholder="Размер" required="" >
+    <input type="Number" class="form-control" name="Name" id="prop_counter" placeholder="Количество" required="" >
      <span><select name="
 in_stock" id="in_stock_for_table" style="    height: 40px;
     position: 2px;
@@ -510,7 +510,7 @@ in_stock" id="in_stock_for_table" style="    height: 40px;
   <tr class="table_tr_class" id="table_tr_id{{ forloop.counter0 }}">
     
     
-     <td> <input type="number" class="form-control" name="Name" id="table_prop_counter{{ forloop.counter0 }}" placeholder="Цена" required="" min="0" style="max-width: 100px;" value="{{counter.counter_prop}}"><span>шт</span></td>
+     <td> <input type="number" class="form-control" name="Name" id="table_prop_counter{{ forloop.counter0 }}" placeholder="шт" required="" min="0" style="max-width: 100px;" value="{{counter.counter_prop}}"><span>шт</span></td>
    
     <td> <input type="number" class="form-control" name="Name" id="table_price_counter{{ forloop.counter0 }}" placeholder="Цена" required="" min="0" style="max-width: 100px;" value="{{counter.counter_price}}"><span>AMD </span><div class="delete_counter_tabel" key="{{ forloop.counter0 }}"><span class="icon icon-times"></span></div></td>
 
@@ -543,7 +543,7 @@ in_stock" id="in_stock_for_table" style="    height: 40px;
 
 <p style="font-weight: bold;padding-top: 20px;"  class="important_label">Цена за штуку</p>
 <input type="Number
-" class="form-control" name="Name" id="price_size_pcs" placeholder="min size" required="" value="{{product.price_pcs}}" >
+" class="form-control" name="Name" id="price_size_pcs" placeholder="Цена за штуку" required="" value="{{product.price_pcs}}" >
   <span value="sm" style="    height: 40px;
     position: 2px;
     position: absolute;
@@ -556,7 +556,7 @@ in_stock" id="in_stock_for_table" style="    height: 40px;
                         {% else %}
                           <div class="price_container"><p style="font-weight: bold;padding-top: 20px;">Цена</p>
 
-  <input type="Number" class="form-control" name="Name" step="0.01" id="Price_product" placeholder="Price" required="" value="{{product.price}}" >
+  <input type="Number" class="form-control" name="Name" step="0.01" id="Price_product" placeholder="Цена" required="" value="{{product.price}}" >
   <span>Դր</span>
  </div>
                         {% endif %}
@@ -564,22 +564,20 @@ in_stock" id="in_stock_for_table" style="    height: 40px;
  {% endif %}
 
  <p style="font-weight: bold;padding-top: 20px;">В наличии</p>
-  <input type="Number" class="form-control" name="Name" id="Pcs_product" placeholder="pcs" required="" value="{{product.pcs}}">
+  <input type="Number" class="form-control" name="Name" id="Pcs_product" placeholder="В наличии" required="" value="{{product.pcs}}">
   <span><select name="
 in_stock" id="in_stock" style="    height: 40px;
     position: 2px;
     position: absolute;
     margin-left: 5px;">
   <option value="pcs">шт</option>
-  <option value="sm">см</option>
-  <option value="mm">мм</option>
-  <option value="m">м</option>
+  
 </select></span>
 
 <p style="font-weight: bold;padding-top: 20px;">Вес</p>
-  <input type="text" class="form-control" name="Name" id="mass_product" placeholder="Sale" required="" value="{{product.mass}}">
+  <input type="text" class="form-control" name="Name" id="mass_product" placeholder="Вес" required="" value="{{product.mass}}">
   <span>Г</span>
-<div class="finish_p">Далее</div>
+<div class="finish_p">Сохранить</div>
 
 </div>
 
@@ -620,7 +618,7 @@ in_stock" id="in_stock" style="    height: 40px;
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/lazyload.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts.css" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts_features.css" rel="stylesheet" type="text/css">
