@@ -474,7 +474,7 @@ Order #{{checkout.order_id}}
 <div class="co-checkout-block--padded">
    {% with rate=request|Get_pay_rate %}
  <div class="order-details">
-      <h2>order #{{checkout.order_id}}</h2>
+      <h2>order #{{checkout.pk}}</h2>
    
       <p><strong>date of payment:</strong> {{checkout.date_ordered}}</p>
       <p><strong>delivery method:</strong>Mail</p>
