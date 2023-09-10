@@ -658,48 +658,35 @@ ind="count"
 
 
 <script>
-   var splide_rec= new Splide('.splide_two', {
-       
-    
-    drag:'free',
-    arrows: true,
-    focus:'left',
-    type:'loop',
+   var splide_rec = new Splide('.splide_two', {
+  drag: 'free',
+  arrows: true,
+  focus: 'left',
+  type: 'loop',
+  isClone: false, // Disable slide cloning
+  perPage: 6,
+  gap: 15,
+  perMove: 1,
+  pagination: true,
+  autoplay: true,
+  focus: 'start',
+  breakpoints: {
+    1024: {
+      start: 0,
+      perPage: 5,
+    },
+    500: {
+      start: 0,
+      perPage: 4,
+    },
+    400: {
+      start: 0,
+      perPage: 3,
+      gap: 5,
+    },
+  },
+}).mount();
 
-perPage: 6,
-        gap: 15,
-        perMove: 1,
-        pagination: true,
-        autoplay:true,
-         
-    
-    
-    focus  : 'start',
-    
-    breakpoints: {
-      1024: {
-            start: 0,
-            perPage:5,
-
-            
-          },
-          500: {
-            start: 0,
-            perPage:4,
-
-            
-          },
-          400: {
-            start: 0,
-            perPage:3,
-            gap: 5,
-
-            
-          }
-        }
-    
-  }).mount();
-  
   
  
 var products_template=` <div class="product-preview-elem">

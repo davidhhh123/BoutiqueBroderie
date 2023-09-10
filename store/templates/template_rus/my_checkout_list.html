@@ -205,7 +205,7 @@ input:checked + .slider:before {
   <div class="layout__content">
     
 
-<a href="{% url 'accounts:my_account' %}" class="button back_to_catalog"><span class="icon icon-arrow-left"></span><span>Вернуться к админ панельи</span></a>
+<a href="{% url 'accounts:my_account' %}" class="button back_to_catalog"><span class="icon icon-arrow-left"></span><span>Вернуться к админ панели</span></a>
 
   </div>
 </div>
@@ -215,9 +215,10 @@ input:checked + .slider:before {
   <div class="layout__content">
     
 <h1 class="heading">Заказы</h1>
-<div class="search_box" style="padding-bottom: 30px;">
-  <input type="text" autocomplete="off" class="form-control form-control_size-l header__search-field search_my_products_field" name="q" value="" placeholder="Поиск" data-search-field="" inprocess="false" style="width: 100%;height: 100%;border: 1px solid black; ">
 
+<div class="search_box" style="padding-bottom: 30px;">
+  <input type="text" autocomplete="off" class="form-control form-control_size-l header__search-field search_my_products_field" name="q" value="" placeholder="Название" data-search-field="" inprocess="false" style="width: 100%;height: 100%;border: 1px solid black; ">
+<!--
   <select id="Countryes" style="height: 40px;
     width: 100px;
     margin-top: 10px;
@@ -227,7 +228,8 @@ input:checked + .slider:before {
     <option value="{{country.country}}">{{country.country}}</option>
      {% endfor %}
   </select>
-  <div href="#" class="button button_size-m button_filter_products" style="margin-top: 10px;margin-left: 120px;">Поиск</div>
+  -->
+  <div href="#" class="button button_size-m button_filter_products" style="margin-top: 10px;">Поиск</div>
 
 </div>
 
