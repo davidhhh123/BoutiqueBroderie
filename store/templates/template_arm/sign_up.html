@@ -142,6 +142,91 @@
   }
 </style>
 
+     <style>
+        /* Reset some default styles for email compatibility */
+        
+
+        /* Center the alert using flexbox */
+        .alert_backgraud {
+            display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999999999999999;
+    background: #5353534f;
+
+        }
+
+        /* Define styles for the alert container */
+        .alert-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            position: fixed;
+            z-index: 99999999999999999;
+        }
+
+        /* Style the alert heading */
+        .alert-heading {
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Style the alert message */
+        .alert-message {
+            font-size: 18px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* Style the OK button */
+        .alert-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        /* Hover effect for the button */
+        .alert-button:hover {
+            background-color: #0056b3;
+        }
+         .loader-container_alert {
+            display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    z-index: 999999999999999;
+    background: #69696933;
+        }
+
+        /* Styles for the loader */
+        .loader-container_alert .loader {
+            border: 4px solid #dd626f;
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Keyframes for the loader animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 
 <!-- icons-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/icons.css">
@@ -159,7 +244,18 @@
 </style>
 
   </head>
+  
   <body data-multi-lang="false" data-theme-template="index" data-sidebar-type="sticky" data-sidebar-position="left" class="settings_loaded">
+     <div class="loader-container_alert">
+        <div class="loader"></div>
+    </div>
+    <div class="alert_backgraud">
+   <div class="alert-container">
+        <h1 class="alert-heading">Էլ․փոստի հաստատում</h1>
+        <p class="alert-message">Գրանցման հաստատման հղումն ուղարկվել է Ձեր էլ.փոստի հասցեին:</p>
+        <div style="cursor: pointer;" class="alert-button">OK</div>
+    </div>
+    </div>
     <div class="preloader">
       <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
     </div>
@@ -210,7 +306,8 @@
                     <div class="co-input co-input--text co-input--language co-input--nested co-input--required co-input--empty_nested"><label class="co-input-label" for="email">Email</label><div class="co-input-text"><input type="email" name="email" id="register-email" class="co-input-field js-input-field" required="required"></div></div>
                   <div class="co-input co-input--text co-input--language co-input--nested co-input--required co-input--empty_nested"><label class="co-input-label" for="login">Մուտքանուն</label><div class="co-input-text"><input type="text" name="login" id="register-login" class="co-input-field js-input-field" placeholder ="Մուտքանունը պետք է պարունակի միայն տառեր և թվեր" required="required"><p></p></div></div>
 
-                  <div class="co-input co-input--text co-input--language co-input--nested co-input--required co-input--empty_nested"><label class="co-input-label" for="password">Գաղտնաբառ</label><div class="co-input-text"><input type="password" placeholder ="Գաղտնաբառը պետք է պարունակի միայն տառեր և թվեր" name="password" id="register-password" class="co-input-field js-input-field" required="required"><input type="checkbox" onclick="myFunction()" style="margin-top: 15px;"> Ցույց տալ գաղտնաբառը</div></div>
+                  <div class="co-input co-input--text co-input--language co-input--nested co-input--required co-input--empty_nested"><label class="co-input-label" for="password">Գաղտնաբառ</label><div class="co-input-text"><input type="password" placeholder ="Գաղտնաբառը պետք է պարունակի միայն տառեր և թվեր" name="password" id="register-password" class="co-input-field js-input-field" required="required"></div></div>
+                   <div class="co-input co-input--text co-input--language co-input--nested co-input--required co-input--empty_nested"><label class="co-input-label" for="password">Հաստատել գաղտաբառը</label><div class="co-input-text"><input type="password" placeholder ="Գաղտնաբառը պետք է պարունակի միայն տառեր և թվեր" name="password" id="register-password_confirm" class="co-input-field js-input-field" required="required"><input type="checkbox" onclick="myFunction()" style="margin-top: 15px;"> Ցույց տալ գաղտնաբառը</div></div>
 
                   <div class="form-footer">
                             <div class="form-checkbox">
@@ -227,7 +324,7 @@
 
                         </div>
 
-                  <div class="co-form-controls"><button class="co-button co-form-button  btn_registration" name="commit" type="submit">Գրանցվել</button><a class="co-button co-button--link co-form-button" href="#">Վերականգնել գաղտաբառը</a><a class="co-button co-button--link co-form-button" href="{% url 'accounts:login_page' %}">Մուռք</a></div></form>
+                  <div class="co-form-controls"><button class="co-button co-form-button  btn_registration" name="commit" type="submit">Գրանցվել</button><a class="co-button co-button--link co-form-button" href="{% url 'accounts:password_recovery_page' %}">Վերականգնել գաղտաբառը</a><a class="co-button co-button--link co-form-button" href="{% url 'accounts:login_page' %}">Մուտք</a></div></form>
 
                 </div></div>
 
@@ -267,7 +364,7 @@
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/main.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/main_4.js"></script>
+  <script src="{% static 'js/main_4.js' %}"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
   <link
      rel="stylesheet"
@@ -283,6 +380,9 @@
    });
 </script>
 <script>
+  $(".alert-button").on("click", function(){
+    $(".alert_backgraud").css("display", "none")
+  })
   function check() {
   event.preventDefault();
   var form = document.forms["login"];
@@ -297,10 +397,14 @@
 }
 function myFunction() {
   var x = document.getElementById("register-password");
+  var y = document.getElementById("register-password_confirm");
+  
   if (x.type === "password") {
     x.type = "text";
+     y.type = "text";
   } else {
     x.type = "password";
+    y.type = "password";
   }
 }
 

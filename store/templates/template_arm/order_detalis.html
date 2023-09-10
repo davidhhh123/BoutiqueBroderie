@@ -474,9 +474,9 @@ width: 100px;
 <div class="co-checkout-block--padded">
    {% with rate=request|Get_pay_rate %}
  <div class="order-details">
-      <h2>Պատվեր #{{checkout.order_id}}</h2>
+      <h2>Պատվեր #{{checkout.pk}}</h2>
    
-      <p><strong>Վճարման :</strong> {{checkout.date_ordered}}</p>
+      <p><strong>Վճարման Ժամանակը:</strong> {{checkout.date_ordered}}</p>
       <p><strong>Առաքման տարբերակ:</strong>Փոստ</p>
       <p><strong>Պատվերի գինը:</strong> {{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
       <p><strong>Առաքմնա գինը:</strong> {{checkout.delivery_check.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
