@@ -4,6 +4,9 @@ from . import models
 
 # Register your models here.
 admin.site.register(models.Profile)
+admin.site.register(models.Visit)
+admin.site.register(models.order_id_count)
+
 
 
 

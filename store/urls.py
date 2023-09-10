@@ -85,6 +85,8 @@ urlpatterns = [
     path('collection_view/', views.collection_view, name="collection_view"),
     path('orders_view/<pk>', views.orders_view, name="orders_view"),
     path('checkout_delivery/<pk>', views.checkout_delivery, name="checkout_delivery"),
+    path('confirm/<uidb64>/<token>/', views.confirm_email, name='confirm_email'),
+    path('confirm_reset/<uidb64>/<token>/', views.confirm_reset_password, name='confirm_reset_password'),
     
     
     
@@ -93,6 +95,9 @@ urlpatterns = [
 
     path('sign_in/', views.login_page, name="login_page"),
     path('sign_up/', views.sign_up_page, name="sign_up_page"),
+    path('recovery_password/', views.password_recovery_page, name="password_recovery_page"),
+    path('new_password_page/', views.new_password_page, name="new_password_page"),
+    
 
     
    
@@ -105,6 +110,8 @@ urlpatterns = [
     path('api/sign_up/', views.registration, name="registration"),
     path('api/sign_in/', views.sign_in, name="sign_in"),
     path('api/sign_out/', views.sign_out, name="sign_out"),
+    path('api/send_recovery_via_email/', views.send_recovery_via_email, name="send_recovery_via_email"),
+    
 
     
     path('api/check_max_count_product/', views.check_max_count_product, name="check_max_count_product"),
@@ -132,6 +139,8 @@ urlpatterns = [
     path('api/remove_cart_product/', views.remove_cart_product, name="remove_cart_product"),
     
     path('api/add_favorite_products/', views.add_favorite_products, name="add_favorite_products"),
+    path('api/new_register_password/', views.new_register_password, name="new_register_password"),
+    
     
     
     path('api/change_account/', views.change_account, name="change_account"),

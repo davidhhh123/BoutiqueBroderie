@@ -47,6 +47,11 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.utils import timezone
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_text
+from django.contrib.sites.shortcuts import get_current_site
 
 
 def change_currency_symbol(request, new_currency_symbol):
@@ -362,65 +367,216 @@ def my_account(request):
         },
     )
 
-
-
- 
-def registration(request):
-
+def send_recovery_via_email(request):
+    email = request.POST.get('email')
     username = request.POST.get('username')
-    password  = request.POST.get('password')
-    email  = request.POST.get('email')
-    first_name  = request.POST.get('name')
-    lastname  = request.POST.get('lastname')
-    phone  = request.POST.get('phone')
-    
-    print(username, password, email, User.objects.filter(username=username))
-    if  User.objects.filter(username=username).exists():
-        data = {
-                "data":"error"
+    if not User.objects.filter(username=username).exists():
+            data = {
+                "data": "error"
             }
     else:
+        user = get_object_or_404(User, username=username)
+        token = default_token_generator.make_token(user)
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
 
+            # Build the confirmation URL
+        current_site = get_current_site(request)
+        confirmation_url = f'http://{current_site.domain}/confirm_reset/{uid}/{token}/'
 
-        user = User.objects.create_user(username,  password=password)
-        profile = get_object_or_404(models.Profile, user = user)
-        profile.first_name = first_name
-        profile.email = email
-        profile.last_name = lastname
-        profile.phone_number = phone
-        
-        
-        
-
-        profile.save()
-        
-        #user_add_n.save()
-        print(user)
-        user = authenticate(request, username=username,
-                        password=password)
-        login(request, user)
-        if user is not None:
+            # Send a confirmation email
+        subject = 'Confirm your email'
+        message = render_to_string('layouts/email_conf.html', {
+            'user': user,
+            'confirmation_url': confirmation_url,
+        })
             
+        recipient_list = [user.profile.email]
+        if (str(email) != str(user.profile.email)):
             data = {
-                "data":1
+            "data": "error"
+            }
+            return JsonResponse(data, safe=False)
+
+        print(recipient_list)
+        plain_message = strip_tags(message)
+        print(recipient_list)
+        send_mail(
+            'Ապրանքը վերադարձնելու հայտ',
+            plain_message,
+            'boutique.broderie.am@gmail.com',
+            recipient_list,
+            fail_silently=False,
+            html_message=message,
+                
+
+        )
+            
+
+        data = {
+            "data": "confirmation_sent"
+        }
+    return JsonResponse(data, safe=False)
+
+
+
+
+
+
+
+
+def registration(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        email = request.POST.get('email')
+        first_name = request.POST.get('name')
+        lastname = request.POST.get('lastname')
+        phone = request.POST.get('phone')
+
+        # Check if the user already exists
+        if User.objects.filter(username=username).exists():
+            data = {
+                "data": "error"
             }
         else:
+            # Create a user with a unique email confirmation token
+            user = User.objects.create_user(username, password=password, is_active=False)
+            user.profile.first_name = first_name
+            user.profile.email = email
+            user.profile.last_name = lastname
+            user.profile.phone_number = phone
+            user.profile.save()
+
+            # Generate an email confirmation token
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+
+            # Build the confirmation URL
+            current_site = get_current_site(request)
+            confirmation_url = f'http://{current_site.domain}/confirm/{uid}/{token}/'
+
+            # Send a confirmation email
+            subject = 'Confirm your email'
+            message = render_to_string('layouts/email_conf.html', {
+                'user': user,
+                'confirmation_url': confirmation_url,
+            })
+            
+            recipient_list = [user.profile.email]
+            plain_message = strip_tags(message)
+            print(recipient_list)
+            send_mail(
+                'Ապրանքը վերադարձնելու հայտ',
+                plain_message,
+                'boutique.broderie.am@gmail.com',
+                recipient_list,
+                fail_silently=False,
+                html_message=message,
+                
+
+                )
+            
+
             data = {
-                "data":0
+                "data": "confirmation_sent"
             }
 
+    else:
+        data = {
+            "data": "error"
+        }
+
+    return JsonResponse(data, safe=False)
+def new_register_password(request):
+    new_password = request.POST.get("new_password")
+    print(request.method)
+    uid = request.COOKIES.get("user_recovery_id")
+    user = User.objects.get(id=uid)
+    print(new_password, "new_password", user)
+    if new_password is None:
+        return JsonResponse({"success":"error"})
+    user.password = new_password
+    user.save()
+    login(request, user)
     
-    return JsonResponse(data=data, safe=False)   
-    
+    return JsonResponse({"success":"success"})
+
+def confirm_reset_password(request, uidb64, token):
+    try:
+        # Decode the user ID from base64
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+
+        # Verify the email confirmation token
+        if default_token_generator.check_token(user, token):
+            # Activate the user's account
+            
+            # Optional: Log the user in
+
+            # Display a success message
+            user.is_active = True
+            user.save()
+            messages.success(request, 'Your email has been confirmed!')
+            response  =redirect('accounts:new_password_page')
+            
+            response.set_cookie("user_recovery_id", user.id)
+            return response  # Redirect to a success page
+
+        else:
+            # Token is invalid
+            messages.error(request, 'Invalid token. Please try again.')
+            return redirect('accounts:login')  # Redirect to login page or another error page
+
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        # Handle exceptions if the user ID cannot be decoded or user does not exist
+        messages.error(request, 'Invalid token. Please try again.')
+        return redirect('accounts:login')  # Redirect to login page or another error page
 
 
 
+
+def confirm_email(request, uidb64, token):
+    try:
+        # Decode the user ID from base64
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+
+        # Verify the email confirmation token
+        if default_token_generator.check_token(user, token):
+            # Activate the user's account
+            user.is_active = True
+            user.save()
+            login(request, user)  # Optional: Log the user in
+
+            # Display a success message
+            messages.success(request, 'Your email has been confirmed!')
+            return redirect('accounts:home')  # Redirect to a success page
+
+        else:
+            # Token is invalid
+            messages.error(request, 'Invalid token. Please try again.')
+            return redirect('accounts:login')  # Redirect to login page or another error page
+
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        # Handle exceptions if the user ID cannot be decoded or user does not exist
+        messages.error(request, 'Invalid token. Please try again.')
+        return redirect('accounts:login')  # Redirect to login page or another error page
+
+from django.contrib.auth.hashers import check_password
 def sign_in(request):
     username = request.POST.get("username")
     password = request.POST.get("password")
+    print(username, password)
+    usern=get_object_or_404(User, username=username)
+    usern.is_active=True
+    usern.save()
+
+    print(usern, usern.password, "p")
+    print(check_password(password, usern.password), "a")
     user = authenticate(username=username, password=password)
-    if user is not None:
-        login(request, user)
+    
+    if usern is not None:
+        login(request, usern)
         data = {
             "data":1
         }
@@ -647,8 +803,13 @@ def new_products(request):
 
     return render(request, "template_rus/products_all.html", {"products":first_page, "new_products":True, "page_range":page_range})
 def send_email(request):
-    html_message = render_to_string('layouts/email_template.html')
+    checkout = models.checkout_products.objects.filter()
+    checkout = checkout[14]
+
+
+    html_message = render_to_string('layouts/email_template.html',{"checkout":checkout, "request":request})
     email  = "david.hovhannisyan445@gmail.com"
+    
     
     
     
@@ -656,7 +817,7 @@ def send_email(request):
     send_mail(
         'Ապրանքը վերադարձնելու հայտ',
         plain_message,
-        'info@boutiquebroderie.com',
+        'boutique.broderie.am@gmail.com',
         ["david.hovhannisyan445@gmail.com"],
         fail_silently=False,
         html_message=html_message,
@@ -1567,6 +1728,23 @@ def check_payment(request):
             checkout_products.save()
             request.user.profile.product_cart.clear()
             request.user.profile.save()
+            html_message = render_to_string('layouts/email_template.html',{"checkout":checkout_products, "request":request})
+            email  = request.user.profile.email
+            
+            
+            
+            
+            plain_message = strip_tags(html_message)
+            send_mail(
+                'Checkout',
+                plain_message,
+                'boutique.broderie.am@gmail.com',
+                [email],
+                fail_silently=False,
+                html_message=html_message,
+                
+
+                )
             
 
         
@@ -1618,6 +1796,24 @@ def check_payment_delyvery(request):
                 collection.delete()
             except:
                 pass
+            html_message = render_to_string('layouts/email_template.html',{"delivery_check":delivery_check, "request":request})
+            email  = request.user.profile.email
+            
+            
+            
+            
+            plain_message = strip_tags(html_message)
+            send_mail(
+                'Checkout',
+                plain_message,
+                'boutique.broderie.am@gmail.com',
+                [email],
+                fail_silently=False,
+                html_message=html_message,
+                
+
+                )
+            
             
             
             
@@ -1628,6 +1824,10 @@ def login_page(request):
     return  render(request, "template_rus/login.html")
 def sign_up_page(request):
     return  render(request, "template_rus/sign_up.html")
+def password_recovery_page(request):
+    return  render(request, "template_rus/recovery_password.html")
+def new_password_page(request):
+    return render(request, "template_rus/reset_password_page.html")
 def blog(request):
     blog_articles = models.Blog.objects.all()
     number_of_item = 3
