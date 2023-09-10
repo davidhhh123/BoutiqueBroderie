@@ -1,12 +1,3 @@
-
-{% load i18n %}
-
- {% get_current_language as LANGUAGE_CODE1 %}
- {% if  LANGUAGE_CODE1 == "hy" %}
-{% include 'layouts/email_template_arm.html' %}
-{% elif LANGUAGE_CODE1 == "en" %}
-{% include 'layouts/email_template_eng.html' %}
-{% else %}
 {% load all_go %}
 {% load mathfilters %}
   {% load rate %}
@@ -16,7 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Подтверждение заказа</title>
+  <title>Պատվերի հաստատում</title>
   <style>
     /* CSS Styles */
     body {
@@ -107,72 +98,71 @@
     <div class="header">
       <div class="header">
   <img src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32067130.png" alt="Logo" style="max-width: 200px;">
-  <h1>Подтверждение доствки - boutiquebroderie.com</h1>
+  <h1>Առաքման հաստատում - boutiquebroderie.com</h1>
 </div>
-
     </div>
-     {% with rate=request|Get_pay_rate %}
-
+ {% with rate=request|Get_pay_rate %}
+   {% if delivery_check %}
     <div class="order-details">
-      <h2>Детали доствки</h2>
-      {% if delivery_check %}
-             <h2>Номер доставки #{{delivery_check.pk}}</h2>
-
+      <h2>Առաքման մանրամասները</h2>
+      <h2>Առաքման համարը #{{delivery_check.pk}}</h2>
    
-      
-      <p><strong>Способ доставки:</strong>почта</p>
-      <p><strong>Сумма доставки:</strong> {{delivery_check.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
-      
-      <p><strong>Масса :</strong> {{delivery_check.mass}} г</p>
      
-      <h2>Контактные данные</h2>
-       <p><strong>Фамилия имя:</strong> {{delivery_check.my_contacts_info.username}}</p>
+      <p><strong>Առաքման տարբերակ:</strong>Փոստ</p>
+      <p><strong>Առաքման գինը գինը:</strong> {{delivery_check.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
+     
+      <p><strong>Քաշ :</strong> {{delivery_check.mass}} գ</p>
+     
+      <h2>Կոնտակտային տվյալներ</h2>
+       <p><strong>Անուն ազգանուն:</strong> {{delivery_check.my_contacts_info.username}}</p>
       <p><strong>Email:</strong>{{delivery_check.my_contacts_info.email}}</p>
-      <p><strong>Контактный телефон:</strong> {{delivery_check.my_contacts_info.phone_number}}</p>
-      <p><strong>Страна:</strong> {{delivery_check.my_contacts_info.country}}</p>
-      <p><strong>Область :</strong> {{delivery_check.my_contacts_info.state}}</p>
-      <p><strong>Место проживания:</strong> {{delivery_check.my_contacts_info.city}}</p>
-      <p><strong>Адрес:</strong> {{delivery_check.my_contacts_info.address}}</p>
-      <p><strong>Индекс:</strong> {{delivery_check.my_contacts_info.index}}</p>
-      {% else %}
-     
-       <h2>Заказ #{{checkout.pk}}</h2>
-
-   
-      <p><strong>Дата оплаты:</strong> {{checkout.date_ordered}}</p>
-      <p><strong>Способ доставки:</strong>почта</p>
-      <p><strong>Сумма заказа:</strong> {{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
-      
-      <p><strong>Масса :</strong> {{checkout.mass}} г</p>
-     
-      <h2>Контактные данные</h2>
-       <p><strong>Фамилия имя:</strong> {{checkout.delivery_check.my_contacts_info.username}}</p>
-      <p><strong>Email:</strong>{{checkout.delivery_check.my_contacts_info.email}}</p>
-      <p><strong>Контактный телефон:</strong> {{checkout.delivery_check.my_contacts_info.phone_number}}</p>
-      <p><strong>Страна:</strong> {{checkout.delivery_check.my_contacts_info.country}}</p>
-      <p><strong>Область :</strong> {{checkout.delivery_check.my_contacts_info.state}}</p>
-      <p><strong>Место проживания:</strong> {{checkout.delivery_check.my_contacts_info.city}}</p>
-      <p><strong>Адрес:</strong> {{checkout.delivery_check.my_contacts_info.address}}</p>
-      <p><strong>Индекс:</strong> {{checkout.delivery_check.my_contacts_info.index}}</p>
+      <p><strong>Հեռախոսահամար:</strong> {{delivery_check.my_contacts_info.phone_number}}</p>
+      <p><strong>Երկիր:</strong> {{delivery_check.my_contacts_info.country}}</p>
+      <p><strong>Մարզ :</strong> {{delivery_check.my_contacts_info.state}}</p>
+      <p><strong>Բնակվելու վայր:</strong> {{delivery_check.my_contacts_info.city}}</p>
+      <p><strong>Հասցե:</strong> {{delivery_check.my_contacts_info.address}}</p>
+      <p><strong>ինդեկս:</strong> {{delivery_check.my_contacts_info.index}}</p>
     </div>
+    {% else %}
+    <div class="order-details">
+      <h2>Պարվերի մանրամասները</h2>
+      <h2>Պատվեր #{{checkout.pk}}</h2>
+   
+      <p><strong>Վճարման Ժամանակը:</strong> {{checkout.date_ordered}}</p>
+      <p><strong>Առաքման տարբերակ:</strong>Փոստ</p>
+      <p><strong>Պատվերի գինը:</strong> {{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
+     
+      <p><strong>Քաշ :</strong> {{checkout.mass}} գ</p>
+     
+      <h2>Կոնտակտային տվյալներ</h2>
+       <p><strong>Անուն ազգանուն:</strong> {{checkout.delivery_check.my_contacts_info.username}}</p>
+      <p><strong>Email:</strong>{{checkout.delivery_check.my_contacts_info.email}}</p>
+      <p><strong>Հեռախոսահամար:</strong> {{checkout.delivery_check.my_contacts_info.phone_number}}</p>
+      <p><strong>Երկիր:</strong> {{checkout.delivery_check.my_contacts_info.country}}</p>
+      <p><strong>Մարզ :</strong> {{checkout.delivery_check.my_contacts_info.state}}</p>
+      <p><strong>Բնակվելու վայր:</strong> {{checkout.delivery_check.my_contacts_info.city}}</p>
+      <p><strong>Հասցե:</strong> {{checkout.delivery_check.my_contacts_info.address}}</p>
+      <p><strong>ինդեկս:</strong> {{checkout.delivery_check.my_contacts_info.index}}</p>
+    </div>
+
 
     <div class="order-summary">
       <table>
        <thead>
   <tr>
-    <th>Продукт</th>
-    <th>Сумма</th>
-    <th>Количество</th>
-    <th>Скидка</th>
-    <th>Общая сумма</th>
+    <th>Ապրանք</th>
+    <th>Գին</th>
+    <th>Քանակ</th>
+    <th>Զեղչ</th>
+    <th>Ընդհանուր գինը</th>
   </tr>
 </thead>
 <tbody>
-  
+   
   {% for order in checkout.products_Order.all %}
 
   <tr>
-    <td class="product-name">{% if order.product  %}{{ order.product.name_ru }}{% else %}{{ order.name_ru }} {% endif %}</td>
+    <td class="product-name">{% if order.product  %}{{ order.product.name_ru }}{% else %}{{ order.name_am }} {% endif %}</td>
     <td class="product-price">{% if order.product  %}
            
            
@@ -233,7 +223,7 @@
 
 </td>
     <td class="product-quantity">
-   {% if order.count_size %}{{ order.count_size }}см{% else %} {{ order.count }}{% endif %}</td>
+   {% if order.count_size %}{{ order.count_size }}սմ{% else %} {{ order.count }}{% endif %}</td>
     <td class="product-sale">{% if order.product.sale  %}{{order.product.sale}} %{% else %}-{% endif %}</td>
     <td class="product-total"> {{ order.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</td>
   </tr>
@@ -243,19 +233,17 @@
 
         <tfoot>
           <tr>
-            <td colspan="3"><strong>Общая сумма:</strong></td>
+            <td colspan="3"><strong>Ընդհանուր գինը:</strong></td>
             <td><strong>{{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</strong></td>
           </tr>
         </tfoot>
       </table>
     </div>
     {% endwith %}
-     {% endif %}
-
+{% endif %}
     <div class="footer">
      <p></p>
-  <a href="https://www.boutiquebroderie.com" style="display: inline-block; padding: 10px 20px; background-color: #c22738; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 20px;">
-Вернуться в магазин</a>
+  <a href="https://www.boutiquebroderie.com" style="display: inline-block; padding: 10px 20px; background-color: #c22738; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 20px;">Գնալ խանութ</a>
     </div>
   </div>
 
@@ -265,5 +253,3 @@
 </body>
 
 </html>
-
-{% endif %}
