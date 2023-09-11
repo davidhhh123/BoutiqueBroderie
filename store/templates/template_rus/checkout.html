@@ -450,7 +450,7 @@
                        
                       
 
-                        <label class="co-payment_method  co-input-wrapper co-toggable_field co-toggable_field--bordered juridical individual" for="order_variant2"><span class="co-payment_method-input co-toggable_field-input  co-toggable_field-input--radio"><input class="radio_button js-input-field" data-payment-id="1576667" data-payment-position="1" id="order_variant2" name="order_variant" rel="#summ_1576667" type="radio" value="1576667" style="cursor: pointer; opacity: 1;" checked="checked"><span></span></span><span class="co-payment_method-information co-toggable_field-information"><span class="co-payment_method-title co-toggable_field-title co-input-title">Заказать сейчас</span><span class="co-payment_method-description co-toggable_field-description co-input-description" id="payment_description_1576667">Заказать сейчас</span></span><span class="co-toggable_field-price co-price--current" id="summ_1576667" data-price="0" style="display: none;">0&nbsp;₽</span></label>
+                        <label class="co-payment_method  co-input-wrapper co-toggable_field co-toggable_field--bordered juridical individual" for="order_variant2"><span class="co-payment_method-input co-toggable_field-input  co-toggable_field-input--radio"><input class="radio_button js-input-field" data-payment-id="1576667" data-payment-position="1" id="order_variant2" name="order_variant" rel="#summ_1576667" type="radio" value="1576667" style="cursor: pointer; opacity: 1;" checked="checked"><span></span></span><span class="co-payment_method-information co-toggable_field-information"><span class="co-payment_method-title co-toggable_field-title co-input-title">Сразу оформить заказ</span><span class="co-payment_method-description co-toggable_field-description co-input-description" id="payment_description_1576667">Выбирать данный способ , если желаете сразу оформить доставку</span></span><span class="co-toggable_field-price co-price--current" id="summ_1576667" data-price="0" style="display: none;">0&nbsp;₽</span></label>
 
 
 
@@ -861,7 +861,9 @@ if (comment.length>0){
   if (collection_input.length>0){
     data.append("indicator",collection_input.eq(0).attr("order_type"))
     data.append("pk",collection_input.eq(0).attr("pk"))
+     data.append("contact_pk", $(".radio_contact:checked").eq(0).attr("pk"))
     if (collection_input.eq(0).attr("status") != undefined){
+
       data.append("create",1)
 
     }

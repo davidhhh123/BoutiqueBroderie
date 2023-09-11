@@ -384,6 +384,13 @@ button.pswp__button--close:hover {
 .images_inputs img{
     width: 70px;height: 70px;object-fit: contain;margin-left: 5px;
 }
+.zoom_images_main{
+    cursor: zoom-in;
+}
+.pswp__img.pswp__img_main{
+     cursor: zoom-out;
+
+}
 </style>
 
   </head>
@@ -429,7 +436,7 @@ button.pswp__button--close:hover {
 
                     <div class="pswp__counter">1 / 1</div>
 
-                    <button class="pswp__button pswp__button--close d-icon-times" aria-label="Close (Esc)" style="font-size: 35px;color: white;"></button>
+                    <button class="pswp__button pswp__button--close " aria-label="Close (Esc)" style="font-size: 35px;color: white;"><span class="icon icon-times"></span></button>
 
                     <button class="pswp__button pswp__button--zoom" aria-label="Zoom in/out"></button>
 
@@ -484,7 +491,13 @@ button.pswp__button--close:hover {
         
         
         
-      
+       <li class="breadcrumb-item" data-breadcrumbs="2">
+            <a class="breadcrumb-link" title="{{ product.name_ru }} " href="#">{{ product.category_choeses.name }} </a>
+          </li>
+          {% for category in product.sub_categories.all %}
+          <li class="breadcrumb-item" data-breadcrumbs="2">
+            <a class="breadcrumb-link" title="{{ product.name_ru }} " href="#">{{ category.name }} </a>
+          {% endfor %}
         
         
           <li class="breadcrumb-item" data-breadcrumbs="2">
@@ -522,7 +535,7 @@ button.pswp__button--close:hover {
           <div class="img-ratio__inner">
 
             <picture><source srcset="{{ product.zoom_image.url }}" type="image/webp">
-                <span class='zoom zoom_images_main' id='ex1'>
+                <span class='zoom zoom_images_main' id='ex1' img_src="{{ product.zoom_image.url }}">
          <img src="{{ product.zoom_image.url }}" alt="many_photos" >
         <p>Hover</p>
     </span>
@@ -536,7 +549,7 @@ button.pswp__button--close:hover {
 
           </div>
         </div>
-        <div href="#" class="product-image-full" img_src="{{ product.zoom_image.url }}" style="cursor: pointer;"><i class="d-icon-zoom"></i></div>
+      
         
   <div class="stickers">
     
@@ -555,7 +568,7 @@ button.pswp__button--close:hover {
         <div class="img-ratio img-ratio_cover product__photo" data-fslightbox="product-photos-lightbox-618751824" data-type="image" href="#">
           <div class="img-ratio__inner">
             <picture><source srcset="{{ image.avatar_e.url }}" type="image/webp">
-                <span class='zoom zoom_images_main' id='ex1'>
+                <span class='zoom zoom_images_main' id='ex1' img_src="{{ product.zoom_image.url }}">
          <img src="{{ image.avatar_e.url }}" alt="many_photos" >
         <p>Hover</p>
     </span>
@@ -938,7 +951,7 @@ button.pswp__button--close:hover {
             <div class="product-preview__area-photo">
               <div class="product-preview__photo">
                 
-                  <span class="button button_size-s favorites_btn favorites-not-added" pk="{{ product_rec.pk }}">
+                  <span class=" button button_size-s favorite_on favorites_btn favorites-not-added" pk="{{ product_rec.pk }}">
                     <span class="btn-icon icon-favorites-o"></span>
                     <span class="btn-icon icon-favorites-f"></span>
                   </span>
@@ -1160,7 +1173,7 @@ ind="count"
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/lazyload.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_3.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/main.css" rel="stylesheet" type="text/css">
     <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/photoswipe.min.js"></script>
@@ -1170,10 +1183,7 @@ ind="count"
   
 
 <script>
-        $(document).ready(function(){
-            $('.zoom_images_main').zoom();
-          
-        });
+        
     </script>
 <script>
     if ($(".cut-block__content-wrapper").height()>400){
@@ -1213,9 +1223,14 @@ perMove: 1,
     
     
     focus  : 'center',
-    perPage: 3,
+    perPage: 4,
     breakpoints: {
           500: {
+            start: 0,
+            perPage:3,
+            
+          },
+          400: {
             start: 0,
             perPage:2,
             
@@ -1785,10 +1800,13 @@ $(".is-count-down ").on("click", function(){
 
 
 
+$(".pswp__img.pswp__img_main").on("click", function(){
+    $(".pswp").removeClass("pswp--supports-fs pswp--open pswp--notouch pswp--css_animation pswp--svg pswp--zoom-allowed pswp--visible pswp--animated-in pswp--has_mouse")
+})
 $(".pswp__button--close").on("click", function(){
     $(".pswp").removeClass("pswp--supports-fs pswp--open pswp--notouch pswp--css_animation pswp--svg pswp--zoom-allowed pswp--visible pswp--animated-in pswp--has_mouse")
 })
-$(".product-image-full").on("click", function(){
+$(".zoom_images_main").on("click", function(){
     $(".pswp__img_main").attr("src", $(this).attr("img_src"))
     $(".pswp").addClass("pswp--supports-fs pswp--open pswp--notouch pswp--css_animation pswp--svg pswp--zoom-allowed pswp--visible pswp--animated-in pswp--has_mouse")
 })
@@ -1806,63 +1824,7 @@ $(".product-image-full").on("click", function(){
     $(this).parents(".product__reviews").find(".notice-success").hide();
   });
 
-  $(".button.button_size-l.favorite_on.favorites_btn").on("click", function(){
-             
-              var indicator = ""
-        var name = ""
-        var data = new FormData()
-         var pk = $(this).attr("pk")
-         
-        
-     
-     
-       
-        
-       
-      
-        
-        
-            
-            data.append("pk", pk)
-           
-            
-
-            
-
-            
-
-     $.ajax({
-
-
-              
-            url: '/api/add_favorite_products/',
-            method: "POST",
-            data: data,
-            success: function(data){
-                location.replace('/favorite/');
-                
-                
-
-             
-               
-                  
-                
-
-            },
-            error: function(daa){},
-            processData: false,
-            contentType: false,
-        })
-
-
-            
-       
-            
-            
-            
-        
-
-       })
+  
   $(".add_sales_btn").on("click", function(){
     $(".sales_prop").removeClass("display_none")
 

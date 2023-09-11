@@ -343,9 +343,28 @@ in_stock "  id="in_stock_for_catrgories" class="category_class" style="    heigh
     width: 100%;
    " value="{{ product.category_choeses.category_id_main }}">
 
-  
-      <option value="{{product.category_choeses.category_id_main}}" class="option_categories" pk="{{product.category_choeses.category_id_main}}" >{{product.category_choeses.name}}</option>
-    
+  <option value="5" class="option_categories" pk="5">Нитки и пряжа</option>
+     <option value="6" class="option_categories" pk="6">Ленты, шнуры, тесьма</option>
+
+    <option value="8" class="option_categories" pk="8">Пайетки</option>
+
+    <option value="9" class="option_categories" pk="9">Бисер, бусины, жемчуг</option>
+
+
+    <option value="3" class="option_categories" pk="3">Миксы</option>
+
+    <option value="10" class="option_categories" pk="10">Фурнитура</option>
+    <option value="11" class="option_categories" pk="11" >Ткани, кожа, мех</option>
+   
+
+    <option value="12" class="option_categories" pk="12">Антиквар и винтаж </option>
+    <option value="4" class="option_categories" pk="4"> Наборы для рукоделия</option>
+     <option value="13" class="option_categories" pk="13">Инструменты</option>
+   
+    <option value="14" class="option_categories" pk="14">Книги,журналы</option>
+   
+    <option value="15" class="option_categories" pk="15">Разное</option>
+      
  
 
   </select>
@@ -711,6 +730,10 @@ selectElement('in_stock_for_catrgories', '{{ product.category_choeses.category_i
       var video_link = $("#link_video").val()
       var Sale_product = $("#Sale_product").val()
       var mass_product = $("#mass_product").val()
+      var category_before_value = "{{ product.category_choeses.category_id_main }}"
+      var category_new_value = $("#in_stock_for_catrgories").val()
+
+      
 
 
       
@@ -731,6 +754,10 @@ selectElement('in_stock_for_catrgories', '{{ product.category_choeses.category_i
 
 
       var data = new FormData()
+      if (String(category_new_value) != String(category_before_value)){
+        data.append("category_new_value", category_new_value)
+        
+      }
       if (name_ru.length==0 || name_en.length==0  || name_am.length==0 || Description_ru.length==0 || Description_am.length==0 || Description_en.length==0 ||  pcs.length==0 || mass_product.length==0 || $(".option_categories:selected").eq(0).text().length == 0){
         
         var status=false

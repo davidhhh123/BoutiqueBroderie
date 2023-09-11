@@ -365,7 +365,7 @@
         <div class="sidebar_header">В корзине</div>
         <div class="sidebar-size-items">
           <span>Товаров: </span>
-          <span data-cart-positions-count="">{{count}}</span>
+          <span data-cart-positions-count="" class="products_count">{{count}}</span>
         </div>
       </div>
       <div class="cart__area-coupon">
@@ -905,10 +905,11 @@ if (all_price.toFixed(2)<max_per){
                else{
 
                 var size_block = $("#cart-item"+String(pk)).find(".counter-input.input_sizes.form-control.form-control_size-s").eq(0)
-              
-                $(".total-amount span").text(parseFloat($(".total-amount span").text()) - parseInt(thiscount_size.slice(0,-3))*parseFloat(size_block.attr("price"))*size_block.attr("min_size")/100 )
+              console.log(parseFloat($(".total-amount span").text()), $(".total-amount span").text(), thiscount_size.slice(0,-3), size_block.attr("price"), size_block.attr("min_size")/100)
+                $(".total-amount span").text(parseFloat($(".total-amount span").text()) - parseInt(thiscount_size.slice(0,-3)) * (parseFloat(size_block.attr("price"))/size_block.attr("min_size") ))
 
                }
+               $(".products_count").text(parseInt($(".products_count").text())-1)
                 $("#cart-item"+String(pk)).remove()
                
                 

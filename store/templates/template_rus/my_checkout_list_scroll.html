@@ -11,8 +11,8 @@
  
      <div class="cart-item cart-item_order{{checkout.delivery_check.pk}} " id="cart-item25" data-product-id="336490978" data-item-id="573211243">
       
-      <a href="{% url 'accounts:order_detalis' checkout.order_id %}" class="item-title" style="">
-      order_id:{{ checkout.pk }}
+      <div href="#" class="item-title" style="">
+      order_id:{{ checkout.pk }} | account_id:{{ checkout.profile.pk }}
         {% if checkout.status == "joint" %}
      Совместная доставка
       {% elif  checkout.status == "collectionpay"  %}
@@ -20,7 +20,7 @@
 
       {% endif %}
       
-      </a>
+      </div>
       <div class="item-price">
         <span class="price" data-cart-item-price=""> {{ checkout.price|floatformat:2 }}&nbsp;֏</span>
       </div>

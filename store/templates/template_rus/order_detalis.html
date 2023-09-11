@@ -480,27 +480,37 @@ width: 100px;
              
                 
 <div class="co-checkout-block--padded">
+ 
    {% with rate=request|Get_pay_rate %}
  <div class="order-details">
-      <h2>Заказ #{{checkout.order_id}}</h2>
-   
+   {% if request.user.is_superuser %}
+   <a href="/my_checkout_products/" style="width: 50px;height: 50px;font-size: 1.5rem;position: absolute;right: 0;cursor: pointer;text-decoration: none;">
+          <span class="icon icon-times"></span></a>
+     
+     {% else %}
+          
+      
+     {% endif %}
+      <h2>Заказ #{{checkout.pk}}</h2>
+      
       <p><strong>Дата оплаты:</strong> {{checkout.date_ordered}}</p>
-      <p><strong>способ доставки:</strong>почта</p>
-      <p><strong>сумма заказа:</strong> {{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
-      <p><strong>сумма Доставки:</strong> {{checkout.delivery_check.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
+      <p><strong>Способ доставки:</strong> Почта</p>
+      <p><strong>Сумма заказа:</strong> {{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
+      <p><strong>Сумма Доставки:</strong> {{checkout.delivery_check.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
       <p><strong>Масса :</strong> {{checkout.mass}} г</p>
      
       <h2>Контактные данные</h2>
-       <p><strong>Фамилия имя:</strong> {{checkout.delivery_check.my_contacts_info.username}}</p>
-      <p><strong>Email:</strong>{{checkout.delivery_check.my_contacts_info.email}}</p>
-      <p><strong>Контактный телефон:</strong> {{checkout.delivery_check.my_contacts_info.phone_number}}</p>
-      <p><strong>Страна:</strong> {{checkout.delivery_check.my_contacts_info.country}}</p>
-      <p><strong>Область :</strong> {{checkout.delivery_check.my_contacts_info.state}}</p>
-      <p><strong>Место проживания:</strong> {{checkout.delivery_check.my_contacts_info.city}}</p>
-      <p><strong>Адрес:</strong> {{checkout.delivery_check.my_contacts_info.address}}</p>
-      <p><strong>Индекс:</strong> {{checkout.delivery_check.my_contacts_info.index}}</p>
+       <p><strong>Имя:</strong> {{checkout.first_name}}</p>
+       <p><strong>Фамилия :</strong> {{checkout.last_name}}</p>
+      <p><strong>Email:</strong> {{checkout.email}}</p>
+      <p><strong>Контактный телефон:</strong> {{checkout.phone_number}}</p>
+      <p><strong>Страна:</strong> {{checkout.country}}</p>
+      <p><strong>Область :</strong> {{checkout.state}}</p>
+      <p><strong>Место проживания:</strong> {{checkout.city}}</p>
+      <p><strong>Адрес:</strong> {{checkout.address}}</p>
+      <p><strong>Индекс:</strong> {{checkout.index}}</p>
       <h2>Статус заказа</h2>
-      <p><strong>статус:</strong> 
+      <p><strong>Статус:</strong> 
 
 {% if checkout.status == "send" or checkout.status == "collectionsend" %}
             Отправлено
@@ -551,7 +561,11 @@ width: 100px;
 
     </div>
     {% endwith %}
-     <a href="/orders/" class="button back_to_catalog" style="width: 100%;"><span class="icon icon-arrow-left"></span><span>Вернуться к покупкам</span></a>
+    {% if request.user.is_superuser %}
+    
+     {% else %}
+      <a href="/orders/" class="button back_to_catalog" style="width: 100%;"><span class="icon icon-arrow-left"></span><span>Вернуться к покупкам</span></a>
+     {% endif %}
 
 
 
