@@ -1511,8 +1511,11 @@ def add_check_api(request):
         
 
 
-
-        checkout = models.checkout_products.objects.create(profile=request.user.profile,price=price, order_id=order_id, collection=collection, mass=mass)
+        contact_pk = request.POST.get("contact_pk")
+        print(contact_pk, "contact_pk")
+        
+        my_contacts_info = get_object_or_404(models.my_contacts_info, pk=contact_pk)
+        checkout = models.checkout_products.objects.create(profile=request.user.profile,price=price, order_id=order_id, collection=collection, mass=mass,first_name=my_contacts_info.first_name, last_name=my_contacts_info.last_name,email=my_contacts_info.email,phone_number=my_contacts_info.phone_number,country=my_contacts_info.country,state=my_contacts_info.state,city=my_contacts_info.city,address=my_contacts_info.address, index=my_contacts_info.index)
         
         for order in request.user.profile.checkout_products_list.all():
 
@@ -1627,7 +1630,9 @@ def add_check_api(request):
                 minimum = Mass_and_money[1].money
             shipping_price = minimum
         delivery_check = models.delivery_check.objects.create(price=shipping_price,mass=mass, my_contacts_info=my_contacts_info, order_id=order_id)
-        checkout = models.checkout_products.objects.create(profile=request.user.profile,price=price,mass=order_mass, order_id=order_id, delivery_check=delivery_check)
+        
+    
+        checkout = models.checkout_products.objects.create(profile=request.user.profile,price=price,mass=order_mass, order_id=order_id, delivery_check=delivery_check, first_name=my_contacts_info.first_name, last_name=my_contacts_info.last_name,email=my_contacts_info.email,phone_number=my_contacts_info.phone_number,country=my_contacts_info.country,state=my_contacts_info.state,city=my_contacts_info.city,address=my_contacts_info.address, index=my_contacts_info.index)
         if mass_add_indicator is not None:
             checkout.status="not_payjoint"
         else:
@@ -2654,7 +2659,7 @@ def add_product_change_api(request):
     brand_pk = request.POST.get("Brand")
     SKU_code = request.POST.get("SKU_code")
     
-    catrgory_pk = request.POST.get("catrgory_pk")
+    category_new_value = request.POST.get("category_new_value")
     video_link = request.POST.get("video_link")
     video_file = request.FILES.get("video_file")
     pk = request.POST.get("pk")
@@ -2716,19 +2721,21 @@ def add_product_change_api(request):
     
     sub_categories_len = request.POST.get("sub_categories_len")
     
+    
+
 
     category_obj_main = models.category_choeses.objects.filter(name=category)
     catrgory_before  = request.POST.get("catrgory_before")
-    
-    
-    if catrgory_before != category:
-        
-        category_obj_main = product.category_choeses
-        category_obj_main.name = category
-        category_obj_main.save()
-        
+    print(category_new_value, "category_new_value", catrgory_before)
+    if category_new_value:
+        category_obj_main = models.category_choeses.objects.get(category_id_main=category_new_value)
+        product.category_choeses=category_obj_main
     else:
         category_obj_main = category_obj_main[0]
+    
+    
+    
+    
     if video_link is not None:
         product.video_link = video_link
         

@@ -483,7 +483,15 @@ class checkout_products(models.Model):
     date_ordered = models.DateTimeField(auto_now_add=True)
     delivery_check = models.ForeignKey(delivery_check , on_delete = models.CASCADE , null=True,blank=True, related_name="delivery_check")
     comments = models.CharField(max_length=250, default="")
-    my_contacts_info = models.ForeignKey(my_contacts_info, on_delete = models.SET_NULL , null=True,blank=True, related_name="my_contacts_info_check")
+    first_name = models.CharField(max_length=30, default='')
+    last_name = models.CharField(max_length=30, default='')
+    email=models.CharField(max_length=30, default='')
+    phone_number = models.CharField(max_length=20, default='')
+    country = models.CharField(max_length=12, default='')
+    state = models.CharField(max_length=12, default='')
+    city = models.CharField(max_length=12, default='')
+    address = models.CharField(max_length=35, default='')
+    index = models.CharField(max_length=6, default='')
 
 
     def __str__(self):
