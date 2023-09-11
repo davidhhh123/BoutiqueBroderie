@@ -413,7 +413,22 @@ in_stock "  id="in_stock_for_catrgories" class="category_class" style="    heigh
  </div>
  {% else %}
  {% endif %}
- 
+ {% if product.Brand %}
+  <p style="margin-top: 10px;">Выберите Бренд</p>
+   <select name="
+in_stock "  id="in_stock_for_brand" class="category_class" style="    height: 40px;
+    width: 100%;
+   " value="{{ product.Brand }}">
+    <option value="none" selected="">Выбрать Бренд</option>
+    {% for brand in barnds %}
+     <option value="{{ brand.brand }}" class="option_brand" pk="{{brand.pk}}">{{ brand.brand }}</option>
+    {% endfor %}
+    
+    {% else %}
+    {% endif %}
+    
+
+  </select>
 <p style="font-weight: bold;padding-top: 20px;">Такс код</p>
 <input type="Name" class="form-control" name="Name" id="Code_product_SKU" placeholder="Такс код" required="" style="width: 100%;" value="{{product.SKU_code}}">
 
@@ -658,6 +673,20 @@ if (response == true){
     }
 }
 
+function selectBrand(id, valueToSelect) {    
+    let element = document.getElementById(id);
+    element.value = valueToSelect;
+    
+    if (element.value.length==0){
+      element.value = "none"
+      
+      
+    }
+}
+{% if product.Brand %}
+selectBrand('in_stock_for_brand', '{{ product.Brand.brand }}')
+{% else %}
+{% endif %}
 selectElement('in_stock_for_catrgories', '{{ product.category_choeses.category_id_main }}');
 
     var main_image_delete = 0

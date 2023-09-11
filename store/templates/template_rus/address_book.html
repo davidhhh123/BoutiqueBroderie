@@ -261,6 +261,67 @@ table {
     right: -13px;
 }
 
+input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+.container_data{
+  width: 60%;
+}
+@media(max-width: 1080px){
+  .container_data{
+  width: 70%;
+}
+
+}
+@media(max-width: 768px){
+  .container_data{
+  width: 100%;
+}
+
+}
+.delete_category, .delete_sizes_tabel, .change_table {
+    position: absolute;
+    margin-top: -38px;
+    font-size: 26px;
+    color: red;
+    right: -10px;
+}
+.change_table {
+    right: 20px;
+    margin-top: -44px;
+}
+@media (max-width: 680px){
+.change_table {
+    right: -8px;
+    margin-top: -7px;
+}
+.delete_sizes_tabel{
+   
+    margin-top: -1px;
+    
+   
+    right: 27px;
+}
+
+
+}
+@media (max-width: 503px){
+.change_table {
+    right: 0px;
+    margin-top: -7px;
+}}
+.display_none{
+  display: none !important;
+}
+
+tr.table_tr_class{
+  height: 100px;border-bottom: 1px solid black;
+}
 
 </style>
        
@@ -331,6 +392,44 @@ table {
                   </h1>
                 </div>
                 <div class="co-checkout-block--padded"><div class="co-adress"><div class="co-adress-short_information"></div>
+
+<div class="container container_data">
+  <form class="co-form--login co-modal-login_form my_account_form" data-use-mask="1" onsubmit="check()">
+  <p><strong>Имя:</strong></p>
+  <input type="text" value="{{request.user.profile.first_name}}" id="first_name" >
+
+  <p><strong>Фамилия:</strong></p>
+  <input type="text" value="{{request.user.profile.last_name}}" id="last_name" disabled="disabled">
+
+  <p><strong>Телефон:</strong></p>
+  <input type="tel" value="{{request.user.profile.phone_number}}" id="phone_number"  
+required="required">
+
+  <p><strong>Email:</strong></p>
+  <input type="email" value="{{request.user.profile.email}}" id="email">
+
+  <p><strong>Страна:</strong></p>
+  <input type="text" id="country">
+  <p><strong>Область:</strong></p>
+  <input type="text" id="state">
+  
+   <p><strong>Место проживания(город , село, итд):</strong></p>
+  <input type="text" id="city">
+  <p><strong>Адрес:</strong></p>
+  <input type="text" id="address">
+    <p><strong>Индекс:</strong></p>
+  <input type="text" id="index">
+  
+
+  <p class="error_window"></p>
+  <div class="co-form-controls"><button class="co-button co-form-button add_address" type="submit">Добавить</button>
+    <button class="co-button co-form-button change_address display_none" type="button">Изменить</button>
+    <button class="co-button co-form-button  cancel_changes display_none"  type="button" style="margin-top: 10px;">отмена</button>
+
+  </div>
+
+</form>
+</div>
                 <div class="co-adress-editor">
                    <div class="all_shipping_prop">
      <div style="width: 100%; position: relative; margin-top: 25px; padding-bottom: 50px; display: inline-table;" class="table_all_feature">
@@ -340,13 +439,21 @@ table {
     <th class="f1_table_name">Адрес</th>
    
    
-    <th>email</th>
+    <th>Телефон</th>
   </tr>
   {% for my_contacts in my_contacts_info %}
   <tr class="table_tr_class" id="table_tr_id{{my_contacts.pk}}">
-    <td class="mass_start_table">{{my_contacts.address}}</td>
+    <td class="mass_start_table" id="address_no{{my_contacts.pk}}">{{my_contacts.address}}</td>
     
-     <td class="mass_end_table">{{my_contacts.email}} <div class="delete_sizes_tabel" key="{{my_contacts.pk}}"><span class="icon icon-times"></span></div></td>
+     <td class="mass_end_table" id="phone_number_no{{my_contacts.pk}}">
+      <span class="phone_number_all">{{my_contacts.phone_number}}</span> <div class="delete_sizes_tabel" key="{{my_contacts.pk}}"><span class="icon icon-times"></span></div>
+      <div class="change_table" email="{{my_contacts.email}}" phone_number="{{my_contacts.phone_number}}" address="{{my_contacts.address}}" state="{{my_contacts.state}}" city="{{my_contacts.city}}" country="{{my_contacts.country}}" index="{{my_contacts.index}}" key="{{my_contacts.pk}}"><svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+<path d="M250.6,66.8V0L136.7,111.3l113.9,111.3v-66.8c73.7,0,133.6,59.8,133.6,133.6c0,73.8-59.8,133.6-133.6,133.6
+  C176.9,423,117,363.2,117,289.4H28C28,412.3,127.7,512,250.6,512c123,0,222.6-99.7,222.6-222.6C473.2,166.4,373.6,66.8,250.6,66.8z"></path>
+</svg></div>
+
+
+     </td>
    
    
 
@@ -388,6 +495,20 @@ table {
   
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.min.js"></script>
 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
+  
+
+<script>
+  const phoneInputField = document.querySelector("#phone_number");
+   const phoneInput = window.intlTelInput(phoneInputField, {
+     utilsScript:
+       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+   });
+ </script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
@@ -395,17 +516,236 @@ table {
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts.css" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts_features.css" rel="stylesheet" type="text/css">
   <script type="text/javascript">
-    var category_template = ` <div  class="shipping_all" style="" id="shipping_all`+ 0 +`"><span  class="shipping_veiw" price = "`+ 0 +`" time = "`+ 0 +`">{name}</span><div class="shipping_del_icon" ids = "`+ 0 +`"><span class="icon icon-times" style="font-size: 16px;color: red;"></span></div></div>`
-    $(".button_add_category").on("click", function(){
-      var category_name = $("#Name_product").val()
-      category_template1 = category_template.replace("{name}", category_name)
-      $(".images_view_item").append(category_template1)
+    var category_template = `<tr class="table_tr_class" id="table_tr_id#pk">
+    <td class="mass_start_table"  id="address_no#pk">#address</td>
+    
+     <td class="mass_end_table" id="phone_number_no#pk"><span class="phone_number_all">#phone_number </span><div class="delete_sizes_tabel" key="#pk"><span class="icon icon-times"></span></div>
+      <div class="change_table" email="#email" phone_number="#phone_number" address="#address" state="#state" city="#city" country="#country" index="#index" key="#pk"><svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+<path d="M250.6,66.8V0L136.7,111.3l113.9,111.3v-66.8c73.7,0,133.6,59.8,133.6,133.6c0,73.8-59.8,133.6-133.6,133.6
+  C176.9,423,117,363.2,117,289.4H28C28,412.3,127.7,512,250.6,512c123,0,222.6-99.7,222.6-222.6C473.2,166.4,373.6,66.8,250.6,66.8z"></path>
+</svg></div>
+
+
+     </td>
+   
+   
+
+  </tr>`
+    $(".add_address").on("click", function(){
+      var first_name = $("#first_name").val()
+      var last_name = $("#last_name").val()
+      var email = $("#email").val()
+      var phone_number = $("#phone_number").val()
+      var state = $("#state").val()
+      var country = $("#country").val()
+      var address = $("#address").val()
+      var index = $("#index").val()
+
+      var city = $("#city").val()
+
+
+
+      const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+       const phoneInputField = document.querySelector("#phone_number");
+   const phoneInput = window.intlTelInput(phoneInputField, {
+     utilsScript:
+       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+   });
+if (phoneInput.isValidNumber()) {
+      
+      validation = true
+    } else {
+      validation = false
+      
+      const errorCode = phoneInput.getValidationError();
+      error_text = ""
+      
+        if (errorMap[errorCode] == "Invalid number"){
+            error_text = "Номер телефона должен быть цифрами"
+          }
+          else if(errorMap[errorCode] == "Too short"){
+            error_text = "Номер телефона короткий"
+
+          }
+          else if(errorMap[errorCode] == "Too long"){
+            error_text = "Номер телефона длинный"
+            
+          }
+          else if(errorMap[errorCode] == "Invalid number"){
+            error_text = "Номер телефона неправильный"
+            
+          }
+          else{
+            error_text = "Неверный код страны"
+
+          }
+        
+          
+       
+        
+        $(".error_window").text(error_text)
+        $(".error_window").css("display", "block")
+        
+      
+      
+     
+    }
+    if (validation){
+      var data = new FormData()
+      data.append("first_name",first_name)
+      data.append("last_name",last_name)
+  data.append("email",email)
+  data.append("phone_number",phone_number)
+  data.append("address",address)
+  data.append("country",country)
+  data.append("state",state)
+  data.append("city",city)
+  data.append("index",index)
+  
+   $.ajax({
+
+
+              
+            url: '/api/add_user_info/',
+            method: "POST",
+            data: data,
+            success: function(data){
+                
+                address_template = category_template.replaceAll("#pk", data.info_pk)
+                address_template = address_template.replaceAll("#address", address)
+                address_template = address_template.replaceAll("#phone_number", phone_number)
+                 address_template = address_template.replace("#state", state)
+                 address_template = address_template.replace("#email", email)
+                address_template = address_template.replace("#city", city)
+                 address_template = address_template.replace("#country", country)
+                address_template = address_template.replace("#index", index)
+                $(".table_all_features tbody").append(address_template)
+                 $("#state").val("")
+       $("#country").val("")
+     $("#address").val("")
+      $("#index").val("")
+
+       $("#city").val("")
+
+
+                
+                
+
+                
+                
+                
+
+            },
+            error: function(data){},
+            processData: false,
+            contentType: false,
+        })
+
+    }
 
 
 
 
 
     })
+
+    $(document).on("click", ".change_table", function(){
+      var first_name = $(this).attr("first_name")
+      var last_name = $(this).attr("first_name")
+      var email = $(this).attr("email")
+      var phone_number = $(this).attr("phone_number")
+      var state = $(this).attr("state")
+      var country =$(this).attr("country")
+      var address = $(this).attr("address")
+      var index = $(this).attr("index")
+
+      var city = $(this).attr("city")
+
+     
+      $("#email").val(email)
+      $("#phone_number").val(phone_number)
+      $("#state").val(state)
+       $("#country").val(country)
+     $("#address").val(address)
+      $("#index").val(index)
+
+       $("#city").val(city)
+       $(".add_address").addClass("display_none")
+       $(".change_address").removeClass("display_none")
+       $(".cancel_changes").removeClass("display_none")
+       
+       $(".change_address").attr("pk", $(this).attr("key"))
+
+    })
+    $(".cancel_changes").on("click", function(){
+     
+      $("#state").val("")
+       $("#country").val("")
+     $("#address").val("")
+      $("#index").val("")
+
+       $("#city").val("")
+       $(".add_address").removeClass("display_none")
+       $(".change_address").addClass("display_none")
+       $(".cancel_changes").addClass("display_none")
+
+    })
+    $(document).on("click",".change_address", function(){
+  var [first_name,last_name, email, phone_number,address, country, state, city, index]=[$("#first_name").val(),$("#last_name").val(),$("#email").val(),$("#phone_number").val(),$("#address").val(),$("#country").val(),$("#state").val(),$("#city").val(),$("#index").val() ]
+
+
+
+  var data = new FormData()
+  var pk = $(this).attr("pk")
+  data.append("last_name",last_name)
+  data.append("first_name",first_name)
+  data.append("email",email)
+  data.append("phone_number",phone_number)
+  data.append("address",address)
+  data.append("country",country)
+  data.append("state",state)
+  data.append("city",city)
+  data.append("index",index)
+  data.append("pk", pk)
+     $.ajax({
+
+
+              
+            url: '/api/change_user_info/',
+            method: "POST",
+            data: data,
+            success: function(data){
+                $("#address_no"+String(pk)).text(address)
+                $("#phone_number_no"+String(pk) +" span.phone_number_all").text(phone_number)
+                
+
+                 $("#state").val("")
+       $("#country").val("")
+     $("#address").val("")
+      $("#index").val("")
+
+       $("#city").val("")
+                
+                
+
+            },
+            error: function(data){},
+            processData: false,
+            contentType: false,
+        })})
+
+     function check() {
+  event.preventDefault();
+  var form = document.forms["login"];
+ 
+  if (form.userid.value == "pf900" && form.pswrd.value == "password") {
+    window.open('/pf900_pid/index.htm', '_self')
+  } else if (form.userid.value == "pf350a" && form.pswrd.value == "password") {
+    window.open('/pf350a_pid/index.htm', '_self')
+  } else {
+    alert("Error: Wrong username or password")
+  }
+}
     $(".delete_sizes_tabel").on("click", function(){
       var key = $(this).attr("key")
       

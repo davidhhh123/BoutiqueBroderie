@@ -523,7 +523,7 @@ button.pswp__button--close:hover {
 
             <picture><source srcset="{{ product.zoom_image.url }}" type="image/webp">
                 <span class='zoom zoom_images_main' id='ex1'>
-         <img src="{{ product.zoom_image.url }}" alt="many_photos" title="Роликовые коньки">
+         <img src="{{ product.zoom_image.url }}" alt="many_photos" >
         <p>Hover</p>
     </span>
 
@@ -987,7 +987,7 @@ button.pswp__button--close:hover {
 
             <div class="product-preview__area-title">
               <div class="product-preview__title">
-                <a href="{% url 'accounts:product_detalis_view' product_rec.pk %}">{{ product_rec.name_am }}</a>
+                <a href="{% url 'accounts:product_detalis_view' product_rec.pk %}">{{ product_rec.name_ru }}</a>
               </div>
             </div>
 
