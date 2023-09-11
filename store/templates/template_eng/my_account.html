@@ -335,6 +335,7 @@ div.im-colormask > div {
     outline: none;
     border: 0;
 }
+
 .item-link{
     grid-area: total;
     font-size: 1rem;
@@ -344,11 +345,57 @@ div.im-colormask > div {
     white-space: nowrap;
     position: absolute;
 }
-
-@media(max-width: 400px){
+@media(max-width: 406px){
   .item-title{
     font-size: .9rem;
   }
+}
+input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+.container_data{
+  width: 60%;
+}
+@media(max-width: 1080px){
+  .container_data{
+  width: 70%;
+}
+
+}
+@media(max-width: 768px){
+  .container_data{
+  width: 100%;
+}
+
+}
+
+.finish_p{
+            width: 122px;
+    height: 45px;
+    
+    position: relative;
+    margin-top: 40px;
+    margin-left: calc(100% - 122px);
+    border: 1px solid #7c7c7c;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 40px;
+    cursor: pointer;
+    padding-left: 3px;
+
+
+          }
+
+.error_window{
+  margin-top: 10px;
+  color: red;
+  display: none;
 }
 
 
@@ -384,20 +431,39 @@ div.im-colormask > div {
              
                 
 <div class="co-checkout-block--padded">
+  <p style="font-weight: bold;font-size: 17px;">Аккаунт #{{request.user.profile.pk}}</p>
 
-   <p style="font-weight: bold;font-size: 17px;">Account #{{request.user.profile.pk}}</p>
+<div class="container container_data">
+  <form class="co-form--login co-modal-login_form my_account_form" data-use-mask="1" onsubmit="check()">
+  <p><strong>First name:</strong></p>
+  <input type="text" value="{{profile.first_name}}" id="first_name">
 
- <p><strong>
-Firstname Lastname:</strong> {{profile.first_name}}</p>
- <p>
-<p><strong>Phone Number:</strong> {{profile.phone_number}}</p>
-<p><strong>Email:</strong> {{profile.email}}</p>
-<p><strong>Login:</strong> {{profile.user.username}}</p>
+  <p><strong>Last name:</strong></p>
+  <input type="text" value="{{profile.last_name}}" id="last_name">
 
-  
+  <p><strong>Phone number:</strong></p>
+  <input type="tel" value="{{profile.phone_number}}" id="phone_number"  
+required="required">
+
+  <p><strong>Email:</strong></p>
+  <input type="email" value="{{profile.email}}" id="email">
+
+  <p><strong>Password:</strong></p>
+  <input type="password" value="{{profile.password}}" id="password">
+  <p><strong>Confirm password:</strong></p>
+  <input type="password" value="{{profile.password}}" id="confirm_password">
+  <input type="checkbox" onclick="myFunction()" style="margin-top: 15px;"> Show password
+
+  <p class="error_window"></p>
+  <div class="co-form-controls"><button class="co-button co-form-button finish_p" type="submit">Save</button></div>
+
+</form>
+</div>
+ 
   
   
 </div>
+
 
               </div>
             </div>
@@ -419,7 +485,46 @@ Firstname Lastname:</strong> {{profile.first_name}}</p>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/core-css.css" rel="stylesheet" type="text/css">
   
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
+  
+
+<script>
+  const phoneInputField = document.querySelector("#phone_number");
+   const phoneInput = window.intlTelInput(phoneInputField, {
+     utilsScript:
+       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+   });
+ 
+function myFunction() {
+  var x = document.getElementById("password");
+   var y = document.getElementById("confirm_password");
+  if (x.type === "password") {
+    x.type = "text";
+    y.type = "text";
+  } else {
+    x.type = "password";
+    y.type = "password";
+  }
+}
+ function check() {
+  event.preventDefault();
+  var form = document.forms["login"];
+ 
+  if (form.userid.value == "pf900" && form.pswrd.value == "password") {
+    window.open('/pf900_pid/index.htm', '_self')
+  } else if (form.userid.value == "pf350a" && form.pswrd.value == "password") {
+    window.open('/pf350a_pid/index.htm', '_self')
+  } else {
+    alert("Error: Wrong username or password")
+  }
+}
+</script>
     <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.waypoints.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/infinite.min.js"></script>
 <script type="text/javascript">
   var infinite = new Waypoint.Infinite({
@@ -443,6 +548,147 @@ Firstname Lastname:</strong> {{profile.first_name}}</p>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts_features.css" rel="stylesheet" type="text/css">
   
 <script>
+
+    function validateUsername(username) {
+  // Check if the username is not empty
+  var nameRegex = /^[a-zA-Z ]+$/;
+
+
+  // Check if the name matches the regular expression
+  
+  if (nameRegex.test(username)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function isValidlogin_password(text) {
+  // Use a regular expression to check if the username contains only letters and numbers
+  const regex = /^[a-zA-Z0-9]+$/;
+  return regex.test(text);
+}
+  $(".my_account_form").on("submit", function(){
+    var first_name = $("#first_name").val()
+    var last_name = $("#last_name").val()
+    var email = $("#email").val()
+    var phone_number = $("#phone_number").val()
+    var password = $("#password").val()
+    var confirm_password = $("#confirm_password").val()
+    var validation=true
+const validationResult_password = isValidlogin_password(password);
+const validationResult_first_name = validateUsername(first_name);
+const validationResult_last_name = validateUsername(last_name);
+if (validationResult_password){
+
+
+    if (password!=confirm_password){
+      validation = false
+      $(".error_window").text("Пароли не совподают")
+      $(".error_window").css("display", "block")
+      return false
+
+    }
+    else{
+      validation = true
+    }}
+  else{
+    validation = false
+    $(".error_window").text("Пароли должен содержать только цифры и буквы")
+    $(".error_window").css("display", "block")
+    return false
+
+
+  }
+console.log(validationResult_first_name, validationResult_last_name)
+if (validationResult_first_name && validationResult_last_name){
+  validation = true
+
+
+}
+else{
+  validation = false
+   $(".error_window").text("Имя и Фамилия должны содержать только цифры и буквы")
+   $(".error_window").css("display", "block")
+  return false
+}
+  
+  const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+    const phoneInputField = document.querySelector("#phone_number");
+   const phoneInput = window.intlTelInput(phoneInputField, {
+     utilsScript:
+       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+   });
+
+   if (phoneInput.isValidNumber()) {
+      
+      validation = true
+      console.log(true)
+
+    } else {
+      validation = false
+        
+      const errorCode = phoneInput.getValidationError();
+      error_text = ""
+      if (lang_all_page=="ru"){
+        if (errorMap[errorCode] == "Invalid number"){
+            error_text = "Номер телефона должен быть цифрами"
+          }
+          else if(errorMap[errorCode] == "Too short"){
+            error_text = "Номер телефона короткий"
+
+          }
+          else if(errorMap[errorCode] == "Too long"){
+            error_text = "Номер телефона длинный"
+            
+          }
+          else if(errorMap[errorCode] == "Invalid number"){
+            error_text = "Номер телефона неправильный"
+            
+          }
+          else{
+            error_text = "Неверный код страны"
+
+          }
+        
+          
+        }
+         $(".error_window").text(error_text)
+          $(".error_window").css("display", "block")
+        console.log(error_text)
+
+        return false
+      }
+
+if (validation){
+  var data = new FormData()
+  data.append("first_name", first_name)
+   data.append("last_name", last_name)
+   data.append("email", email)
+   data.append("password", password)
+   data.append("phone_number", phone_number)
+    $.ajax({
+
+
+              
+            url: '/api/change_profile/',
+            method: "POST",
+            data: data,
+            success: function(data){
+                
+                location.replace("/my_account/")
+                
+                
+
+            },
+            error: function(data){},
+            processData: false,
+            contentType: false,
+        })
+}
+    
+  })
+  
   try {
   let widget = '.widget-type_system_widget_v4_header_1';
   let $widget = $('.widget-type_system_widget_v4_header_1');
