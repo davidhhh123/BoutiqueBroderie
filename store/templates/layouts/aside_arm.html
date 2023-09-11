@@ -1,3 +1,4 @@
+
  {% load static %}
 
 
@@ -85,7 +86,8 @@
 
         <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-           <a  href="{% url 'accounts:day_of_products'  %}" class="sidebar-collections__link_open" data-navigation-link="/collection/dlya-malchikov" category_name="Товары дня">
+
+           <a  href="{% url 'accounts:day_of_products'  %}" class="sidebar-collections__link_open" data-navigation-link="/collection/dlya-malchikov" category_name="Товары дня" >
               Օրվա ապրանքներ
             </a>
              
@@ -101,13 +103,10 @@
           
             </li>
             
-
-
-
-
-<li class="sidebar-collections__item" data-navigation-item="">
+           
+             <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-           <div url="{% url 'accounts:shop_products_category' 5 %}" class="sidebar-collections__link" data-navigation-link="/collection/dlya-malchikov" category_name="Нитки и пряжа">
+           <div url="{% url 'accounts:shop_products_category' 5 %}" class="sidebar-collections__link" category_pk="5">
               Թելեր և մանվածք
             </div>
 
@@ -121,10 +120,11 @@
 
           
             </li>
- <li class="sidebar-collections__item" data-navigation-item="">
+            
+            <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <a href="#" class="sidebar-collections__link" data-navigation-link="/collection/dlya-malchikov">
-              Ժապավեններ, քուղ, հյուսք
+            <a href="#" class="sidebar-collections__link" category_pk="6">
+             Ժապավեններ, քուղ, հյուսք
             </a>
 
             
@@ -136,10 +136,31 @@
 
           
             </li>
+           
+           
+          
+
+          
+      
+    
+      
+      
+      
+
+      
+      
+
+      
+      
+
+      
+        
+
+        
 
         <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <a href="#" class="sidebar-collections__link" data-navigation-link="/collection/dlya-novorozhdennyh">
+            <a href="#" class="sidebar-collections__link" category_pk="8">
               Փուլեր
             </a>
 
@@ -152,8 +173,27 @@
 
           
             </li>
-              
-             <li class="sidebar-collections__item" data-navigation-item="">
+          
+
+          
+      
+    
+      
+      
+      
+
+      
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
             <div href="{% url 'accounts:shop_products_category' 9 %}" class="sidebar-collections__link"  category_pk="9">
               Ուլունքներ և մարգարիտներ
@@ -170,7 +210,7 @@
             </li>
              <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <div url="{% url 'accounts:shop_products_category' 3 %}" class="sidebar-collections__link" data-navigation-link="/collection/dlya-malchikov" category_name="Миксы">
+            <div url="{% url 'accounts:shop_products_category' 3 %}" class="sidebar-collections__link" category_pk="3">
               Միքսեր
             </div>
 
@@ -184,11 +224,20 @@
 
           
             </li>
+            
+          
 
           
-           <li class="sidebar-collections__item" data-navigation-item="">
+
+
+      
+        
+
+        
+
+        <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <a href="#" class="sidebar-collections__link" data-navigation-link="/collection/komplekty-tovarov">
+            <a href="#" class="sidebar-collections__link"  category_pk="10">
               Կցամասեր 
             </a>
 
@@ -201,9 +250,29 @@
 
           
             </li>
-             <li class="sidebar-collections__item" data-navigation-item="">
+          
+
+          
+      
+    
+      
+      
+      
+
+      
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <a href="#" class="sidebar-collections__link" data-navigation-link="/collection/frontpage">
+            <a href="#" class="sidebar-collections__link" category_pk="11">
               Գործվածքներ,  կաշի, մորթի
             </a>
 
@@ -217,47 +286,6 @@
           
             </li>
           
-            
-             
-            
-           
-    
-        
-
-        
-
-        <li class="sidebar-collections__item" data-navigation-item="">
-          <div class="sidebar-collections__controls ">
-            <a href="#" class="sidebar-collections__link" data-navigation-link="/collection/hits">
-             Հնաոճ և վինտաժ Նյութեր 
-            </a>
-
-            
-          </div>
-
-          
-
-          
-
-          
-            </li>
-             <li class="sidebar-collections__item" data-navigation-item="">
-          <div class="sidebar-collections__controls ">
-            <a href="#" class="sidebar-collections__link" data-navigation-link="/collection/dlya-malchikov">
-              Ձեռագործության հավաքածուներ 
-            </a>
-
-            
-          </div>
-
-
-          
-
-          
-
-          
-            </li>
-          
 
           
       
@@ -279,7 +307,58 @@
 
         <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <a href="#" class="sidebar-collections__link" data-navigation-link="/collection/popular">
+            <a href="#" class="sidebar-collections__link" category_pk="12">
+              Հնաոճ և վինտաժ Նյութեր
+            </a>
+
+            
+          </div>
+
+          
+
+          
+
+          
+            </li>
+              <li class="sidebar-collections__item" data-navigation-item="">
+          <div class="sidebar-collections__controls ">
+            <a href="#" class="sidebar-collections__link" category_pk="4">
+              Ձեռագործության հավաքածուներ
+            </a>
+
+            
+          </div>
+
+
+          
+
+          
+
+          
+            </li>
+          
+
+          
+      
+    
+      
+      
+      
+
+      
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <li class="sidebar-collections__item" data-navigation-item="">
+          <div class="sidebar-collections__controls ">
+            <a href="#" class="sidebar-collections__link" category_pk="13">
              Գործիքներ 
             </a>
 
@@ -314,7 +393,7 @@
 
         <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <a href="#" class="sidebar-collections__link_open" data-navigation-link="/collection/razvitie">
+            <a href="#" class="sidebar-collections__link_open" category_pk="14">
              Գրքեր և ամսագրեր
             </a>
 
@@ -349,7 +428,7 @@
 
         <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <a href="#" class="sidebar-collections__link" data-navigation-link="/collection/konstruktory">
+            <a href="#" class="sidebar-collections__link" category_pk="15">
               Տարբեր
             </a>
 
@@ -400,13 +479,55 @@
           
 
           
+      
+    
+      
+      
+      
 
       
+      
+
+      
+      
+
+      
+        
+
+        
+
+       
+
+          
+
+          
+
+          
+         
 
           
       
     
- 
+      
+      
+      
+
+      
+      
+
+      
+      
+
+      
+        
+
+        
+
+       
+          
+
+          
+            
               
           
       
@@ -427,5 +548,10 @@
             
         </section>
       </aside>
+    
+      
+
+
+
     
       

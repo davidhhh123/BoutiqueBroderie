@@ -70,7 +70,10 @@
                   
                    
                 {% else %}
-                <div class="co-menu-item co-menu-item--personal"><a class="co-menu-link co-menu-link--personal co-link co-link--active co-menu-link--active" href="{% url 'accounts:orders' %}">История заказов</a></div><div class="co-menu-item co-menu-item--personal"><a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:address_book' %}">Адрес доставки</a></div>
+                
+                 <div class="co-menu-item co-menu-item--personal"><a class="co-menu-link co-menu-link--personal co-link  co-menu-link--active" href="{% url 'accounts:my_account' %}">Личные данные </a></div>
+                 <div class="co-menu-item co-menu-item--personal"><a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:address_book' %}">Адрес доставки</a></div>
+                <div class="co-menu-item co-menu-item--personal"><a class="co-menu-link co-menu-link--personal co-link co-link--active co-menu-link--active" href="{% url 'accounts:orders' %}">История заказов</a></div>
 
 
                 {% endif %}

@@ -85,8 +85,9 @@
 
         <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-           <a href="{% url 'accounts:day_of_products'  %}" class="sidebar-collections__link_open" data-navigation-link="/collection/dlya-malchikov" category_name="Товары дня">
-              Product of the day
+
+           <a  href="{% url 'accounts:day_of_products'  %}" class="sidebar-collections__link_open" data-navigation-link="/collection/dlya-malchikov" category_name="Товары дня" >
+              Products of the day
             </a>
              
 
@@ -100,43 +101,30 @@
 
           
             </li>
-            <li class="sidebar-collections__item" data-navigation-item="">
-          <div class="sidebar-collections__controls ">
-           <div url="{% url 'accounts:shop_products_category' 5 %}" class="sidebar-collections__link" data-navigation-link="/collection/dlya-malchikov" category_name="Нитки и пряжа">
-              Threads and yarn
-            </div>
-
             
-          </div>
-
-
-          
-
-          
-
-          
-            </li>
-
-            <li class="sidebar-collections__item" data-navigation-item="">
-          <div class="sidebar-collections__controls ">
-            <div href="#" class="sidebar-collections__link" data-navigation-link="/collection/dlya-malchikov">
-             Ribbons, cords, braids
-            </div>
-
-            
-          </div>
-
-          
-
-          
-
-          
-            </li>
+           
              <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <div href="#" class="sidebar-collections__link" data-navigation-link="/collection/dlya-novorozhdennyh">
-              Paillettes
+           <div url="{% url 'accounts:shop_products_category' 5 %}" class="sidebar-collections__link" category_pk="5">
+              Threads and yarns
             </div>
+
+            
+          </div>
+
+
+          
+
+          
+
+          
+            </li>
+            
+            <li class="sidebar-collections__item" data-navigation-item="">
+          <div class="sidebar-collections__controls ">
+            <a href="#" class="sidebar-collections__link" category_pk="6">
+             Ribbons, cords, braids
+            </a>
 
             
           </div>
@@ -147,11 +135,67 @@
 
           
             </li>
-            
+           
+           
+          
+
+          
+      
+    
+      
+      
+      
+
+      
+      
+
+      
+      
+
+      
+        
+
+        
+
         <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-             <div href="{% url 'accounts:shop_products_category' 9 %}" class="sidebar-collections__link"  category_pk="9">
-               Beads and pearls
+            <a href="#" class="sidebar-collections__link" category_pk="8">
+              Paillettes
+            </a>
+
+            
+          </div>
+
+          
+
+          
+
+          
+            </li>
+          
+
+          
+      
+    
+      
+      
+      
+
+      
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <li class="sidebar-collections__item" data-navigation-item="">
+          <div class="sidebar-collections__controls ">
+            <div href="{% url 'accounts:shop_products_category' 9 %}" class="sidebar-collections__link"  category_pk="9">
+              Beads and pearls
             </div>
 
             
@@ -163,10 +207,9 @@
 
           
             </li>
-
              <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <div url="{% url 'accounts:shop_products_category' 3 %}" class="sidebar-collections__link" data-navigation-link="/collection/dlya-malchikov" category_name="Миксы">
+            <div url="{% url 'accounts:shop_products_category' 3 %}" class="sidebar-collections__link" category_pk="3">
               Mixes
             </div>
 
@@ -180,21 +223,22 @@
 
           
             </li>
-             
-           
-          
+            
           
 
           
+
+
       
-    
+        
+
         
 
         <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <div href="#" class="sidebar-collections__link" data-navigation-link="/collection/komplekty-tovarov">
+            <a href="#" class="sidebar-collections__link"  category_pk="10">
               Findings 
-            </div>
+            </a>
 
             
           </div>
@@ -227,9 +271,9 @@
 
         <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <div href="#" class="sidebar-collections__link" data-navigation-link="/collection/frontpage">
+            <a href="#" class="sidebar-collections__link" category_pk="11">
               Fabrics, leather, fur
-            </div>
+            </a>
 
             
           </div>
@@ -262,9 +306,9 @@
 
         <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <div href="#" class="sidebar-collections__link" data-navigation-link="/collection/hits">
+            <a href="#" class="sidebar-collections__link" category_pk="12">
               Antique and vintage materials
-            </div>
+            </a>
 
             
           </div>
@@ -275,18 +319,11 @@
 
           
             </li>
-          
-
-          
-      
-    
-      
-      
-       <li class="sidebar-collections__item" data-navigation-item="">
+              <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <div href="#" class="sidebar-collections__link" data-navigation-link="/collection/dlya-malchikov">
+            <a href="#" class="sidebar-collections__link" category_pk="4">
               Needlework kits
-            </div>
+            </a>
 
             
           </div>
@@ -298,7 +335,14 @@
 
           
             </li>
+          
 
+          
+      
+    
+      
+      
+      
 
       
       
@@ -313,9 +357,9 @@
 
         <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <div href="#" class="sidebar-collections__link" data-navigation-link="/collection/popular">
+            <a href="#" class="sidebar-collections__link" category_pk="13">
              Tools 
-            </div>
+            </a>
 
             
           </div>
@@ -348,9 +392,9 @@
 
         <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <div href="#" class="sidebar-collections__link_open" data-navigation-link="/collection/razvitie">
-             Books and magazines 
-            </div>
+            <a href="#" class="sidebar-collections__link_open" category_pk="14">
+             Books, magazines
+            </a>
 
             
           </div>
@@ -383,44 +427,58 @@
 
         <li class="sidebar-collections__item" data-navigation-item="">
           <div class="sidebar-collections__controls ">
-            <div href="#" class="sidebar-collections__link" data-navigation-link="/collection/konstruktory">
-              Other
-            </div>
-
-            
-          </div>
-
-          
-
-          
-
-          
-            </li>
-          
-
-          
-      
-    
-      
-      
-      
-
-      
-      
-
-      
-      
-
-      
-        
-
-        
-
-        <li class="sidebar-collections__item" data-navigation-item="">
-          <div class="sidebar-collections__controls ">
-            <div href="#" class="sidebar-collections__link_open" data-navigation-link="/collection/hity">
+            <a href="#" class="sidebar-collections__link" category_pk="15">
               Gift cards
-            </div>
+            </a>
+
+            
+          </div>
+
+          
+
+          
+
+          
+            </li>
+            <li class="sidebar-collections__item" data-navigation-item="">
+          <div class="sidebar-collections__controls ">
+            <a href="#" class="sidebar-collections__link" category_pk="15">
+              Other
+            </a>
+
+            
+          </div>
+
+          
+
+          
+
+          
+            </li>
+
+          
+      
+    
+      
+      
+      
+
+      
+      
+
+      
+      
+
+      
+        
+
+        
+
+        <li class="sidebar-collections__item" data-navigation-item="">
+          <div class="sidebar-collections__controls ">
+            <a href="#" class="sidebar-collections__link_open" data-navigation-link="/collection/hity">
+              Gift cards
+            </a>
 
             
           </div>
