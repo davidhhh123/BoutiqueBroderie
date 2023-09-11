@@ -33,6 +33,7 @@ class Profile(models.Model):
     receiver = models.CharField(max_length=100, default="")
     phone_number = models.CharField(max_length=20, default="")
     zipcode = models.CharField(max_length=10, default="")
+    password = models.CharField(max_length=30, default="")
     
     
     
@@ -441,7 +442,9 @@ class products_Order(models.Model):
 
 class my_contacts_info(models.Model):
     profile = models.ForeignKey(Profile , on_delete = models.CASCADE , null=True, related_name="contact_info_profile")
-    username = models.CharField(max_length=30, default='')
+    
+    first_name = models.CharField(max_length=30, default='')
+    last_name = models.CharField(max_length=30, default='')
     email=models.CharField(max_length=30, default='')
     phone_number = models.CharField(max_length=20, default='')
     country = models.CharField(max_length=12, default='')

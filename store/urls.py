@@ -202,6 +202,7 @@ urlpatterns = [
     path("api/search_my_checkout_with_country/", views.search_my_checkout_with_country, name="search_my_checkout_with_country"),
     
     path("api/assembled/", views.assembled, name="assembled"),
+    path("api/change_profile/", views.change_profile, name="change_profile"),
 
     
     

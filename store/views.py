@@ -52,6 +52,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth import update_session_auth_hash
+
 
 
 def change_currency_symbol(request, new_currency_symbol):
@@ -349,6 +351,7 @@ def my_account(request):
 
     shipping_address = models.shipping_address.objects.filter(profile=profile)
     Visit = models.Visit.objects.filter()
+    Profiles_count = models.Profile.objects.filter().count()
     
     lang = request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME)
     if not request.user.is_superuser:
@@ -363,6 +366,7 @@ def my_account(request):
             "profile": profile,
             "Visit": Visit,
             "shipping_address": shipping_address,
+            "Profiles_count":Profiles_count,
             
         },
     )
@@ -401,7 +405,7 @@ def send_recovery_via_email(request):
         plain_message = strip_tags(message)
         print(recipient_list)
         send_mail(
-            'Ապրանքը վերադարձնելու հայտ',
+            subject,
             plain_message,
             'boutique.broderie.am@gmail.com',
             recipient_list,
@@ -445,6 +449,7 @@ def registration(request):
             user.profile.email = email
             user.profile.last_name = lastname
             user.profile.phone_number = phone
+            user.password = password
             user.profile.save()
 
             # Generate an email confirmation token
@@ -466,7 +471,7 @@ def registration(request):
             plain_message = strip_tags(message)
             print(recipient_list)
             send_mail(
-                'Ապրանքը վերադարձնելու հայտ',
+                subject,
                 plain_message,
                 'boutique.broderie.am@gmail.com',
                 recipient_list,
@@ -495,9 +500,15 @@ def new_register_password(request):
     print(new_password, "new_password", user)
     if new_password is None:
         return JsonResponse({"success":"error"})
-    user.password = new_password
+    user.set_password(new_password)
     user.save()
+    
+    a=update_session_auth_hash(request, user)
+    
     login(request, user)
+    profile = get_object_or_404(models.Profile, user=user)
+    profile.password = new_password
+    profile.save()
     
     return JsonResponse({"success":"success"})
 
@@ -525,7 +536,7 @@ def confirm_reset_password(request, uidb64, token):
         else:
             # Token is invalid
             messages.error(request, 'Invalid token. Please try again.')
-            return redirect('accounts:login')  # Redirect to login page or another error page
+            return redirect('accounts:sign_in')  # Redirect to login page or another error page
 
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         # Handle exceptions if the user ID cannot be decoded or user does not exist
@@ -567,16 +578,15 @@ def sign_in(request):
     username = request.POST.get("username")
     password = request.POST.get("password")
     print(username, password)
-    usern=get_object_or_404(User, username=username)
-    usern.is_active=True
-    usern.save()
-
-    print(usern, usern.password, "p")
-    print(check_password(password, usern.password), "a")
-    user = authenticate(username=username, password=password)
     
-    if usern is not None:
-        login(request, usern)
+
+    
+    
+    user = authenticate(username=username, password=password)
+    print(user)
+    
+    if user is not None:
+        login(request, user)
         data = {
             "data":1
         }
@@ -1371,6 +1381,8 @@ def pay_delivery_api(request):
     else:
         models.order_id_count.objects.create(order_id="3141801")
         order_id = 3141801
+    current_site = get_current_site(request)
+    confirmation_url = f'http://{current_site.domain}/api/check_payment_delyvery'
     url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/InitPayment"
 
     myobj = {
@@ -1380,7 +1392,7 @@ def pay_delivery_api(request):
         "Description":"aaa",
         "OrderID":order_id,
         "Amount":10,
-        "BackURL":"http://127.0.0.1:8000/api/check_payment_delyvery"
+        "BackURL":confirmation_url
     }
     r = requests.post(url = url, json = myobj)
 
@@ -1634,6 +1646,8 @@ def add_check_api(request):
         data = {
             "collection":0
         }
+    current_site = get_current_site(request)
+    confirmation_url = f'http://{current_site.domain}/api/check_payment'
     url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/InitPayment"
     print("order_id", order_id)
     myobj = {
@@ -1643,7 +1657,7 @@ def add_check_api(request):
         "Description":"aaa",
         "OrderID":order_id,
         "Amount":10,
-        "BackURL":"http://127.0.0.1:8000/api/check_payment"
+        "BackURL":confirmation_url
     }
     r = requests.post(url = url, json = myobj)
 
@@ -1861,8 +1875,42 @@ def my_products(request):
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
     
-    return render(request, "template_rus/scroll_my_products.html", {"products":products})
+    return render(request, "template_rus/scroll_my_products.html", {"products":products, "products_count":len(products)})
     
+def change_profile(request):
+    profile = get_object_or_404(models.Profile, user = request.user)
+    first_name = request.POST.get("first_name")
+    last_name = request.POST.get("last_name")
+    phone_number = request.POST.get("phone_number")
+    email = request.POST.get("email")
+    password = request.POST.get("password")
+    profile_password = profile.user.password
+    if profile_password != password:
+        user = User.objects.get(username=profile.user.username)
+        user.set_password(password)
+        user.save()
+        update_session_auth_hash(request, user)
+    
+
+        #user = authenticate(username= u.username, password=password)
+        
+    
+        login(request, user)
+        profile.password = password
+    if profile.email != email:
+        profile.email = email
+    if profile.first_name != first_name:
+        profile.first_name = first_name
+    if profile.phone_number != phone_number:
+        profile.phone_number = phone_number
+    if profile.last_name != last_name:
+        profile.last_name = last_name
+    profile.save()
+
+    
+    print(email, first_name, last_name, phone_number)
+    return JsonResponse(1, safe=False)
+
 
 
 
@@ -1955,12 +2003,13 @@ def add_product_page_size_pcs(request):
 def change_product_page(request, pk):
     product = get_object_or_404(models.products, pk=pk)
     images =models.productsimage.objects.filter(post=product)
+    barnds = models.Brand.objects.all()
 
     if product.price_size:
-        return  render(request, "template_rus/change_product_page_size.html", {"product":product, "images":images,"images_len":len(images), "sub_categorys":product.sub_categories.all(), "sub_categorys_len":len(product.sub_categories.all())})
+        return  render(request, "template_rus/change_product_page_size.html", {"product":product,"barnds":barnds, "images":images,"images_len":len(images), "sub_categorys":product.sub_categories.all(), "sub_categorys_len":len(product.sub_categories.all())})
     
     else:
-        return  render(request, "template_rus/change_product_page.html", {"product":product, "images":images,"images_len":len(images), "sub_categorys":product.sub_categories.all(), "sub_categorys_len":len(product.sub_categories.all())})
+        return  render(request, "template_rus/change_product_page.html", {"product":product,"barnds":barnds, "images":images,"images_len":len(images), "sub_categorys":product.sub_categories.all(), "sub_categorys_len":len(product.sub_categories.all())})
     
    
 
@@ -2330,7 +2379,8 @@ def change_brand(request):
     brand.save()
     return JsonResponse("data", safe=False)
 def add_user_info(request):
-    username = request.POST.get("username")
+    first_name = request.POST.get("first_name")
+    last_name = request.POST.get("last_name")
     address = request.POST.get("address")
     index = request.POST.get("index")
     city = request.POST.get("city")
@@ -2338,11 +2388,12 @@ def add_user_info(request):
     state = request.POST.get("state")
     phone_number = request.POST.get("phone_number")
     email = request.POST.get("email")
-    info = models.my_contacts_info.objects.create(profile = request.user.profile,username = username,email=email,phone_number=phone_number,country=country,state=state,city=city,address=address,index=index)
+    info = models.my_contacts_info.objects.create(profile = request.user.profile,first_name = first_name,last_name=last_name,email=email,phone_number=phone_number,country=country,state=state,city=city,address=address,index=index)
     data = {"info_pk":info.pk}
     return JsonResponse(data,safe=False)
 def change_user_info(request):
-    username = request.POST.get("username")
+    first_name = request.POST.get("first_name")
+    last_name = request.POST.get("last_name")
     address = request.POST.get("address")
     index = request.POST.get("index")
     city = request.POST.get("city")
@@ -2352,7 +2403,13 @@ def change_user_info(request):
     email = request.POST.get("email")
     pk = request.POST.get("pk")
     info = get_object_or_404(models.my_contacts_info, pk=int(pk))
-    info.username = username
+    info.first_name = first_name
+    info.last_name = last_name
+    print(first_name, "first_name")
+    if first_name is None or len(first_name)==0:
+        info.first_name = request.user.profile.first_name
+        info.last_name = request.user.profile.last_name
+
     info.email = email
     info.address = address
     info.index = index
@@ -2594,7 +2651,7 @@ def add_product_change_api(request):
     table_len_counter = request.POST.get("table_len_counter")
     table_len_mass = request.POST.get("table_len_mass")
     
-    brand_name  = request.POST.get("Brand")
+    brand_pk = request.POST.get("Brand")
     SKU_code = request.POST.get("SKU_code")
     
     catrgory_pk = request.POST.get("catrgory_pk")
@@ -2639,7 +2696,9 @@ def add_product_change_api(request):
     
     
     product.SKU_code=SKU_code
-    product.Brand=brand
+    if brand_pk is not None:
+        brand = get_object_or_404(models.Brand, pk=brand_pk)
+        product.Brand = brand
     product.pcs=pcs
    
     product.pcs_type=pcs_type
@@ -2956,10 +3015,10 @@ def search_category_api(request):
             if request.user.is_superuser:
                 
 
-                products = models.products.objects.filter(name_ru__iregex = r"(^|\s)%s" % text).exclude().order_by()
+                products = models.products.objects.filter(Q(name_ru__iregex = r"(^|\s)%s" % text) | Q(name_am__iregex = r"(^|\s)%s" % text) | Q(name_en__iregex = r"(^|\s)%s" % text)).exclude().order_by()
             else:
                 
-                products = models.products.objects.filter(Q(name_ru__iregex = r"(^|\s)%s" % text)).exclude().order_by()
+                products = models.products.objects.filter(Q(name_ru__iregex = r"(^|\s)%s" % text) | Q(name_am__iregex = r"(^|\s)%s" % text) | Q(name_en__iregex = r"(^|\s)%s" % text)).exclude().order_by()
 
             data = list()
             
