@@ -98,7 +98,8 @@
     <div class="header">
       <div class="header">
   <img src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32067130.png" alt="Logo" style="max-width: 200px;">
-  <h1>Առաքման հաստատում - boutiquebroderie.com</h1>
+   {% if delivery_check %} <h1>Առաքման հաստատում - boutiquebroderie.com</h1>{% else %} <h1>Պատվերի հաստատում - boutiquebroderie.com</h1>{% endif %}
+ 
 </div>
     </div>
  {% with rate=request|Get_pay_rate %}
@@ -114,8 +115,11 @@
       <p><strong>Քաշ :</strong> {{delivery_check.mass}} գ</p>
      
       <h2>Կոնտակտային տվյալներ</h2>
-       <p><strong>Անուն ազգանուն:</strong> {{delivery_check.my_contacts_info.username}}</p>
-      <p><strong>Email:</strong>{{delivery_check.my_contacts_info.email}}</p>
+       <p><strong>Անուն:</strong> {{checkout.first_name}}</p>
+
+       <p><strong>Ազգանուն :</strong> 
+       {{checkout.last_name}}</p>
+      <p><strong>Email:</strong> {{delivery_check.my_contacts_info.email}}</p>
       <p><strong>Հեռախոսահամար:</strong> {{delivery_check.my_contacts_info.phone_number}}</p>
       <p><strong>Երկիր:</strong> {{delivery_check.my_contacts_info.country}}</p>
       <p><strong>Մարզ :</strong> {{delivery_check.my_contacts_info.state}}</p>
@@ -135,7 +139,10 @@
       <p><strong>Քաշ :</strong> {{checkout.mass}} գ</p>
      
       <h2>Կոնտակտային տվյալներ</h2>
-       <p><strong>Անուն ազգանուն:</strong> {{checkout.delivery_check.my_contacts_info.username}}</p>
+        <p><strong>Անուն:</strong> {{checkout.first_name}}</p>
+
+       <p><strong>Ազգանուն :</strong> 
+       {{checkout.last_name}}</p>
       <p><strong>Email:</strong>{{checkout.delivery_check.my_contacts_info.email}}</p>
       <p><strong>Հեռախոսահամար:</strong> {{checkout.delivery_check.my_contacts_info.phone_number}}</p>
       <p><strong>Երկիր:</strong> {{checkout.delivery_check.my_contacts_info.country}}</p>
@@ -244,7 +251,7 @@
  {% endwith %}
     <div class="footer">
      <p></p>
-  <a href="https://www.boutiquebroderie.com" style="display: inline-block; padding: 10px 20px; background-color: #c22738; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 20px;">Գնալ խանութ</a>
+  <a href="https://boutiquebroderie.com/" style="display: inline-block; padding: 10px 20px; background-color: #c22738; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 20px;">Գնալ խանութ</a>
     </div>
   </div>
 

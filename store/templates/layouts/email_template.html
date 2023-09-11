@@ -107,14 +107,15 @@
     <div class="header">
       <div class="header">
   <img src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32067130.png" alt="Logo" style="max-width: 200px;">
-  <h1>Подтверждение доствки - boutiquebroderie.com</h1>
+  <h1>{% if delivery_check %}Подтверждение доствки - boutiquebroderie.com{% else %}Подтверждение закза - boutiquebroderie.com{% endif %}</h1>
 </div>
 
     </div>
      {% with rate=request|Get_pay_rate %}
 
     <div class="order-details">
-      <h2>Детали доствки</h2>
+      {% if delivery_check %}<h2>Детали доствки</h2>{% else %}<h2>Детали закза</h2>{% endif %}
+      
       {% if delivery_check %}
              <h2>Номер доставки #{{delivery_check.pk}}</h2>
 
@@ -126,7 +127,10 @@
       <p><strong>Масса :</strong> {{delivery_check.mass}} г</p>
      
       <h2>Контактные данные</h2>
-       <p><strong>Фамилия имя:</strong> {{delivery_check.my_contacts_info.username}}</p>
+        <p><strong>Имя:</strong> {{checkout.first_name}}</p>
+
+       <p><strong>Фамилия :</strong> 
+       {{checkout.last_name}}</p>
       <p><strong>Email:</strong>{{delivery_check.my_contacts_info.email}}</p>
       <p><strong>Контактный телефон:</strong> {{delivery_check.my_contacts_info.phone_number}}</p>
       <p><strong>Страна:</strong> {{delivery_check.my_contacts_info.country}}</p>
@@ -146,7 +150,10 @@
       <p><strong>Масса :</strong> {{checkout.mass}} г</p>
      
       <h2>Контактные данные</h2>
-       <p><strong>Фамилия имя:</strong> {{checkout.delivery_check.my_contacts_info.username}}</p>
+       <p><strong>Имя:</strong> {{checkout.first_name}}</p>
+
+       <p><strong>Фамилия :</strong> 
+       {{checkout.last_name}}</p>
       <p><strong>Email:</strong>{{checkout.delivery_check.my_contacts_info.email}}</p>
       <p><strong>Контактный телефон:</strong> {{checkout.delivery_check.my_contacts_info.phone_number}}</p>
       <p><strong>Страна:</strong> {{checkout.delivery_check.my_contacts_info.country}}</p>
@@ -161,10 +168,10 @@
        <thead>
   <tr>
     <th>Продукт</th>
-    <th>Сумма</th>
+    <th>Цена</th>
     <th>Количество</th>
     <th>Скидка</th>
-    <th>Общая сумма</th>
+    <th>Сумма</th>
   </tr>
 </thead>
 <tbody>
@@ -255,7 +262,7 @@
 
     <div class="footer">
      <p></p>
-  <a href="https://www.boutiquebroderie.com" style="display: inline-block; padding: 10px 20px; background-color: #c22738; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 20px;">
+  <a href="https://boutiquebroderie.com/" style="display: inline-block; padding: 10px 20px; background-color: #c22738; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 20px;">
 Вернуться в магазин</a>
     </div>
   </div>

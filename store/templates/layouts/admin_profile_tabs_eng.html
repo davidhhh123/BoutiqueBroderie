@@ -13,12 +13,14 @@
 <line class="cls-1" x1="16" x2="7" y1="20.5" y2="11.5"/>
 <line class="cls-1" x1="25" x2="16" y1="11.5" y2="20.5"/>
 </g>
-</svg></label><div class="co-menu co-menu--personal co-checkout-block--padded"><div class="co-menu-item co-menu-item--personal"><a class="co-menu-link co-menu-link--personal co-link co-link--active co-menu-link--active" href="{% url 'accounts:orders' %}">Orders</a></div><div class="co-menu-item co-menu-item--personal"><a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:address_book' %}">Delivery address</a></div>
+</svg></label><div class="co-menu co-menu--personal co-checkout-block--padded"><div class="co-menu-item co-menu-item--personal"><a class="co-menu-link co-menu-link--personal co-link  co-menu-link--active" href="{% url 'accounts:my_account' %}">My account</a></div>
+
+<div class="co-menu-item co-menu-item--personal"><a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:address_book' %}">Delivery address</a></div>
+<div class="co-menu-item co-menu-item--personal"><a class="co-menu-link co-menu-link--personal co-link  co-menu-link--active" href="{% url 'accounts:orders' %}">Orders</a></div><div class="co-menu-item co-menu-item--personal"><a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:sign_out' %}">Exit</a></div>
                
                 
                   <div class="co-menu-item co-menu-item--personal">
 
-                <a class="co-menu-link co-menu-link--personal co-link" href="{% url 'accounts:sign_out' %}">Exit</a>
               </div>
               </div></div>
               

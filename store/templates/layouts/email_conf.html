@@ -79,14 +79,14 @@ a:link {
     </div>
     <h1>Подтверждение электонной почты</h1>
     <p>
-Добро пожаловать, {{user.username}}!</p>
+Добро пожаловать, {{user.profile.first_name}} {{user.profile.last_name}}!</p>
     <p>Пожалуйста, переходите по ссылке для подтверждения регистрации.</p>
     <p>
 Благодарим вас за выбор BoutiqueBroderie. 
 </p>
     <div class="btn-container">
         <a href="{{confirmation_url}}" class="btn">
-Подтверждать</a>
+Подтвердить</a>
     </div>
 </div>
 </body>

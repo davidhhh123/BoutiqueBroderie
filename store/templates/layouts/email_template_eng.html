@@ -99,7 +99,8 @@
     <div class="header">
       <div class="header">
   <img src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32067130.png" alt="Logo" style="max-width: 200px;">
-  <h1>Delivery Confirmation - boutiquebroderie.com</h1>
+   {% if delivery_check %}<h1>Delivery Confirmation - boutiquebroderie.com</h1>{% else %}<h1>Order Confirmation - boutiquebroderie.com</h1>{% endif %}
+  
 </div>
     </div>
 {% if delivery_check %}
@@ -107,35 +108,41 @@
       <h2>Delivery details</h2>
       <p><strong>Delivery Number:</strong> {{delivery_check.pk}}</p>
     
-      <p><strong>mass :</strong> {{delivery_check.mass}} g</p>
+      <p><strong>Mass :</strong> {{delivery_check.mass}} g</p>
        <p><strong>Delivery price:</strong> {{delivery_check.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
      
-      <h2>contacts</h2>
-       <p><strong>Last name first name:</strong> {{delivery_check.my_contacts_info.username}}</p>
-      <p><strong>Email:</strong>{{delivery_check.my_contacts_info.email}}</p>
+      <h2>Contacts</h2>
+       <p><strong>First name:</strong> {{checkout.first_name}}</p>
+
+       <p><strong>Last name :</strong> 
+       {{checkout.last_name}}</p>
+      <p><strong>Email:</strong> {{delivery_check.my_contacts_info.email}}</p>
       <p><strong>Phone number:</strong> {{delivery_check.my_contacts_info.phone_number}}</p>
-      <p><strong>country:</strong> {{delivery_check.my_contacts_info.country}}</p>
-      <p><strong>state :</strong> {{delivery_check.my_contacts_info.state}}</p>
-      <p><strong>place of residence:</strong> {{delivery_check.my_contacts_info.city}}</p>
-      <p><strong>address:</strong> {{delivery_check.my_contacts_info.address}}</p>
-      <p><strong>index:</strong> {{delivery_check.my_contacts_info.index}}</p>
+      <p><strong>Country:</strong> {{delivery_check.my_contacts_info.country}}</p>
+      <p><strong>State :</strong> {{delivery_check.my_contacts_info.state}}</p>
+      <p><strong>Place of residence:</strong> {{delivery_check.my_contacts_info.city}}</p>
+      <p><strong>Address:</strong> {{delivery_check.my_contacts_info.address}}</p>
+      <p><strong>Index:</strong> {{delivery_check.my_contacts_info.index}}</p>
     </div>
     {% else %}
     <div class="order-details">
       <h2>Order Details</h2>
       <p><strong>Order Number:</strong> {{checkout.pk}}</p>
       <p><strong>Date:</strong> {{checkout.date_ordered}}</p>
-      <p><strong>mass :</strong> {{checkout.mass}} g</p>
+      <p><strong>Mass :</strong> {{checkout.mass}} g</p>
      
-      <h2>contacts</h2>
-       <p><strong>Last name first name:</strong> {{checkout.delivery_check.my_contacts_info.username}}</p>
+      <h2>Contacts</h2>
+        <p><strong>First name:</strong> {{checkout.first_name}}</p>
+
+       <p><strong>Last name :</strong> 
+       {{checkout.last_name}}</p>
       <p><strong>Email:</strong>{{checkout.delivery_check.my_contacts_info.email}}</p>
       <p><strong>Phone number:</strong> {{checkout.delivery_check.my_contacts_info.phone_number}}</p>
-      <p><strong>country:</strong> {{checkout.delivery_check.my_contacts_info.country}}</p>
-      <p><strong>state :</strong> {{checkout.delivery_check.my_contacts_info.state}}</p>
-      <p><strong>place of residence:</strong> {{checkout.delivery_check.my_contacts_info.city}}</p>
-      <p><strong>address:</strong> {{checkout.delivery_check.my_contacts_info.address}}</p>
-      <p><strong>index:</strong> {{checkout.delivery_check.my_contacts_info.index}}</p>
+      <p><strong>Country:</strong> {{checkout.delivery_check.my_contacts_info.country}}</p>
+      <p><strong>State :</strong> {{checkout.delivery_check.my_contacts_info.state}}</p>
+      <p><strong>Place of residence:</strong> {{checkout.delivery_check.my_contacts_info.city}}</p>
+      <p><strong>Address:</strong> {{checkout.delivery_check.my_contacts_info.address}}</p>
+      <p><strong>Index:</strong> {{checkout.delivery_check.my_contacts_info.index}}</p>
     </div>
 
 
@@ -237,7 +244,7 @@
  {% endwith %}
     <div class="footer">
      <p>.</p>
-  <a href="https://www.boutiquebroderie.com" style="display: inline-block; padding: 10px 20px; background-color: #c22738; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 20px;">Back to Shop</a>
+  <a href="https://boutiquebroderie.com/" style="display: inline-block; padding: 10px 20px; background-color: #c22738; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 20px;">Back to Shop</a>
     </div>
   </div>
 
