@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .confirmation-icon {
+            font-size: 60px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333333;
+        }
+
+        p {
+            font-size: 18px;
+            color: #666666;
+        }
+
+        .btn-container {
+            margin-top: 20px;
+        }
+
+       .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #dd626f; /* Red button background color */
+    color: #ffffff !important; /* White button text color */
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+
+a:link {
+  color: #ffffff;
+  
+}
+.ii a[href] {
+    color: #ffffff !important;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="confirmation-icon">
+        <i class="fas fa-check-circle"></i>
+    </div>
+    <h1>Email Confirmation</h1>
+    <p>Dear {{user.username}}!</p>
+    <p>Please follow the link to confirm registration.</p>
+    <p>Thank you for choosing BoutiqueBroderie. 
+</p>
+    <div class="btn-container">
+        <a href="{{confirmation_url}}" class="btn">Confirm</a>
+    </div>
+</div>
+</body>
+</html>

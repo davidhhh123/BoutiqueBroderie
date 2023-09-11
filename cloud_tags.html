@@ -1,0 +1,42 @@
+{% load static %}
+<style type="text/css">
+  .icon_social img {max-width: 30px;max-height: 30px;}
+    @media(max-width: 712px){
+        .icon_social{
+            display: none;
+        }
+    }
+    
+</style>
+
+<div class="tagcloud-block">
+  
+  <div class="tagcloud">
+    
+    <a class="button " href="{% url 'accounts:about_us' %}" >
+    О нас
+    </a>
+    
+    <a class="button " href="{% url 'accounts:rules' %}" >
+    Правила магазина
+    </a>
+    
+    <a class="button " href="{% url 'accounts:blog' %}">
+    Блог
+    </a>
+      <a class="button " href="{% url 'accounts:delivery_info' %}">
+    Доставка
+    </a>
+      <a class="button " href="{% url 'accounts:reviews' %}" title="Отзывы">
+    Отзывы
+    </a>
+
+              
+    <a href="https://www.instagram.com/maisonbroderie/" class="icon_social" target="_blank"> <img src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/Instagram_logo_2016.svg" alt="Иконка социальной сети"></a>
+    
+    
+   
+    
+  </div>
+  
+</div>

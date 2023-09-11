@@ -1,0 +1,38 @@
+{% load static %}
+<style type="text/css">
+    .icon_social img {max-width: 30px;max-height: 30px;}
+    @media(max-width: 767px){
+        .icon_social{
+            display: none;
+        }
+    }
+    
+</style>
+<div class="tagcloud-block">
+  
+  <div class="tagcloud">
+    
+    <a class="button " href="{% url 'accounts:about_us' %}">
+    Մեր մասին
+    </a>
+    
+    <a class="button " href="{% url 'accounts:rules' %}">
+    Խանութի կանոնները
+    </a>
+    
+    <a class="button " href="{% url 'accounts:blog' %}" title="բլոգ">
+    Բլոգ
+    </a>
+       <a class="button " href="{% url 'accounts:delivery_info' %}">
+    Առաքում
+    </a>
+      <a class="button " href="{% url 'accounts:reviews' %}" title="Կարծիքներ">
+    Կարծիքներ
+    </a>
+      <a href="https://www.instagram.com/maisonbroderie/" target="_blank" class="icon_social"> <img src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/Instagram_logo_2016.svg" alt="Иконка социальной сети"></a>
+    
+   
+    
+  </div>
+  
+</div>
