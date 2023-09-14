@@ -1572,8 +1572,8 @@ def pay_delivery_api(request):
         last_order_id.save()
 
     else:
-        models.order_id_count.objects.create(order_id="3141850")
-        order_id = 3141850
+        models.order_id_count.objects.create(order_id="3141911")
+        order_id = 3141911
     current_site = get_current_site(request)
     confirmation_url = f'http://{current_site.domain}/api/check_payment_delyvery'
     url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/InitPayment"
@@ -1703,8 +1703,8 @@ def add_check_api(request):
             last_order_id.save()
 
         else:
-            models.order_id_count.objects.create(order_id="3141850")
-            order_id = 3141850
+            models.order_id_count.objects.create(order_id="3141911")
+            order_id = 3141911
             
         
 
@@ -1808,8 +1808,8 @@ def add_check_api(request):
             last_order_id.save()
 
         else:
-            models.order_id_count.objects.create(order_id="3141850")
-            order_id = 3141850
+            models.order_id_count.objects.create(order_id="3141911")
+            order_id = 3141911
             
 
         
