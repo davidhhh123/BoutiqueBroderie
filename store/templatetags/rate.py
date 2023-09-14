@@ -1,7 +1,9 @@
 from django import template
 from django.conf import settings
 from django.utils import timezone
-from store.models import rates
+from store.models import rates, favorite_products,products
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
 
 
 register = template.Library()
@@ -38,3 +40,13 @@ def Get_pay_rate(request):
         rate = rate_obj.rate
     
     return rate, currency_code
+
+@register.filter(name='check_favorite')
+def check_favorite(profile, pk):
+    product = get_object_or_404(products, pk=pk)
+    if favorite_products.objects.filter(Q(profile = profile) & Q(product=product)).exists():
+
+        return True
+    else:
+        return False
+
