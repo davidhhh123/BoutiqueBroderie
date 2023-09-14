@@ -49,11 +49,11 @@ from django.utils.html import strip_tags
 from django.utils import timezone
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+
 from django.utils.encoding import force_bytes, force_text
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import update_session_auth_hash
-
+from django.contrib.auth.hashers import check_password
 
 
 def change_currency_symbol(request, new_currency_symbol):
@@ -149,7 +149,7 @@ def home(request):
     
     products = models.products.objects.filter(active = True).only('id', 'name_ru', 'name_am', 'name_en', 'price', 'price_pcs','price_size', 'sale_price_size','sale_price_pcs', 'counter_props', 'avatar_p','sale_price', 'sale').order_by('-created_at')
     home_slides = models.home_slide.objects.all()
-    
+    #models.collection.objects.filter().delete()
     
 
     
@@ -162,6 +162,7 @@ def home(request):
     
     first_page = paginatorr.page(1).object_list
     page_range = paginatorr.page_range
+
     
 
     if request.method == 'POST':
@@ -170,6 +171,13 @@ def home(request):
         page_n = request.POST.get('page_n', None)
         results = pag_ajax.page(page_n).object_list.filter()
         statuss_se=ArticleSerializer(results, many=True)
+        if request.user.is_authenticated:
+            favorites = [1 if  models.favorite_products.objects.filter(Q(profile=request.user.profile) & Q(product=i)).exists() else 0 for i in results]
+        else:
+            favorites = [0  for i in results]
+
+
+        
 
         
         if (int(page_n)-2>=0):
@@ -179,7 +187,7 @@ def home(request):
         
         
         
-        return JsonResponse({"results":statuss_se.data, "page_range":list(page_range)})
+        return JsonResponse({"results":statuss_se.data, "page_range":list(page_range), "favorites":list(favorites)})
     return render(request, "template_rus/home.html", {"brands":brands, "home_slides":home_slides,'paginatorr':paginatorr,'products':first_page,'page_range':page_range})
 
 def pagination_ajax(request):
@@ -207,6 +215,7 @@ def add_order(request):
     profile = get_object_or_404(models.Profile,pk=request.user.profile.pk ) 
     profile.checkout_products_list.clear()
 
+
     for index,product_cart in enumerate(products):
         cart_pk = int(request.POST.get(f'cart_pk{index}'))
         
@@ -217,7 +226,8 @@ def add_order(request):
         
         cart_count = int(re.findall(r'\d+', request.POST.get(f'count{index}'))[0])
 
-        
+        const_sale=0
+        const_price_product = 0
 
         if product_cart.indicator=="size":
             
@@ -229,9 +239,14 @@ def add_order(request):
 
 
             if product_cart.product.sale_price_size:
-                price = (count/product_cart.product.min_size)*product_cart.product.sale_price_size
+                const_price = product_cart.product.sale_price_size/10
+                price = (count)*product_cart.product.sale_price_size/100
+
             else:
-                price = (count/product_cart.product.min_size)*product_cart.product.price_size
+                const_price = product_cart.product.price_size/10
+                
+                price = (count)*product_cart.product.price_size/100
+            const_price_product = product_cart.product.price_size/10
 
             
 
@@ -242,16 +257,19 @@ def add_order(request):
             for j in  product_cart.product.counter_props.all().order_by('counter_prop'):
                 if (int(product_cart.count) >= int(j.counter_prop)):
                     price = float(j.counter_price)
+
                     if(j.counter_price_sale):
                         price = float(j.counter_price_sale)
                     else:
                         price = float(j.counter_price)
+                    const_price_product = float(j.counter_price)
+
             count = product_cart.count
             if int(cart_count) != int(count):
                 count = cart_count
 
                     
-            
+            const_price = price
             price = count*price
             
         elif product_cart.indicator=="count":
@@ -259,31 +277,41 @@ def add_order(request):
             if int(cart_count) != int(count):
                 count = cart_count
             if product_cart.product.sale_price:
+                const_price = product_cart.product.sale_price
 
                 price = count*product_cart.product.sale_price
             else:
+                const_price = product_cart.product.price
+                
                 price = count*product_cart.product.price
+            const_price_product = product_cart.product.price
             
         elif product_cart.indicator=="size_pcs":
             count = product_cart.count
             if int(cart_count) != int(count):
                 count = cart_count
             if product_cart.product.sale_price_pcs:
+                const_price_sale = product_cart.product.sale_price_pcs
                 price = count*product_cart.product.sale_price_pcs
             else:
+                const_price = product_cart.product.price_pcs
+                
                 price = count*product_cart.product.price_pcs
+            const_price_product = product_cart.product.price_pcs
             
             
 
             #orders = models.products_Order.objects.create(product=product_cart.product, customer=request.user.profile,count_size=count,price=price)
         else:
             pass
+        if product_cart.product.sale>0:
+            const_sale = product_cart.product.sale
         
 
         if product_cart.indicator=="size":
-            orders = models.products_Order.objects.create(product=product_cart.product, customer=request.user.profile,count_size=count,price=price,indicator=product_cart.indicator, name_ru = product_cart.product.name_ru, name_am = product_cart.product.name_am, name_en = product_cart.product.name_am, avatar_p = product_cart.product.avatar_p)
+            orders = models.products_Order.objects.create(product=product_cart.product, customer=request.user.profile,count_size=count,price=price,indicator=product_cart.indicator, name_ru = product_cart.product.name_ru, name_am = product_cart.product.name_am, name_en = product_cart.product.name_am, avatar_p = product_cart.product.avatar_p, const_price=const_price,const_sale=const_sale, const_price_product=const_price_product)
         else:
-            orders = models.products_Order.objects.create(product=product_cart.product, customer=request.user.profile,count=count,price=price,indicator=product_cart.indicator, name_ru = product_cart.product.name_ru, name_am = product_cart.product.name_am, name_en = product_cart.product.name_am, avatar_p = product_cart.product.avatar_p)
+            orders = models.products_Order.objects.create(product=product_cart.product, customer=request.user.profile,count=count,price=price,indicator=product_cart.indicator, name_ru = product_cart.product.name_ru, name_am = product_cart.product.name_am, name_en = product_cart.product.name_am, avatar_p = product_cart.product.avatar_p, const_price=const_price,const_sale=const_sale, const_price_product=const_price_product)
         profile.checkout_products_list.add(orders)
     profile.save()
     return JsonResponse("data", safe=False)
@@ -297,7 +325,7 @@ def checkout(request):
     price_total = sum( int(product.product.sale_price)*product.count if product.product.sale > 0 else int(product.product.price)*product.count  for product in order_products)
     shipping_address = order_products[0].shipping_address
     user_info = models.my_contacts_info.objects.filter(profile=request.user.profile)
-    zone_countries = models.zone_countries.objects.all()
+    zone_countries = models.zone_countries.objects.all().order_by("country")
     return render(
         request,
         "template_rus/checkout.html",
@@ -392,6 +420,7 @@ def send_recovery_via_email(request):
         message = render_to_string('layouts/email_conf.html', {
             'user': user,
             'confirmation_url': confirmation_url,
+            'recovery':1
         })
             
         recipient_list = [user.profile.email]
@@ -444,17 +473,22 @@ def registration(request):
             }
         else:
             # Create a user with a unique email confirmation token
-            user = User.objects.create_user(username, password=password, is_active=False)
+            user = User.objects.create_user(username=username, password=password, is_active=False)
             user.profile.first_name = first_name
             user.profile.email = email
             user.profile.last_name = lastname
             user.profile.phone_number = phone
-            user.password = password
+            user.profile.password = password
+
+            
             user.profile.save()
+            user.save()
+            print(user.username, "user")
 
             # Generate an email confirmation token
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
+            print(default_token_generator.check_token(user, token), "toke", len(token))
 
             # Build the confirmation URL
             current_site = get_current_site(request)
@@ -518,6 +552,7 @@ def confirm_reset_password(request, uidb64, token):
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
 
+
         # Verify the email confirmation token
         if default_token_generator.check_token(user, token):
             # Activate the user's account
@@ -536,12 +571,12 @@ def confirm_reset_password(request, uidb64, token):
         else:
             # Token is invalid
             messages.error(request, 'Invalid token. Please try again.')
-            return redirect('accounts:sign_in')  # Redirect to login page or another error page
+            return redirect('accounts:sign_up_page')  # Redirect to login page or another error page
 
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         # Handle exceptions if the user ID cannot be decoded or user does not exist
         messages.error(request, 'Invalid token. Please try again.')
-        return redirect('accounts:login')  # Redirect to login page or another error page
+        return redirect('accounts:login_page')  # Redirect to login page or another error page
 
 
 
@@ -550,9 +585,11 @@ def confirm_email(request, uidb64, token):
     try:
         # Decode the user ID from base64
         uid = force_text(urlsafe_base64_decode(uidb64))
+        print(uid, "uid", token)
         user = User.objects.get(pk=uid)
 
         # Verify the email confirmation token
+        print(default_token_generator.check_token(user, token), user, len(token))
         if default_token_generator.check_token(user, token):
             # Activate the user's account
             user.is_active = True
@@ -566,14 +603,14 @@ def confirm_email(request, uidb64, token):
         else:
             # Token is invalid
             messages.error(request, 'Invalid token. Please try again.')
-            return redirect('accounts:login')  # Redirect to login page or another error page
+            return redirect('accounts:login_page')  # Redirect to login page or another error page
 
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         # Handle exceptions if the user ID cannot be decoded or user does not exist
         messages.error(request, 'Invalid token. Please try again.')
-        return redirect('accounts:login')  # Redirect to login page or another error page
+        return redirect('accounts:login_page')  # Redirect to login page or another error page
 
-from django.contrib.auth.hashers import check_password
+
 def sign_in(request):
     username = request.POST.get("username")
     password = request.POST.get("password")
@@ -658,6 +695,10 @@ def shop_products_category(request, categoryid):
                 page_n = request.POST.get('page_n', None)
             results = paginatorr.page(page_n).object_list.filter()
             statuss_se=ArticleSerializer(results, many=True)
+            if request.user.is_authenticated:
+                favorites = [1 if  models.favorite_products.objects.filter(Q(profile=request.user.profile) & Q(product=i)).exists() else 0 for i in results]
+            else:
+                favorites = [0  for i in results]
 
             
             if (int(page_n)-2>=0):
@@ -667,7 +708,7 @@ def shop_products_category(request, categoryid):
             
             
             
-            return JsonResponse({"results":statuss_se.data, "page_range":list(page_range)})
+            return JsonResponse({"results":statuss_se.data, "page_range":list(page_range), "favorites":list(favorites)})
         return  render(request, "template_rus/products_all.html", {"category_choeses":category_choeses, "products":first_page, "category_main":category_main, "page_range":page_range, "categoryid":categoryid})
 
     except:
@@ -694,6 +735,10 @@ def products_of_day(request):
         page_n = request.POST.get('page_n', None)
         results = paginatorr.page(page_n).object_list.filter()
         statuss_se=ArticleSerializer(results, many=True)
+        if request.user.is_authenticated:
+            favorites = [1 if  models.favorite_products.objects.filter(Q(profile=request.user.profile) & Q(product=i)).exists() else 0 for i in results]
+        else:
+            favorites = [0  for i in results]
 
         
         if (int(page_n)-2>=0):
@@ -701,7 +746,7 @@ def products_of_day(request):
         else:
             page_range = page_range[0:int(page_n)+3]
 
-        return JsonResponse({"results":statuss_se.data, "page_range":list(page_range)})
+        return JsonResponse({"results":statuss_se.data, "page_range":list(page_range), "favorites":list(favorites)})
 
     return render(request, "template_rus/products_all.html", {"products":first_page,"day_products":True, "page_range":page_range })
 def all_brands_product(request):
@@ -737,16 +782,76 @@ def all_brands_product(request):
             page_n = request.POST.get('page_n', None)
         results = paginatorr.page(page_n).object_list.filter()
         statuss_se=ArticleSerializer(results, many=True)
+        if request.user.is_authenticated:
+            favorites = [1 if  models.favorite_products.objects.filter(Q(profile=request.user.profile) & Q(product=i)).exists() else 0 for i in results]
+        else:
+            favorites = [0  for i in results]
 
         
         if (int(page_n)-2>=0):
             page_range = page_range[int(page_n)-2:int(page_n)+2]
         else:
             page_range = page_range[0:int(page_n)+3]
-        return JsonResponse({"results":statuss_se.data,  "page_range":list(page_range)})
+        return JsonResponse({"results":statuss_se.data,  "page_range":list(page_range), "favorites":list(favorites)})
 
 
     return render(request, "template_rus/products_all.html", {"products":first_page,"Brands":True, "page_range":page_range })
+def search_products(request):
+    q = request.GET.get('q', "")
+    lang = request.GET.get('lang', "")
+    search_text = q
+
+    
+    number_of_item = 12
+    
+    search_text_pagination = request.POST.get('search_text')
+    print(search_text_pagination, "search_text_pagination")
+    
+    if search_text is not None and search_text != u"" or search_text_pagination:
+        if search_text_pagination:
+            search_text = search_text_pagination
+
+        
+
+
+
+        
+        text = re.escape(search_text)
+        products = models.products.objects.filter(Q(name_ru__iregex = r"(^|\s)%s" % text) | Q(name_am__iregex = r"(^|\s)%s" % text) | Q(name_en__iregex = r"(^|\s)%s" % text) | Q(description_arm__iregex = r"(^|\s)%s" % text) | Q(description_eng__iregex = r"(^|\s)%s" % text) | Q(description_rus__iregex = r"(^|\s)%s" % text)).exclude().order_by()
+            
+    else:
+        products = []
+    paginatorr = Paginator(products, number_of_item)
+
+    first_page = paginatorr.page(1).object_list
+    page_range = paginatorr.page_range
+    
+
+    
+
+    if request.method == 'POST':
+
+        
+        if request.POST.get('page_n', None) is  None:
+            page_n=1
+        else:
+            page_n = request.POST.get('page_n', None)
+        results = paginatorr.page(page_n).object_list.filter()
+        statuss_se=ArticleSerializer(results, many=True)
+        if request.user.is_authenticated:
+            favorites = [1 if  models.favorite_products.objects.filter(Q(profile=request.user.profile) & Q(product=i)).exists() else 0 for i in results]
+        else:
+            favorites = [0  for i in results]
+
+        
+        if (int(page_n)-2>=0):
+            page_range = page_range[int(page_n)-2:int(page_n)+2]
+        else:
+            page_range = page_range[0:int(page_n)+3]
+        return JsonResponse({"results":statuss_se.data,  "page_range":list(page_range), "favorites":list(favorites)})
+
+
+    return render(request, "template_rus/products_all.html", {"products":first_page,"search":True,"Brands":True, "page_range":page_range, "search_name":search_text })
 def brand_products(request, Brand_id):
     Brand = get_object_or_404(models.Brand, pk=Brand_id)
     products = models.products.objects.filter(Brand=Brand,active = True)
@@ -782,19 +887,23 @@ def brand_products(request, Brand_id):
             page_n = request.POST.get('page_n', None)
         results = paginatorr.page(page_n).object_list.filter()
         statuss_se=ArticleSerializer(results, many=True)
+        if request.user.is_authenticated:
+            favorites = [1 if  models.favorite_products.objects.filter(Q(profile=request.user.profile) & Q(product=i)).exists() else 0 for i in results]
+        else:
+            favorites = [0  for i in results]
 
         
         if (int(page_n)-2>=0):
             page_range = page_range[int(page_n)-2:int(page_n)+2]
         else:
             page_range = page_range[0:int(page_n)+3]
-        return JsonResponse({"results":statuss_se.data,  "page_range":list(page_range)})
+        return JsonResponse({"results":statuss_se.data,  "page_range":list(page_range), "favorites":list(favorites)})
 
 
     return render(request, "template_rus/products_all.html", {"products":first_page,"Brand":Brand, "page_range":page_range })
 def new_products(request):
     
-    products = models.products.objects.filter(active = True)
+    products = models.products.objects.filter(active = True).order_by("-pk")
     number_of_item = 12
     paginatorr = Paginator(products, number_of_item)
     first_page = paginatorr.page(1).object_list
@@ -803,13 +912,17 @@ def new_products(request):
         page_n = request.POST.get('page_n', None)
         results = paginatorr.page(page_n).object_list.filter()
         statuss_se=ArticleSerializer(results, many=True)
+        if request.user.is_authenticated:
+            favorites = [1 if  models.favorite_products.objects.filter(Q(profile=request.user.profile) & Q(product=i)).exists() else 0 for i in results]
+        else:
+            favorites = [0  for i in results]
 
         
         if (int(page_n)-2>=0):
             page_range = page_range[int(page_n)-2:int(page_n)+2]
         else:
             page_range = page_range[0:int(page_n)+3]
-        return JsonResponse({"results":statuss_se.data,  "page_range":list(page_range)})
+        return JsonResponse({"results":statuss_se.data,  "page_range":list(page_range), "favorites":list(favorites)})
 
     return render(request, "template_rus/products_all.html", {"products":first_page, "new_products":True, "page_range":page_range})
 def send_email(request):
@@ -922,7 +1035,7 @@ def add_delivery_box_price(request):
     }
     return JsonResponse(data, safe=False)
 def add_zones(request):
-    zones = models.zone.objects.all()
+    zones = models.zone.objects.all().order_by("zone_number")
 
     return render(request, "template_rus/add_zones.html", {"zones":zones})
 
@@ -1025,11 +1138,12 @@ def cart_page(request):
 
     for i in cart_products:
         if i.indicator=="size":
+            print(i.count_size, i.product.price_size)
             if i.product.sale_price_size:
-                sums+=(i.count_size/i.product.min_size)*i.product.sale_price_size
+                sums+=i.count_size*i.product.sale_price_size/100
             else:
 
-                sums+=(i.count_size/i.product.min_size)*i.product.price_size
+                sums+=i.count_size*i.product.price_size/100
         elif i.indicator=="counter":
             price=None
             
@@ -1064,7 +1178,7 @@ def cart_page(request):
 
         
         
-
+    print(sums, "sums")
     
     count = cart_products.count()
     max_per = models.max_cart_price.objects.filter()
@@ -1103,7 +1217,7 @@ def checkout_page(request):
     shipping_price=None
     if user_info:
         user_info_zero = user_info[0]
-        zone_countries = models.zone_countries.objects.filter()
+        zone_countries = models.zone_countries.objects.filter().order_by("country")
         zone_shipping = models.zone_countries.objects.filter(country=user_info_zero.country)
         
         zone = models.zone.objects.filter(zone_countries__in = zone_shipping)
@@ -1119,7 +1233,7 @@ def checkout_page(request):
                     minimum = Mass_and_money[1].money
                 shipping_price = minimum
     else:
-        zone_countries = models.zone_countries.objects.filter()
+        zone_countries = models.zone_countries.objects.filter().order_by("country")
 
     
     collection  = models.collection.objects.filter(profile = profile)
@@ -1213,6 +1327,15 @@ def add_day_of_products_api(request):
     product_sales = models.products.objects.filter(sale__gt = 0)
     for product_sale in product_sales:
         product_sale.sale = 0
+        product_sale.sale_price_size = 0
+        product_sale.sale_price_pcs = 0
+        product_sale.sale_price = 0
+        if product_sale.counter_props.all():
+            for i in product_sale.counter_props.all():
+                i.counter_price_sale = 0
+                i.save()
+
+        
         
         product_sale.save()
     products = models.products.objects.filter().order_by('?')[:int(count_product)]
@@ -1285,6 +1408,7 @@ def create_delivery(request, pk):
     mass = sum([i.mass for i in checkouts ])
     delyvery_box_mass = models.price_of_deliverybox.objects.filter(Q(mass_start__lte=mass) & Q(mass_end__gte=mass))[0]
     mass+=delyvery_box_mass.total_mass
+    """
     user_info = models.my_contacts_info.objects.filter(profile=profile).order_by('-pk')
     user_info_zero = user_info[0]
     
@@ -1303,19 +1427,24 @@ def create_delivery(request, pk):
         if int(minimum)>int(Mass_and_money[1].money):
             minimum = Mass_and_money[1].money
         shipping_price = minimum
+    
         
-
+    """
     delivery = get_object_or_404(models.delivery_check, pk=pk)
     delivery.mass=mass
-    delivery.price=shipping_price
+    
     delivery.save()
+
     collection.delivery_check = delivery
+
     collection.save()
+
     for checkout in  checkouts:
         checkout.delivery_check = delivery
         
 
         checkout.save()
+
 
 
     
@@ -1330,16 +1459,17 @@ def create_joint_delivery(request, pk):
     mass = sum([i.mass for i in checkouts ])
     delyvery_box_mass = models.price_of_deliverybox.objects.filter(Q(mass_start__lte=mass) & Q(mass_end__gte=mass))[0]
     mass+=delyvery_box_mass.total_mass
-    user_info = models.my_contacts_info.objects.filter(profile=profile).order_by('-pk')
-    user_info_zero = user_info[0]
+    
     
 
     
     delivery = get_object_or_404(models.delivery_check, pk=pk)
     delivery.mass=mass
+    delivery.joint="joint"
    
     delivery.save()
     collection.delivery_check = delivery
+
     collection.save()
     
     for checkout in  checkouts:
@@ -1350,28 +1480,91 @@ def create_joint_delivery(request, pk):
         checkout.save()
 
 
+
     
-    return redirect("accounts:orders")
+    return redirect("accounts:checkout_delivery", pk=delivery.id)
+def create_joint_delivery_api(request):
+    delyvery_pk = request.POST.get("delyvery_pk")
+    contact_pk  = request.POST.get("contact_pk")
+    delyvery = get_object_or_404(models.delivery_check, pk=delyvery_pk)
+    if contact_pk is not None:
+        my_contacts_info = get_object_or_404(models.my_contacts_info, pk=contact_pk)
+        mass = delyvery.mass
+        zone_shipping = models.zone_countries.objects.filter(country=my_contacts_info.country)
+        print("my_contacts_info", my_contacts_info)
+        
+        zone = models.zone.objects.filter(zone_countries__in = zone_shipping)
+        Mass_and_money = models.Mass_and_money.objects.filter(Q(zones__in = zone) & Q(mass_start__lte=mass) &  Q(mass_end__gte=mass))
+        if len(Mass_and_money)==1:
+            shipping_price = Mass_and_money[0].money
+            
+        else:
+            minimum = Mass_and_money[0].money
+            if int(minimum)>int(Mass_and_money[1].money):
+                minimum = Mass_and_money[1].money
+            shipping_price = minimum
+        delyvery.my_contacts_info = my_contacts_info
+        delyvery.first_name = my_contacts_info.first_name
+        delyvery.last_name = my_contacts_info.last_name
+        delyvery.email = my_contacts_info.email
+        delyvery.phone_number = my_contacts_info.phone_number
+        delyvery.state = my_contacts_info.state
+        delyvery.country = my_contacts_info.country
+        delyvery.index = my_contacts_info.index
+        delyvery.city = my_contacts_info.city
+        delyvery.address = my_contacts_info.address
+        delyvery.price = shipping_price
+        delyvery.save()
+        collection = models.collection.objects.filter(delivery_check=delyvery)
+        if collection:
+            collection.update(collection_status="process")
+    return JsonResponse("data", safe=False)
+
+
 
 def pay_delivery_api(request):
 
     delyvery_pk = request.POST.get("delyvery_pk")
     contact_pk  = request.POST.get("contact_pk")
+
+
     
     delyvery = get_object_or_404(models.delivery_check, pk=delyvery_pk)
-    if contact_pk is not None:
-        my_contacts_info = get_object_or_404(models.my_contacts_info, pk=contact_pk)
-        delyvery.my_contacts_info=my_contacts_info
-        money_pk = request.POST.get("money_pk")
-        if money_pk is not None:
-            Mass_and_money = get_object_or_404(models.Mass_and_money, pk=money_pk)
-            delyvery.price=Mass_and_money.money
-        
-
-        delyvery.save()
+    
 
     last_order_id = models.order_id_count.objects.all()
-       
+    print("contact_pk", contact_pk)
+    if contact_pk is not None:
+        my_contacts_info = get_object_or_404(models.my_contacts_info, pk=contact_pk)
+
+        mass = delyvery.mass
+        zone_shipping = models.zone_countries.objects.filter(country=my_contacts_info.country)
+        print("my_contacts_info", my_contacts_info)
+        
+        zone = models.zone.objects.filter(zone_countries__in = zone_shipping)
+        Mass_and_money = models.Mass_and_money.objects.filter(Q(zones__in = zone) & Q(mass_start__lte=mass) &  Q(mass_end__gte=mass))
+        if len(Mass_and_money)==1:
+            shipping_price = Mass_and_money[0].money
+            
+        else:
+            minimum = Mass_and_money[0].money
+            if int(minimum)>int(Mass_and_money[1].money):
+                minimum = Mass_and_money[1].money
+            shipping_price = minimum
+        delyvery.my_contacts_info = my_contacts_info
+        delyvery.first_name = my_contacts_info.first_name
+        delyvery.last_name = my_contacts_info.last_name
+        delyvery.email = my_contacts_info.email
+        delyvery.phone_number = my_contacts_info.phone_number
+        delyvery.state = my_contacts_info.state
+        delyvery.country = my_contacts_info.country
+        delyvery.index = my_contacts_info.index
+        delyvery.city = my_contacts_info.city
+        delyvery.address = my_contacts_info.address
+        delyvery.price = shipping_price
+        delyvery.save()
+        print(shipping_price, "shipping_price", my_contacts_info)
+
     if last_order_id:
         last_order_id = last_order_id.last()
         order_id = int(last_order_id.order_id)+1
@@ -1379,8 +1572,8 @@ def pay_delivery_api(request):
         last_order_id.save()
 
     else:
-        models.order_id_count.objects.create(order_id="3141801")
-        order_id = 3141801
+        models.order_id_count.objects.create(order_id="3141850")
+        order_id = 3141850
     current_site = get_current_site(request)
     confirmation_url = f'http://{current_site.domain}/api/check_payment_delyvery'
     url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/InitPayment"
@@ -1432,17 +1625,22 @@ def add_check_api(request):
         mass=0
         checkout_products = models.checkout_products.objects.filter(Q(status="pay") & Q(profile=request.user.profile))
         if create is not None:
-            collection = models.collection.objects.create(collection_name="collection", profile=request.user.profile)
+            if models.collection.objects.filter(collection_name="collection", profile=request.user.profile).exists():
+                collection = models.collection.objects.filter(collection_name="collection", profile=request.user.profile)[0]
+            else:
+
+                collection = models.collection.objects.create(collection_name="collection", profile=request.user.profile)
         else:
             collection = get_object_or_404(models.collection, profile = request.user.profile)
+
 
         
         for i in request.user.profile.checkout_products_list.all():
             if i.indicator=="size":
                 if i.product.sale_price_size:
-                    price += (i.count_size/i.product.min_size)*i.product.sale_price_size
+                    price += (i.count_size)*i.product.sale_price_size/100
                 else:
-                    price += (i.count_size/i.product.min_size)*i.product.price_size
+                    price += (i.count_size)*i.product.price_size/100
                 
                 
                 
@@ -1505,17 +1703,14 @@ def add_check_api(request):
             last_order_id.save()
 
         else:
-            models.order_id_count.objects.create(order_id="3141801")
-            order_id = 3141801
+            models.order_id_count.objects.create(order_id="3141850")
+            order_id = 3141850
             
         
 
 
-        contact_pk = request.POST.get("contact_pk")
-        print(contact_pk, "contact_pk")
         
-        my_contacts_info = get_object_or_404(models.my_contacts_info, pk=contact_pk)
-        checkout = models.checkout_products.objects.create(profile=request.user.profile,price=price, order_id=order_id, collection=collection, mass=mass,first_name=my_contacts_info.first_name, last_name=my_contacts_info.last_name,email=my_contacts_info.email,phone_number=my_contacts_info.phone_number,country=my_contacts_info.country,state=my_contacts_info.state,city=my_contacts_info.city,address=my_contacts_info.address, index=my_contacts_info.index)
+        checkout = models.checkout_products.objects.create(profile=request.user.profile,price=price, order_id=order_id, collection=collection, mass=mass)
         
         for order in request.user.profile.checkout_products_list.all():
 
@@ -1535,8 +1730,13 @@ def add_check_api(request):
             delivery_check_status =delivery_check
         else:
             delivery_check_status =collection.delivery_check
-
         
+        
+
+
+
+
+
 
         collection.save()
         data = {
@@ -1548,9 +1748,9 @@ def add_check_api(request):
         for i in request.user.profile.checkout_products_list.all():
             if i.indicator=="size":
                 if i.product.sale_price_size:
-                    price += (i.count_size/i.product.min_size)*i.product.sale_price_size
+                    price += (i.count_size)*i.product.sale_price_size/100
                 else:
-                    price += (i.count_size/i.product.min_size)*i.product.price_size
+                    price += (i.count_size)*i.product.price_size/100
                 
                 
                 
@@ -1590,7 +1790,7 @@ def add_check_api(request):
                 #orders = models.products_Order.objects.create(product=product_cart.product, customer=request.user.profile,count_size=count,price=price)
             else:
                 pass
-        mass = sum([(int(i.count_size) * float(i.product.mass))/100 if i.product.max_size>0 else int(i.count) * float(i.product.mass)  for i in request.user.profile.checkout_products_list.all()])
+        mass = sum([(int(i.count_size) * float(i.product.mass))/100 if i.indicator == "size" else int(i.count) * float(i.product.mass)  for i in request.user.profile.checkout_products_list.all()])
         order_mass =  mass
         if mass_add_indicator is None:
             delyvery_box_mass = models.price_of_deliverybox.objects.filter(Q(mass_start__lte=mass) & Q(mass_end__gte=mass))[0]
@@ -1608,8 +1808,8 @@ def add_check_api(request):
             last_order_id.save()
 
         else:
-            models.order_id_count.objects.create(order_id="3141801")
-            order_id = 3141801
+            models.order_id_count.objects.create(order_id="3141850")
+            order_id = 3141850
             
 
         
@@ -1629,7 +1829,7 @@ def add_check_api(request):
             if int(minimum)>int(Mass_and_money[1].money):
                 minimum = Mass_and_money[1].money
             shipping_price = minimum
-        delivery_check = models.delivery_check.objects.create(price=shipping_price,mass=mass, my_contacts_info=my_contacts_info, order_id=order_id)
+        delivery_check = models.delivery_check.objects.create(price=shipping_price,mass=mass, my_contacts_info=my_contacts_info, order_id=order_id,first_name=my_contacts_info.first_name, last_name=my_contacts_info.last_name,email=my_contacts_info.email,phone_number=my_contacts_info.phone_number,country=my_contacts_info.country,state=my_contacts_info.state,city=my_contacts_info.city,address=my_contacts_info.address, index=my_contacts_info.index)
         
     
         checkout = models.checkout_products.objects.create(profile=request.user.profile,price=price,mass=order_mass, order_id=order_id, delivery_check=delivery_check, first_name=my_contacts_info.first_name, last_name=my_contacts_info.last_name,email=my_contacts_info.email,phone_number=my_contacts_info.phone_number,country=my_contacts_info.country,state=my_contacts_info.state,city=my_contacts_info.city,address=my_contacts_info.address, index=my_contacts_info.index)
@@ -1682,6 +1882,9 @@ def add_check_api(request):
     return JsonResponse(data, safe=False)
 def change_delivery_price(request,pk):
     checkout = get_object_or_404(models.checkout_products, pk=pk)
+    collection = models.collection.objects.filter(delivery_check=checkout.delivery_check)
+    if collection:
+        collection.update(collection_status="assembled")
     return render(request, "template_rus/change_delivery_pay.html", {"checkout":checkout})
 def apichange_delivery_price(request):
     pk = request.POST.get("pk")
@@ -1708,6 +1911,7 @@ def check_payment(request):
         "Username":"3d19541048",
         "Password":"lazY2k"
         }
+        collection_ind = None
 
 
 
@@ -1733,21 +1937,40 @@ def check_payment(request):
                     i.available = False
                 i.product.save()
             if checkout_products.status=="collectionnotpay":
+                joint_indicator = 0
                 collection = get_object_or_404(models.collection, profile = request.user.profile)
+                for collection_product in collection.checkout_products.all():
+                    if collection_product.status=="joint_green":
+                        collection_product.status="joint"
+                        joint_indicator = 1
+                        collection_product.save()
+                    elif collection_product.status=="joint":
+                        joint_indicator = 1
+
                 if collection.delivery_check:
                     checkout_products.delivery_check = collection.delivery_check
                 collection.checkout_products.add(checkout_products)
-                checkout_products.status = "collectionpay"
+                if joint_indicator!=1:
+                    checkout_products.status = "collectionpay"
+                else:
+                    checkout_products.status = "joint"
+
                 collection.save()
+                collection_ind = True
+
             elif checkout_products.status=="not_payjoint":
                 checkout_products.status = "joint"
 
             else:
                 checkout_products.status = "pay"
+            
+            
             checkout_products.save()
             request.user.profile.product_cart.clear()
+            request.user.profile.product_cart_all_price=0
             request.user.profile.save()
-            html_message = render_to_string('layouts/email_template.html',{"checkout":checkout_products, "request":request})
+
+            html_message = render_to_string('layouts/email_template.html',{"checkout":checkout_products, "request":request, "collection_ind":collection_ind})
             email  = request.user.profile.email
             
             
@@ -1933,6 +2156,10 @@ def add_sales(request):
         product.sale_price = 0
         product.sale_price_pcs=0
         product.sale_price_size=0
+        if product.counter_props.all():
+            for i in product.counter_props.all():
+                i.counter_price_sale = 0
+                i.save()
     else:
         if product.counter_props.all():
             for i in product.counter_props.all():
@@ -1964,12 +2191,15 @@ def assembled(request):
     checkout_products.assembled = "assembled"
     checkout_products.save()
     checkout_products_list.update(assembled="assembled")
+    collection = models.collection.objects.filter(delivery_check=checkout_products.delivery_check)
+    if collection:
+        collection.update(collection_status="assembled")
     return JsonResponse("data", safe=False)
 
 
 def my_checkout_products(request):
     checkouts = models.checkout_products.objects.filter(Q(status="pay") | Q(status="collectionpay") |  Q(status="send") | Q(status="unsend") | Q(status="joint") | Q(status="joint_green")).order_by('-date_ordered')
-    zone_countries = models.zone_countries.objects.all()
+    zone_countries = models.zone_countries.objects.all().order_by("country")
     page = request.GET.get('page', 1)
     paginator = Paginator(checkouts, 2)
     try:
@@ -2023,8 +2253,9 @@ def add_about_us(request):
 
 
 def address_book(request):
-    my_contacts_info = models.my_contacts_info.objects.filter(profile=request.user.profile)
-    return  render(request, "template_rus/address_book.html",{"my_contacts_info":my_contacts_info})
+    my_contacts_info = models.my_contacts_info.objects.filter(profile=request.user.profile).order_by("-pk")
+    zone_countries = models.zone_countries.objects.all().order_by("country")
+    return  render(request, "template_rus/address_book.html",{"my_contacts_info":my_contacts_info, "zone_countries":zone_countries})
 def api_add_categories(request):
     category_name=request.POST.get("category_name")
     sub_categories_switch = request.POST.get("sub_categories_switch")
@@ -2040,39 +2271,46 @@ def api_add_categories(request):
     
 def add_favorite_products(request):
     pk = request.POST.get("pk")
+    if request.user.is_authenticated:
    
     
-    product = get_object_or_404(models.products, pk = pk)
-    profile = get_object_or_404(models.Profile, user = request.user)
-    
-    
-    if not models.favorite_products.objects.filter(product=product, profile = profile).exists():
-        if product.price_size:
-            add_product_cart =models.favorite_products.objects.create(profile = profile, product = product, count_size=product.min_size)
+        product = get_object_or_404(models.products, pk = pk)
+        profile = get_object_or_404(models.Profile, user = request.user)
+        
+        
+        if not models.favorite_products.objects.filter(product=product, profile = profile).exists():
+            if product.price_size:
+                add_product_cart =models.favorite_products.objects.create(profile = profile, product = product, count_size=product.min_size)
+            else:
+                add_product_cart =models.favorite_products.objects.create(profile = profile, product = product,count = 1)
+
+            data = {
+                "data":1,
+                "product_pay":product.price,
+                "name":product.name_ru,
+                
+                "pk":product.pk,
+                "image":str(product.avatar_p)
+                
+               
+
+
+            }
         else:
-            add_product_cart =models.favorite_products.objects.create(profile = profile, product = product,count = 1)
-
-        data = {
-            "data":1,
-            "product_pay":product.price,
-            "name":product.name_ru,
-            
-            "pk":product.pk,
-            "image":str(product.avatar_p)
-            
-           
-
-
-        }
+            models.favorite_products.objects.filter(product=product, profile = profile).delete()
+            data = {
+                "data":0,
+                 "product_pay":product.price,
+                "name":product.name_ru,
+                
+                 "pk":product.pk
+            }
     else:
-        models.favorite_products.objects.filter(product=product, profile = profile).delete()
         data = {
-            "data":0,
-             "product_pay":product.price,
-            "name":product.name_ru,
-            
-             "pk":product.pk
-        }
+                "data":0,
+                 
+            }
+
 
     
     return JsonResponse(data, safe=False)
@@ -2132,11 +2370,11 @@ def add_cart_product(request):
                 this_price = product.sale_price_size
             min_size = product.min_size
 
-            price_total = int(count_size[:-3])*product.min_size*this_price/100
+            price_total = int(count_size[:-3])*this_price/10
         elif product.price_pcs:
             indicator = "size_pcs"
             add_product_cart =models.products_cart.objects.create(profile = profile, product = product, count=count,indicator=indicator)
-            this_price = product.price_size
+            this_price = product.price_pcs
             if product.sale_price_pcs:
                 this_price = product.sale_price_pcs
 
@@ -2150,13 +2388,16 @@ def add_cart_product(request):
 
             price_total = int(count)*this_price
 
+        profile.product_cart_all_price= profile.product_cart_all_price+price_total
         
 
+        profile.product_cart.add(add_product_cart)
+        profile.save()
         data = {
             "data":1,
-            "product_pay":product.price,
+            "product_pay":profile.product_cart_all_price,
             "name":product.name_ru,
-            "price_total":price_total,
+            "price_total":profile.product_cart_all_price,
             "pk":product.pk,
             "min_size":min_size,
             "image":str(product.avatar_p)
@@ -2165,8 +2406,6 @@ def add_cart_product(request):
 
 
         }
-        profile.product_cart.add(add_product_cart)
-        profile.save()
     else:
         data = {
             "data":0,
@@ -2175,6 +2414,7 @@ def add_cart_product(request):
             "count":count,
              "pk":product.pk
         }
+
         
     
 
@@ -2242,6 +2482,7 @@ def product_detalis_view(request, pk):
     
 
     return render(request, "template_rus/product_page.html", {"product":product, "product_recommendation":product_recommendation, "images":images})
+
 @csrf_protect
 def sign_out(request):
     logout(request)
@@ -2601,12 +2842,13 @@ def add_product_api(request):
     
     if table_len_size != 0 and table_len_size is not None:
         product.min_size = int(request.POST.get("min_size"))
+        print(float(request.POST.get("price_size")))
        
-        product.price_size = (int(request.POST.get("price_size"))*product.min_size)/100
+        product.price_size = float(request.POST.get("price_size"))/10
        
         product.max_size = int(request.POST.get("max_size"))
     elif table_len_size_pcs is not None:
-        product.price_pcs = int(request.POST.get("price_size_pcs"))
+        product.price_pcs = float(request.POST.get("price_size_pcs"))
         
         
         #product.price = (product.price*product.min_size)/100
@@ -2695,15 +2937,18 @@ def add_product_change_api(request):
             
         else:
             if product.sale_price:
-                product.sale_price = int(int(price)*(100-int(product.sale)))/100
+                
+
+                product.sale_price = int(float(price)*(100-int(product.sale)))/100
             product.price = price
     
     
     
     product.SKU_code=SKU_code
     if brand_pk is not None:
-        brand = get_object_or_404(models.Brand, pk=brand_pk)
-        product.Brand = brand
+        if product.Brand:
+            brand = get_object_or_404(models.Brand, pk=brand_pk)
+            product.Brand = brand
     product.pcs=pcs
    
     product.pcs_type=pcs_type
@@ -2726,10 +2971,13 @@ def add_product_change_api(request):
 
     category_obj_main = models.category_choeses.objects.filter(name=category)
     catrgory_before  = request.POST.get("catrgory_before")
-    print(category_new_value, "category_new_value", catrgory_before)
-    if category_new_value:
-        category_obj_main = models.category_choeses.objects.get(category_id_main=category_new_value)
-        product.category_choeses=category_obj_main
+    
+    if catrgory_before != category:
+
+        category_obj_main = product.category_choeses
+        category_obj_main.name = category
+        category_obj_main.save()
+
     else:
         category_obj_main = category_obj_main[0]
     
@@ -2801,7 +3049,7 @@ def add_product_change_api(request):
         product.price_size = price
 
         if product.sale_price_size:
-            product.sale_price_size = int(int(price)*(100-int(product.sale)))/100
+            product.sale_price_size = int(float(price)*(100-int(product.sale)))/100
        
         product.max_size = int(request.POST.get("max_size"))
     elif table_len_size_pcs is not None:
@@ -2809,7 +3057,8 @@ def add_product_change_api(request):
         price = int(request.POST.get("price_size_pcs"))
         product.price_pcs = price
         if product.sale_price_pcs:
-            product.sale_price_pcs = int(int(price)*(100-int(product.sale)))/100
+
+            product.sale_price_pcs = int(float(price)*(100-int(product.sale)))/100
     
 
     product.save()
@@ -2823,15 +3072,57 @@ def add_product_change_api(request):
 def checkout_delivery(request, pk):
     
     delyvery = get_object_or_404(models.delivery_check, pk=pk)
+    mass = 0
+
+    
+    checkouts=models.checkout_products.objects.filter(delivery_check=delyvery)
+    for i in checkouts:
+        mass+=i.mass
+    delyvery_box_mass = models.price_of_deliverybox.objects.filter(Q(mass_start__lte=mass) & Q(mass_end__gte=mass))[0]
+    box_mass = delyvery_box_mass.total_mass
+    mass+=box_mass
+    delyvery.mass = mass
+    delyvery.save()
+
+
+    
     if not delyvery.my_contacts_info:
         my_contacts_info=models.my_contacts_info.objects.filter(profile=request.user.profile).order_by('-pk')
-        zone_countries = models.zone_countries.objects.filter()
+        zone_countries = models.zone_countries.objects.filter().order_by("country")
+        shipping_price=None
+        mass = mass
+        
+
+        if my_contacts_info:
+            user_info_zero = my_contacts_info[0]
+            zone_countries = models.zone_countries.objects.filter().order_by("country")
+            zone_shipping = models.zone_countries.objects.filter(country=user_info_zero.country)
+            
+            zone = models.zone.objects.filter(zone_countries__in = zone_shipping)
+            Mass_and_money = models.Mass_and_money.objects.filter(Q(zones__in = zone) & Q(mass_start__lte=mass) &  Q(mass_end__gte=mass))
+            
+
+            if len(Mass_and_money)==1:
+                shipping_price = Mass_and_money[0].money
+            else:
+                if Mass_and_money:
+                    minimum = Mass_and_money[0].money
+                    if minimum>Mass_and_money[1].money:
+                        minimum = Mass_and_money[1].money
+                    shipping_price = minimum
+
+
     else:
         my_contacts_info=None
         zone_countries=None
+        shipping_price = None
+    if len(checkouts)>1:
+        return render(request, "template_rus/delyvery_check.html", {"delyvery":checkouts[0], "my_contacts_info":my_contacts_info, "zone_countries":zone_countries, "shipping_price":shipping_price, "box_mass":box_mass, "mass":mass})
+    else:
+        return render(request, "template_rus/delyvery_check.html", {"delyvery":checkouts[0], "my_contacts_info":my_contacts_info, "zone_countries":zone_countries, "shipping_price":shipping_price, "box_mass":box_mass, "mass":mass})
         
 
-    return render(request, "template_rus/delyvery_check.html", {"delyvery":delyvery, "my_contacts_info":my_contacts_info, "zone_countries":zone_countries})
+    
 
 def add_comment_product(request):
     comment = request.POST.get("comment")
@@ -2878,12 +3169,17 @@ def delete_cart_all_product(request):
     if pk is not None:
         product=profile.product_cart.get(pk=pk)
         profile.product_cart.remove(product)
+        if product.count_size:
+            profile.product_cart_all_price =profile.product_cart_all_price  - product.price*product.count_size
+        else:
+            profile.product_cart_all_price =profile.product_cart_all_price  - product.price*product.count
         
 
         profile.save()
     else:
         products_carts = profile.product_cart.all().delete()
         profile.product_cart.clear()
+        profile.product_cart_all_price = 0
         profile.save()
     return JsonResponse("data", safe=False)
 

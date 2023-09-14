@@ -34,6 +34,8 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=20, default="")
     zipcode = models.CharField(max_length=10, default="")
     password = models.CharField(max_length=30, default="")
+    product_cart_all_price = models.FloatField(default=0)
+    
     
     
     
@@ -57,10 +59,10 @@ class Profile(models.Model):
         for i in product:
             if i.indicator=="size":
                 if i.product.sale_price_size:
-                    sums+=(i.count_size/i.product.min_size)*i.product.sale_price_size
+                    sums+=(i.count_size)*i.product.sale_price_size/100
                 else:
 
-                    sums+=(i.count_size/i.product.min_size)*i.product.price_size
+                    sums+=(i.count_size)*i.product.price_size/100
             elif i.indicator=="counter":
                 price=None
                 
@@ -98,7 +100,8 @@ class Profile(models.Model):
           
            
             
-        print(sums)
+        self.product_cart_all_price = sums
+        self.save()        
         return sums
     def get_cart_product_count(self):
 
@@ -370,6 +373,7 @@ class collection(models.Model):
     orders = models.ManyToManyField('products_Order', related_name = 'products_Order_many')
     mass = models.FloatField(default=0)
     checkout_products = models.ManyToManyField('checkout_products', related_name = 'checkout_products_many', blank=True, null=True)
+    collection_status =  models.CharField(max_length=15, default='process')
     delivery_check = models.ForeignKey('delivery_check' , on_delete = models.SET_NULL , null=True,blank=True, related_name="delivery_check_collection")
     def __str__(self):
         return self.collection_name
@@ -428,7 +432,11 @@ class products_Order(models.Model):
     transaction_id = models.CharField(max_length=10, null=True)
     count  = models.PositiveIntegerField(default = 0)
     count_size = models.PositiveIntegerField(default = 0)
-    price = models.FloatField(default="0")
+    price = models.FloatField(default=0)
+    const_price = models.FloatField(default=0)
+    const_price_product = models.FloatField(default=0)
+    const_sale = models.FloatField(default=0)
+
     shipping_address = models.ForeignKey('my_contacts_info' , on_delete = models.SET_NULL , null=True,blank=True, related_name="my_contacts_info_order")
     indicator = models.CharField(max_length=10, null=True)
     avatar_p = ResizedImageField(force_format="WEBP", quality=75, default='',size=[400, 400], keep_meta=False)
@@ -453,7 +461,7 @@ class my_contacts_info(models.Model):
     address = models.CharField(max_length=35, default='')
     index = models.CharField(max_length=6, default='')
     def __str__(self):
-        return str(self.username)
+        return str(self.first_name)
 
 
 #prodcuts day and sales
@@ -464,7 +472,18 @@ class delivery_check(models.Model):
     price = models.FloatField(default=0)
     mass = models.FloatField(default=0)
     pay_status  = models.CharField(default="dontpay", max_length=15)
+    joint  = models.CharField(default="", max_length=15)
+    
     order_id = models.CharField(max_length=7, default='')
+    first_name = models.CharField(max_length=30, default='')
+    last_name = models.CharField(max_length=30, default='')
+    email=models.CharField(max_length=30, default='')
+    phone_number = models.CharField(max_length=20, default='')
+    country = models.CharField(max_length=12, default='')
+    state = models.CharField(max_length=12, default='')
+    city = models.CharField(max_length=12, default='')
+    address = models.CharField(max_length=35, default='')
+    index = models.CharField(max_length=6, default='')
     my_contacts_info = models.ForeignKey(my_contacts_info, on_delete = models.SET_NULL , null=True,blank=True, related_name="my_contacts_info")
 class order_id_count(models.Model):
     order_id = models.CharField(max_length=7, default='')

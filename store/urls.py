@@ -53,6 +53,8 @@ urlpatterns = [
     path('add_day_of_products/', views.add_day_of_products, name="add_day_of_products"),
     path('add_brand/', views.add_brand, name="add_brand"),
     path('products_of_brands/', views.all_brands_product, name="all_brands_product"),
+    path('search/', views.search_products, name="search_products"),
+    
     
 
     
@@ -203,6 +205,7 @@ urlpatterns = [
     
     path("api/assembled/", views.assembled, name="assembled"),
     path("api/change_profile/", views.change_profile, name="change_profile"),
+    path("api/create_joint_delivery_api/", views.create_joint_delivery_api, name="create_joint_delivery_api"),
 
     
     
