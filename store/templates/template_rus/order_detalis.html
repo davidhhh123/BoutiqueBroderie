@@ -449,6 +449,48 @@ width: 100px;
       }
     }
 
+
+     .order-summary {
+      margin-bottom: 20px;
+    }
+
+    .order-summary table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .order-summary th,
+    .order-summary td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    .order-summary th {
+      background-color: #f8f8f8;
+      color: #c22738;
+    }
+
+    .order-summary td.product-name {
+      width: 40%;
+    }
+
+    .order-summary td.product-price,
+    .order-summary td.product-quantity,
+    .order-summary td.product-total {
+      text-align: start;
+    }
+
+    .order-summary td.product-total {
+      font-weight: bold;
+    }
+
+@media(max-width: 465px){
+  .order-summary{
+    max-width: calc(100% - 50px);overflow-x: auto;width: 100%;
+  }
+}
+
   </style>
 
   </head>
@@ -494,12 +536,22 @@ width: 100px;
       <h2>Заказ #{{checkout.pk}}</h2>
       
       <p><strong>Дата оплаты:</strong> {{checkout.date_ordered}}</p>
+        
       <p><strong>Способ доставки:</strong> Почта</p>
-      <p><strong>Сумма заказа:</strong> {{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
-      <p><strong>Сумма Доставки:</strong> {{checkout.delivery_check.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
-      <p><strong>Масса :</strong> {{checkout.mass}} г</p>
+    
      
+      <p><strong>Сумма заказа:</strong> {{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
+  {% if not  checkout.first_name and not checkout.delivery_check.first_name %}
+     
+       {% else %}
+        <p><strong>Сумма Доставки:</strong> {{checkout.delivery_check.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
+      {% endif %}
+      <p><strong>Вес :</strong> {{checkout.mass}} г</p>
+    
+     {% if not  checkout.first_name and not checkout.delivery_check.first_name %}
+     {% else %}
       <h2>Контактные данные</h2>
+      {% if checkout.first_name %}
        <p><strong>Имя:</strong> {{checkout.first_name}}</p>
        <p><strong>Фамилия :</strong> {{checkout.last_name}}</p>
       <p><strong>Email:</strong> {{checkout.email}}</p>
@@ -509,6 +561,18 @@ width: 100px;
       <p><strong>Место проживания:</strong> {{checkout.city}}</p>
       <p><strong>Адрес:</strong> {{checkout.address}}</p>
       <p><strong>Индекс:</strong> {{checkout.index}}</p>
+      {% else %}
+       <p><strong>Имя:</strong> {{checkout.delivery_check.first_name}}</p>
+       <p><strong>Фамилия :</strong> {{checkout.delivery_check.last_name}}</p>
+      <p><strong>Email:</strong> {{checkout.delivery_check.email}}</p>
+      <p><strong>Контактный телефон:</strong> {{checkout.delivery_check.phone_number}}</p>
+      <p><strong>Страна:</strong> {{checkout.delivery_check.country}}</p>
+      <p><strong>Область :</strong> {{checkout.delivery_check.state}}</p>
+      <p><strong>Место проживания:</strong> {{checkout.delivery_check.city}}</p>
+      <p><strong>Адрес:</strong> {{checkout.delivery_check.address}}</p>
+      <p><strong>Индекс:</strong> {{checkout.delivery_check.index}}</p>
+      {% endif %}
+      {% endif %}
       <h2>Статус заказа</h2>
       <p><strong>Статус:</strong> 
 
@@ -555,6 +619,52 @@ width: 100px;
 
 
 </p>
+  {% if request.user.is_superuser %}
+  
+  <div class="order-summary">
+      <table>
+       <thead>
+  <tr>
+    <th>Продукт</th>
+    <th>Цена</th>
+    <th>Количество</th>
+    <th>Скидка</th>
+    <th>Сумма</th>
+  </tr>
+</thead>
+<tbody>
+
+  {% for order in checkout.products_Order.all %}
+
+  <tr>
+    <td class="product-name">{% if order.product  %}{{ order.product.name_ru }}{% else %}{{ order.name_ru }} {% endif %}</td>
+    <td class="product-price">
+      {% if order.count_size %}
+           
+            {{order.const_price_product|div:rate.0|div:10|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
+      {% else %}
+       {{order.const_price_product|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
+      {% endif %}
+
+</td>
+    <td class="product-quantity">
+   {% if order.count_size %}{{ order.count_size }}см{% else %} {{ order.count }}{% endif %}</td>
+    <td class="product-sale">{% if order.const_sale  %}{{order.const_sale}} %{% else %}-{% endif %}</td>
+    <td class="product-total"> {{ order.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</td>
+  </tr>
+  {% endfor %}
+  
+</tbody>
+
+        <tfoot>
+          <tr>
+            <td colspan="3"><strong>Общая сумма:</strong></td>
+            <td><strong>{{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    {% endif %}
        <h2>Комментарии к заказу</h2>
        <p>{{checkout.comments}}</p>
       
@@ -595,7 +705,7 @@ width: 100px;
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_4.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts.css" rel="stylesheet" type="text/css">
    <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts_features.css" rel="stylesheet" type="text/css">

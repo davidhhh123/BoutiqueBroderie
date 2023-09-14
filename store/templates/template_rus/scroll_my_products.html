@@ -51,12 +51,12 @@
               {% endif %}
 {% elif product.price_size %}
 {% if product.sale_price_size  %}
-               <span class="product-preview__price-old">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               <span class="product-preview__price-old">{{product.price_size|div:rate.0|div:10|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
               
-              <span class="product-preview__price-cur">{{product.sale_price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product.sale_price_size|div:rate.0|div:10|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
                
               {% else %}
-              <span class="product-preview__price-cur">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product.price_size|div:rate.0|div:10|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
              
               {% endif %}
 {% else %}
@@ -117,6 +117,7 @@
                
               {% else %}
               <span class="product-preview__price-cur">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span>за 1 м</span>
              
               {% endif %}
 {% else %}

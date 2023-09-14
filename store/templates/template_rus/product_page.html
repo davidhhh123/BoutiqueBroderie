@@ -424,7 +424,7 @@ button.pswp__button--close:hover {
             <div class="pswp__container" style="">
                 <div class="pswp__item" style="display: block;"></div>
                 <div class="pswp__item" style=""><div class="pswp__zoom-wrap" style=""><div class="pswp__img pswp__img--placeholder pswp__img--placeholder--blank" style="display: none;"></div><img class="pswp__img pswp__img_main" src="{{ product.avatar_p.url }}" alt="" style="display: block; width: calc(100% - 40px); height: calc(100%  - 40px);margin-top: 20px;margin-left: 20px; "></div></div>
-                <div class="pswp__item" style="display: block; transform: translate3d(700px, 0px, 0px);"></div>
+              
             </div>
 
             <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
@@ -599,7 +599,7 @@ button.pswp__button--close:hover {
     
   </div>
 
-  <form action="#" method="post" class="product__area-form product-form">
+  <div action="#" method="post" class="product__area-form product-form">
     <div class="product-form__area-rating">
       
     </div>
@@ -649,6 +649,15 @@ button.pswp__button--close:hover {
 
 
 
+{% if product.price_size %}
+
+{% if product.sale_price  %}
+ <div style="font-weight: 600;"> цена за 1 метр  {{ product.sale_price|div:rate.0|floatformat:2  }} {% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</div>
+{% else %}
+ <div style="font-weight: 600;"> цена за 1 метр  {{ product.price_size|div:rate.0|floatformat:2  }} {% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</div>
+{% endif %}
+{% else %}
+{% endif %}
         
         
 <span class="max_count_error" style="color: red;font-weight: 600;">максимальное количество  </span>
@@ -684,11 +693,11 @@ button.pswp__button--close:hover {
 {% if product.sale_price_size  %}
                
               
-              <span class="product__price-cur">{{product.sale_price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
-               <span class="product__price-old">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product__price-cur">{{product.sale_price_size|div:rate.0|mul:product.min_size|div:100|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               <span class="product__price-old">{{product.price_size|div:rate.0|mul:product.min_size|div:100|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
                
               {% else %}
-              <span class="product__price-cur">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product__price-cur">{{product.price_size|div:rate.0|mul:product.min_size|div:100|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
              
               {% endif %}
 {% else %}
@@ -841,7 +850,7 @@ button.pswp__button--close:hover {
         </div>
       
     </div>
-  </form>
+  </div>
 
  <div class="product__area-description" style="padding-top: 10px;">
     
@@ -1026,52 +1035,54 @@ button.pswp__button--close:hover {
                
 
 
-{% if product.price %}
-{% if product.sale_price  %}
-               <span class="product-preview__price-old">{{product.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+{% if product_rec.price %}
+{% if product_rec.sale_price  %}
+               <span class="product-preview__price-old">{{product_rec.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
               
-              <span class="product-preview__price-cur">{{product.sale_price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product_rec.sale_price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
                
               {% else %}
-              <span class="product-preview__price-cur">{{product.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product_rec.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+
              
               {% endif %}
-{% elif product.price_pcs %}
- {% if product.sale_price_pcs  %}
-               <span class="product-preview__price-old">{{product.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+{% elif product_rec.price_pcs %}
+ {% if product_rec.sale_price_pcs  %}
+               <span class="product-preview__price-old">{{product_rec.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
               
-              <span class="product-preview__price-cur">{{product.sale_price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product_rec.sale_price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
                
               {% else %}
-              <span class="product-preview__price-cur">{{product.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product_rec.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
              
               {% endif %}
-{% elif product.price_size %}
-{% if product.sale_price_size  %}
-               <span class="product-preview__price-old">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+{% elif product_rec.price_size %}
+{% if product_rec.sale_price_size  %}
+               <span class="product-preview__price-old">{{product_rec.price_size|div:rate.0|div:10|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
               
-              <span class="product-preview__price-cur">{{product.sale_price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product_rec.sale_price_size|div:rate.0|div:10|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
                
               {% else %}
-              <span class="product-preview__price-cur">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product_rec.price_size|div:rate.0|div:10|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
              
               {% endif %}
+               <span style="font-size: 16px;"> за 10 см</span>
 {% else %}
-{% if product.counter_props.all %}
-{% with firstname=product.count|checkcounters:product.product.pk %}
+{% if product_rec.counter_props.all %}
+{% with firstname=product_rec.count|checkcounters:product_rec.product.pk %}
     {% if firstname is not None %}
      <span class="product-preview__price-cur">{{firstname|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
    
 
              
     {% else %}
-    <span class="product-preview__price-cur">{{product.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+    <span class="product-preview__price-cur">{{product_rec.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
       
              
     {% endif %}
   {% endwith %}
 {% else %}
-<span class="product-preview__price-cur">{{product.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+<span class="product-preview__price-cur">{{product_rec.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
       
 {% endif %}
 {% endif %}
@@ -1081,16 +1092,16 @@ button.pswp__button--close:hover {
 
               <div class="product-preview__controls">
                 <div class="add-cart-counter" data-add-cart-counter="" data-add-cart-counter-max-quantity="null" data-add-cart-counter-is-ready="">
-                    {% if product.price_pcs or product.price_size %}
- <a href="{% url 'accounts:product_detalis_view' product.pk %}" class="button add-cart-counter__btn "  data-add-cart-counter-btn="">
+                    {% if product_rec.price_pcs or product_rec.price_size %}
+ <a href="{% url 'accounts:product_detalis_view' product_rec.pk %}" class="button add-cart-counter__btn "  data-add-cart-counter-btn="">
 <span class="add-cart-counter__btn-icon icon-cart"></span>
                 </a>
 {% else %}
- <button type="button" class="button add-cart-counter__btn add_cart_btn_counter_ind" pk = "{{product.pk}}"  {% if product.price %}
+ <button type="button" class="button add-cart-counter__btn add_cart_btn_counter_ind" pk = "{{product_rec.pk}}"  {% if product_rec.price %}
 ind="count"
 
 {% else %}
-{% if product.counter_props.all %}
+{% if product_rec.counter_props.all %}
 ind="counter"
 {% else %}
 ind="count"
@@ -1173,7 +1184,7 @@ ind="count"
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/lazyload.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_3.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_4.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/main.css" rel="stylesheet" type="text/css">
     <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/photoswipe.min.js"></script>
@@ -1209,6 +1220,7 @@ ind="count"
     
     focus  : 'center',
     perPage: 1,
+    pagination: false,
     
   }).mount();
     var splide_rec= new Splide('.splide_two', {
@@ -1408,15 +1420,27 @@ product_count=data.max_count
     if (product_count>max_pcs){
             check_max_count($(this).attr("pk"),1, function(data){
             console.log(data.max_count, "ok")
+            console.log(data.max_count, "ok")
+
+
             $(".counter-input").val(data.max_count)
              $(".max_count_error").text("Максимальное количество товара "+ String(data.max_count)+" шт")
+
+
             $(".max_count_error").css("display", "block")
             product_count=data.max_count
+
+              var index = counter_arr.findLastIndex(p => product_count>=p.counter);
+    if (index != -1){
+        product_price = counter_arr[index]["price"]
+
+    }
             
 
        var new_price = product_price*product_count
     price_total = new_price
     $(".counter-input").val(product_count)
+
     $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+" ₽")
 
 
@@ -1424,7 +1448,12 @@ product_count=data.max_count
 
     }
     else{
-         $(".max_count_error").css("display", "none")
+        if (product_count <= 0){
+            product_count = 1
+
+         
+        }
+        $(".max_count_error").css("display", "none")
     var index = counter_arr.findLastIndex(p => product_count>=p.counter);
     if (index != -1){
         product_price = counter_arr[index]["price"]
@@ -1514,6 +1543,11 @@ count_sys=data.max_count
 })
 $(".counter-input_two").on("change", function(){
     count_sys = parseInt($(this).val())
+     if (count_sys <= 0){
+            count_sys = 1
+
+         
+        }
     if (count_sys>max_pcs){
             check_max_count($(this).attr("pk"),1, function(data){
             console.log(data.max_count, "ok")
@@ -1524,6 +1558,7 @@ $(".counter-input_two").on("change", function(){
              var new_price = price_pcs*count_sys
     price_total = new_price
     $(".counter-input_two").val(count_sys)
+    console.log(count_sys, "aa")
     $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
     
             
@@ -1563,10 +1598,10 @@ $(".counter-input_two").on("change", function(){
 var size_arr = []
 var min_size = parseInt("{{ product.min_size }}")
 var max_size = parseInt("{{product.max_size}}")
-var product_price = parseFloat("{{ product.price_size|div:rate.0|floatformat:2 }}").toFixed(2)
+var product_price = parseFloat("{{ product.price_size|div:rate.0|div:10|floatformat:2 }}").toFixed(2)
 product_count = min_size
 {% if product.sale > 0 %}
-product_price = parseFloat("{{ product.sale_price_size|div:rate.0|floatformat:2 }}").toFixed(2)
+product_price = parseFloat("{{ product.sale_price_size|div:rate.0|div:10|floatformat:2 }}").toFixed(2)
 
 
 {% else %}
@@ -1592,9 +1627,9 @@ product_price = parseFloat("{{ product.sale_price_size|div:rate.0|floatformat:2 
         var this_count = $("#in_stock option:checked").attr("value")
         product_count = data.max_count
     
-    console.log(product_price, "product_price")
+   
 
-    var new_price = (product_price*product_count/(min_size)).toFixed(2);
+    var new_price = (product_price*product_count/(10)).toFixed(2);
     price_total = new_price
     $(".counter-input").val(String(product_count)+" см")
     $(".is-count-up_count").attr("disabled", "disabled")
@@ -1617,7 +1652,7 @@ product_price = parseFloat("{{ product.sale_price_size|div:rate.0|floatformat:2 
     
     console.log(product_price, "product_price")
 
-    var new_price = (product_price*product_count/(min_size)).toFixed(2);
+    var new_price = (product_price*product_count/(10)).toFixed(2);
     price_total = new_price
     $(".counter-input").val(String(product_count)+" см")
     $(".is-count-up_count").attr("disabled", "disabled")
@@ -1638,10 +1673,10 @@ product_price = parseFloat("{{ product.sale_price_size|div:rate.0|floatformat:2 
         product_count-=10;
     
 
-    var new_price = (product_price*product_count/(min_size)).toFixed(2);
+    var new_price = (product_price*product_count/(10)).toFixed(2);
     price_total = new_price
 
-    $(".counter-input").val(product_count)
+    $(".counter-input").val(product_count+" см")
     $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
          
         
@@ -1661,7 +1696,7 @@ $(".counter-input").on("change", function(){
              $(".max_count_error").text("Максимальное длина товара "+ String(data.max_count)+" см")
             $(".max_count_error").css("display", "block")
             product_count = data.max_count
-            var new_price = (product_price*product_count/(min_size)).toFixed(2);
+            var new_price = (product_price*product_count/(10)).toFixed(2);
     price_total = new_price
     $(".counter-input").val(String(product_count)+" см")
     $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
@@ -1678,8 +1713,12 @@ $(".counter-input").on("change", function(){
     else{
          $(".max_count_error").css("display", "none")
     
-    
-    var new_price = (product_price*product_count/(min_size)).toFixed(2);
+    if (product_count<min_size){
+        $(".counter-input").val(String(min_size)+" см")
+        product_count = min_size
+
+    }
+    var new_price = (product_price*product_count/(10)).toFixed(2);
     price_total = new_price
     $(".counter-input").val(String(product_count)+" см")
     $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
@@ -1749,15 +1788,22 @@ $(".is-count-down ").on("click", function(){
 })
  $(".counter-input").on("change", function(){
     product_count = parseInt($(this).val())
+     if (product_count <= 0){
+            product_count = 1
+
+         
+        }
     if (product_count>max_pcs){
             check_max_count($(this).attr("pk"),1, function(data){
             console.log(data.max_count, "ok")
             $(".counter-input").val(data.max_count)
              $(".max_count_error").text("Максимальное количество товара "+ String(data.max_count)+" шт")
+
             $(".max_count_error").css("display", "block")
            var new_price = product_price*max_pcs
     price_total = new_price
     $(".counter-input").val(max_pcs)
+    product_count = data.max_count
     $(".product__price-cur").text(String(parseFloat(new_price).toFixed(2))+pay_icon)
             
 
@@ -1866,6 +1912,7 @@ $(".zoom_images_main").on("click", function(){
   {% endif %}
 
    $(".button.button_size-l.add-cart-counter__btn").on("click", function(){
+
              
               var indicator = ""
         var name = ""
@@ -1922,7 +1969,7 @@ $(".zoom_images_main").on("click", function(){
             
             
 
-            
+           $(".loader-container_alert").css("display", "flex")
 
             
 
@@ -1934,12 +1981,15 @@ $(".zoom_images_main").on("click", function(){
             method: "POST",
             data: data,
             success: function(data){
+                $(".loader-container_alert").css("display", "none")
                 if (data.data!=0){
+                    console.log(data.price_total)
 
                  $(".icon.icon-cart .header__control-bage").text(parseInt($("span.header__control-bage.cart-empty").text())+1)
                   $(".navigation-bar__icon.icon-cart .navigation-bar__bage").text($(".icon.icon-cart .header__control-bage").text())
                   console.log(data.price_total/rate, "data.price_total)")
                   if (parseInt(data.min_size) !=  1){
+
                      
 
                          $(".header__control-btn.header__cart .header__control-text").text(String((parseFloat($(".header__control-btn.header__cart .header__control-text").text())+parseFloat($(".product__price-cur").text().slice(0,-2))).toFixed(2))+" "+pay_icon)
@@ -1964,7 +2014,7 @@ $(".zoom_images_main").on("click", function(){
                 
 
             },
-            error: function(daa){},
+            error: function(daa){$(".loader-container_alert").css("display", "none")},
             processData: false,
             contentType: false,
         })

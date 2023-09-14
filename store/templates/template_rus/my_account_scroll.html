@@ -13,6 +13,7 @@
   <div class="cart-item " id="cart-item25" data-product-id="336490978" data-item-id="573211243">
       
       <a href="{% url 'accounts:orders_view' checkout.pk %}" class="item-title" style="">
+       
 
       order_id:{{ checkout.pk }}       {% if checkout.assembled == "assembled" %}
       {% if checkout.status == "send" or checkout.status   == "collectionsend" %}
@@ -67,10 +68,13 @@
 {% if checkout.status == "collectionpay"  %}
 <a href="{% url 'accounts:collection_view' %}">
             <button class="button js-item-change" type="button" data-item_change="25">Оплатить доставку</button>  </a>
-   
+{% elif  checkout.status == "joint" and checkout.delivery_check.joint == "joint" %}
+   <button class="button js-item-change" type="button" data-item_change="25">Обработка заказа</button>
     {% else %}
+   
      <a href="{% url 'accounts:checkout_delivery' checkout.delivery_check.pk %}">
             <button class="button js-item-change" type="button" data-item_change="25">Оплатить доставку</button>  </a><span style="margin-top: 5px;"> {{ checkout.delivery_check.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+   
     {% endif  %}
 
 {% else %}

@@ -455,7 +455,10 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
 {% endif %}
   
   {% else %}
-   <p style="font-weight: bold;font-size: 17px;">Аккаунт #{{request.user.profile.pk}}</p>
+   <h1 class="co-checkout-title co-title co-title--h1">
+                   Личные данные
+                  </h1>
+   <p style="font-weight: bold;font-size: 17px;margin-top: 10px;">Аккаунт #{{request.user.profile.pk}}</p>
 
 <div class="container container_data">
   <form class="co-form--login co-modal-login_form my_account_form" data-use-mask="1" onsubmit="check()">
@@ -466,6 +469,7 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
   <input type="text" value="{{profile.last_name}}" id="last_name">
 
   <p><strong>Телефон:</strong></p>
+  
   <input type="tel" value="{{profile.phone_number}}" id="phone_number"  
 required="required">
 
@@ -474,7 +478,7 @@ required="required">
 
   <p><strong>Пароль:</strong></p>
   <input type="password" value="{{profile.password}}" id="password">
-  <p><strong>Подвердите пароль:</strong></p>
+  <p><strong>Подтвердите пароль:</strong></p>
   <input type="password" value="{{profile.password}}" id="confirm_password">
   <input type="checkbox" onclick="myFunction()" style="margin-top: 15px;"> Показать пароль
 
@@ -521,9 +525,11 @@ required="required">
 
 <script>
   const phoneInputField = document.querySelector("#phone_number");
+
    const phoneInput = window.intlTelInput(phoneInputField, {
      utilsScript:
        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+
    });
  
 function myFunction() {
@@ -566,7 +572,7 @@ function myFunction() {
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/lazyload.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_4.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
     <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/icons.css" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts.css" rel="stylesheet" type="text/css">
@@ -638,43 +644,31 @@ else{
 }
   
   const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-    const phoneInputField = document.querySelector("#phone_number");
-   const phoneInput = window.intlTelInput(phoneInputField, {
-     utilsScript:
-       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-   });
+ var phoneInputInstance = window.intlTelInputGlobals.getInstance(phoneInputField);
+ var phone_number = phoneInputInstance.getNumber();
 
-   if (phoneInput.isValidNumber()) {
-      
-      validation = true
-      console.log(true)
 
+if (phoneInputInstance.isValidNumber()) {
+  validation = true;
+  console.log(true);
+} else {
+  validation = false;
+  const errorCode = phoneInputInstance.getValidationError();
+  console.log(errorCode)
+  let error_text = "";
+  if (lang_all_page == "ru") {
+    if (errorMap[errorCode] == "Invalid number") {
+      error_text = "Номер телефона должен быть цифрами";
+    } else if (errorMap[errorCode] == "Too short") {
+      error_text = "Номер телефона короткий";
+    } else if (errorMap[errorCode] == "Too long") {
+      error_text = "Номер телефона длинный";
+    } else if (errorMap[errorCode] == "Invalid number") {
+      error_text = "Номер телефона неправильный";
     } else {
-      validation = false
-        
-      const errorCode = phoneInput.getValidationError();
-      error_text = ""
-      if (lang_all_page=="ru"){
-        if (errorMap[errorCode] == "Invalid number"){
-            error_text = "Номер телефона должен быть цифрами"
-          }
-          else if(errorMap[errorCode] == "Too short"){
-            error_text = "Номер телефона короткий"
-
-          }
-          else if(errorMap[errorCode] == "Too long"){
-            error_text = "Номер телефона длинный"
-            
-          }
-          else if(errorMap[errorCode] == "Invalid number"){
-            error_text = "Номер телефона неправильный"
-            
-          }
-          else{
-            error_text = "Неверный код страны"
-
-          }
-        
+    
+    }
+  
           
         }
          $(".error_window").text(error_text)

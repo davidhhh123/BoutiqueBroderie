@@ -292,7 +292,7 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
     right: -10px;
 }
 .change_table {
-    right: 20px;
+    right: 40px;
     margin-top: -44px;
 }
 @media (max-width: 680px){
@@ -409,7 +409,13 @@ required="required">
   <input type="email" value="{{request.user.profile.email}}" id="email">
 
   <p><strong>Страна:</strong></p>
-  <input type="text" id="country">
+  <select id="countrys" name="countrys" style="width: 100%;height: 40px;">
+                          {% for country in zone_countries %}
+                          <option value="{{country.country}}">{{country.country}}</option>
+                          {% endfor %}
+                          
+                        </select>
+  
   <p><strong>Область:</strong></p>
   <input type="text" id="state">
   
@@ -441,13 +447,14 @@ required="required">
    
     <th>Телефон</th>
   </tr>
+  <tr class="one_line"></tr>
   {% for my_contacts in my_contacts_info %}
   <tr class="table_tr_class" id="table_tr_id{{my_contacts.pk}}">
     <td class="mass_start_table" id="address_no{{my_contacts.pk}}">{{my_contacts.address}}</td>
     
      <td class="mass_end_table" id="phone_number_no{{my_contacts.pk}}">
       <span class="phone_number_all">{{my_contacts.phone_number}}</span> <div class="delete_sizes_tabel" key="{{my_contacts.pk}}"><span class="icon icon-times"></span></div>
-      <div class="change_table" email="{{my_contacts.email}}" phone_number="{{my_contacts.phone_number}}" address="{{my_contacts.address}}" state="{{my_contacts.state}}" city="{{my_contacts.city}}" country="{{my_contacts.country}}" index="{{my_contacts.index}}" key="{{my_contacts.pk}}"><svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+      <div class="change_table" id="change_table{{my_contacts.pk}}" email="{{my_contacts.email}}" phone_number="{{my_contacts.phone_number}}" address="{{my_contacts.address}}" state="{{my_contacts.state}}" city="{{my_contacts.city}}" country="{{my_contacts.country}}" index="{{my_contacts.index}}" key="{{my_contacts.pk}}"><svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <path d="M250.6,66.8V0L136.7,111.3l113.9,111.3v-66.8c73.7,0,133.6,59.8,133.6,133.6c0,73.8-59.8,133.6-133.6,133.6
   C176.9,423,117,363.2,117,289.4H28C28,412.3,127.7,512,250.6,512c123,0,222.6-99.7,222.6-222.6C473.2,166.4,373.6,66.8,250.6,66.8z"></path>
 </svg></div>
@@ -511,7 +518,7 @@ required="required">
  </script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_4.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts.css" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts_features.css" rel="stylesheet" type="text/css">
@@ -520,7 +527,7 @@ required="required">
     <td class="mass_start_table"  id="address_no#pk">#address</td>
     
      <td class="mass_end_table" id="phone_number_no#pk"><span class="phone_number_all">#phone_number </span><div class="delete_sizes_tabel" key="#pk"><span class="icon icon-times"></span></div>
-      <div class="change_table" email="#email" phone_number="#phone_number" address="#address" state="#state" city="#city" country="#country" index="#index" key="#pk"><svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+      <div class="change_table" id="change_table#pk" email="#email" phone_number="#phone_number" address="#address" state="#state" city="#city" country="#country" index="#index" key="#pk"><svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <path d="M250.6,66.8V0L136.7,111.3l113.9,111.3v-66.8c73.7,0,133.6,59.8,133.6,133.6c0,73.8-59.8,133.6-133.6,133.6
   C176.9,423,117,363.2,117,289.4H28C28,412.3,127.7,512,250.6,512c123,0,222.6-99.7,222.6-222.6C473.2,166.4,373.6,66.8,250.6,66.8z"></path>
 </svg></div>
@@ -537,7 +544,7 @@ required="required">
       var email = $("#email").val()
       var phone_number = $("#phone_number").val()
       var state = $("#state").val()
-      var country = $("#country").val()
+      var country = $("#countrys").val()
       var address = $("#address").val()
       var index = $("#index").val()
 
@@ -546,18 +553,15 @@ required="required">
 
 
       const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-       const phoneInputField = document.querySelector("#phone_number");
-   const phoneInput = window.intlTelInput(phoneInputField, {
-     utilsScript:
-       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-   });
-if (phoneInput.isValidNumber()) {
+       var phoneInputInstance = window.intlTelInputGlobals.getInstance(phoneInputField);
+var phone_number = phoneInputInstance.getNumber();
+if (phoneInputInstance.isValidNumber()) {
       
       validation = true
     } else {
       validation = false
       
-      const errorCode = phoneInput.getValidationError();
+      const errorCode = phoneInputInstance.getValidationError();
       error_text = ""
       
         if (errorMap[errorCode] == "Invalid number"){
@@ -619,7 +623,7 @@ if (phoneInput.isValidNumber()) {
                 address_template = address_template.replace("#city", city)
                  address_template = address_template.replace("#country", country)
                 address_template = address_template.replace("#index", index)
-                $(".table_all_features tbody").append(address_template)
+                $(".one_line").after(address_template)
                  $("#state").val("")
        $("#country").val("")
      $("#address").val("")
@@ -665,7 +669,8 @@ if (phoneInput.isValidNumber()) {
       $("#email").val(email)
       $("#phone_number").val(phone_number)
       $("#state").val(state)
-       $("#country").val(country)
+
+       $("#countrys").val(country)
      $("#address").val(address)
       $("#index").val(index)
 
@@ -691,7 +696,7 @@ if (phoneInput.isValidNumber()) {
 
     })
     $(document).on("click",".change_address", function(){
-  var [first_name,last_name, email, phone_number,address, country, state, city, index]=[$("#first_name").val(),$("#last_name").val(),$("#email").val(),$("#phone_number").val(),$("#address").val(),$("#country").val(),$("#state").val(),$("#city").val(),$("#index").val() ]
+  var [first_name,last_name, email, phone_number,address, country, state, city, index]=[$("#first_name").val(),$("#last_name").val(),$("#email").val(),$("#phone_number").val(),$("#address").val(),$("#countrys").val(),$("#state").val(),$("#city").val(),$("#index").val() ]
 
 
 
@@ -725,6 +730,26 @@ if (phoneInput.isValidNumber()) {
       $("#index").val("")
 
        $("#city").val("")
+       
+console.log(pk, "pk")
+       $("#change_table"+String(pk)).attr("first_name", first_name)
+        $("#change_table"+String(pk)).attr("last_name", last_name)
+         $("#change_table"+String(pk)).attr("email", email)
+          $("#change_table"+String(pk)).attr("phone_number", phone_number)
+           $("#change_table"+String(pk)).attr("state", state)
+            $("#change_table"+String(pk)).attr("address", address)
+            $("#change_table"+String(pk)).attr("country", country)
+            $("#change_table"+String(pk)).attr("index", index)
+
+
+
+
+
+
+          $(".add_address").removeClass("display_none")
+       $(".change_address").addClass("display_none")
+       $(".cancel_changes").addClass("display_none")
+
                 
                 
 

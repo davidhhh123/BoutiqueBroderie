@@ -570,16 +570,17 @@ in_stock "  id="in_stock_for_brand" class="category_class" style="    height: 40
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/lazyload.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_4.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts.css" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts_features.css" rel="stylesheet" type="text/css">
 
-
+<script type="text/javascript">console.log("aa")</script>
 
 
 
   <script type="text/javascript">
+
     var category_deg = parseInt("{{sub_categorys_len}}")+1
     
       console.log("{{sub_categorys_len}}", "sub")
@@ -610,6 +611,7 @@ if (response == true){
       
     }
 }
+
 function selectBrand(id, valueToSelect) {    
     let element = document.getElementById(id);
     element.value = valueToSelect;
@@ -777,7 +779,7 @@ var video_link=""
       console.log(sub_categories)
       data.append("sub_categories_len", sub_categories.length)
        for (var i=0;i<sub_categories.length;i++){
-        data.append("pk"+String(i), sub_categories_en.eq(i).attr("pk")
+        data.append("pk"+String(i), sub_categories_en.eq(i).attr("pk"))
         data.append("sub_category_name_ru"+String(i), sub_categories.eq(i).val())
         data.append("sub_category_name_en"+String(i), sub_categories_en.eq(i).val())
         data.append("sub_category_name_am"+String(i), sub_categories_am.eq(i).val())

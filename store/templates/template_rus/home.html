@@ -404,11 +404,24 @@
       <div class="product-preview__content">
         <div class="product-preview__area-photo">
           <div class="product-preview__photo">
-            
-              <span class="button button_size-s favorites_btn favorite_on favorites-not-added" pk="{{product.pk}}">
+            {% if request.user.is_authenticated %}
+            {% with favorite=request.user.profile|check_favorite:product.pk %}
+           
+            {% if favorite %}
+              <span class="button button_size-s favorites_btn favorite_on favorites-added" pk="{{product.pk}}">
+              {% else %}
+               <span class="button button_size-s favorites_btn favorite_on favorites-not-added" pk="{{product.pk}}">
+              {% endif %}
                 <span class="btn-icon icon-favorites-o"></span>
                 <span class="btn-icon icon-favorites-f"></span>
               </span>
+            {% endwith %}
+            {% else %}
+             <span class="button button_size-s favorites_btn  favorites-not-added" pk="{{product.pk}}">
+                <span class="btn-icon icon-favorites-o"></span>
+                <span class="btn-icon icon-favorites-f"></span>
+              </span>
+            {% endif %}
             
             <div class="img-ratio img-fit">
               <div class="img-ratio__inner">
@@ -488,14 +501,15 @@
               {% endif %}
 {% elif product.price_size %}
 {% if product.sale_price_size  %}
-               <span class="product-preview__price-old">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               <span class="product-preview__price-old">{{product.price_size|div:rate.0|div:10|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
               
-              <span class="product-preview__price-cur">{{product.sale_price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product.sale_price_size|div:rate.0|div:10|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
                
               {% else %}
-              <span class="product-preview__price-cur">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product.price_size|div:rate.0|div:10|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
              
               {% endif %}
+              <span style="font-size: .8rem">за 10 см</span>
 {% else %}
 {% if product.counter_props.all %}
 {% with firstname=product.count|checkcounters:product.product.pk %}
@@ -651,7 +665,7 @@ ind="count"
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/lazyload.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_3.js"></script>
+  <script src="{% static 'js/microAlert_4.js' %}"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/main.css" rel="stylesheet" type="text/css">
   
@@ -695,7 +709,7 @@ var products_template=` <div class="product-preview-elem">
         <div class="product-preview__area-photo">
           <div class="product-preview__photo">
             
-               <span class="button button_size-s favorites_btn favorite_on favorites-not-added" pk="<pk_product>">
+               <span class="button button_size-s favorites_btn favorite_on <favorite_class>" pk="<pk_product>">
                 <span class="btn-icon icon-favorites-o"></span>
                 <span class="btn-icon icon-favorites-f"></span>
               </span>
@@ -909,8 +923,16 @@ $(document).on("click",".ajax-pag",function(event){
                 }
                 console.log(response.page_range, "page_range")
                 $.each(response.results, function(i, result) {
-                  console.log(result)
-                 
+                  
+                  if (parseInt(response.favorites[i])==1){
+                    favorite_class = `favorites-added`
+
+                  }
+                  else{
+                    favorite_class = `favorites-not-added`
+
+                  }
+                  
                   var template = products_template.replace("<product_name>", result.name_ru)
                   template = template.replaceAll("<avatar_p>", result.avatar_p)
                   var price = result['price']
@@ -940,6 +962,7 @@ $(document).on("click",".ajax-pag",function(event){
           indicator="size"
 
         }
+
         else if (result['counter_props'].length > 0){
           var count_er = parseInt(result['counter_props'][0]['counter_prop'])
           var counter_props = result['counter_props'][0]
@@ -964,15 +987,19 @@ $(document).on("click",".ajax-pag",function(event){
         else{
 
         }
-
+        var size_text=""
+        if (parseInt(result['price_size']) != 0){
+          size_text = ` <span style="font-size: .8rem">за 10 см</span>`
+        }
+template = template.replace("<favorite_class>",favorite_class)
         
                  if (price_sale!=undefined){
-           template = template.replace("<product_price>", `<span class="product-preview__price-old">`+ (parseFloat(price)/parseFloat(pay_rates_search)).toFixed(2)  + ` `+ pay_icon_search  +`</span><span class="product-preview__price-cur"> `+ (parseFloat(price_sale)/parseFloat(pay_rates_search)).toFixed(2) +` `+ pay_icon_search +`</span>`)
+           template = template.replace("<product_price>", `<span class="product-preview__price-old">`+ (parseFloat(price)/parseFloat(pay_rates_search)).toFixed(2)  + ` `+ pay_icon_search  +`</span><span class="product-preview__price-cur"> `+ (parseFloat(price_sale)/parseFloat(pay_rates_search)).toFixed(2) +` `+ pay_icon_search +`</span>`+size_text)
            template = template.replace("<sales_products>","-"+result["sale"]+"%")
 
         }
         else{
-           template = template.replace("<product_price>", `<span class="product-preview__price-cur"> `+ (parseFloat(price)/parseFloat(pay_rates_search)).toFixed(2) +` `+ pay_icon_search +`</span>`)
+           template = template.replace("<product_price>", `<span class="product-preview__price-cur"> `+ (parseFloat(price)/parseFloat(pay_rates_search)).toFixed(2) +` `+ pay_icon_search +`</span>`+size_text)
            template = template.replace("<sales_products>","")
 
         }
