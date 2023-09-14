@@ -70,6 +70,11 @@ a:link {
     </div>
     <h1>Email Confirmation</h1>
     <p>Dear {{user.profile.first_name}} {{user.profile.last_name}}!</p>
+     {% if recovery is not None %}
+<p>Please follow the link to recovery password.</p>
+{% else %}
+<p>Please follow the link to confirm registration.</p>
+{% endif %}
     <p>Please follow the link to confirm registration.</p>
     <p>Thank you for choosing BoutiqueBroderie. 
 </p>

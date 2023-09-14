@@ -34,7 +34,7 @@
       {% if request.user.is_authenticated %}
       {% with  request.user.profile.get_cart_product_count as count_cart %}
       {% if count_cart == 0 or count_cart is None %}
-      <span class="navigation-bar__bage cart-empty" data-cart-positions-count="">{{count_cart}}</span>
+      <span class="navigation-bar__bage" data-cart-positions-count="">{{count_cart}}</span>
       {% else %}
       <span class="navigation-bar__bage" data-cart-positions-count="">{{count_cart}}</span>
       {% endif %}
@@ -48,7 +48,11 @@
   
         <a href="{% url 'accounts:favorite' %}" class="navigation-bar__item navigation-bar__item-favorites ">
           <span class="navigation-bar__icon icon-favorites">
-            <span class="navigation-bar__bage favorites-empty" data-ui-favorites-counter="">0</span>
+             {% if request.user.is_authenticated %}
+                <span class="navigation-bar__bage" data-ui-favorites-counter="">{{request.user.profile.get_favorite_products_count}}</span>
+                {% else %}
+                {% endif %}
+            
           </span>
           <span class="navigation-bar__title"></span>
         </a>
@@ -96,7 +100,8 @@
 
 
 <div class="navigation-bar-panel navigation-bar-search" data-navigation-bar-panel="search">
-  <div action="" method="get">
+
+   <form action="/search/" method="get">
     <input type="hidden" name="lang" value="ru">
     <div class="navigation-bar-search__controls">
       <input class="form-control navigation-bar-search__field header__search-field_main" type="text" name="q" value="" placeholder="Поиск" autocomplete="off" data-search-field="" inprocess="false">
@@ -105,7 +110,7 @@
       </button>
     </div>
     <div class="navigation-bar-search__results header__search__results" data-search-result=""></div>
-  </div>
+  </form>
 </div>
 
 

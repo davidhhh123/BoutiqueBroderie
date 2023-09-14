@@ -490,10 +490,37 @@ input[type="radio"] {
 .widget-type_system_widget_v4_bottom_navigation_bar_1 .navigation-bar__bage {
     background-color: #dd626f !important;
 }
+  .loader-container_alert {
+            display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    z-index: 999999999999999;
+    background: #69696933;
+        }
 
+        /* Styles for the loader */
+        .loader-container_alert .loader {
+            border: 4px solid #dd626f;
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Keyframes for the loader animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
  </style>
- 
+  <div class="loader-container_alert">
+        <div class="loader"></div>
+    </div>
 <div id="loader_page" style=" position: fixed;
   left: 0px;
   top: 0px;
@@ -886,7 +913,7 @@ input[type="radio"] {
 
         <div class="header__area-search">
           <div class="header__search">
-            <div action="#search" method="get" class="header__search-form">
+            <form action="/search/" method="get" class="header__search-form">
           
 
 <div id="app-cover" class="form-control form-control_size-l">
@@ -996,6 +1023,7 @@ input[type="radio"] {
               <button type="submit" class="button button_size-l header__search-btn">
                 <span class="icon icon-search"></span>
               </button>
+           
               <input type="hidden" name="lang" value="ru">
               <div class="header__search__results">
                
@@ -1003,7 +1031,7 @@ input[type="radio"] {
 
 
               </div>
-            </div>
+            </form>
             <button type="button" class="button button_size-l header__search-mobile-btn js-show-mobile-search">
                 <span class="icon icon-search _show"></span>
               <span class="icon icon-times _hide"></span>

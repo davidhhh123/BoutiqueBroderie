@@ -871,21 +871,9 @@ input[type="radio"] {
 
         <div class="header__area-search">
           <div class="header__search">
-            <div action="#search" method="get" class="header__search-form">
-              <!--
-               <select name="cars" id="cars" class="form-control form-control_size-l">
-  <option value="categoria1">Нитки и пряжа</option>
-  <option value="categoria2">Ленты, шнуры, тесьма </option>
-    <option value="categoria1">Пайетки</option>
-  <option value="categoria2">Бисер, бусины, жемчуг </option>
-    <option value="categoria1">Фурнитура</option>
-  <option value="categoria2">Ткани, кожа, мех </option>
-    <option value="categoria1">Наборы для рукоделия</option>
-  <option value="categoria2">Инструменты </option>
-   <option value="categoria2">Книги, журналы </option>
-    <option value="categoria2">Антикварные и винтажные материалы</option>
+            <form action="/search/" method="get" class="header__search-form">
+             
 
-</select>-->
 
 <div id="app-cover" class="form-control form-control_size-l">
   <div id="select-box">
@@ -994,14 +982,14 @@ input[type="radio"] {
               <button type="submit" class="button button_size-l header__search-btn">
                 <span class="icon icon-search"></span>
               </button>
-              <input type="hidden" name="lang" value="ru">
+              <input type="hidden" name="lang" value="am">
               <div class="header__search__results">
                
                 
 
 
               </div>
-            </div>
+            </form>
             <button type="button" class="button button_size-l header__search-mobile-btn js-show-mobile-search">
                 <span class="icon icon-search _show"></span>
               <span class="icon icon-times _hide"></span>
