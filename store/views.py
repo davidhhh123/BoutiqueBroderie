@@ -999,7 +999,7 @@ def add_images_for_home_page_slide(request):
     data = {"success":1}
     return JsonResponse(data, safe=False)
 def add_price_for_shipping(request):
-    Mass_and_money = models.Mass_and_money.objects.filter()
+    Mass_and_money = models.Mass_and_money.objects.filter().order_by("zones")
 
     return render(request, "template_rus/add_shipping_price.html", {"Mass_and_money":Mass_and_money})
 def price_of_deliverybox(request):
@@ -2393,6 +2393,8 @@ def add_cart_product(request):
 
         profile.product_cart.add(add_product_cart)
         profile.save()
+
+        print("all_price", profile.product_cart_all_price)
         data = {
             "data":1,
             "product_pay":profile.product_cart_all_price,
