@@ -458,6 +458,8 @@ select_type" id="select_type" style="width: 100%;height: 40px;">
   <option value="Parcel">Parcel</option>
  
 </select>
+ <div class="finish_p">Добавить</div>
+     <div class="finish_pchange display_none">Изменить</div>
 
     <div class="all_shipping_prop">
      <div style="width: 100%; position: relative; margin-top: 25px; padding-bottom: 50px; display: inline-table;" class="table_all_feature">
@@ -471,6 +473,7 @@ select_type" id="select_type" style="width: 100%;height: 40px;">
     <th>Цена</th>
 
   </tr>
+  <tr class="one_item"></tr>
   {% for shipping_table in Mass_and_money %}
   <tr class="table_tr_class" id="table_tr_id{{shipping_table.pk}}">
     <td class="mass_start_table">{{shipping_table.mass_start}} <span>г</span></td>
@@ -504,8 +507,7 @@ select_type" id="select_type" style="width: 100%;height: 40px;">
                        </div>
       
     </div>
-    <div class="finish_p">Добавить</div>
-     <div class="finish_pchange display_none">Изменить</div>
+   
 
 </div>
 
@@ -734,7 +736,7 @@ var templates = ` <tr class="table_tr_class" id="table_tr_id#counters">
                 template = template.replaceAll("#counterb", data.pk)
                 
                 template = template.replaceAll("#counters",  data.pk)
-                $(".table_all_features tbody").append(template)
+                $(".one_item").after(template)
 
                 
                 

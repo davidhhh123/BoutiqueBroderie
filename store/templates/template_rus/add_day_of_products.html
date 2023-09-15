@@ -409,7 +409,7 @@ table {
       
 
 
-      
+       $(".loader-container_alert").css("display", "flex")
       
        $.ajax({
 
@@ -420,6 +420,7 @@ table {
             data: data,
             success: function(data){
               location.replace("/products_of_day/")
+               $(".loader-container_alert").css("display", "none")
                 
                 
 
@@ -427,7 +428,7 @@ table {
                 
 
             },
-            error: function(data){},
+            error: function(data){ $(".loader-container_alert").css("display", "none")},
             processData: false,
             contentType: false,
         })

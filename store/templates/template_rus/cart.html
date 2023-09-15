@@ -72,11 +72,42 @@
     }
   }
  
+  .loader-container_alert {
+            display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    z-index: 999999999999999;
+    background: #69696933;
+        }
+
+        /* Styles for the loader */
+        .loader-container_alert .loader {
+            border: 4px solid #dd626f;
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Keyframes for the loader animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+
 </style>
 
   </head>
   {% with rate=request|Get_pay_rate %}
   <body data-multi-lang="false" data-theme-template="index" data-sidebar-type="sticky" data-sidebar-position="left" class="settings_loaded">
+      <div class="loader-container_alert">
+        <div class="loader"></div>
+    </div>
     <div class="preloader">
       <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
     </div>
@@ -144,10 +175,10 @@
           </div>
         </div>
       </div>
-      <a href="#" class="item-title">
+      <div style="cursor: pointer;" onclick="on_click_href(`{% url 'accounts:product_detalis_view' product.product.pk %}`)" class="item-title">
       {{product.product.name_ru}}
       
-      </a>
+      </div>
 
 
       <div class="item-price">
@@ -489,6 +520,10 @@
 
 
 <script>
+
+  function on_click_href(href){
+     window.open(href);
+  }
   console.log("aaaaaa")
   {% if rate.1 == 'ARM' %}
 
@@ -791,6 +826,7 @@ $(".is-count-down_size ").on("click", function(){
          
         
     }
+
      if (all_price.toFixed(2)<max_per){
       
       $(".cart-controls").html(`<p class="button button_size-l button_wide" style="cursor: default;">Минимальная сумма заказа՝ `+ max_per +` `+ pay_icon +` </p>`)
@@ -1061,6 +1097,7 @@ if (all_price.toFixed(2)<max_per){
       console.log(counter_inputs.eq(i).val())
     }
     
+    $(".loader-container_alert").css("display", "flex")
      $.ajax({
 
 
@@ -1071,12 +1108,13 @@ if (all_price.toFixed(2)<max_per){
             success: function(data){
                 
                 window.open("{% url 'accounts:checkout_page' %}");
+                $(".loader-container_alert").css("display", "none")
                 
                 
                 
 
             },
-            error: function(data){},
+            error: function(data){$(".loader-container_alert").css("display", "none")},
             processData: false,
             contentType: false,
         })
