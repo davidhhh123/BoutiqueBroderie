@@ -1991,18 +1991,7 @@ $(".zoom_images_main").on("click", function(){
                  $(".icon.icon-cart .header__control-bage").text(parseInt($("span.header__control-bage.cart-empty").text())+1)
                   $(".navigation-bar__icon.icon-cart .navigation-bar__bage").text($(".icon.icon-cart .header__control-bage").text())
                   console.log(data.price_total/rate, "data.price_total)")
-                  if (parseInt(data.min_size) !=  1){
-
-                     
-
-                         $(".header__control-btn.header__cart .header__control-text").text(parseFloat(data.price_total/rate).toFixed(2))
-
-
-                  }
-                  else{
-                     $(".header__control-btn.header__cart .header__control-text").text(parseFloat(data.price_total/rate).toFixed(2)+" "+pay_icon)
-
-                  }
+                   $(".header__control-btn.header__cart .header__control-text").text(String(parseFloat(data.price_total/rate).toFixed(2))+" "+pay_icon)
                  
                  
                  
