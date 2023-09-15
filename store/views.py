@@ -2370,7 +2370,7 @@ def add_cart_product(request):
                 this_price = product.sale_price_size
             min_size = product.min_size
 
-            price_total = int(count_size[:-3])*this_price/10
+            price_total = int(count_size[:-3])*this_price/100
         elif product.price_pcs:
             indicator = "size_pcs"
             add_product_cart =models.products_cart.objects.create(profile = profile, product = product, count=count,indicator=indicator)
