@@ -1,6 +1,4 @@
 {% load static %}
-{% load i18n %}
-
 <!DOCTYPE html>
 <!-- saved from url=(0052)https://demo-idea.myinsales.ru/client_account/orders -->
 <html class="desktop landscape" style="--color-btn-bg:#7188D4; --color-btn-bg-is-dark:true; --bg:#FFFFFF; --bg-is-dark:false; --color-text: var(--color-text-dark); --color-text-minor-shade: var(--color-text-dark-minor-shade); --color-text-major-shade: var(--color-text-dark-major-shade); --color-text-half-shade: var(--color-text-dark-half-shade); --color-notice-warning-is-dark:false; --color-notice-success-is-dark:false; --color-notice-error-is-dark:false; --color-notice-info-is-dark:false; --color-form-controls-bg:var(--bg); --color-form-controls-bg-disabled:var(--bg-minor-shade); --color-form-controls-border-color:var(--bg-half-shade); --color-form-controls-color:var(--color-text); --is-editor:false; --vh:568px; --fixed-panels-bottom-offset:0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>
@@ -101,6 +99,70 @@
   .spinner {
     background: rgba(255, 255, 255, 0);
   }
+  .next_p, .finish_p{
+            width: 100px;
+    height: 45px;
+    
+    position: relative;
+    margin-top: 40px;
+    margin-left: calc(100% - 100px);
+    border: 1px solid #7c7c7c;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 40px;
+    cursor: pointer;
+
+          }
+          .svg_icon{
+            margin-left:10px;position: absolute;padding-top: 20px;
+          }
+            
+          .images_view_item{
+            width: calc(100% - 230px);
+    height: 124px;
+    margin-left: 230px;
+    position: absolute;
+    overflow-wrap: break-word;          }
+          .item_im{
+            width: 100px;height: 100px;background: white;position: relative;float: left;margin-left: 10px;margin-top: 10px;
+          }
+             .close_icon_ff, .close_icon_gg{
+                 position: absolute;
+    margin-top: 10px;
+    margin-left: 0;
+    color: #e37e7e;z-index: 999999999999;
+
+            }
+          .item_im img{
+            width: 100px;height: 100%;
+            object-fit: cover;
+          }
+          .item_im .close_ic{
+            width: 20px;height: 20px;position: absolute;display: inline-block;cursor: pointer;
+          }
+    .button_add_color, .button_add_size, .button_sub_category {
+            width: 95px;
+    height: 40px;
+    
+    position: relative;
+    margin-top: 20px;
+    
+    border: 1px solid #7c7c7c;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 35px;
+    cursor: pointer;
+
+          }
+    .button_sub_category{
+      width: 200px;
+    }
+    .category_class{
+      margin-top: 10px;
+    }
+          
 
   .spinner-screen {
     position: fixed;
@@ -108,6 +170,159 @@
     height: 100%;
     width: 100%;
   }
+
+
+ .cart {
+    display: grid;
+    grid-template-areas:
+        "items controls"
+        "items controls"
+        "items controls";
+    grid-gap: 2rem 2.5rem;
+    grid-auto-columns: 6fr 2fr;
+    grid-auto-rows: max-content auto;
+}
+@media screen and (max-width: 900px){
+ .cart {
+    grid-template-areas:
+        "items items"
+        "controls controls";
+    grid-gap: 1rem;
+    grid-auto-columns: 1fr 1fr;
+}}
+  @media screen and (max-width: 767px){
+ .cart {
+    grid-template-areas:
+        "items"
+        "controls";
+    grid-gap: 1rem;
+}}
+.widget-type_system_widget_v4_cart_2 .cart__area-items {
+    grid-area: items;
+}
+ .cart-item:last-child {
+    margin-bottom: 0;
+}
+ .cart-item {
+    --item-image-size: 96px;
+    display: grid;
+    grid-template-areas:
+        "image title title total"
+        "image delete . counter"
+        "image . . .";
+    grid-auto-columns: var(--item-image-size) min-content auto min-content;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--bg-major-shade);
+    padding-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 550px){
+ .cart-item {
+    --item-image-size: 80px;
+    grid-template-areas:
+        "image title"
+        "image total"
+        "image counter"
+        "image delete";
+    grid-auto-columns: minmax(var(--item-image-size), auto) auto;
+}
+}
+ .item-image {
+    grid-area: image;
+}
+.img-ratio {
+    height: 0;
+    position: relative;
+    padding-top: calc(100% / (var(--img-ratio, 1)));
+}
+.img-ratio_cart {
+    height: 0;
+    position: relative;
+    padding-top: calc(100% / (var(--img-ratio, 1)));
+}
+
+.img-ratio.img-ratio_cover, .img-ratio.img-ratio_contain, .img-ratio.img-fit {
+    overflow: hidden;
+}
+.co-input-description a:not([class]), .co-menu-link, .co-link, .link, a {
+    background-color: transparent;
+}
+.co-input-description a:not([class]), .co-menu-link, .co-link, .link, a {
+    color: var(--color-accent-text);
+    text-decoration: underline;
+}
+
+ .item-title {
+    grid-area: title;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.8rem;
+    color: var(--color-text);
+    text-decoration: none;
+    word-break: break-word;
+}
+@media screen and (max-width: 550px){
+ .item-title {
+    font-size: 1rem;
+    line-height: 1.2rem;
+}}
+ .item-delete {
+    grid-template-columns: 1fr 1fr 1fr !important;
+}
+
+ .item-delete {
+    grid-area: delete;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1rem;
+}
+.button, .co-button:not(.co-button--link), .picker-button, .m-modal-button, .co-tabs-controls--customer .co-tabs-node {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--controls-height-m);
+    max-width: 100%;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight);
+    font-size: var(--controls-font-size-m);
+    line-height: 1;
+    color: var(--color-btn-color);
+    border-radius: var(--controls-btn-border-radius);
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    background: var(--color-btn-bg);
+    border: var(--controls-border-width) solid transparent;
+    box-shadow: var(--color-btn-shadow);
+    padding: var(--controls-btn-padding-y) var(--controls-btn-padding-x);
+    outline: none;
+    transition: var(--btn-transition);
+}
+ .item-delete button {
+    color: #969696;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+.button:not(:disabled):not(.disabled), .co-button:not(:disabled):not(.disabled):not(.co-button--link), .picker-button:not(:disabled):not(.disabled), .m-modal-button:not(:disabled):not(.disabled), .co-tabs-controls--customer .co-tabs-node:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.button:hover, .co-button:hover:not(.co-button--link), .picker-button:hover, .m-modal-button:hover, .co-tabs-controls--customer .co-tabs-node:hover {
+    background: var(--color-btn-bg-minor-shade);
+    color: var(--color-btn-color);
+    border-color: var(--color-btn-bg-minor-shade);
+    box-shadow: var(--color-btn-shadow-hover);
+    text-decoration: none;
+}
+
+
+
+
 </style><meta data-config="{&quot;money_with_currency_format&quot;:{&quot;delimiter&quot;:&quot; &quot;,&quot;separator&quot;:&quot;.&quot;,&quot;format&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;show_price_without_cents&quot;:1},&quot;currency_code&quot;:&quot;RUR&quot;,&quot;default_currency&quot;:{&quot;title&quot;:&quot;Российский рубль&quot;,&quot;code&quot;:&quot;RUR&quot;,&quot;rate&quot;:1.0,&quot;format_string&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;price_separator&quot;:&quot;&quot;,&quot;is_default&quot;:true,&quot;price_delimiter&quot;:&quot;&quot;,&quot;show_price_with_delimiter&quot;:true,&quot;show_price_without_cents&quot;:true},&quot;facebook&quot;:{&quot;pixelActive&quot;:false,&quot;currency_code&quot;:&quot;RUB&quot;,&quot;use_variants&quot;:null},&quot;vk&quot;:{&quot;pixel_active&quot;:null,&quot;price_list_id&quot;:null},&quot;new_ya_metrika&quot;:false,&quot;ecommerce_data_container&quot;:&quot;dataLayer&quot;,&quot;common_js_version&quot;:null,&quot;vue_ui_version&quot;:null,&quot;feedback_captcha_enabled&quot;:&quot;1&quot;,&quot;is_minisite&quot;:false,&quot;account_id&quot;:1215183,&quot;hide_items_out_of_stock&quot;:false,&quot;forbid_order_over_existing&quot;:false,&quot;minimum_items_price&quot;:null,&quot;enable_comparison&quot;:true,&quot;locale&quot;:&quot;ru&quot;,&quot;client_group&quot;:null,&quot;consent_to_personal_data&quot;:{&quot;active&quot;:false,&quot;obligatory&quot;:true,&quot;description&quot;:&quot;Настоящим подтверждаю, что я ознакомлен и согласен с условиями \u003ca href=&#39;/page/oferta&#39; target=&#39;blank&#39;\u003eоферты и политики конфиденциальности\u003c/a\u003e.&quot;},&quot;recaptcha_key&quot;:&quot;6Lc0T0YUAAAAAAVNiH-_bnSC4E-YHMFTeYOqZyRx&quot;,&quot;checkout_float_order_content_block&quot;:false,&quot;sber_id_app_id&quot;:&quot;5b5a3c11-72e5-4871-8649-4cdbab3ba9a4&quot;,&quot;theme_generation&quot;:4,&quot;quick_checkout_captcha_enabled&quot;:false,&quot;max_order_lines_count&quot;:500}" name="shop-config" content=""><meta name="js-evnvironment" content="production"><meta name="default-locale" content="ru"><meta name="insales-redefined-api-methods" content="[]">
 <!--
 <script type="text/javascript" async="" src="./История заказов_files/insales_counter.js.Без названия"></script><script src="./История заказов_files/shop_checkout2_bundle-a278843f1b3d74a47695.js.Без названия"></script><style type="text/css"></style>--><style type="text/css">span.im-caret {
@@ -177,16 +392,42 @@ div.im-colormask > div {
     color: black;
     display: inline-block;
     width: 100px; /*calculated*/
-}</style>
+}
+.img-ratio.img-ratio_cover img{
+  object-fit: contain !important;
+}
+
+textarea:hover{
+  border-color: transparent;
+}
+textarea:focus {
+    outline: none !important;
+    
+   
+  }
+  main .layout{
+    --layout-side-padding: 20%;
+  }
+  
+  @media(max-width: 400px){
+    main .layout{
+    --layout-side-padding: 40px;
+  }
+
+  }
+
+ 
+</style>
         <!--InsalesCounter -->
-     
+       
+        <!-- /InsalesCounter -->
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="z5u4ZcCi96mLmA06enAYpRD2dVqvCx8HW_1QzHzkq-bn-aBcfLadnFoM4BmdLhkmMUfr4as37zV5Q8uvBIY1Og">
+    <!-- meta -->
 <title>
-My account
+Правила магазина
 
-</title>
-
-
-<meta name="description" content="boutiquebroderie">
+</title><meta name="description" content="">
 <meta data-config="{&quot;static-versioned&quot;: &quot;1.38&quot;}" name="theme-meta-data" content="">
 <meta name="robots" content="index,follow">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -197,9 +438,10 @@ My account
 <!-- canonical url-->
 
 <!-- rss feed-->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://boutiquebroderie.com">
-    <meta property="og:title" content="boutiquebroderie">
+
+
+<!-- icons-->
+
 <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32275806.ico"><style media="screen">
   @supports (content-visibility: hidden) {
     body:not(.settings_loaded) {
@@ -211,198 +453,6 @@ My account
       visibility: hidden;
     }
   }
-</style>
-<style type="text/css">
-  
-   .cart__area-items {
-    grid-area: items;
-}
- .cart-item {
-    --item-image-size: 0px;
-    display: grid;
-    grid-template-areas:
-        "image title title total"
-        "image delete . counter"
-        "image . . .";
-    grid-auto-columns: var(--item-image-size) min-content auto min-content;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--bg-major-shade);
-    padding-bottom: 1.5rem;
-}
- .item-image {
-    grid-area: image;
-}
-.img-ratio {
-    height: 0;
-    position: relative;
-    padding-top: calc(100% / (var(--img-ratio, 1)));
-}
-.img-ratio_cart {
-    height: 0;
-    position: relative;
-    padding-top: calc(100% / (var(--img-ratio, 1)));
-}
-
-
-.img-ratio.img-ratio_cover, .img-ratio.img-ratio_contain, .img-ratio.img-fit {
-    overflow: hidden;
-}
-.img-ratio__inner {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-
-
-.img-ratio img {
-    max-height: 100%;
-    max-width: 100%;
-    vertical-align: middle;
-}
- .item-image {
-    grid-area: image;
-}
- .item-image img {
-    width: 100%;
-    border-radius: var(--border-radius);
-    object-position: 50%;
-}
-.img-ratio.img-ratio_cover img, .img-ratio.img-ratio_contain img, .img-ratio.img-fit img {
-    height: 100%;
-    width: 100%;
-    max-width: none;
-    max-height: none;
-    object-position: 50% 50%;
-}
-
-.img-ratio.img-ratio_cover img {
-    object-fit: cover;
-}
- .item-image .img-ratio img {
-    object-fit: contain !important;
-    object-position: 50% 0 !important;
-
-}
- .item-title {
-    grid-area: title;
-    font-size: 1.2rem;
-    font-weight: 500;
-    line-height: 1.8rem;
-    color: var(--color-text);
-    text-decoration: none;
-    word-break: break-word;
-}
- .item-price {
-    grid-area: price;
-    color: var(--color-accent-text);
-    display: grid;
-    grid-auto-flow: column;
-    justify-self: start;
-    gap: 1rem;
-    display: none;
-}
-.widget-type_system_widget_v4_cart_2 .item-counter {
-    grid-area: counter;
-    justify-self: self-end;
-    align-self: center;
-}
- .counter {
-    display: flex;
-}
- .item-total {
-    grid-area: total;
-    font-size: 1.3rem;
-    line-height: 1.8rem;
-    justify-self: end;
-    font-weight: 500;
-    white-space: nowrap;
-}
- .item-delete {
-    grid-area: delete;
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 1rem;
-}
-
- .item-delete {
-    grid-template-columns: 1fr 1fr 1fr !important;
-}
- .favorites_btn,  .favorites_btn:hover {
-    padding: 0;
-    background: transparent;
-    color: var(--color-text-half-shade);
-    outline: none;
-    border: 0;
-}
-
-.item-link{
-    grid-area: total;
-    font-size: 1rem;
-    line-height: 1.8rem;
-    justify-self: end;
-    font-weight: 500;margin-top: 30px;
-    white-space: nowrap;
-    position: absolute;
-}
-@media(max-width: 406px){
-  .item-title{
-    font-size: .9rem;
-  }
-}
-input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-.container_data{
-  width: 60%;
-}
-@media(max-width: 1080px){
-  .container_data{
-  width: 70%;
-}
-
-}
-@media(max-width: 768px){
-  .container_data{
-  width: 100%;
-}
-
-}
-
-.finish_p{
-            width: 122px;
-    height: 45px;
-    
-    position: relative;
-    margin-top: 40px;
-    margin-left: calc(100% - 122px);
-    border: 1px solid #7c7c7c;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 20px;
-    line-height: 40px;
-    cursor: pointer;
-    padding-left: 3px;
-
-
-          }
-
-.error_window{
-  margin-top: 10px;
-  color: red;
-  display: none;
-}
-
-
 </style>
 
   </head>
@@ -421,7 +471,7 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
       <header>
       
         <div class="layout widget-type_system_widget_v4_header_1" style="--logo-img:&#39;https://static.insales-cdn.com/files/1/7649/24960481/original/Frame.png&#39;; --logo-max-width:160px; --hide-menu-photo:false; --hide-search:false; --hide-language:false; --hide-compare:true; --hide-personal:false; --hide-favorite:false; --hide-total-price:false; --bage-bg:#7188D4; --bage-bg-is-dark:true; --bage-bg-minor-shade:#8095d9; --bage-bg-minor-shade-is-dark:true; --bage-bg-major-shade:#8ea0dd; --bage-bg-major-shade-is-dark:true; --bage-bg-half-shade:#b8c4ea; --bage-bg-half-shade-is-light:true; --bg-top-panel:#E5EBFF; --bg-top-panel-is-light:true; --bg-top-panel-minor-shade:#e5ebff; --bg-top-panel-minor-shade-is-light:true; --bg-top-panel-major-shade:#e4eaff; --bg-top-panel-major-shade-is-light:true; --bg-top-panel-half-shade:#d9e2ff; --bg-top-panel-half-shade-is-light:true; --menu-grid-list-min-width:220px; --menu-grid-list-row-gap:3rem; --menu-grid-list-column-gap:3rem; --subcollections-items-limit:10; --menu-img-ratio:1; --live-search:true; --header-wide-bg:true; --header-top-pt:0.5vw; --header-top-pb:0.5vw; --header-main-pt:1vw; --header-main-pb:2vw; --header-wide-content:false; --hide-desktop:false; --hide-mobile:false;">
-{% include 'layouts/header_eng.html' %}
+{% include 'layouts/header.html' %}
 
       
       </header>
@@ -429,259 +479,140 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
         <div class="layout">
           <div class="layout__content">
             <div class="checkout-v2-wrapper co-section--content_wrapper">
-              {% include 'layouts/admin_profile_tabs_eng.html' %}
-
-             
+              
+              
                 
 <div class="co-checkout-block--padded">
- 
-   <h1 class="co-checkout-title co-title co-title--h1">
-                   
-Personal data
-                  </h1>
-   <p style="font-weight: bold;font-size: 17px;margin-top: 10px;">Account #{{request.user.profile.pk}}</p>
 
-<div class="container container_data">
-  <form class="co-form--login co-modal-login_form my_account_form" data-use-mask="1" onsubmit="check()">
-  <p><strong>First name:</strong></p>
-  <input type="text" value="{{profile.first_name}}" id="first_name">
-
-  <p><strong>Last name:</strong></p>
-  <input type="text" value="{{profile.last_name}}" id="last_name">
-
-  <p><strong>Phone number:</strong></p>
+  <div class="my_text" >
+    <div class="article-content static-text">
+     <div class="fr-wrapper" dir="auto"><div class="fr-element fr-view" >
+    {{about_us.description | safe }}
+  </div></div>
+   {% if request.user.is_superuser %}
+  <em><a href="{% url 'accounts:rules_edit' about_us.pk %}">отредактировать</a> </em>
+    
+ {% else %}
+ {% endif %}
   
-  <input type="tel" value="{{profile.phone_number}}" id="phone_number"  
-required="required">
-
-  <p><strong>Email:</strong></p>
-  <input type="email" value="{{profile.email}}" id="email">
-
-  <p><strong>Password:</strong></p>
-  <input type="password" value="{{profile.password}}" id="password">
-  <p><strong>Confirm password:</strong></p>
-  <input type="password" value="{{profile.password}}" id="confirm_password">
-  <input type="checkbox" onclick="myFunction()" style="margin-top: 15px;">Show password
-
-  <p class="error_window"></p>
-  <div class="co-form-controls"><button class="co-button co-form-button finish_p" type="submit">Save</button></div>
-
-</form>
-</div>
- 
-  
-  
-  
-</div>
-
-
-              </div>
-            </div>
           </div>
         </div>
+      </div></div>
       </main>
-        {% include 'layouts/aside_eng.html' %}
-    {% include 'layouts/footer_eng.html' %}
+        {% include 'layouts/aside.html' %}
+    {% include 'layouts/footer.html' %}
     </div>
     
     <div data-fixed-panels="bottom">
-      
-    
+     
       
     </div>
 
+   
+ 
  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my-layout.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/core-css.css" rel="stylesheet" type="text/css">
   
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.waypoints.min.js"></script>
-
-
- <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-  <link
-     rel="stylesheet"
-     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
-   />
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/main_2.js"></script>
   
 
-<script>
-  const phoneInputField = document.querySelector("#phone_number");
-
-   const phoneInput = window.intlTelInput(phoneInputField, {
-     utilsScript:
-       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-       initialCountry: "auto",
-                separateDialCode: true,
-
-   });
- 
-function myFunction() {
-  var x = document.getElementById("password");
-   var y = document.getElementById("confirm_password");
-  if (x.type === "password") {
-    x.type = "text";
-    y.type = "text";
-  } else {
-    x.type = "password";
-    y.type = "password";
-  }
-}
- function check() {
-  event.preventDefault();
-  var form = document.forms["login"];
- 
-  if (form.userid.value == "pf900" && form.pswrd.value == "password") {
-    window.open('/pf900_pid/index.htm', '_self')
-  } else if (form.userid.value == "pf350a" && form.pswrd.value == "password") {
-    window.open('/pf350a_pid/index.htm', '_self')
-  } else {
-    alert("Error: Wrong username or password")
-  }
-}
-</script>
-<script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/infinite.min.js"></script>
-<script type="text/javascript">
-  var infinite = new Waypoint.Infinite({
-      element: $('.infinite-container')[0],
-      onBeforePageLoad: function () {
-        $('.loading').show();
-      },
-      onAfterPageLoad: function ($items) {
-        $('.loading').hide();
-      }
-    });
-  </script>
- 
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/lazyload.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_4.js"></script>
-  <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/icons.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts.css" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts_features.css" rel="stylesheet" type="text/css">
-  
-<script>
-    function validateUsername(username) {
-  // Check if the username is not empty
-  var nameRegex = /^[a-zA-Z ]+$/;
+  <script>
+    
+</script>
+  <script type="text/javascript">
+    var category_deg = 1
+    var files_for_request=[]
+    
+    var files_for_request_delete=[]
+    var files_for_request_s_nums=[]
+   
+    var id_close=parseInt("{{slides_len}}")
+    
+    console.log(id_close, "id_close")
+    var images_count=video_count=0
 
-
-  // Check if the name matches the regular expression
-  
-  if (nameRegex.test(username)) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function isValidlogin_password(text) {
-  // Use a regular expression to check if the username contains only letters and numbers
-  const regex = /^[a-zA-Z0-9]+$/;
-  return regex.test(text);
-}
-  $(".my_account_form").on("submit", function(){
-    var first_name = $("#first_name").val()
-    var last_name = $("#last_name").val()
-    var email = $("#email").val()
-    var phone_number = $("#phone_number").val()
-    var password = $("#password").val()
-    var confirm_password = $("#confirm_password").val()
-    var validation=true
-const validationResult_password = isValidlogin_password(password);
-const validationResult_first_name = validateUsername(first_name);
-const validationResult_last_name = validateUsername(last_name);
-if (validationResult_password){
-
-
-    if (password!=confirm_password){
-      validation = false
-      $(".error_window").text("Password mismatch")
-      $(".error_window").css("display", "block")
-      return false
-
-    }
-    else{
-      validation = true
-    }}
-  else{
-    validation = false
-    $(".error_window").text("Passwords must contain only numbers and letters")
-    $(".error_window").css("display", "block")
-    return false
-
-
-  }
-console.log(validationResult_first_name, validationResult_last_name)
-if (validationResult_first_name && validationResult_last_name){
-  validation = true
-
-
-}
-else{
-  validation = false
-   $(".error_window").text("First and Last Name must contain only numbers and letters")
-   $(".error_window").css("display", "block")
-  return false
-}
-  
-  const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
- var phoneInputInstance = window.intlTelInputGlobals.getInstance(phoneInputField);
- var phone_number = phoneInputInstance.getNumber();
-
-
-if (phoneInputInstance.isValidNumber()) {
-  validation = true;
-  console.log(true);
-} else {
-  validation = false;
-  const errorCode = phoneInputInstance.getValidationError();
-  console.log(errorCode)
-  let error_text = "";
-  if (errorMap[errorCode] == "Invalid number"){
-            error_text = "Phone number must be numbers"
-          }
-          else if(errorMap[errorCode] == "Too short"){
-            error_text = "Phone number is short"
-
-          }
-          else if(errorMap[errorCode] == "Too long"){
-            error_text = "Phone number is long"
+var files_for_request_video=[]
+var template_brand = `<div class="infinite-item item_brand<pk>" > <div class="cart-item " id="cart-item51" data-product-id="336490978" data-item-id="573211243">
+      <div class="item-image">
+        <div class="img-ratio img-ratio_cover img-ratio_cart">
+          <div class="img-ratio__inner">
+           
             
-          }
-          else if(errorMap[errorCode] == "Invalid number"){
-            error_text = "Phone number is wrong"
+             <img title="Инструменты" alt="Инструменты" src="<brand_picture>" class="item-image">
             
-          }
-          else{
-            error_text = "Invalid country code"
+            
+           
+            
+          </div>
+        </div>
+      </div>
+      <a href="/brand_products/<pk>" class="item-title">
+      <brand_name>
+      
+      </a>
+     
+     
+     
+      <div class="item-delete">
+        
+         
+        
+        <button class="button js-item-delete" type="button" data-item_delete="<pk>"><span class="icon icon-trash"></span> Удалить</button>
+        <!-- a -n  button style  -->
 
-          }
-         $(".error_window").text(error_text)
-          $(".error_window").css("display", "block")
-        console.log(error_text)
+        
+      </div>
+    </div>
+  </div>`
+    $(".finish_p").on("click", function(){
+      var Brand_name = $("#Brand_name").val()
+      
 
-        return false
-      }
 
-if (validation){
-  var data = new FormData()
-  data.append("first_name", first_name)
-   data.append("last_name", last_name)
-   data.append("email", email)
-   data.append("password", password)
-   data.append("phone_number", phone_number)
-    $.ajax({
+      
+      
+
+
+
+      var data = new FormData()
+       data.append('images' + String(0), files_for_request[0])
+      
+
+     
+      data.append("Brand_name", Brand_name)
+      
+      
+    
+
+
+      
+      
+       $.ajax({
 
 
               
-            url: '/api/change_profile/',
+            url: '/api/add_brand/',
             method: "POST",
             data: data,
             success: function(data){
-                
-                location.replace("/my_account/")
+                console.log(data.pk)
+                template = template_brand.replaceAll("<pk>", data.pk)
+                template = template.replace("<brand_name>", Brand_name)
+                template = template.replace("<brand_picture>", data.picture)
+                //location.replace("/my_product/")
+                $(".first_item").after(template)
+                $("#Brand_name").val("")
+                files_for_request=[]
+                 $("#file_inp").val(''); 
+                 $(".images_view_item.item_images").html("")
                 
                 
 
@@ -690,11 +621,251 @@ if (validation){
             processData: false,
             contentType: false,
         })
-}
-    
-  })
-  
 
+      
+
+    })
+
+       $(document).on("click",".js-item-delete_brand", function(){
+        var pk = $(this).attr("data-item_delete")
+        var data=new FormData()
+      
+      
+
+     
+      data.append("pk", pk)
+
+      
+      
+    
+
+
+      
+      
+       $.ajax({
+
+
+              
+            url: '/api/delete_brand/',
+            method: "POST",
+            data: data,
+            success: function(data){
+                $(".item_brand"+String(pk)).remove()
+                
+                
+                
+
+            },
+            error: function(data){},
+            processData: false,
+            contentType: false,
+        })
+
+      
+
+    })
+
+    
+    close_count=0;
+
+
+    $(document).on("click", ".close_ic", function(){
+      var this_id = $(this).attr("this_id")
+      var pk = $(this).attr("pk")
+      var status = $(this).attr("status")
+      if (status!="yes"){
+
+        files_for_request.splice(this_id-close_count, 1);
+        
+        
+        
+          id_close--;
+        close_count++;
+
+      }
+      else{
+        files_for_request_delete.push(pk)
+      }
+
+      $("#id_for_remove"+String(this_id)).remove()
+      
+        if (id_close==0){
+           $(".images_view_item").css("display", "none")
+        }
+        console.log(files_for_request)
+
+    })
+    var files_m=[]
+    var files_m_video=[]
+          var images_item = `<div class="item_im" id="id_for_remove"><span class="close_ic" this_id = "id_p" status="no"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   viewBox="0 0 511.76 511.76" style="enable-background:new 0 0 511.76 511.76;" xml:space="preserve">
+<g>
+  <g>
+    <path d="M436.896,74.869c-99.84-99.819-262.208-99.819-362.048,0c-99.797,99.819-99.797,262.229,0,362.048
+      c49.92,49.899,115.477,74.837,181.035,74.837s131.093-24.939,181.013-74.837C536.715,337.099,536.715,174.688,436.896,74.869z
+       M361.461,331.317c8.341,8.341,8.341,21.824,0,30.165c-4.16,4.16-9.621,6.251-15.083,6.251c-5.461,0-10.923-2.091-15.083-6.251
+      l-75.413-75.435l-75.392,75.413c-4.181,4.16-9.643,6.251-15.083,6.251c-5.461,0-10.923-2.091-15.083-6.251
+      c-8.341-8.341-8.341-21.845,0-30.165l75.392-75.413l-75.413-75.413c-8.341-8.341-8.341-21.845,0-30.165
+      c8.32-8.341,21.824-8.341,30.165,0l75.413,75.413l75.413-75.413c8.341-8.341,21.824-8.341,30.165,0
+      c8.341,8.32,8.341,21.824,0,30.165l-75.413,75.413L361.461,331.317z"/>
+  </g>
+</g>
+</svg>
+</span><img src="srcT"></div>`
+
+
+
+function add_images(src, r, video_or_image){
+    let render = new FileReader();
+        render.addEventListener("load", function(){
+            var image = new Image();
+            image.src = this.result;
+
+            image.onload = function() {
+           //if (this.width<900  ||  this.height<1200){
+                 console.log(this.width + " " + this.height, "not");
+                 $(".error_tabl").html(`Փոխեք նկարի չափսերը`)
+                 $(".error_tabl").css("display", "block")
+
+            //}
+
+
+            //else{
+               box = images_item.replace("srcT", this.src)
+            box = box.replace("id_p", (id_close+close_count))
+            
+            box = box.replace("id_for_remove", "id_for_remove"+(id_close+close_count))
+            
+            id_close++;
+             $(".images_view_item").css("display", "block")
+            
+            if (r!=undefined){
+                 r.val(''); 
+
+            }
+            if (video_or_image != undefined){
+              files_for_request.push(src)
+              $(".images_view_item.item_images").append(box)
+              images_count++;
+            if (images_count>=4){
+                $(".error_tabl").css("display", "none")
+
+            }
+
+            }
+            else{
+              $(".images_view_item.item_videos").append(box)
+              files_for_request_video.push(src)
+              video_count++;
+            if (video_count>=4){
+                $(".error_tabl").css("display", "none")
+
+            }
+
+            }
+                   
+           
+            
+
+
+
+            //}
+        };
+            
+                
+            
+
+       
+            
+
+        })
+        
+
+        render.readAsDataURL(src)
+
+
+}
+
+
+
+
+
+      $("#file_inp").on('change',function(){
+        var r = $(this)
+
+            
+
+      
+        if (this.files.length > 1){
+          for (var i1 = 0; i1 < this.files.length; i1++) {
+                files_m.push(this.files[i1])
+                
+                if (i1==this.files.length-1){
+                  $(this).val(''); 
+
+                }
+                
+            } 
+
+        }
+        else{
+          if (this.files.length == 0){
+
+
+                }else{
+
+                
+                files_m.push(this.files[0])
+               
+
+                  $(this).val(''); 
+
+                
+                 
+                 
+            }
+        }
+        if (files_m.length > 1){
+
+                    for (var i1 = 0; i1 < files_m.length; i1++) {
+                        if (i1==files_m.length-1){
+                    
+                    add_images(files_m[i1], r, "image")
+
+                }else{
+                    add_images(files_m[i1], undefined, "image")
+
+                }
+                        
+                        
+        
+
+        
+                        
+                        
+                 
+
+               
+               
+            } 
+                   
+
+                }else{
+                
+
+               add_images(files_m[0], r, "image")
+                
+            }
+            files_m=[]
+
+
+           
+
+
+      })
+     
+  </script>
+<script>
   try {
   let widget = '.widget-type_system_widget_v4_header_1';
   let $widget = $('.widget-type_system_widget_v4_header_1');
@@ -820,7 +991,21 @@ $(function() {
     });
   });
 
- 
+  EventBus.subscribe('widget:input-setting:insales:system:editor', (data) => {
+    $(widget).find(".js-cut-list").resize();
+
+    if (data.setting_name == 'subcollections-items-limit') {
+      configureSubcollectionsItemsLimit(data.value);
+    }
+  });
+
+  EventBus.subscribe('widget:change-setting:insales:system:editor', (data) => {
+    $(widget).find(".js-cut-list").resize();
+
+    if (data.setting_name == 'subcollections-items-limit') {
+      configureSubcollectionsItemsLimit(data.value);
+    }
+  });
 
   function configureSubcollectionsItemsLimit(limit) {
     let collections_menu = $(widget).find(".header__collections-menu");
@@ -869,6 +1054,100 @@ function replaceAlertWarningIcon(message) {
   }
 }
 
+EventBus.subscribe('error-feedback:insales:ui_feedback', function(data) {
+  let iconWarning = '<span class="icon-exclamation-triangle" style="margin-right:5px;"></span>';
+  $.each(data.errors, function(i, val) {
+    let errorText = typeof val == 'string' ? val : val[0];
+
+    microAlert(iconWarning + errorText, 5000, {
+      modificator: 'warning-notice'
+    });
+  });
+});
+
+EventBus.subscribe('send-feedback:insales:ui_feedback', function(data) {
+  let success_feedback = alertsSettings['success_feedback'];
+  let preorder = false;
+
+  if ($(data.form[0]).find('[name="is-preorder-form"]').length) {
+    success_feedback = alertsSettings['success_preorder'];
+    preorder = true;
+  }
+
+  if ($(window).width() >= '767' && preorder) {
+    microAlert(replaceAlertCheckIcon(success_feedback), 5000, {
+      modificator: 'success-notice'
+    });
+  } else if ($(window).width() <= '768' && !preorder) {
+    microAlert(replaceAlertCheckIcon(success_feedback), 5000, {
+      modificator: 'success-notice'
+    });
+  }
+});
+
+EventBus.subscribe('overload:insales:compares', function() {
+  let overload_compares = alertsSettings['overload_compares'];
+  microAlert(replaceAlertWarningIcon(overload_compares), 5000, {
+    modificator: 'warning-notice'
+  });
+});
+
+EventBus.subscribe('add_item:insales:compares', () => {
+  let add_item_compares = alertsSettings['add_item_compares'];
+
+  microAlert(replaceAlertCheckIcon(add_item_compares), 5000, {
+    modificator: 'success-notice'
+  });
+});
+
+EventBus.subscribe('remove_item:insales:compares', () => {
+  let remove_item_compares = alertsSettings['remove_item_compares'];
+  microAlert(remove_item_compares, 5000, {
+    modificator: 'success-notice'
+  });
+});
+
+EventBus.subscribe('add_item:insales:favorites_products', () => {
+  let add_item_favorites = alertsSettings['add_item_favorites'];
+  microAlert(replaceAlertCheckIcon(add_item_favorites), 5000, {
+    modificator: 'success-notice'
+  });
+});
+
+EventBus.subscribe('remove_item:insales:favorites_products', () => {
+  let remove_item_favorites = alertsSettings['remove_item_favorites'];
+  microAlert(remove_item_favorites, 5000, {
+    modificator: 'success-notice'
+  });
+});
+
+EventBus.subscribe(['overload:quantity:insales:product', 'unchange_quantity:insales:ui_add-cart-counter'], () => {
+  let overload_quantity = alertsSettings['overload_quantity'];
+  microAlert(replaceAlertWarningIcon(overload_quantity), 5000, {
+    modificator: 'warning-notice'
+  });
+});
+
+EventBus.subscribe('add_items:insales:cart', function(data) {
+  if (data.action.button) {
+    let success_cart = alertsSettings['success_cart'];
+    let btn_add_cart_counter_attr = $(data.action.button).is("[data-add-cart-counter-btn]") || $(data.action.button).is("[data-add-cart-counter]");
+    let show_alert_always = $(data.action.button.prevObject).is("[data-show-alert-always]");
+
+    if (btn_add_cart_counter_attr && data.action.currentItems && data.action.currentItems.length) {
+      let current_id = data.action.currentItems[0].variant_id;
+      let first_added = Cart.order.order_lines.filter(i => {
+        return i.variant_id == current_id && i.quantity == 1;
+      });
+
+      if (first_added.length || show_alert_always) {
+        microAlert(replaceAlertCheckIcon(success_cart), 3000, {
+          modificator: 'success-notice'
+        });
+      }
+    }
+  }
+});
 
 if (window.location.pathname == '/' && Cookies.get('lite_preorder')) {
   let success_feedback = alertsSettings['success_preorder'];
@@ -899,6 +1178,20 @@ if (window.location.pathname == '/' && Cookies.get('lite_preorder')) {
   });
 });
 
+EventBus.subscribe('send-feedback:insales:ui_feedback', (data) => {
+  data.form.addClass("is-sended");
+
+  setTimeout(function() {
+    data.form.removeClass("is-sended");
+    $(widget).removeClass("is-show-fullscreen");
+  }, 5000);
+});
+
+EventBus.subscribe('show-modal-feedback:insales:ui_feedback', (data) => {
+  if (data.modal_id && data.modal_id == "default") {
+    $(widget).addClass("is-show-fullscreen");
+  }
+});
 
 } catch(error) {
   console.error('Widget "widget-type_system_widget_v4_callback_modal_1" throwed an error: "' + error.stack + '"')
@@ -928,7 +1221,35 @@ if (window.location.pathname == '/' && Cookies.get('lite_preorder')) {
 ;try {
   let widget = '.widget-type_system_widget_v4_notification_add_to_cart_1';
   let $widget = $('.widget-type_system_widget_v4_notification_add_to_cart_1');
- 
+  EventBus.subscribe('add_items:insales:cart', function(data) {
+  if (data.action.button) {
+    var btn_add_cart_counter_attr = $(data.action.button[0]).attr("data-add-cart-counter");
+
+    if (typeof btn_add_cart_counter_attr === typeof undefined && data.action.currentItems && data.action.currentItems.length) {
+
+      var photo_area = $(widget).find(".notification-product__photo");
+      var title_area = $(widget).find(".notification-product__title");
+      var price_area = $(widget).find(".notification-product__price");
+      var count_area = $(widget).find(".notification-product__count");
+
+      photo_area.find("img").remove();
+      title_area.text('');
+      price_area.text('');
+      count_area.text('');
+
+      var product_info = data.action.currentItems[0];
+      var variant_id = product_info.variant_id;
+      var count = data.action.items[variant_id] || 1;
+
+      $('<img src="' + product_info.first_image.medium_url + '"/>').appendTo($(widget).find(".notification-product__photo"));
+      $(widget).find(".notification-product__title").html(product_info.title);
+      $(widget).find(".notification-product__price").html(Shop.money.format(product_info.sale_price));
+      $(widget).find(".notification-product__count").text(count + ' ' + Shop.units.getName(product_info.product.unit) + '.');
+
+      $(widget).addClass("is-show-fullscreen");
+    }
+  }
+});
 
 $(document).ready(function() {
   $(widget).find(".js-hide-notification").on("click", function() {
@@ -950,7 +1271,45 @@ $(document).ready(function() {
 ;try {
   let widget = '.widget-type_system_widget_v4_preorder_1';
   let $widget = $('.widget-type_system_widget_v4_preorder_1');
- 
+  $(function() {
+  EventBus.subscribe('show-preorder:insales:ui_product', (data) => {
+    let content_field = $(widget).find('[name="content"]');
+    let product_label = content_field.data("preorderProductLabel");
+    let variant_label = content_field.data("preorderVariantLabel");
+
+    let product_info = product_label + data.product;
+
+    if (data.variant) {
+      product_info += "<br/>" + variant_label + data.variant;
+    }
+
+    $(widget).find('[name="content"]').val(product_info);
+    $(widget).addClass("is-show-fullscreen");
+  });
+
+  $(document).ready(function() {
+    $(widget).find(".js-hide-preorder").on("click", function() {
+      $(widget).removeClass("is-show-fullscreen");
+    });
+
+    $(widget).on("click", function(event) {
+      if ($(event.target).closest(widget + ' .layout__content').length) {
+        return;
+      }
+
+      $(widget).removeClass("is-show-fullscreen");
+    });
+  });
+
+  EventBus.subscribe('send-feedback:insales:ui_feedback', (data) => {
+    data.form.addClass("is-sended");
+
+    setTimeout(function() {
+      data.form.removeClass("is-sended");
+      $(widget).removeClass("is-show-fullscreen");
+    }, 5000);
+  });
+});
 
 } catch(error) {
   console.error('Widget "widget-type_system_widget_v4_preorder_1" throwed an error: "' + error.stack + '"')
@@ -980,7 +1339,14 @@ function showButtonOnTop(btn) {
   }
 }
 
-
+$(function() {
+  EventBus.subscribe(['widget:input-setting:insales:system:editor', 'widget:change-setting:insales:system:editor'], (data) => {
+    if (data.setting_name == 'icon-view') {
+      let btn = $('[data-widget-id="' + data.widget_id + '"] .js-go-top-page');
+      btn.find("> span").removeClass().addClass(data.value);
+    }
+  });
+});
 } catch(error) {
   console.error('Widget "widget-type_system_widget_v4_button_on_top_1" throwed an error: "' + error.stack + '"')
 }
@@ -1109,11 +1475,11 @@ function showCartFixedBtn(btn) {
 </script>
 
 
+  
 
 
-
-
-
+<meta name="font-static-version" content="3.11">
+<meta name="system-google-fonts" content="Roboto,Comfortaa,Jura,Montserrat,Oswald,Lobster,Neucha,El Messiri,PT Serif,Anonymous Pro,Istok Web,Fira Sans,Open Sans,Manrope,Jost,Exo 2,Raleway,Playfair Display,Noto Serif Display,Press Start 2P,">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/style.css" media="all" onload="this.media=&#39;all&#39;">
 

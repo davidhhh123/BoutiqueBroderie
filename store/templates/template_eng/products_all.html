@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load i18n %}
 {% load mathfilters %}
   {% load rate %}
   {% load all_go %}
@@ -7,9 +7,10 @@
 <!DOCTYPE html>
 
 <html style="--color-btn-bg:#7188D4; --color-btn-bg-is-dark:true; --bg:#FFFFFF; --bg-is-dark:false; --color-text: var(--color-text-dark); --color-text-minor-shade: var(--color-text-dark-minor-shade); --color-text-major-shade: var(--color-text-dark-major-shade); --color-text-half-shade: var(--color-text-dark-half-shade); --color-notice-warning-is-dark:false; --color-notice-success-is-dark:false; --color-notice-error-is-dark:false; --color-notice-info-is-dark:false; --color-form-controls-bg:var(--bg); --color-form-controls-bg-disabled:var(--bg-minor-shade); --color-form-controls-border-color:var(--bg-half-shade); --color-form-controls-color:var(--color-text); --is-editor:false; --vh:568px; --fixed-panels-bottom-offset:0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta data-config="{&quot;money_with_currency_format&quot;:{&quot;delimiter&quot;:&quot; &quot;,&quot;separator&quot;:&quot;.&quot;,&quot;format&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;show_price_without_cents&quot;:1},&quot;currency_code&quot;:&quot;RUR&quot;,&quot;default_currency&quot;:{&quot;title&quot;:&quot;Российский рубль&quot;,&quot;code&quot;:&quot;RUR&quot;,&quot;rate&quot;:1.0,&quot;format_string&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;price_separator&quot;:&quot;&quot;,&quot;is_default&quot;:true,&quot;price_delimiter&quot;:&quot;&quot;,&quot;show_price_with_delimiter&quot;:true,&quot;show_price_without_cents&quot;:true},&quot;facebook&quot;:{&quot;pixelActive&quot;:false,&quot;currency_code&quot;:&quot;RUB&quot;,&quot;use_variants&quot;:null},&quot;vk&quot;:{&quot;pixel_active&quot;:null,&quot;price_list_id&quot;:null},&quot;new_ya_metrika&quot;:false,&quot;ecommerce_data_container&quot;:&quot;dataLayer&quot;,&quot;common_js_version&quot;:null,&quot;vue_ui_version&quot;:null,&quot;feedback_captcha_enabled&quot;:&quot;1&quot;,&quot;account_id&quot;:1215183,&quot;hide_items_out_of_stock&quot;:false,&quot;forbid_order_over_existing&quot;:false,&quot;minimum_items_price&quot;:null,&quot;enable_comparison&quot;:true,&quot;locale&quot;:&quot;ru&quot;,&quot;client_group&quot;:null,&quot;consent_to_personal_data&quot;:{&quot;active&quot;:false,&quot;obligatory&quot;:true,&quot;description&quot;:&quot;Настоящим подтверждаю, что я ознакомлен и согласен с условиями \u003ca href=&#39;/page/oferta&#39; target=&#39;blank&#39;\u003eоферты и политики конфиденциальности\u003c/a\u003e.&quot;},&quot;recaptcha_key&quot;:&quot;6Lc0T0YUAAAAAAVNiH-_bnSC4E-YHMFTeYOqZyRx&quot;,&quot;checkout_float_order_content_block&quot;:false,&quot;sber_id_app_id&quot;:&quot;5b5a3c11-72e5-4871-8649-4cdbab3ba9a4&quot;,&quot;theme_generation&quot;:4,&quot;quick_checkout_captcha_enabled&quot;:false,&quot;max_order_lines_count&quot;:500}" name="shop-config" content=""><meta name="js-evnvironment" content="production"><meta name="default-locale" content="ru"><meta name="insales-redefined-api-methods" content="[]">
+        <!--InsalesCounter -->
         
+        <!-- /InsalesCounter -->
 
-    <!-- meta -->
     <!-- meta -->
 <title>Boutiquebroderie
 </title>
@@ -20,20 +21,22 @@
 <meta name="robots" content="index,follow">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
+<meta name="format-detection" content="telephone=no">
 
+<!-- canonical url-->
+
+<!-- rss feed-->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://boutiquebroderie.com">
     <meta property="og:title" content="boutiquebroderie">
-
     
 
 
-    
-    
-    
 
-
-   
+    
+    
+    
 
 
 <style type="text/css">
@@ -43,18 +46,18 @@
 }
 
 @media(max-width: 767px){
-  .layout__content.main_content{
-    padding-bottom: 64px !important;
-  }
+	.layout__content.main_content{
+		padding-bottom: 64px !important;
+	}
   .layout__content.main_content.new_or_day_layout{
     padding-bottom: 15px !important;
     padding-top: var(--layout-pt) !important;
   }
-  .filter-mobile-controls input.header__search-field1{
-    border: 1px solid #808080 !important;
+	.filter-mobile-controls input.header__search-field1{
+		border: 1px solid #808080 !important;
     margin-top: 6px;
 
-  }
+	}
   .layout__content.layout__content_new_or_day {
     max-width: var(--layout-content-max-width) !important;
     margin: 0 auto !important;
@@ -83,10 +86,10 @@
     text-decoration: none !important;
 }
 @media(max-width: 560px){
-  .layout__content.main_content{
-    padding-bottom: 80px !important;
-  }
-  
+	.layout__content.main_content{
+		padding-bottom: 80px !important;
+	}
+	
 
 }
 .img-ratio.img-ratio_cover.article-photo{
@@ -117,6 +120,7 @@
 
 </style>
 
+
 <!-- icons-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/icons.css">
 <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32275806.ico"><style media="screen">
@@ -130,7 +134,7 @@
       visibility: hidden;
     }
   }
-   .multi-column-list {
+    .multi-column-list {
     column-count: 3; /* Adjust the number of columns as needed */
     column-gap: 20px; /* Adjust the gap between columns as needed */
   }
@@ -181,26 +185,33 @@
 
 
   
-    <div class="layout widget-type_system_widget_v4_page_title_1" style="--layout-wide-bg:true; --layout-pt:1.5vw; --layout-pb:0.5vw; --layout-wide-content:false; --layout-edge:false; --hide-desktop:false; --hide-mobile:true;">
- <div {% if new_products is not None or day_products is not  None %}class="layout__content layout__content_new_or_day" 
+    <div class="layout widget-type_system_widget_v4_page_title_1" style="--layout-wide-bg:true; --layout-pt:1.5vw; --layout-pb:0.5vw; --layout-wide-content:false; --layout-edge:false; --hide-desktop:false; --hide-mobile:true;display: block !important;">
+
+  <div {% if new_products is not None or day_products is not  None %}class="layout__content layout__content_new_or_day" 
   {% else %}class="layout__content " {% endif %}>
     <h1 class="page-headding heading">
+   
   {% if day_products is not  None %}
-   Product of the day
+  Product of the day
   
   {% elif Brand is not None %}
   {{Brand.brand}}
   {% elif new_products is not None %}
   New
   {% elif Brands is not None %}
-  Product of the brnad
+  {% if search %}
+  Search
+  {% else %}
+Product of the brnad
+  {% endif %}
+
+  
 
   {% else %}
   
   
   {% endif %}
-  
- 
+    
   
   
   
@@ -208,6 +219,7 @@
 
   </div>
 </div>
+
 {% if new_products is not None or day_products is not None %}
 <div class="layout widget-type_system_widget_v4_filter_sort_3" style="--hide-sorting-on-desktop:false; --display-property-color:picture; --hide-sorting-on-mobile:false; --layout-wide-content:false; --layout-edge:false; --hide-count:false; --filter-onchange-submit:true; --layout-wide-bg:false; --layout-pt:1vw; --layout-pb:2vw; --hide-desktop:false; --hide-mobile:false;">
   <div class="layout__content main_content new_or_day_layout">
@@ -229,7 +241,7 @@
 
 
 
-<form action="#" method="get" class="filter live-submit">
+<div action="#" method="get" class="filter live-submit">
   <div class="filter__mobile-top-panel">
     <button type="button" class="button filter__hide-filter-btn js-hide-filter">
     <span class="icon icon-angle-left"></span>
@@ -249,7 +261,7 @@
      
     </div>
   </div>
-  </form></div></div>
+  </div></div></div>
 
 {% elif Brand is not None or Brands is not None %}
 <div class="layout widget-type_system_widget_v4_filter_sort_3" >
@@ -306,17 +318,21 @@
   </div>
   
 </div>
+ 
+    {% if search %}
+    {% else %}
 <div class="filter-mobile-controls">
   
-  <input type="text" autocomplete="off" class="form-control form-control_size-l header__search-field1" name="q" value="" placeholder="Name" data-search-field="" inprocess="false" style="width: 100%;height: 100%;border: 1px solid transparent; ">    
-  
-   <a href="#/collection/all?theme_preview=1932632" class="button button_size-m"  style="margin-top: 48px;
+  <input type="text" autocomplete="off" class="form-control form-control_size-l header__search-field1" name="q" value="" placeholder="Search" data-search-field="" inprocess="false" style="width: 100%;height: 100%;border: 1px solid transparent; ">
+
+   <a href="#" class="button button_size-m"  style="margin-top: 48px;
     position: absolute;">Search</a>
   
 </div>
 
+{% endif %}
 
-<form action="#" method="get" class="filter live-submit">
+<div action="#" method="get" class="filter live-submit">
   <div class="filter__mobile-top-panel">
     <button type="button" class="button filter__hide-filter-btn js-hide-filter">
     <span class="icon icon-angle-left"></span>
@@ -344,7 +360,8 @@
     
     
     
-    
+    {% if search %}
+    {% else %}
     
     <div class="filter-item filter-item__collection sorting-field">
       <div class="collection-sort">
@@ -354,7 +371,7 @@
         
         <div class="collection-order">
          
-          <input type="text" autocomplete="off" class="form-control form-control_size-l header__search-field1 search_name_field" name="q" value="" placeholder="Name" data-search-field="" inprocess="false" style="width: 100%;height: 100%;border: 1px solid transparent; ">
+          <input type="text" autocomplete="off" class="form-control form-control_size-l header__search-field1 search_name_field" name="q" value="" placeholder="Search" data-search-field="" inprocess="false" style="width: 100%;height: 100%;border: 1px solid transparent; ">
           
           
           
@@ -375,19 +392,15 @@
 
 
 
-    
-
-
-
-
-    
-    
-    
-    
-    
-    
    
-    <div class="filter-item filter-item_property " style="border-bottom: 1px solid transparent;margin-top: 15px;">
+
+
+    
+    
+    
+    
+    
+     <div class="filter-item filter-item_property " style="border-bottom: 1px solid transparent;margin-top: 15px;">
      
         <div href="#" class="button button_size-m button_filter_products" style="margin-top: -18px;">Search</div>
      
@@ -395,6 +408,10 @@
         
      
     </div>
+    {% endif %}
+    
+   
+   
     
   </div>
   
@@ -402,7 +419,7 @@
   
   
   
-</form>
+</div>
 
 
   </div>
@@ -442,12 +459,25 @@
           
         </div>
       </div>
-   <!--
+   </div>
+   <div class="layout widget-type_system_widget_v4_page_title_1" style="--layout-wide-bg:true; --layout-pt:1.5vw; --layout-pb:0.5vw; --layout-wide-content:false; --layout-edge:false; --hide-desktop:false; --hide-mobile:true;display: block !important;margin-top: 30px;">
 
-
-    <img src="{% static 'images/wcdfxwzc2476qbavpc5ll3q2l2u7d2cj.jpg' %}" width="200" height="200" align="right" style="width: 100%;"> -->
-  </div>
+  <div class="layout__content layout__content_new_or_day">
+    <h1 class="page-headding heading">
   
+  
+{{category_choeses_name}}
+  
+  
+    
+  
+  
+  
+</h1>
+
+  </div>
+</div>
+ 
 
 <div class="layout widget-type_system_widget_v4_filter_sort_3">
   
@@ -459,14 +489,15 @@
 <ul class="multi-column-list">
    {% if category_choeses %}
     {% for category in category_choeses %}
-     <li><a class="standard" href="{% url 'accounts:shop_products_category' category.category_id_main  %}">{{category.name_en}} ({{category.products_count}})</a>
+     <li><a class="standard" href="{% url 'accounts:shop_products_category' category.category_id_main  %}">{{category.name}} ({{category.products_count}})</a>
    </li>
     {% endfor %}
     {% else %}
     {% endif %}
   
 </ul>
-  </td> 
+  </td>
+  
 </tr>
 </tbody></table>
   
@@ -490,20 +521,21 @@
 
 <div class="filter-mobile-controls-top">
   <div class="filter__product-count">
-    Products <span class="filter__product-count__num">{{products.count}}</span>
+    Товаров <span class="filter__product-count__num">{{products.count}}</span>
   </div>
   
 </div>
 <div class="filter-mobile-controls">
   
-  <input type="text" autocomplete="off" class="form-control form-control_size-l header__search-field1" name="q" value="" placeholder="Name" data-search-field="" inprocess="false" style="width: 100%;height: 100%;border: 1px solid transparent; ">    
-   <a href="#/collection/all?theme_preview=1932632" class="button button_size-m"  style="margin-top: 48px;
+  <input type="text" autocomplete="off" class="form-control form-control_size-l header__search-field1" name="q" value="" placeholder="Search" data-search-field="" inprocess="false" style="width: 100%;height: 100%;border: 1px solid transparent; ">   
+
+   <a href="#" class="button button_size-m"  style="margin-top: 48px;
     position: absolute;">Search</a>
   
 </div>
 
 
-<form action="#" method="get" class="filter live-submit">
+<div action="#" method="get" class="filter live-submit">
   <div class="filter__mobile-top-panel">
     <button type="button" class="button filter__hide-filter-btn js-hide-filter">
     <span class="icon icon-angle-left"></span>
@@ -516,7 +548,7 @@
   </div>
   <div class="filter__controls">
     <div class="filter__product-count">
-      Products <span class="filter__product-count__num">{{products.count}}</span>
+      Товаров <span class="filter__product-count__num">{{products.count}}</span>
     </div>
     <div class="filter__head-reset">
       <button class="button button_wide button_wide__submit submit_filter" type="submit">Применить</button>
@@ -541,7 +573,7 @@
         
         <div class="collection-order">
          
-          <input type="text" autocomplete="off" class="form-control form-control_size-l header__search-field1 search_name_field" name="q" value="" placeholder="Name" data-search-field="" inprocess="false" style="width: 100%;height: 100%;border: 1px solid transparent; ">
+          <input type="text" autocomplete="off" class="form-control form-control_size-l header__search-field1 search_name_field" name="q" value="" placeholder="Search" data-search-field="" inprocess="false" style="width: 100%;height: 100%;border: 1px solid transparent; ">
           
           
           
@@ -562,7 +594,6 @@
 
 
 
-    
     
 
 
@@ -590,7 +621,7 @@
   
   
   
-</form>
+</div>
 
 
   </div>
@@ -605,10 +636,8 @@
 
 <div class="catalog">
   <div class="grid-list catalog-list" data-collection-infinity="">
-    {% with rate=request|Get_pay_rate %}
-
-
    
+
     {% for product in products %}
     
     <div class="product-preview-elem">
@@ -617,10 +646,26 @@
         <div class="product-preview__area-photo">
           <div class="product-preview__photo">
             
-              <span class="button button_size-s favorites_btn favorites-not-added" data-ui-favorites-trigger="336489960">
+            
+              {% if request.user.is_authenticated %}
+            {% with favorite=request.user.profile|check_favorite:product.pk %}
+           
+            {% if favorite %}
+              <span class="button button_size-s favorites_btn favorite_on favorites-added" pk="{{product.pk}}">
+              {% else %}
+               <span class="button button_size-s favorites_btn favorite_on favorites-not-added" pk="{{product.pk}}">
+              {% endif %}
                 <span class="btn-icon icon-favorites-o"></span>
                 <span class="btn-icon icon-favorites-f"></span>
               </span>
+            {% endwith %}
+            {% else %}
+             <span class="button button_size-s favorites_btn  favorites-not-added" pk="{{product.pk}}">
+                <span class="btn-icon icon-favorites-o"></span>
+                <span class="btn-icon icon-favorites-f"></span>
+              </span>
+            {% endif %}
+            
             
             <div class="img-ratio img-fit">
               <div class="img-ratio__inner">
@@ -659,16 +704,10 @@
         </div>
         <div class="product-preview__area-title">
           <div class="product-preview__title">
-            <a href="{% url 'accounts:product_detalis_view' product.pk %}">{{ product.name_ru }}</a>
+            <a href="{% url 'accounts:product_detalis_view' product.pk %}">{{ product.name_en }}</a>
           </div>
         </div>
-        <div class="product-preview__area-description">
-          
-          <div class="product-preview__description">
-            Карнавальный костюм - это замечательная возможность окунуться в атмосферу волшебства...
-          </div>
-          
-        </div>
+        
         <div class="product-preview__area-bottom">
           <div class="product-preview__buy">
             
@@ -704,16 +743,20 @@
               <span class="product-preview__price-cur">{{product.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
              
               {% endif %}
+              <span style="font-size: .8rem"></span><span style="font-size: .8rem;">за 1 кусок</span>
 {% elif product.price_size %}
 {% if product.sale_price_size  %}
-               <span class="product-preview__price-old">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               <span class="product-preview__price-old">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %} </span>
               
-              <span class="product-preview__price-cur">{{product.sale_price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product.sale_price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %} </span><span style="font-size: .8rem;">For 1m</span>
                
               {% else %}
-              <span class="product-preview__price-cur">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %} </span>
+               <span style="font-size: .8rem"></span><span style="font-size: .8rem;">For 1m</span>
              
               {% endif %}
+
+              
 {% else %}
 {% if product.counter_props.all %}
 {% with firstname=product.count|checkcounters:product.product.pk %}
@@ -747,14 +790,13 @@
               
               
               <div class="add-cart-counter" data-add-cart-counter="" data-add-cart-counter-max-quantity="null" data-add-cart-counter-is-ready="">
-               {% if product.price_pcs or product.price_size %}
- <a href="{% url 'accounts:product_detalis_view' product.pk %}" class="button add-cart-counter__btn "  data-add-cart-counter-btn="">
-<span class="add-cart-counter__btn-icon icon-cart"></span>
-                </a>
-{% else %}
+              
  <button type="button" class="button add-cart-counter__btn add_cart_btn_counter_ind" pk = "{{product.pk}}"  {% if product.price %}
 ind="count"
-
+{% elif product.price_size %}
+ind="size"
+{% elif product.price_pcs %}
+ind="size_pcs"
 {% else %}
 {% if product.counter_props.all %}
 ind="counter"
@@ -764,7 +806,6 @@ ind="count"
 {% endif %} data-add-cart-counter-btn="">
 <span class="add-cart-counter__btn-icon icon-cart"></span>
                 </button>
-{% endif %}
                 <div class="add-cart-counter__controls">
                   <button data-add-cart-counter-plus="" class="button add-cart-counter__controls-btn" type="button">
                   <span data-add-cart-counter-count="" class="add-cart-counter__detail-count">0</span>
@@ -779,11 +820,11 @@ ind="count"
         </div>
       </div>
       </form>
-    
+     
     </div>
     
     {% endfor %}
-    {%  endwith %}
+
     
     
     
@@ -803,11 +844,11 @@ ind="count"
 
   </div>
 </div>
-<div class="layout widget-type_system_widget_v4_pagination_1" style="--align:center; --layout-wide-bg:false; --layout-pt:3vw; --layout-pb:3vw; --layout-wide-content:false; --layout-edge:false; --hide-desktop:false; --hide-mobile:false;">
+   <div class="layout widget-type_system_widget_v4_pagination_1" style="--align:center; --layout-wide-bg:false; --layout-pt:3vw; --layout-pb:3vw; --layout-wide-content:false; --layout-edge:false; --hide-desktop:false; --hide-mobile:false;">
   <div class="layout__content">
     
 <div class="pagination">
-  <a  href="1" class="button button_size-s pagination-prev ajax-pag hide-mobile">prev</a>
+  <a  href="1" class="button button_size-s pagination-prev ajax-pag hide-mobile">Prev</a>
     <a href="1" class="button button_size-s show-mobile ajax-pag pagination-prev icon icon-arrow-left"></a>
   <div class="pagination-items next pagination_products">
      {% for i in page_range %}
@@ -823,7 +864,7 @@ ind="count"
     
     
   </div>
-   <a href="2" class="button button_size-s pagination-next hide-mobile ajax-pag">next</a>
+   <a href="2" class="button button_size-s pagination-next hide-mobile ajax-pag">Next</a>
     <a href="2" class="button button_size-s pagination-next  ajax-pag icon icon-arrow-right show-mobile"></a>
   
   
@@ -841,7 +882,9 @@ ind="count"
 
       </main>
       {% endwith %}
-<link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/shop_products.css" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/shop_products.css" rel="stylesheet" type="text/css">
+
 
 
       
@@ -855,7 +898,6 @@ ind="count"
       
     </div>
 
-  
 
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my-layout.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/core-css.css" rel="stylesheet" type="text/css">
@@ -864,9 +906,12 @@ ind="count"
 
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_6.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/main.css" rel="stylesheet" type="text/css">
+  
+
+
 <script>
   try {
   let widget = '.widget-type_system_widget_v4_header_1';
@@ -878,10 +923,11 @@ var products_template=` <div class="product-preview-elem">
         <div class="product-preview__area-photo">
           <div class="product-preview__photo">
             
-              <span class="button button_size-s favorites_btn favorites-not-added" data-ui-favorites-trigger="336489960">
+                 <span class="button button_size-s favorites_btn favorite_on <favorite_class>" pk="<pk_product>">
                 <span class="btn-icon icon-favorites-o"></span>
                 <span class="btn-icon icon-favorites-f"></span>
               </span>
+            
             
             <div class="img-ratio img-fit">
               <div class="img-ratio__inner">
@@ -923,13 +969,7 @@ var products_template=` <div class="product-preview-elem">
             <a href="/shop/products/<pk_product>"><product_name></a>
           </div>
         </div>
-        <div class="product-preview__area-description">
-          
-          <div class="product-preview__description">
-            Карнавальный костюм - это замечательная возможность окунуться в атмосферу волшебства...
-          </div>
-          
-        </div>
+       
         <div class="product-preview__area-bottom">
           <div class="product-preview__buy">
             
@@ -972,6 +1012,7 @@ var products_template=` <div class="product-preview-elem">
      
     </div>
     `
+    var search_class = $(".search_name_field")
     var pagination_url = ``
     {% if day_products is not  None %}
     pagination_url = "{% url 'accounts:day_of_products' %}"
@@ -980,7 +1021,15 @@ var products_template=` <div class="product-preview-elem">
   {% elif new_products is not None %}
   pagination_url = "{% url 'accounts:new_products' %}"
   {% elif Brands is not None %}
- pagination_url = "{% url 'accounts:all_brands_product' %}" 
+  {% if search %}
+  $(".form-control.form-control_size-l.header__search-field.header__search-field_main").val("{{search_name}}")
+   var search_class = $(".form-control.form-control_size-l.header__search-field.header__search-field_main")
+  
+  pagination_url = "{% url 'accounts:search_products' %}"
+  {% else %}
+  pagination_url = "{% url 'accounts:all_brands_product' %}"
+  {% endif %}
+  
   {% else %}
   pagination_url = "{% url 'accounts:shop_products_category' categoryid  %}"
   {% endif %}
@@ -990,7 +1039,8 @@ var products_template=` <div class="product-preview-elem">
         event.preventDefault();
         var page_n = $(this).attr('href');
         var _this = $(this)
-        var search_name = $(".search_name_field")
+
+        var search_name = search_class
 
         var color_name = $(".search_color_field").val()
 
@@ -1067,8 +1117,18 @@ var products_template=` <div class="product-preview-elem">
                 console.log(response.page_range, "page_range")
                 $.each(response.results, function(i, result) {
                   console.log(result)
+                   if (parseInt(response.favorites[i])==1){
+                    favorite_class = `favorites-added`
+
+                  }
+                  else{
+                    favorite_class = `favorites-not-added`
+
+                  }
+
                  
-                  var template = products_template.replace("<product_name>", result.name_ru)
+                  var template = products_template.replace("<product_name>", result.name_en)
+                  template = template.replace("<favorite_class>",favorite_class)
                   template = template.replaceAll("<avatar_p>", result.avatar_p)
                   var price = result['price']
                   var price_sale = undefined
@@ -1084,7 +1144,7 @@ var products_template=` <div class="product-preview-elem">
             price_sale = result['sale_price_pcs']
 
           }
-          indicator = "size"
+          indicator = "size_pcs"
           
 
         }
@@ -1121,19 +1181,31 @@ var products_template=` <div class="product-preview-elem">
         else{
 
         }
+        var size_text=""
+        if (parseInt(result['price_size']) != 0){
+          size_text = ` <span style="font-size: .8rem">For 1 m</span>`
+        }
+        else if (parseInt(result['price_pcs']) != 0){
+          size_text = ` <span style="font-size: .8rem">
+for 1 piece</span>`
 
-        
+        }
+
                  if (price_sale!=undefined){
-           template = template.replace("<product_price>", `<span class="product-preview__price-old">`+ (parseFloat(price_sale)/parseFloat(pay_rates_search)).toFixed(2)  + ` `+ pay_icon_search  +`</span><span class="product-preview__price-cur"> `+ (parseFloat(price)/parseFloat(pay_rates_search)).toFixed(2) +` `+ pay_icon_search +`</span>`)
+
+
+           template = template.replace("<product_price>", `<span class="product-preview__price-old">`+ (parseFloat(price)/parseFloat(pay_rates_search)).toFixed(2)  + ` `+ pay_icon_search  +`</span><span class="product-preview__price-cur"> `+ (parseFloat(price_sale)/parseFloat(pay_rates_search)).toFixed(2) +` `+ pay_icon_search +`</span>`+size_text)
             template = template.replace("<sales_products>","-"+result["sale"]+"%")
+           
 
         }
         else{
-           template = template.replace("<product_price>", `<span class="product-preview__price-cur"> `+ (parseFloat(price)/parseFloat(pay_rates_search)).toFixed(2) +` `+ pay_icon_search +`</span>`)
-            template = template.replace("<sales_products>","")
+           template = template.replace("<product_price>", `<span class="product-preview__price-cur"> `+ (parseFloat(price)/parseFloat(pay_rates_search)).toFixed(2) +` `+ pay_icon_search +`</span>`+size_text)
+           template = template.replace("<sales_products>","")
         }
         template = template.replace("<indicator>", indicator) 
               template = template.replaceAll("<pk_product>", result["id"]) 
+
                
 
                   
@@ -1174,14 +1246,7 @@ var products_template=` <div class="product-preview-elem">
     var data  = new FormData()
    
     data.append("search_text", search_name)
-    if (color_name.length > 0){
-      data.append("search_color", color_name)
-
-    }
-    if (size_name.length > 0){
-      data.append("search_size", size_name)
-      
-    }
+   
     $.ajax({
 
 
@@ -1193,20 +1258,16 @@ var products_template=` <div class="product-preview-elem">
                 
 
                     
-                   
-                  $(".grid-list.catalog-list").html("")
-                  var page_n = 1
-                  var pagination_template= ``
+               $('.grid-list.catalog-list').html('')
+                console.log("aaaaaa",response.page_range, page_n)
+                var pagination_template= ``
 
-                   
-
-                  if (response.page_range.length>0){
+                if (response.page_range.length>0){
                   $(".ajax-pag.pagination-next").attr("href", parseInt(page_n)+1)
                    $(".ajax-pag.pagination-prev").attr("href",parseInt(page_n)-1)
                   for (var pag_range=0;pag_range<response.page_range.length;pag_range++){
 
                     if (pag_range==1){
-
 
                       pagination_template+=`<a href="`+ response.page_range[pag_range] +`" class="button button_size-s ajax-pag pagination-link pagination_select">
        `+ response.page_range[pag_range] +`
@@ -1219,7 +1280,6 @@ var products_template=` <div class="product-preview-elem">
     </a>`
 
                     }
-                    console.log(pagination_template, "pagination_template")
                     
 
                   }
@@ -1243,8 +1303,18 @@ var products_template=` <div class="product-preview-elem">
                 console.log(response.page_range, "page_range")
                 $.each(response.results, function(i, result) {
                   console.log(result)
+                   if (parseInt(response.favorites[i])==1){
+                    favorite_class = `favorites-added`
+
+                  }
+                  else{
+                    favorite_class = `favorites-not-added`
+
+                  }
+
                  
-                  var template = products_template.replace("<product_name>", result.name_ru)
+                  var template = products_template.replace("<product_name>", result.name_am)
+                  template = template.replace("<favorite_class>",favorite_class)
                   template = template.replaceAll("<avatar_p>", result.avatar_p)
                   var price = result['price']
                   var price_sale = undefined
@@ -1260,7 +1330,7 @@ var products_template=` <div class="product-preview-elem">
             price_sale = result['sale_price_pcs']
 
           }
-          indicator= "size"
+          indicator = "size_pcs"
           
 
         }
@@ -1270,13 +1340,14 @@ var products_template=` <div class="product-preview-elem">
             price_sale = result['sale_price_size']
 
           }
-          indicator= "size"
+          indicator = "size"
 
         }
         else if (result['counter_props'].length > 0){
           var count_er = parseInt(result['counter_props'][0]['counter_prop'])
           var counter_props = result['counter_props'][0]
-          indicator = "counter"
+          indicator="counter"
+          
           for (var i_counter =0;i_counter<result['counter_props'].length;i_counter++){
             if (parseInt(result['counter_props'][i_counter]['counter_prop'])<count_er){
               count_er = parseInt(result['counter_props'][i_counter]['counter_prop'])
@@ -1296,20 +1367,32 @@ var products_template=` <div class="product-preview-elem">
         else{
 
         }
+        var size_text=""
+        if (parseInt(result['price_size']) != 0){
+          size_text = ` <span style="font-size: .8rem">For 1m</span>`
+        }
+        else if (parseInt(result['price_pcs']) != 0){
+          size_text = ` <span style="font-size: .8rem">For 1 piece</span>`
 
-        
+        }
+
                  if (price_sale!=undefined){
-           template = template.replace("<product_price>", `<span class="product-preview__price-old">`+ (parseFloat(price_sale)/parseFloat(pay_rates_search)).toFixed(2)  + ` `+ pay_icon_search  +`</span><span class="product-preview__price-cur"> `+ (parseFloat(price)/parseFloat(pay_rates_search)).toFixed(2) +` `+ pay_icon_search +`</span>`)
+
+
+           template = template.replace("<product_price>", `<span class="product-preview__price-old">`+ (parseFloat(price)/parseFloat(pay_rates_search)).toFixed(2)  + ` `+ pay_icon_search  +`</span><span class="product-preview__price-cur"> `+ (parseFloat(price_sale)/parseFloat(pay_rates_search)).toFixed(2) +` `+ pay_icon_search +`</span>`+size_text)
             template = template.replace("<sales_products>","-"+result["sale"]+"%")
+           
 
         }
         else{
-           template = template.replace("<product_price>", `<span class="product-preview__price-cur"> `+ (parseFloat(price)/parseFloat(pay_rates_search)).toFixed(2) +` `+ pay_icon_search +`</span>`)
-            template = template.replace("<sales_products>","")
+           template = template.replace("<product_price>", `<span class="product-preview__price-cur"> `+ (parseFloat(price)/parseFloat(pay_rates_search)).toFixed(2) +` `+ pay_icon_search +`</span>`+size_text)
+           template = template.replace("<sales_products>","")
         }
-               
- template = template.replace("<indicator>", indicator) 
+        template = template.replace("<indicator>", indicator) 
               template = template.replaceAll("<pk_product>", result["id"]) 
+
+               
+
                   
                   
                 $('.grid-list.catalog-list').append(template)
@@ -1329,13 +1412,12 @@ var products_template=` <div class="product-preview-elem">
 
                });
             },
-            error: function () {},
-            processData: false,
-            contentType: false,
-        })
+            error: function () {
+                
+            }
+        }); 
+    });    
 
-
-  })
 function image_load(file, pk){
     var data = new FormData()
     data.append("image", file)
@@ -1381,16 +1463,17 @@ function image_load(file, pk){
         })
 
 }
-
 $("#file_p00").on("change", function(){
   var file = this.files[0]
   var pk = $(this).attr("pk")
   image_load(file,pk)
 })
+
 $(function() {
   function getWidget(item) {
     return item.closest('.layout');
   }
+
 
   var mobilePoint = 768;
   $(document).ready(function() {
@@ -1503,7 +1586,7 @@ $(function() {
     });
   });
 
- 
+  
 
   function configureSubcollectionsItemsLimit(limit) {
     let collections_menu = $(widget).find(".header__collections-menu");
@@ -1611,7 +1694,7 @@ if (window.location.pathname == '/' && Cookies.get('lite_preorder')) {
 ;try {
   let widget = '.widget-type_system_widget_v4_notification_add_to_cart_1';
   let $widget = $('.widget-type_system_widget_v4_notification_add_to_cart_1');
- 
+  
 
 $(document).ready(function() {
   $(widget).find(".js-hide-notification").on("click", function() {
@@ -1634,10 +1717,23 @@ $(document).ready(function() {
   let widget = '.widget-type_system_widget_v4_preorder_1';
   let $widget = $('.widget-type_system_widget_v4_preorder_1');
 
-
-
 } catch(error) {
   console.error('Widget "widget-type_system_widget_v4_preorder_1" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_sidebar_collections_menu_1';
+  let $widget = $('.widget-type_system_widget_v4_sidebar_collections_menu_1');
+  $(document).ready(function() {
+  $(widget).find(".sidebar-collections__menu .is-current").addClass("is-show");
+
+  $(widget).find(".js-show-submenu").on("click", function() {
+    var cur_item = $(this).parents(".sidebar-collections__item:first");
+    cur_item.toggleClass("is-show");
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_sidebar_collections_menu_1" throwed an error: "' + error.stack + '"')
 }
 ;try {
   let widget = '.widget-type_system_widget_v4_button_on_top_1';
@@ -1665,6 +1761,7 @@ function showButtonOnTop(btn) {
 }
 
 
+ 
 } catch(error) {
   console.error('Widget "widget-type_system_widget_v4_button_on_top_1" throwed an error: "' + error.stack + '"')
 }
@@ -1694,6 +1791,131 @@ function showCartFixedBtn(btn) {
 
 } catch(error) {
   console.error('Widget "widget-type_system_widget_v4_cart_fixed_button_1" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_catalog_3';
+  let $widget = $('.widget-type_system_widget_v4_catalog_3');
+  $(function() {
+  var isTouch = !!('ontouchstart' in window || navigator.msMaxTouchPoints);
+  var infinityProductsTempPage = [];
+
+  if (isTouch) {
+    $(widget).find(".product-preview").addClass("is-touch");
+  }
+
+
+  function loadMoreCollectionProducts(productListBlock, showMoreBtn) {
+    let next_page = productListBlock.data('collectionInfinity');
+
+    if (next_page && next_page != '') {
+      if (infinityProductsTempPage.indexOf(next_page) > -1) {
+        return;
+      }
+
+      infinityProductsTempPage.push(next_page);
+      showMoreBtn.addClass('is-loading');
+
+      $.ajax({
+        url: next_page,
+        dataType: 'html'
+      })
+        .done(function(resultDom) {
+          let new_products = $(resultDom).find('[data-collection-infinity]');
+          let next = new_products.data('collectionInfinity');
+
+          productListBlock.append( new_products.html() );
+          productListBlock.data('collectionInfinity', next);
+
+          productListBlock.find('[data-product-id]').each(function(index, el) {
+            Products.initInstance($(el));
+          });
+
+          productListBlock.each(function(index, el) {
+            new LazyLoad({
+              container: $(el).get(0),
+              elements_selector: '.lazyload',
+              use_native: 'loading' in document.createElement('img')
+            });
+          });
+
+          if (productListBlock.data('collectionInfinity') == '') {
+            showMoreBtn.parents(".layout").hide();
+          }
+        })
+        .always(function() {
+          showMoreBtn.removeClass('is-loading');
+        })
+    }
+  }
+
+  function ModalProductPreview(widgetClass) {
+    let dop_class = widgetClass.slice(1);
+
+    this.rootNode = $('<div class="modal-product-preview ' + dop_class + '"></div>').appendTo("body");
+    this.contentNode = $('<div class="modal-product-preview__content"></div>').appendTo(this.rootNode);
+    this.overlayNode = $('<div class="modal-product-preview-overlay ' + dop_class + '"></div>').appendTo("body");
+    this.closeBtnNode = $('<button class="button modal-product-preview__close-btn"><span class="icon icon-times"></span></button>').appendTo(this.rootNode);
+
+    this.closeBtnNode.on("click", () => {
+      this.close();
+    });
+
+    this.overlayNode.on("click", () => {
+      this.close();
+    });
+
+    this.open = function(content) {
+      this.contentNode.html('');
+      content.appendTo(this.contentNode);
+
+      this.rootNode.find("[data-option-selector]").remove();
+
+      $('.modal-product-preview').each(function(index, el) {
+        new LazyLoad({
+          container: $(el).get(0),
+          elements_selector: '.modal-lazyload',
+          use_native: 'loading' in document.createElement('img')
+        });
+      });
+
+      Products.initInstance(this.rootNode.find('[data-product-id]'))
+        .done(() => {
+          this.overlayNode.addClass("is-open");
+          this.rootNode.addClass("is-open");
+        })
+        .fail((onFail) => { console.log('onFail', onFail) });
+    }
+
+    this.close = function() {
+      this.overlayNode.removeClass("is-open");
+      this.rootNode.removeClass("is-open");
+    }
+  }
+
+  $(function() {
+  /* SHOW MODAL PREVIEW */
+    let modalProductPreview = new ModalProductPreview(widget);
+
+    $widget.on("click", ".js-show-modal-product", function() {
+      let modal_product_block = $(this).parents(".product-preview-elem").find(".hidden-product-preview-modal [data-product-id]").clone();
+      modalProductPreview.open(modal_product_block);
+    });
+
+  
+  });
+
+  if (window.location.pathname == '/favorites') {
+    EventBus.subscribe('remove_item:insales:favorites_products', (data) => {
+      $widget.find('[data-product-id="' + data.action.item + '"]').parent('.product-preview-elem').remove();
+      if (data.products.length == 0 ) {
+        $widget.find('.empty-catalog-message').removeClass('hidden');
+      }
+    })
+  }
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_catalog_3" throwed an error: "' + error.stack + '"')
 }
 ;try {
   let widget = '.widget-type_system_widget_v4_bottom_navigation_bar_1';
@@ -1778,6 +2000,303 @@ function showCartFixedBtn(btn) {
   console.error('Widget "widget-type_system_widget_v4_bottom_navigation_bar_1" throwed an error: "' + error.stack + '"')
 }
 ;try {
+  let widget = '.widget-type_system_widget_v4_filter_sort_3';
+  let $widget = $('.widget-type_system_widget_v4_filter_sort_3');
+  $(function() {
+  initFilterRangeSlider($widget.find(".js-filter-range"));
+
+  $widget.find(".filter-item").each(function() {
+    if ($(this).find(".filter-option__field:checked").length == 1 ) {
+      let title = $(this).find(".filter-option__field:checked").parent('label').attr('title');
+      $(this).find('.filter-item__name .text').text(title);
+
+
+    } else if ($(this).find(".filter-option__field:checked").length > 1 ) {
+      let count = $(this).find(".filter-option__field:checked").length;
+      $(this).addClass('select-big');
+      $(this).find('.filter-item__name').append('<span class="count_name">' + count + '</span>');
+    }
+  });
+
+  $widget.find(".js-filter-range").each(function() {
+
+    if ( !$(this).find('.filter-range__field-min').is(':disabled') || !$(this).find('.filter-range__field-max').is(':disabled')) {
+      $(this).parents('.filter-item').addClass('is-active-filters');
+    }
+
+
+  });
+
+  if ($widget.find(".sorting .collection-order-items:checked").length > 0 ) {
+    $widget.find(".filter-mobile-controls").addClass("is-active-sorting");
+  }
+
+  $(document).click(function(event) {
+    if (!$(event.target).closest(".filter-item").length) {
+      $widget.find(".filter-item.is-show .filter-item__content").stop().slideUp(250, function() {
+        $(this).removeClass("is-show");
+        $widget.find(".js-hide-filter-content").removeClass("visible");
+      });
+    }
+  });
+
+  $widget.find(".js-all-filters").on("click", function() {
+    $widget.find('.filter__content').addClass('is-show-items');
+  });
+
+  $widget.find(".js-reset-filter").on("click", function() {
+    let filter_form = $widget.find('form.filter');
+
+    filter_form.find(".filter-option__field").prop('checked', false);
+    filter_form.find(".collection-order__field").prop('checked', false);
+    filter_form.find(".filter-range__field").prop('disabled', true);
+
+    filter_form.submit();
+  });
+
+  $widget.find(".sorting .button_wide__submit").on("click", function() {
+    let filter_form = $(this).parents(".sorting").find('form');
+    filter_form.submit();
+  });
+
+  $widget.find(".js-open-order-list").on("click", function() {
+    $(this).parents(".collection-order").toggleClass("is-show");
+    $widget.find(".order-overlay").toggleClass("is-show");
+  });
+
+  $widget.find(".icon-times._hide").on("click", function() {
+    $(this).addClass("click");
+    $(this).parents(".filter-item").find(".filter-option__field").prop('checked', false);
+    $(this).parents(".filter-item").removeClass("selected");
+  });
+
+  $widget.find(".js-hide-filter").on("click", function() {
+    $widget.find(".filter").removeClass("is-show-mobile");
+  });
+
+  $widget.find(".js-hide-sorting").on("click", function() {
+    $widget.find(".sorting-modal").removeClass("is-show-mobile");
+  });
+
+  $widget.find(".sorting-modal").on("click", function(event) {
+    if ($(event.target).hasClass('sorting-modal') ) {
+      $widget.find(".sorting-modal").removeClass("is-show-mobile");
+    }
+  });
+
+  $widget.find(".js-hide-order-list").on("click", function() {
+    $widget.find(".collection-order, .order-overlay").removeClass("is-show");
+  });
+  $(document).on("click", function(event) {
+    if ($(event.target).closest(".collection-order").length) {
+      return;
+    }
+
+    $widget.find(".collection-order.is-show, .order-overlay").removeClass("is-show");
+  });
+
+  if ($widget.find(".filter-option__field:checked").length > 0 || $widget.find(".js-filter-range .filter-range__field:not(:disabled)").length > 0) {
+    $widget.find(".js-show-mobile-filter, .filter__head-reset").addClass("is-active-filters");
+  }
+
+  $widget.find(".filter-item").each(function() {
+    if ($(this).find(".collection-order__field:checked").length > 0 || $(this).find(".filter-option__field:checked").length > 0 || $(this).find(".js-filter-range .filter-range__field:not(:disabled)").length > 0) {
+      $(this).addClass("is-active-filters");
+    }
+  });
+
+
+  $widget.find(".filter-range__values-item").on("click", function() {
+    $(this).find(".filter-range__field").prop('disabled', false).focus();
+  });
+
+  $widget.find(".js-toggle-show-filter-item").on("click", function() {
+    let filter_item = $(this).parents(".filter-item");
+
+    if (filter_item.is(".is-show")) {
+      filter_item.find(".filter-item__content").stop().slideUp(250, function() {
+        filter_item.removeClass("is-show");
+        $widget.find(".js-hide-filter-content").removeClass("visible");
+      });
+    } else {
+      $widget.find(".filter-item.is-show .filter-item__content").stop().slideUp(250, function() {
+        $(this).removeClass("is-show");
+        $widget.find(".js-hide-filter-content").removeClass("visible");
+      });
+
+
+      filter_item.find(".filter-item__content").stop().slideDown(250, function() {
+        filter_item.addClass("is-show");
+        $widget.find(".js-hide-filter-content").addClass("visible");
+      });
+    }
+  });
+
+  if (window.matchMedia('(max-width: 767px)').matches) {
+    $widget.find(".js-hide-filter-content").on("click", function() {
+      $widget.find(".filter-item").removeClass("is-show");
+      $(this).removeClass("visible");
+    });
+  }
+
+  $widget.find('.js-more-items').on("click", function() {
+    $(this).parent().find('.filter-item__list-item.hidden').removeClass('hidden').addClass('show');
+    $(this).parent().find('.js-hide-items').removeClass('hidden').addClass('show');
+    $(this).addClass('hidden');
+  });
+
+  $widget.find('.js-hide-items').on("click", function() {
+    $(this).parent().find('.filter-item__list-item.show').toggleClass('hidden show');
+    $(this).toggleClass('show hidden');
+    $(this).parent().find('.js-more-items').toggleClass('hidden show');
+  });
+
+  $widget.find(".js-show-mobile-filter").on("click", function() {
+    $widget.find(".filter").addClass("is-show-mobile");
+  });
+  $widget.find(".js-show-mobile-sorting").on("click", function() {
+    $widget.find(".sorting-modal").addClass("is-show-mobile");
+  });
+
+
+  $widget.find(".js-hide-mobile-filter").on("click", function() {
+    $widget.find(".filter").removeClass("is-show-mobile");
+  });
+
+  $widget.find(".filter-item__list-item, .collection-order__list, .filter-range").on("click", function() {
+    if ($widget.find(".filter-option__field:checked").length > 0 || $widget.find(".filter-range__field").is(':disabled').length < 2 || $widget.find(".collection-order__field:checked").length > 0 ) {
+      $widget.find(".filter__controls > .button_wide").addClass("is-active-filters-controls");
+      $(this).parents(".filter-item").addClass("selected");
+      $(this).parents(".layout__content").find(".filter__controls").addClass("is-selected");
+    } else {
+      $widget.find(".filter__controls > .button_wide").removeClass("is-active-filters-controls");
+      $(this).parents(".filter-item").removeClass("selected");
+      $(this).parents(".layout__content").find(".filter__controls").removeClass("is-selected");
+    }
+  });
+
+
+  //ограничение инпутов на цифры
+  let cur_widget = document.querySelector(widget);
+  cur_widget.querySelectorAll('.filter-range__field').forEach(function(item) {
+    item.oninput = function() {
+      this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')
+    }
+  })
+
+  // Сортировка
+  $(document).on("change", ".js-sorting-trigger", function() {
+    let thisEl = $(this);
+    let thisForm = thisEl.parents('form:first');
+    let order_val = thisForm.find('[name="order"]').val();
+
+    if (order_val == '') {
+      $('[name="order"]').attr('disabled', 'disabled');
+    }
+
+    thisForm.find(".collection-order").addClass("is-submit");
+    thisForm.submit();
+  });
+
+});
+
+function filterSubmit($widget) {
+  let filter_form = $widget.find('form.filter.live-submit');
+  if (filter_form) {
+    filter_form.submit();
+  }
+}
+
+$widget.find(".filter input[type='checkbox'], .filter input[type='radio']").on("change", function() {
+  filterSubmit($widget);
+});
+
+$widget.find(".sorting.live-submit input[type='radio']").on("change", function() {
+  let filter_form_sort = $widget.find('.sorting.live-submit form');
+  if (filter_form_sort) {
+    filter_form_sort.submit();
+  }
+});
+
+function initFilterRangeSlider(filterRange) {
+
+  filterRange.each(function() {
+    let widget = $(this).parents(".layout:first");
+    let filter_range = $(this);
+    let filter_range_slider = filter_range.find(".filter-range__slider")[0];
+    let filter_range_field_min = filter_range.find(".filter-range__field-min");
+    let filter_range_field_max = filter_range.find(".filter-range__field-max");
+
+    let slider_min_value = Math.floor(filter_range.data("range-min"));
+    let slider_max_value = Math.floor(filter_range.data("range-max"));
+    let slider_start_val = Math.floor(filter_range.data("range-start"));
+    let slider_end_val = Math.floor(filter_range.data("range-end"));
+    let slider_step = Math.floor(filter_range.data("range-step"));
+
+    let rangeMin = slider_min_value == slider_max_value ? 0 : slider_min_value;
+    let rangeMax = slider_max_value == 0 ? 1 : slider_max_value;
+
+    noUiSlider.create(filter_range_slider, {
+      start: [slider_start_val, slider_end_val],
+      range: {
+        'min': rangeMin,
+        'max': rangeMax
+      },
+      step: slider_step,
+      connect: true
+    });
+
+    filter_range_slider.noUiSlider.on('slide', function() {
+      changeRangeValue(
+        filter_range_slider.noUiSlider.get()[0],
+        filter_range_slider.noUiSlider.get()[1]
+      );
+    });
+
+    filter_range_slider.noUiSlider.on('set', function() {
+      filterSubmit(widget);
+      changeRangeValue(
+        filter_range_slider.noUiSlider.get()[0],
+        filter_range_slider.noUiSlider.get()[1]
+      );
+    });
+
+    changeRangeValue(
+      filter_range_slider.noUiSlider.get()[0],
+      filter_range_slider.noUiSlider.get()[1]
+    );
+
+    function changeRangeValue(curMinValue, curMaxValue) {
+      filter_range_field_min.val(Math.floor(curMinValue));
+      filter_range_field_max.val(Math.floor(curMaxValue));
+
+      curMinValue > slider_min_value
+        ? filter_range_field_min.prop('disabled', false)
+        : filter_range_field_min.prop('disabled', true);
+
+      curMaxValue < slider_max_value
+        ? filter_range_field_max.prop('disabled', false)
+        : filter_range_field_max.prop('disabled', true);
+    }
+
+    filter_range_field_min.on("blur", function() {
+      filter_range_slider.noUiSlider.set(
+        [$(this).val(), filter_range_slider.noUiSlider.get()[1]]
+      );
+    });
+
+    filter_range_field_max.on("blur", function() {
+      filter_range_slider.noUiSlider.set(
+        [filter_range_slider.noUiSlider.get()[0], $(this).val()]
+      );
+    });
+  });
+}
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_filter_sort_3" throwed an error: "' + error.stack + '"')
+}
+;try {
   let widget = '.widget-type_system_widget_v4_footer_19';
   let $widget = $('.widget-type_system_widget_v4_footer_19');
   $(function() {
@@ -1789,8 +2308,49 @@ function showCartFixedBtn(btn) {
 } catch(error) {
   console.error('Widget "widget-type_system_widget_v4_footer_19" throwed an error: "' + error.stack + '"')
 }
+;try {
+  let widget = '.widget-type_system_widget_v4_special_products_20';
+  let $widget = $('.widget-type_system_widget_v4_special_products_20');
+  $(function() {
+  var mobile_point = 767;
+
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload',
+      use_native: 'loading' in document.createElement('img')
+    });
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_special_products_20" throwed an error: "' + error.stack + '"')
+}
+;try {
+  let widget = '.widget-type_system_widget_v4_sidebar_social_1';
+  let $widget = $('.widget-type_system_widget_v4_sidebar_social_1');
+  $(function() {
+  $widget.each(function(index, el) {
+    new LazyLoad({
+      container: $(el).get(0),
+      elements_selector: '.lazyload'
+    });
+  });
+});
+
+} catch(error) {
+  console.error('Widget "widget-type_system_widget_v4_sidebar_social_1" throwed an error: "' + error.stack + '"')
+}
 
 </script>
+
+
+
+
+
+
+
+
 
 
 
@@ -1810,6 +2370,5 @@ function showCartFixedBtn(btn) {
 
 
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/theme.js" charset="utf-8"></script>
-
 
 </body></html>

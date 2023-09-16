@@ -1,4 +1,9 @@
 {% load static %}
+{% load i18n %}
+{% load all_go %}
+{% load mathfilters %}
+  {% load rate %}
+
 <!DOCTYPE html>
 <!-- saved from url=(0052)https://demo-idea.myinsales.ru/client_account/orders -->
 <html class="desktop landscape" style="--color-btn-bg:#7188D4; --color-btn-bg-is-dark:true; --bg:#FFFFFF; --bg-is-dark:false; --color-text: var(--color-text-dark); --color-text-minor-shade: var(--color-text-dark-minor-shade); --color-text-major-shade: var(--color-text-dark-major-shade); --color-text-half-shade: var(--color-text-dark-half-shade); --color-notice-warning-is-dark:false; --color-notice-success-is-dark:false; --color-notice-error-is-dark:false; --color-notice-info-is-dark:false; --color-form-controls-bg:var(--bg); --color-form-controls-bg-disabled:var(--bg-minor-shade); --color-form-controls-border-color:var(--bg-half-shade); --color-form-controls-color:var(--color-text); --is-editor:false; --vh:568px; --fixed-panels-bottom-offset:0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>
@@ -250,11 +255,74 @@ table {
 .delete_sizes_tabel {
     right: -13px;
 }
- 
+
+input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+.container_data{
+  width: 60%;
+}
+@media(max-width: 1080px){
+  .container_data{
+  width: 70%;
+}
+
+}
+@media(max-width: 768px){
+  .container_data{
+  width: 100%;
+}
+
+}
+.delete_category, .delete_sizes_tabel, .change_table {
+    position: absolute;
+    margin-top: -38px;
+    font-size: 26px;
+    color: red;
+    right: -10px;
+    cursor: pointer;
+}
+.change_table {
+    right: 40px;
+    margin-top: -44px;
+}
+@media (max-width: 680px){
+.change_table {
+    right: -8px;
+    margin-top: -7px;
+}
+.delete_sizes_tabel{
+   
+    margin-top: -1px;
+    
+   
+    right: 27px;
+}
+
+
+}
+@media (max-width: 503px){
+.change_table {
+    right: 0px;
+    margin-top: -7px;
+}}
+.display_none{
+  display: none !important;
+}
+
+tr.table_tr_class{
+  height: 100px;border-bottom: 1px solid black;
+}
 
 </style>
+       
 
-<title>Address book
+<title>Адресная  книга
 </title>
 
 
@@ -274,8 +342,7 @@ table {
 
 
 
-
-<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32275806.ico"><style media="screen">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/32275806.ico' %}"><style media="screen">
   @supports (content-visibility: hidden) {
     body:not(.settings_loaded) {
       content-visibility: hidden;
@@ -285,6 +352,9 @@ table {
     body:not(.settings_loaded) {
       visibility: hidden;
     }
+  }
+  .error_window{
+    color: red;
   }
 </style>
 
@@ -308,7 +378,7 @@ table {
 
       
       </header>
-        <main>
+     <main>
         <div class="layout">
           <div class="layout__content">
             <div class="checkout-v2-wrapper co-section--content_wrapper">
@@ -317,13 +387,13 @@ table {
 
                 <div class="co-section--checkout_header co-checkout-block--padded">
                   <h1 class="co-checkout-title co-title co-title--h1">
-                   Address book
+                    Address book
                   </h1>
                 </div>
                 <div class="co-checkout-block--padded"><div class="co-adress"><div class="co-adress-short_information"></div>
 
 <div class="container container_data">
-  <form class="co-form--login co-modal-login_form my_account_form" data-use-mask="1" onsubmit="check()">
+  <form class="co-form--login co-modal-login_form my_account_form" data-use-mask="1" onsubmit="check()" id="my_account_form">
   <p><strong>First name:</strong></p>
   <input type="text" value="{{request.user.profile.first_name}}" id="first_name" >
 
@@ -338,7 +408,13 @@ required="required">
   <input type="email" value="{{request.user.profile.email}}" id="email">
 
   <p><strong>Country:</strong></p>
-  <input type="text" id="country">
+  <select id="countrys" name="countrys" style="width: 100%;height: 40px;">
+                          {% for country in zone_countries %}
+                          <option value="{{country.country}}">{{country.country}}</option>
+                          {% endfor %}
+                          
+                        </select>
+  
   <p><strong>State:</strong></p>
   <input type="text" id="state">
   
@@ -370,13 +446,14 @@ required="required">
    
     <th>Phone number</th>
   </tr>
+  <tr class="one_line"></tr>
   {% for my_contacts in my_contacts_info %}
   <tr class="table_tr_class" id="table_tr_id{{my_contacts.pk}}">
     <td class="mass_start_table" id="address_no{{my_contacts.pk}}">{{my_contacts.address}}</td>
     
      <td class="mass_end_table" id="phone_number_no{{my_contacts.pk}}">
       <span class="phone_number_all">{{my_contacts.phone_number}}</span> <div class="delete_sizes_tabel" key="{{my_contacts.pk}}"><span class="icon icon-times"></span></div>
-      <div class="change_table" email="{{my_contacts.email}}" phone_number="{{my_contacts.phone_number}}" address="{{my_contacts.address}}" state="{{my_contacts.state}}" city="{{my_contacts.city}}" country="{{my_contacts.country}}" index="{{my_contacts.index}}" key="{{my_contacts.pk}}"><svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+      <div class="change_table" id="change_table{{my_contacts.pk}}" email="{{my_contacts.email}}" phone_number="{{my_contacts.phone_number}}" address="{{my_contacts.address}}" state="{{my_contacts.state}}" city="{{my_contacts.city}}" country="{{my_contacts.country}}" index="{{my_contacts.index}}" key="{{my_contacts.pk}}"><svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <path d="M250.6,66.8V0L136.7,111.3l113.9,111.3v-66.8c73.7,0,133.6,59.8,133.6,133.6c0,73.8-59.8,133.6-133.6,133.6
   C176.9,423,117,363.2,117,289.4H28C28,412.3,127.7,512,250.6,512c123,0,222.6-99.7,222.6-222.6C473.2,166.4,373.6,66.8,250.6,66.8z"></path>
 </svg></div>
@@ -406,22 +483,24 @@ required="required">
         </div>
       </main>
      
-    
+
 
 
    {% include 'layouts/footer_eng.html' %}
     </div>
     
     <div data-fixed-panels="bottom">
+    
+
       
-     
     </div>
 
-   
+  
  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my-layout.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/core-css.css" rel="stylesheet" type="text/css">
   
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.min.js"></script>
+
  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
   <link
      rel="stylesheet"
@@ -434,11 +513,14 @@ required="required">
    const phoneInput = window.intlTelInput(phoneInputField, {
      utilsScript:
        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+       initialCountry: "auto",
+                separateDialCode: true,
+
    });
  </script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_4.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts.css" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts_features.css" rel="stylesheet" type="text/css">
@@ -447,7 +529,7 @@ required="required">
     <td class="mass_start_table"  id="address_no#pk">#address</td>
     
      <td class="mass_end_table" id="phone_number_no#pk"><span class="phone_number_all">#phone_number </span><div class="delete_sizes_tabel" key="#pk"><span class="icon icon-times"></span></div>
-      <div class="change_table" email="#email" phone_number="#phone_number" address="#address" state="#state" city="#city" country="#country" index="#index" key="#pk"><svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+      <div class="change_table" id="change_table#pk" email="#email" phone_number="#phone_number" address="#address" state="#state" city="#city" country="#country" index="#index" key="#pk"><svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <path d="M250.6,66.8V0L136.7,111.3l113.9,111.3v-66.8c73.7,0,133.6,59.8,133.6,133.6c0,73.8-59.8,133.6-133.6,133.6
   C176.9,423,117,363.2,117,289.4H28C28,412.3,127.7,512,250.6,512c123,0,222.6-99.7,222.6-222.6C473.2,166.4,373.6,66.8,250.6,66.8z"></path>
 </svg></div>
@@ -464,7 +546,7 @@ required="required">
       var email = $("#email").val()
       var phone_number = $("#phone_number").val()
       var state = $("#state").val()
-      var country = $("#country").val()
+      var country = $("#countrys").val()
       var address = $("#address").val()
       var index = $("#index").val()
 
@@ -473,21 +555,18 @@ required="required">
 
 
       const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-       const phoneInputField = document.querySelector("#phone_number");
-   const phoneInput = window.intlTelInput(phoneInputField, {
-     utilsScript:
-       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-   });
-if (phoneInput.isValidNumber()) {
+       var phoneInputInstance = window.intlTelInputGlobals.getInstance(phoneInputField);
+var phone_number = phoneInputInstance.getNumber();
+if (phoneInputInstance.isValidNumber()) {
       
       validation = true
     } else {
       validation = false
       
-      const errorCode = phoneInput.getValidationError();
+      const errorCode = phoneInputInstance.getValidationError();
       error_text = ""
       
-      if (errorMap[errorCode] == "Invalid number"){
+         if (errorMap[errorCode] == "Invalid number"){
             error_text = "Phone number must be numbers"
           }
           else if(errorMap[errorCode] == "Too short"){
@@ -512,10 +591,25 @@ if (phoneInput.isValidNumber()) {
         
         $(".error_window").text(error_text)
         $(".error_window").css("display", "block")
+        return;
         
       
       
      
+
+    }
+
+    if (first_name.length>0 && last_name.length>0 && email.length>0 && state.length>0 && country.length>0 && address.length>0  && index.length>0 && city.length>0){
+      validation = true
+    }
+    else{
+      validation = false
+      error_text = "Please fill in all fields!"
+      $(".error_window").text(error_text)
+        $(".error_window").css("display", "block")
+
+      return;
+
     }
     if (validation){
       var data = new FormData()
@@ -546,13 +640,14 @@ if (phoneInput.isValidNumber()) {
                 address_template = address_template.replace("#city", city)
                  address_template = address_template.replace("#country", country)
                 address_template = address_template.replace("#index", index)
-                $(".table_all_features tbody").append(address_template)
+                $(".one_line").after(address_template)
                  $("#state").val("")
        $("#country").val("")
      $("#address").val("")
       $("#index").val("")
 
        $("#city").val("")
+       $(".error_window").css("display", "none")
 
 
                 
@@ -592,7 +687,8 @@ if (phoneInput.isValidNumber()) {
       $("#email").val(email)
       $("#phone_number").val(phone_number)
       $("#state").val(state)
-       $("#country").val(country)
+
+       $("#countrys").val(country)
      $("#address").val(address)
       $("#index").val(index)
 
@@ -603,8 +699,22 @@ if (phoneInput.isValidNumber()) {
        
        $(".change_address").attr("pk", $(this).attr("key"))
 
+
+       var element = document.getElementById("my_account_form");
+
+                  element.scrollIntoView();
+                  //var element = document.getElementById('targetElement');
+    var headerOffset = 120;
+    var elementPosition = element.getBoundingClientRect().top;
+    var offsetPosition = elementPosition + window.pageYOffset - headerOffset+600;
+  
+    window.scrollTo({
+         top: offsetPosition,
+         behavior: "smooth"
+    });
+
     })
-    $(".cancel_changes").on("click", function(){
+    $(document).on("click",".cancel_changes", function(){
      
       $("#state").val("")
        $("#country").val("")
@@ -618,7 +728,7 @@ if (phoneInput.isValidNumber()) {
 
     })
     $(document).on("click",".change_address", function(){
-  var [first_name,last_name, email, phone_number,address, country, state, city, index]=[$("#first_name").val(),$("#last_name").val(),$("#email").val(),$("#phone_number").val(),$("#address").val(),$("#country").val(),$("#state").val(),$("#city").val(),$("#index").val() ]
+  var [first_name,last_name, email, phone_number,address, country, state, city, index]=[$("#first_name").val(),$("#last_name").val(),$("#email").val(),$("#phone_number").val(),$("#address").val(),$("#countrys").val(),$("#state").val(),$("#city").val(),$("#index").val() ]
 
 
 
@@ -652,6 +762,26 @@ if (phoneInput.isValidNumber()) {
       $("#index").val("")
 
        $("#city").val("")
+       
+console.log(pk, "pk")
+       $("#change_table"+String(pk)).attr("first_name", first_name)
+        $("#change_table"+String(pk)).attr("last_name", last_name)
+         $("#change_table"+String(pk)).attr("email", email)
+          $("#change_table"+String(pk)).attr("phone_number", phone_number)
+           $("#change_table"+String(pk)).attr("state", state)
+            $("#change_table"+String(pk)).attr("address", address)
+            $("#change_table"+String(pk)).attr("country", country)
+            $("#change_table"+String(pk)).attr("index", index)
+
+
+
+
+
+
+          $(".add_address").removeClass("display_none")
+       $(".change_address").addClass("display_none")
+       $(".cancel_changes").addClass("display_none")
+
                 
                 
 
@@ -673,7 +803,7 @@ if (phoneInput.isValidNumber()) {
     alert("Error: Wrong username or password")
   }
 }
-    $(".delete_sizes_tabel").on("click", function(){
+    $(document).on("click",".delete_sizes_tabel", function(){
       var key = $(this).attr("key")
       
       
@@ -692,6 +822,15 @@ if (phoneInput.isValidNumber()) {
             data: data,
             success: function(data){
               $("#table_tr_id"+String(key)).remove()
+              $("#state").val("")
+       $("#country").val("")
+     $("#address").val("")
+      $("#index").val("")
+
+       $("#city").val("")
+       $(".add_address").removeClass("display_none")
+       $(".change_address").addClass("display_none")
+       $(".cancel_changes").addClass("display_none")
               //location.replace("/address_book/")
       
                 
@@ -1126,8 +1265,6 @@ function showCartFixedBtn(btn) {
 
   
 
-
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/style.css" media="all" onload="this.media=&#39;all&#39;">
 
 
@@ -1144,5 +1281,7 @@ function showCartFixedBtn(btn) {
 
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/theme.js" charset="utf-8"></script>
 
+  
 
 </body></html>
+
