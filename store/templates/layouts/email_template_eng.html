@@ -1,13 +1,17 @@
+{% load i18n %}
+
 {% load all_go %}
 {% load mathfilters %}
-  {% load rate %}
+{% load rate %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Confirmation</title>
+  <title>
+    Order Confirmation</title>
   <style>
     /* CSS Styles */
     body {
@@ -17,13 +21,13 @@
     }
 
     .container {
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
 
     .header {
       text-align: center;
@@ -94,160 +98,110 @@
 </head>
 
 <body>
-  {% with rate=request|Get_pay_rate %}
   <div class="container">
     <div class="header">
       <div class="header">
-  <img src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32067130.png" alt="Logo" style="max-width: 200px;">
-   {% if delivery_check %}<h1>Delivery Confirmation - boutiquebroderie.com</h1>{% else %}<h1>Order Confirmation - boutiquebroderie.com</h1>{% endif %}
-  
-</div>
+        <img src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32067130.png" alt="Logo" style="max-width: 200px;">
+        <h1>{% if delivery_check %}Delivery Confirmation - boutiquebroderie.com{% else %}Order Confirmation - boutiquebroderie.com{% endif %}</h1>
+      </div>
     </div>
-{% if delivery_check %}
+    {% with rate=request|Get_pay_rate %}
     <div class="order-details">
-      <h2>Delivery details</h2>
-      <p><strong>Delivery Number:</strong> {{delivery_check.pk}}</p>
-    
-      <p><strong>Mass :</strong> {{delivery_check.mass}} g</p>
-       <p><strong>Delivery price:</strong> {{delivery_check.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
-     
-      <h2>Contacts</h2>
-       <p><strong>First name:</strong> {{checkout.first_name}}</p>
+      {% if delivery_check %}<h2>Delivery Details</h2>{% else %}<h2>Order Details</h2>{% endif %}
 
-       <p><strong>Last name :</strong> 
-       {{checkout.last_name}}</p>
-      <p><strong>Email:</strong> {{delivery_check.my_contacts_info.email}}</p>
-      <p><strong>Phone number:</strong> {{delivery_check.my_contacts_info.phone_number}}</p>
+      {% if delivery_check %}
+      <h2>Delivery Number #{{delivery_check.pk}}</h2>
+      <p><strong>Delivery Method:</strong> Mail</p>
+      <p><strong>Delivery Amount:</strong> {{delivery_check.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
+      <p><strong>Weight:</strong> {{delivery_check.mass}} g</p>
+      {% if collection_ind is not None %}
+      {% else %}
+      <h2>Contact Information</h2>
+      <p><strong>Name:</strong> {{delivery_check.first_name}}</p>
+      <p><strong>Last Name:</strong> {{delivery_check.last_name}}</p>
+      <p><strong>Email:</strong>{{delivery_check.my_contacts_info.email}}</p>
+      <p><strong>Contact Phone:</strong> {{delivery_check.my_contacts_info.phone_number}}</p>
       <p><strong>Country:</strong> {{delivery_check.my_contacts_info.country}}</p>
-      <p><strong>State :</strong> {{delivery_check.my_contacts_info.state}}</p>
-      <p><strong>Place of residence:</strong> {{delivery_check.my_contacts_info.city}}</p>
+      <p><strong>Region:</strong> {{delivery_check.my_contacts_info.state}}</p>
+      <p><strong>Residence:</strong> {{delivery_check.my_contacts_info.city}}</p>
       <p><strong>Address:</strong> {{delivery_check.my_contacts_info.address}}</p>
-      <p><strong>Index:</strong> {{delivery_check.my_contacts_info.index}}</p>
-    </div>
-    {% else %}
-    <div class="order-details">
-      <h2>Order Details</h2>
-      <p><strong>Order Number:</strong> {{checkout.pk}}</p>
-      <p><strong>Date:</strong> {{checkout.date_ordered}}</p>
-      <p><strong>Mass :</strong> {{checkout.mass}} g</p>
-     
-      <h2>Contacts</h2>
-        <p><strong>First name:</strong> {{checkout.first_name}}</p>
-
-       <p><strong>Last name :</strong> 
-       {{checkout.last_name}}</p>
+      <p><strong>Zip Code:</strong> {{delivery_check.my_contacts_info.index}}</p>
+      {% endif %}
+      {% else %}
+      <h2>Order #{{checkout.pk}}</h2>
+      <p><strong>Payment Date:</strong> {{checkout.date_ordered}}</p>
+      <p><strong>Delivery Method:</strong> Mail</p>
+      <p><strong>Order Amount:</strong> {{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
+      <p><strong>Weight:</strong> {{checkout.mass}} g</p>
+      {% if collection_ind is not None %}
+      {% else %}
+      <h2>Contact Information</h2>
+      {% if checkout.first_name %}
+      <p><strong>Name:</strong> {{checkout.first_name}}</p>
+      <p><strong>Last Name:</strong> {{checkout.last_name}}</p>
+      {% else %}
+      <p><strong>Name:</strong> {{checkout.first_name}}</p>
+      <p><strong>Last Name:</strong> {{checkout.last_name}}</p>
+      {% endif %}
       <p><strong>Email:</strong>{{checkout.delivery_check.my_contacts_info.email}}</p>
-      <p><strong>Phone number:</strong> {{checkout.delivery_check.my_contacts_info.phone_number}}</p>
+      <p><strong>Contact Phone:</strong> {{checkout.delivery_check.my_contacts_info.phone_number}}</p>
       <p><strong>Country:</strong> {{checkout.delivery_check.my_contacts_info.country}}</p>
-      <p><strong>State :</strong> {{checkout.delivery_check.my_contacts_info.state}}</p>
-      <p><strong>Place of residence:</strong> {{checkout.delivery_check.my_contacts_info.city}}</p>
+      <p><strong>Region:</strong> {{checkout.delivery_check.my_contacts_info.state}}</p>
+      <p><strong>Residence:</strong> {{checkout.delivery_check.my_contacts_info.city}}</p>
       <p><strong>Address:</strong> {{checkout.delivery_check.my_contacts_info.address}}</p>
-      <p><strong>Index:</strong> {{checkout.delivery_check.my_contacts_info.index}}</p>
+      <p><strong>Zip Code:</strong> {{checkout.delivery_check.my_contacts_info.index}}</p>
+      {% endif %}
+      {% endif %}
     </div>
-
-
+    {% if not delivery_check %}
     <div class="order-summary">
       <table>
-       <thead>
-  <tr>
-    <th>Product</th>
-    <th>Price</th>
-    <th>Quantity</th>
-    <th>Sale</th>
-    <th>Total</th>
-  </tr>
-</thead>
-<tbody>
-   
-  {% for order in checkout.products_Order.all %}
-
-  <tr>
-    <td class="product-name">{% if order.product  %}{{ order.product.name_ru }}{% else %}{{ order.name_en }} {% endif %}</td>
-    <td class="product-price">{% if order.product  %}
-           
-           
-               {% if order.indicator == "size" %}
-
-               {% if order.product.sale_price_size %}
-
-                {{order.product.sale_price_size|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
-               
-               {% else %}
-                {{order.product.price_size|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %} 
-               {% endif %}
-               
-              
-            
-               {% elif order.indicator == "counter" %}
-                         {% with firstname=order.count|checkcounters:order.product.pk %}
-              {% if firstname is not None %}
-             {{firstname|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
-                
-
-                       
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Discount</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in checkout.products_Order.all %}
+          <tr>
+            <td class="product-name">{% if order.product  %}{{ order.product.name_en }}{% else %}{{ order.name_en }} {% endif %}</td>
+            <td class="product-price">
+              {% if order.count_size %}
+              {{order.const_price_product|div:rate.0|div:10|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
               {% else %}
-               {{order.product.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
-          
-                       
+              {{order.const_price_product|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
               {% endif %}
-            {% endwith %}
-
-               {% elif order.indicator == "size_pcs" %}
-               {% if order.product.sale_price_pcs %}
-                {{order.product.sale_price_pcs|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
-              
-               {% else %}
-                {{order.product.price_pcs|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
-              
-
-               {% endif %}
-               
-               {% elif order.indicator == "count" %}
-               {% if order.product.sale_price %}
-                {{order.product.sale_price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
-             
-               {% else %}
-                {{order.product.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
-              
-
-               {% endif %}
-               
-               {% else %}
-               {% endif %}
-             
-              {% else %}
-
-              {{ order.product.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
-            
-            {% endif %}
-
-</td>
-    <td class="product-quantity">
-   {% if order.count_size %}{{ order.count_size }}sm{% else %} {{ order.count }}{% endif %}</td>
-    <td class="product-sale">{% if order.product.sale  %}{{order.product.sale}} %{% else %}-{% endif %}</td>
-    <td class="product-total"> {{ order.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</td>
-  </tr>
-  {% endfor %}
-  
-</tbody>
-
+            </td>
+            <td class="product-quantity">{% if order.count_size %}{{ order.count_size }}cm{% else %} {{ order.count }}{% endif %}</td>
+            <td class="product-sale">{% if order.const_sale  %}{{order.const_sale}}{% else %}-{% endif %}</td>
+            <td class="product-total"> {{ order.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
         <tfoot>
           <tr>
-            <td colspan="3"><strong>Total:</strong></td>
+            <td colspan="3"><strong>Total Amount:</strong></td>
             <td><strong>{{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</strong></td>
           </tr>
         </tfoot>
       </table>
     </div>
+    {% else %}
+    {% endif %}
+  
    
-{% endif %}
- {% endwith %}
+    {% endwith %}
     <div class="footer">
-     <p>.</p>
-  <a href="https://boutiquebroderie.com/" style="display: inline-block; padding: 10px 20px; background-color: #c22738; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 20px;">Back to Shop</a>
+      <p></p>
+      <a href="https://boutiquebroderie.com/"
+        style="display: inline-block; padding: 10px 20px; background-color: #c22738; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 20px;">
+        Back to Store</a>
     </div>
   </div>
-
   <script>
     // JavaScript logic (if any)
   </script>

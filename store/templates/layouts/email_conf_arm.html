@@ -1,9 +1,10 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hy">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Էլփոստի հաստատում</title>
+    <title>Էլ․ փոստի հաստատման հաստատում</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,47 +44,47 @@
         }
 
        .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #dd626f; /* Red button background color */
-    color: #ffffff !important; /* White button text color */
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #dd626f; /* Կարմիր կոճակի ներքևի գույն */
+            color: #ffffff !important; /* Կարմիր կոճակի տեքստի գույն */
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
 
+        a:link {
+            color: #ffffff;
+        }
 
-
-a:link {
-  color: #ffffff;
-  
-}
-.ii a[href] {
-    color: #ffffff !important;
-}
+        .ii a[href] {
+            color: #ffffff !important;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-    <div class="confirmation-icon">
-        <i class="fas fa-check-circle"></i>
+        <div class="confirmation-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h1>Էլ․ փոստի հաստատման հաստատում</h1>
+        <p>
+            Բարև, {{user.profile.first_name}} {{user.profile.last_name}}!</p>
+        {% if recovery is not None %}
+        <p>Խնդրում ենք անցնել հղումով , գաղտնաբառի վերականգնման համար։</p>
+        <p>
+        {% else %}
+        <p>Խնդրում ենք անցնել հղումով Ձեր գրանցման հաստատման համար։</p>
+        <p>
+        {% endif %}
+       
+        Շնորհակալություն որ դուք ընտրել եք BoutiqueBroderie-ն։ 
+        </p>
+        <div class="btn-container">
+            <a href="{{confirmation_url}}" class="btn">
+                Հաստատել</a>
+        </div>
     </div>
-    
-    <h1>Էլփոստի հաստատում</h1>
-    <p>Ողջույն, {{user.profile.first_name}} {{user.profile.last_name}}!</p>
-    {% if recovery is not None %}
- <p>Խնդրում ենք սեղմել հաստատել կոճակը ,գաղտնաբառի վերականգնամ  համար.</p>
-{% else %}
-<p>Խնդրում ենք սեղմել հաստատել կոճակը ,գրանցումը հաստատելու համար.</p>
-{% endif %}
-    
-    <p>
-Շնորհակալություն BoutiqueBroderie-ն ընտրելու համար. 
-</p>
-    <div class="btn-container">
-        <a href="{{confirmation_url}}" class="btn">Հաստատել</a>
-    </div>
-</div>
 </body>
 </html>
