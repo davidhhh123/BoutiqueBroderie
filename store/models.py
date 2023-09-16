@@ -229,8 +229,7 @@ class category_choeses(models.Model):
     parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
     
 
-    def __str__(self):
-        return self.name
+    
 class about_us(models.Model):
     description = FroalaField(theme='dark', default="")
     description_am = FroalaField(theme='dark', default="")
@@ -358,8 +357,7 @@ class products(models.Model):
 
 
 
-    def __str__(self):
-        return self.name_ru
+   
 class home_slide(models.Model):
     slide_id = models.CharField(max_length=1, default='')
     image = ResizedImageField(force_format="WEBP", quality=80, default='')
