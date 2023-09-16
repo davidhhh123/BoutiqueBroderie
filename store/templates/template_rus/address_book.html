@@ -290,6 +290,7 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
     font-size: 26px;
     color: red;
     right: -10px;
+    cursor: pointer;
 }
 .change_table {
     right: 40px;
@@ -357,6 +358,9 @@ tr.table_tr_class{
       visibility: hidden;
     }
   }
+  .error_window{
+    color: red;
+  }
 </style>
 
   </head>
@@ -394,7 +398,7 @@ tr.table_tr_class{
                 <div class="co-checkout-block--padded"><div class="co-adress"><div class="co-adress-short_information"></div>
 
 <div class="container container_data">
-  <form class="co-form--login co-modal-login_form my_account_form" data-use-mask="1" onsubmit="check()">
+  <form class="co-form--login co-modal-login_form my_account_form" data-use-mask="1" onsubmit="check()" id="my_account_form">
   <p><strong>Имя:</strong></p>
   <input type="text" value="{{request.user.profile.first_name}}" id="first_name" >
 
@@ -514,6 +518,9 @@ required="required">
    const phoneInput = window.intlTelInput(phoneInputField, {
      utilsScript:
        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+       initialCountry: "auto",
+                separateDialCode: true,
+
    });
  </script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
@@ -589,10 +596,25 @@ if (phoneInputInstance.isValidNumber()) {
         
         $(".error_window").text(error_text)
         $(".error_window").css("display", "block")
+        return;
         
       
       
      
+
+    }
+
+    if (first_name.length>0 && last_name.length>0 && email.length>0 && state.length>0 && country.length>0 && address.length>0  && index.length>0 && city.length>0){
+      validation = true
+    }
+    else{
+      validation = false
+      error_text = "Пожалуйста заполните все поля!"
+      $(".error_window").text(error_text)
+        $(".error_window").css("display", "block")
+
+      return;
+
     }
     if (validation){
       var data = new FormData()
@@ -630,6 +652,7 @@ if (phoneInputInstance.isValidNumber()) {
       $("#index").val("")
 
        $("#city").val("")
+       $(".error_window").css("display", "none")
 
 
                 
@@ -681,8 +704,22 @@ if (phoneInputInstance.isValidNumber()) {
        
        $(".change_address").attr("pk", $(this).attr("key"))
 
+
+       var element = document.getElementById("my_account_form");
+
+                  element.scrollIntoView();
+                  //var element = document.getElementById('targetElement');
+    var headerOffset = 120;
+    var elementPosition = element.getBoundingClientRect().top;
+    var offsetPosition = elementPosition + window.pageYOffset - headerOffset+600;
+  
+    window.scrollTo({
+         top: offsetPosition,
+         behavior: "smooth"
+    });
+
     })
-    $(".cancel_changes").on("click", function(){
+    $(document).on("click",".cancel_changes", function(){
      
       $("#state").val("")
        $("#country").val("")
@@ -771,7 +808,7 @@ console.log(pk, "pk")
     alert("Error: Wrong username or password")
   }
 }
-    $(".delete_sizes_tabel").on("click", function(){
+    $(document).on("click",".delete_sizes_tabel", function(){
       var key = $(this).attr("key")
       
       
@@ -790,6 +827,15 @@ console.log(pk, "pk")
             data: data,
             success: function(data){
               $("#table_tr_id"+String(key)).remove()
+              $("#state").val("")
+       $("#country").val("")
+     $("#address").val("")
+      $("#index").val("")
+
+       $("#city").val("")
+       $(".add_address").removeClass("display_none")
+       $(".change_address").addClass("display_none")
+       $(".cancel_changes").addClass("display_none")
               //location.replace("/address_book/")
       
                 

@@ -166,9 +166,9 @@
         <div class="img-ratio img-ratio_cover img-ratio_cart">
           <div class="img-ratio__inner">
             {% if product.product.avatar_p is not None %}
-             <img title="Инструменты" alt="Инструменты" src="{{product.product.avatar_p.url}}" class="item-image">
+             <img  src="{{product.product.avatar_p.url}}" class="item-image">
             {% else %}
-             <img title="Инструменты" alt="Инструменты" src="{% static 'images/GRBD_SET_TIFFANY_big.jpg' %}" class="item-image">
+             <img  src="{% static 'images/GRBD_SET_TIFFANY_big.jpg' %}" class="item-image">
             {% endif %}
            
             
@@ -177,6 +177,8 @@
       </div>
       <div style="cursor: pointer;" onclick="on_click_href(`{% url 'accounts:product_detalis_view' product.product.pk %}`)" class="item-title">
       {{product.product.name_ru}}
+
+
       
       </div>
 
@@ -194,9 +196,16 @@
            
 
           {% if product.indicator == "size" %}
-           <button type="button" data-quantity-change="-1" class="counter-button button button_size-s is-count-down_size " {% if product.product.sale_price_size %}  price="{{ product.product.sale_price_size|div:rate.0|div:10|floatformat:2 }}"{% else %}  price="{{product.product.price_size|div:10|div:rate.0|floatformat:2}}"{% endif %} min_size="{{ product.product.min_size }}" key = "{{forloop.counter0}}"><span class="icon icon-minus"></span></button>
-          <input type="text" key = "{{forloop.counter0}}" cpk="{{product.pk}}"  pk="{{product.product.pk}}" value="{{ product.count_size }} см" name="cart[quantity][573211243]" class="counter-input input_sizes form-control  form-control_size-s" id="counter-input{{ forloop.counter0 }}" last_size= "{{product.count_size}}" {% if product.product.sale_price_size %}  price="{{ product.product.sale_price_size|div:rate.0|div:10|floatformat:2 }}"{% else %} price="{{product.product.price_size|div:10|div:rate.0|floatformat:2}}"{% endif %} min_size="{{ product.product.min_size }}" max="{{ product.product.max_size }}" status="lock" style="width: 5.5rem;">
-          <button type="button" data-quantity-change="1" class="counter-button button button_size-s is-count-up_size " min_size="{{ product.product.min_size }}" {% if product.product.sale_price_size %} price="{{ product.product.sale_price_size|div:rate.0|div:10|floatformat:2 }}"{% else %} price="{{product.product.price_size|div:10|div:rate.0|floatformat:2}}"{% endif %} key = "{{forloop.counter0}}" pk="{{ product.product.pk }}" ><span class="icon icon-plus"></span></button>
+           <button type="button" data-quantity-change="-1" class="counter-button button button_size-s is-count-down_size " {% if product.product.sale_price_size %}  price="{{ product.product.sale_price_size|div:rate.0|div:10|floatformat:2 }}"{% else %}  price="{{product.product.price_size|div:10|div:rate.0|floatformat:2}}"{% endif %}  {% if product.product.max_size  == 0 %}min_size="0"{% else %}min_size="{{ product.product.min_size }}"{% endif %} key = "{{forloop.counter0}}"><span class="icon icon-minus"></span></button>
+          <input type="text" key = "{{forloop.counter0}}" cpk="{{product.pk}}"  pk="{{product.product.pk}}"
+
+          {% if product.count_size > product.product.max_size %}value="{{ product.product.max_size }} см"{% else %}value="{{ product.count_size }} см"{% endif %}  name="cart[quantity][573211243]" class="counter-input input_sizes form-control  form-control_size-s" id="counter-input{{ forloop.counter0 }}" last_size= "{{product.count_size}}" {% if product.product.sale_price_size %}  price="{{ product.product.sale_price_size|div:rate.0|div:10|floatformat:2 }}"{% else %} price="{{product.product.price_size|div:10|div:rate.0|floatformat:2}}"{% endif %} {% if product.product.max_size  == 0 %}min_size="0"{% else %}min_size="{{ product.product.min_size }}"{% endif %} max="{{ product.product.max_size }}" status="lock"   {% if not product.product.available %}
+          style="background:red;width: 5.5rem;" 
+
+          {% else %}
+          style="width: 5.5rem;" 
+          {% endif %}>
+          <button type="button" data-quantity-change="1" class="counter-button button button_size-s is-count-up_size "  {% if product.product.max_size  == 0 %}min_size="0"{% else %}min_size="{{ product.product.min_size }}"{% endif %} {% if product.product.sale_price_size %} price="{{ product.product.sale_price_size|div:rate.0|div:10|floatformat:2 }}"{% else %} price="{{product.product.price_size|div:10|div:rate.0|floatformat:2}}"{% endif %} key = "{{forloop.counter0}}" pk="{{ product.product.pk }}" ><span class="icon icon-plus"></span></button>
          {% elif  product.indicator == "counter" %}
            <button type="button" data-quantity-change="-1" class="counter-button button button_size-s is-count-down " {% with firstname=product.count|checkcounters:product.product.pk %}
     {% if firstname is not None %}
@@ -216,7 +225,12 @@
   {% endwith %}  key = "{{forloop.counter0}}"><span class="icon icon-minus"></span></button>
           <input type="text"   counters="{% for count in product.product.counter_props.all %}{{count.counter_prop}},{% endfor %}" counters_price = "{% for count in product.product.counter_props.all %}{% if product.product.sale > 0  %}{{count.counter_price_sale|div:rate.0|floatformat:2}}{% else %}{{count.counter_price|div:rate.0|floatformat:2}}{% endif %},{% endfor %}"
 
-            key = "{{forloop.counter0}}" cpk="{{product.pk}}"  pk="{{product.product.pk}}" value="{{ product.count }}" name="cart[quantity][573211243]" last_count="{{ product.count }}" class="counter-input input_counters form-control form-control_size-s" style="width: 5.5rem;" id="counter-input{{ forloop.counter0 }}"  {% with firstname=product.count|checkcounters:product.product.pk %}
+            key = "{{forloop.counter0}}" cpk="{{product.pk}}"  pk="{{product.product.pk}}"  {% if product.count > product.product.pcs %}value="{{ product.product.pcs }}"{% else %}value="{{ product.count }}"{% endif %}   name="cart[quantity][573211243]" last_count="{{ product.count }}" class="counter-input input_counters form-control form-control_size-s" {% if not product.product.available %}
+          style="background:red;width: 5.5rem;" 
+
+          {% else %}
+          style="width: 5.5rem;" 
+          {% endif %}id="counter-input{{ forloop.counter0 }}"  {% with firstname=product.count|checkcounters:product.product.pk %}
     {% if firstname is not None %}
    
       price="{{firstname|div:rate.0|floatformat:2}}"
@@ -258,16 +272,22 @@
           {% else %}
           price="{{ product.product.price_pcs|div:rate.0|floatformat:2 }}"
           {% endif %}  key = "{{forloop.counter0}}"><span class="icon icon-minus"></span></button>
-          <input type="text" key = "{{forloop.counter0}}" cpk="{{product.pk}}"  pk="{{product.product.pk}}" value="{{ product.count }}" name="cart[quantity][573211243]" class="counter-input input_counters form-control form-control_size-s" last_count="{{ product.count }}"  id="counter-input{{ forloop.counter0 }}"  {% if product.product.sale_price_pcs %}
+          <input type="text" key = "{{forloop.counter0}}" cpk="{{product.pk}}"  pk="{{product.product.pk}}"  {% if product.count > product.product.pcs %}value="{{ product.product.pcs }}"{% else %}value="{{ product.count }}"{% endif %}  name="cart[quantity][573211243]" class="counter-input input_counters form-control form-control_size-s" last_count="{{ product.count }}"  id="counter-input{{ forloop.counter0 }}"  {% if product.product.sale_price_pcs %}
           price="{{product.product.sale_price_pcs|div:rate.0|floatformat:2}}"
           {% else %}
           price="{{ product.product.price_pcs|div:rate.0|floatformat:2 }}"
-          {% endif %} max="{{ product.product.pcs}}" status="lock" style="width: 5.5rem;">
+          {% endif %} max="{{ product.product.pcs}}" status="lock" {% if not product.product.available %}
+          style="background:red;width: 5.5rem;" 
+
+          {% else %}
+          style="width: 5.5rem;" 
+          {% endif %}>
           <button type="button" data-quantity-change="1" class="counter-button button button_size-s is-count-up "  {% if product.product.sale_price_pcs %}
           price="{{product.product.sale_price_pcs|div:rate.0|floatformat:2}}"
           {% else %}
           price="{{ product.product.price_pcs|div:rate.0|floatformat:2 }}"
           {% endif %} key = "{{forloop.counter0}}" pk="{{ product.product.pk }}" ><span class="icon icon-plus"></span></button>
+
 
 
 
@@ -277,11 +297,16 @@
           {% else %}
           price="{{ product.product.price|div:rate.0|floatformat:2 }}"
           {% endif %}  key = "{{forloop.counter0}}"><span class="icon icon-minus"></span></button>
-          <input type="text" key = "{{forloop.counter0}}" cpk="{{product.pk}}"  pk="{{product.product.pk}}" value="{{ product.count }}" name="cart[quantity][573211243]" last_count="{{ product.count }}"  class="counter-input input_counters form-control form-control_size-s" id="counter-input{{ forloop.counter0 }}"  {% if product.product.sale_price %}
+          <input type="text" key = "{{forloop.counter0}}" cpk="{{product.pk}}"  pk="{{product.product.pk}}" {% if product.count > product.product.pcs %}value="{{ product.product.pcs }}"{% else %}value="{{ product.count }}"{% endif %}  name="cart[quantity][573211243]" last_count="{{ product.count }}"  class="counter-input input_counters form-control form-control_size-s" id="counter-input{{ forloop.counter0 }}"  {% if product.product.sale_price %}
           price="{{product.product.sale_price|div:rate.0|floatformat:2}}"
           {% else %}
           price="{{ product.product.price|div:rate.0|floatformat:2 }}"
-          {% endif %} max="{{ product.product.pcs }}" status="lock" style="width: 5.5rem;">
+          {% endif %} max="{{ product.product.pcs }}" status="lock" {% if not product.product.available %}
+          style="background:red;width: 5.5rem;" 
+
+          {% else %}
+          style="width: 5.5rem;" 
+          {% endif %}>
           <button type="button" data-quantity-change="1" class="counter-button button button_size-s is-count-up "  {% if product.product.sale_price %}
           price="{{product.product.sale_price|div:rate.0|floatformat:2}}"
           {% else %}
@@ -306,12 +331,12 @@
 
 
 
-{{ product.product.sale_price_size|div:rate.0|div:10|floatformat:2 }}
+{{ product.product.sale_price_size|div:rate.0|floatformat:2 }}
 
 
 
 
-      &nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %} за 10 см</div>
+      &nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %} за 1 м</div>
 {% else %}
 <div class="item-total" data-cart-item-total-price="">
         
@@ -323,12 +348,12 @@
 
 
 
-{{ product.product.price_size|div:rate.0|div:10|floatformat:2 }}
+{{ product.product.price_size|div:rate.0|floatformat:2 }}
 
 
 
 
-      &nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %} за 10 см</div>
+      &nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %} за 1 м</div>
 {% endif %}
 
 {% elif  product.indicator == "counter" %}
@@ -352,11 +377,12 @@
 {% elif  product.indicator == "size_pcs" %}
 {% if product.product.sale_price_pcs %}
 <div class="item-total" data-cart-item-total-price="">
-     {{product.product.sale_price_pcs|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
+     {{product.product.sale_price_pcs|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}за 1 кусок
 </div>
 {% else %}
 <div class="item-total" data-cart-item-total-price="">
      {{product.product.price_pcs|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
+     за 1 кусок
 </div>
 {% endif %}
 
@@ -431,8 +457,12 @@
         </div>
         
         <div class="discount" data-cart-discounts-ajax="false"></div>
+
         <div class="total">
-          <span class="total-amount" data-cart-total-price=""><span>{{sums|div:rate.0|floatformat:2}}</span>&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+
+          <span class="total-amount" data-cart-total-price=""><span>
+
+          {{sums|div:rate.0|floatformat:2}}</span>&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
         </div>
       </div>
       <div class="cart-controls">
@@ -520,7 +550,7 @@
 
 
 <script>
-
+var bitton_check = `<button type="button" class="button button_size-l button_wide make_order_class" data-cart-submit="">Оформить заказ</button>`
   function on_click_href(href){
      window.open(href);
   }
@@ -535,7 +565,7 @@ var pay_icon="€"
 {% else %}
 var pay_icon="₽"
 {% endif %}
-var  all_price=parseFloat($(".total-amount span").text())
+var  all_price=parseFloat("{{sums|div:rate.0|floatformat:2}}").toFixed(2)
 
 
 function calculateTotal() {
@@ -594,6 +624,8 @@ total+=parseFloat(price*parseInt(inputs_price_count.eq(price_index).val()))
  }
   
  all_price=total
+ console.log(all_price,max_per, "max")
+ 
 $(".total-amount").text(String(all_price.toFixed(2))+pay_icon)
   return total;
 }
@@ -613,7 +645,7 @@ function findLastIndexLessThanOrEqual(arr, value) {
 }
 
 var max_per = parseInt("{{max_per|div:rate.0|floatformat:2}}")
-var bitton_check = `<button type="button" class="button button_size-l button_wide make_order_class" data-cart-submit="">Оформить заказ</button>`
+
 function check_max_count(pk,size,callback){
   
   var data = new FormData()
@@ -630,6 +662,7 @@ function check_max_count(pk,size,callback){
             method: "POST",
             data: data,
             success: function(data){
+
               callback(data);
               
 
@@ -664,6 +697,17 @@ var key = $(this).attr("key")
         
 
    all_price+= product_price
+   calculateTotal() 
+
+   if (Math.abs(all_price.toFixed(2)*100)<Math.abs(parseFloat(max_per).toFixed(2)*100)){
+      
+      $(".cart-controls").html(`<p class="button button_size-l button_wide" style="cursor: default;">Минимальная сумма заказа՝ `+ max_per +` `+ pay_icon +` </p>`)
+
+    }
+  else{
+     $(".cart-controls").html(bitton_check)
+
+  }
 
     $(".total-amount").text(String(all_price.toFixed(2))+pay_icon)
     status_div.attr("status", "block")
@@ -754,6 +798,15 @@ var index = findLastIndexLessThanOrEqual(counters_array, product_count+1)
         
 
    all_price+= product_price
+   if (Math.abs(all_price.toFixed(2)*100)<Math.abs(parseFloat(max_per).toFixed(2)*100)){
+      
+      $(".cart-controls").html(`<p class="button button_size-l button_wide" style="cursor: default;">Минимальная сумма заказа՝ `+ max_per +` `+ pay_icon +` </p>`)
+
+    }
+  else{
+     $(".cart-controls").html(bitton_check)
+
+  }
    if (index != -1){
        $("#delete_id"+String(key)).attr("counter_price",parseFloat(product_price*(product_count+1)).toFixed(2) )
 
@@ -778,6 +831,7 @@ calculateTotal()
        var product_price = parseFloat($(this).attr("price"))
        if (index != -1){
         product_price  = parseFloat(prices_array[index])
+
         
       
         
@@ -801,6 +855,7 @@ calculateTotal()
       $(".cart-controls").html(bitton_check)
 
     }
+    calculateTotal()
 
     
     
@@ -814,7 +869,7 @@ $(".is-count-down_size ").on("click", function(){
    $("#error"+String(key)).css("display", "none")
 
   var product_count = parseInt($("#counter-input"+String(key)).val()) ;
-    if(!(product_count<=parseInt($(this).attr("min_size")))){
+    if(!(product_count-10<=parseInt($(this).attr("min_size")))){
         product_count-=10;
 
     var product_price = $(this).attr("price")
@@ -826,8 +881,18 @@ $(".is-count-down_size ").on("click", function(){
          
         
     }
+    else{
+         var product_price = $(this).attr("price")
+         product_count = $(this).attr("min_size")
+    
+    $("#counter-input"+String(key)).val(String(product_count)+" см")
+   all_price-= product_price
+    $(".total-amount").text(String(all_price.toFixed(2))+pay_icon)
+    $("#counter-input"+String(key)).attr("last_size", product_count)
 
-     if (all_price.toFixed(2)<max_per){
+    }
+
+     if (Math.abs(all_price.toFixed(2)*100)<Math.abs(parseFloat(max_per).toFixed(2)*100)){
       
       $(".cart-controls").html(`<p class="button button_size-l button_wide" style="cursor: default;">Минимальная сумма заказа՝ `+ max_per +` `+ pay_icon +` </p>`)
 
@@ -889,7 +954,7 @@ var index = findLastIndexLessThanOrEqual(counters_array, product_count)
          
         
     }
-     if (all_price.toFixed(2)<max_per){
+     if (Math.abs(all_price.toFixed(2)*100)<Math.abs(parseFloat(max_per).toFixed(2)*100)){
       
       $(".cart-controls").html(`<p class="button button_size-l button_wide" style="cursor: default;">Минимальная сумма заказа՝ `+ max_per +` `+ pay_icon +` </p>`)
 
@@ -930,12 +995,23 @@ $(".input_sizes").on("change", function(){
     input.attr("last_size", data.max_count)
     $(".total-amount").text(String(all_price.toFixed(2))+pay_icon)
 
+
        //all_price+= product_price
 
         //$(".total-amount").text(String(all_price)+" ₽")
         //status_div.attr("status", "block")
 
 calculateTotal()
+console.log(all_price, max_per, "max_per")
+if (Math.abs(all_price.toFixed(2)*100)<Math.abs(parseFloat(max_per).toFixed(2)*100)){
+      
+      $(".cart-controls").html(`<p class="button button_size-l button_wide" style="cursor: default;">Минимальная сумма заказа՝ `+ max_per +` `+ pay_icon +` </p>`)
+
+    }
+  else{
+     $(".cart-controls").html(bitton_check)
+
+  }
           })
 
     }
@@ -967,7 +1043,7 @@ calculateTotal()
 
 }
 
-if (all_price.toFixed(2)<max_per){
+if (Math.abs(all_price.toFixed(2)*100)<Math.abs(parseFloat(max_per).toFixed(2)*100)){
       
       $(".cart-controls").html(`<p class="button button_size-l button_wide" style="cursor: default;">Минимальная сумма заказа՝ `+ max_per +` `+ pay_icon +` </p>`)
 
@@ -1018,6 +1094,16 @@ $(".input_counters").on("change", function(){
        
             all_price+=new_price
     price_total = new_price
+    console.log(all_price, max_per, "max_per")
+    if (Math.abs(all_price.toFixed(2)*100)<Math.abs(parseFloat(max_per).toFixed(2)*100)){
+      
+      $(".cart-controls").html(`<p class="button button_size-l button_wide" style="cursor: default;">Минимальная сумма заказа՝ `+ max_per +` `+ pay_icon +` </p>`)
+
+    }
+  else{
+     $(".cart-controls").html(bitton_check)
+
+  }
     
     $(".total-amount").text(String(all_price.toFixed(2))+pay_icon)
     calculateTotal()
@@ -1069,7 +1155,7 @@ $(".input_counters").on("change", function(){
     var this_count = $("#in_stock option:checked").attr("value")
 
 }
-if (all_price.toFixed(2)<max_per){
+if (Math.abs(all_price.toFixed(2)*100)<Math.abs(parseFloat(max_per).toFixed(2)*100)){
       
       $(".cart-controls").html(`<p class="button button_size-l button_wide" style="cursor: default;">Минимальная сумма заказа՝ `+ max_per +` `+ pay_icon +` </p>`)
 
@@ -1134,7 +1220,18 @@ if (all_price.toFixed(2)<max_per){
             success: function(data){
                 
                $(".cart__area-items").html("")
-               $(".total-amount span").text("0"+pay_icon)
+               $(".total-amount").text("0 "+pay_icon)
+               $(".sidebar-size-items span.products_count").text("0")
+               all_price=0
+               if (Math.abs(all_price.toFixed(2)*100)<Math.abs(parseFloat(max_per).toFixed(2)*100)){
+      
+      $(".cart-controls").html(`<p class="button button_size-l button_wide" style="cursor: default;">Минимальная сумма заказа՝ `+ max_per +` `+ pay_icon +` </p>`)
+
+    }
+  else{
+     $(".cart-controls").html(bitton_check)
+
+  }
                 
                 
                 
@@ -1170,6 +1267,15 @@ if (all_price.toFixed(2)<max_per){
                $(".products_count").text(parseInt($(".products_count").text())-1)
                 $("#cart-item"+String(pk)).remove()
                 calculateTotal()
+                if (Math.abs(all_price.toFixed(2)*100)<Math.abs(parseFloat(max_per).toFixed(2)*100)){
+      
+      $(".cart-controls").html(`<p class="button button_size-l button_wide" style="cursor: default;">Минимальная сумма заказа՝ `+ max_per +` `+ pay_icon +` </p>`)
+
+    }
+  else{
+     $(".cart-controls").html(bitton_check)
+
+  }
                
                 
 

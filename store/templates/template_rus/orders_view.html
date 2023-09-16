@@ -325,7 +325,8 @@
                {% if order.product  %}
                {% if order.indicator == "size" %}
 
-               <span class="product-preview__price-cur">{{order.const_price|div:rate.0|mul:10|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %} за 10 см</span>
+               <span class="product-preview__price-cur">{{order.const_price|div:rate.0|mul:100|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               <span style="font-size: .8rem">за 1 м</span>
               
              <!-- <span class="product-preview__price-old">{{ order.product.sasle_price }}&nbsp;₽ за {{ order.product.min_size }} см</span>-->
                {% elif order.indicator == "counter" %}
@@ -339,6 +340,7 @@
 
                {% elif order.indicator == "size_pcs" %}
                 <span class="product-preview__price-cur">{{order.const_price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+                <span style="font-size: .8rem">за 1 кусок</span>
                
                {% elif order.indicator == "count" %}
                <span class="product-preview__price-cur">{{order.const_price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>

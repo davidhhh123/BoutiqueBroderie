@@ -15,7 +15,11 @@
       <a href="{% url 'accounts:orders_view' checkout.pk %}" class="item-title" style="">
        
 
-      order_id:{{ checkout.pk }}       {% if checkout.assembled == "assembled" %}
+      order_id:{{ checkout.pk }}   
+
+
+
+       {% if checkout.assembled == "assembled" %}
       {% if checkout.status == "send" or checkout.status   == "collectionsend" %}
 
 
@@ -57,7 +61,15 @@
          
         
         
-       
+       {% if checkout.status == "Refund" %}
+         <button class="button js-item-change" type="button" data-item_change="25">Частичный возврат</button>
+
+
+{% elif checkout.status == "Cancel" %}
+  <button class="button js-item-change" type="button" data-item_change="25">Закза отменён</button>
+
+
+{% else %}
 
 {% if checkout.status == "send" or checkout.status == "collectionsend" %}
             <button class="button js-item-change" type="button" data-item_change="25">Отправлено</button>
@@ -104,7 +116,7 @@
 
 {% endif %}
 
-
+{% endif %}
 
 
 

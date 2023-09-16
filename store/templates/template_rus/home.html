@@ -499,17 +499,18 @@
               <span class="product-preview__price-cur">{{product.price_pcs|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
              
               {% endif %}
+              <span style="font-size: .8rem">за 1 кусок</span>
 {% elif product.price_size %}
 {% if product.sale_price_size  %}
-               <span class="product-preview__price-old">{{product.price_size|div:rate.0|div:10|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+               <span class="product-preview__price-old">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
               
-              <span class="product-preview__price-cur">{{product.sale_price_size|div:rate.0|div:10|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product.sale_price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
                
               {% else %}
-              <span class="product-preview__price-cur">{{product.price_size|div:rate.0|div:10|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+              <span class="product-preview__price-cur">{{product.price_size|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
              
               {% endif %}
-              <span style="font-size: .8rem">за 10 см</span>
+              <span style="font-size: .8rem">за 1 м</span>
 {% else %}
 {% if product.counter_props.all %}
 {% with firstname=product.count|checkcounters:product.product.pk %}
@@ -543,14 +544,12 @@
               
               <div class="add-cart-counter" data-add-cart-counter="" data-add-cart-counter-max-quantity="null" data-add-cart-counter-is-ready="">
 
-{% if product.price_pcs or product.price_size %}
- <a href="{% url 'accounts:product_detalis_view' product.pk %}" class="button add-cart-counter__btn "  data-add-cart-counter-btn="">
-<span class="add-cart-counter__btn-icon icon-cart"></span>
-                </a>
-{% else %}
  <button type="button" class="button add-cart-counter__btn add_cart_btn_counter_ind" pk = "{{product.pk}}"  {% if product.price %}
 ind="count"
-
+{% elif product.price_size %}
+ind="size"
+{% elif product.price_pcs %}
+ind="size_pcs"
 {% else %}
 {% if product.counter_props.all %}
 ind="counter"
@@ -560,7 +559,6 @@ ind="count"
 {% endif %} data-add-cart-counter-btn="">
 <span class="add-cart-counter__btn-icon icon-cart"></span>
                 </button>
-{% endif %}
                
                 
                 <div class="add-cart-counter__controls">
@@ -665,7 +663,7 @@ ind="count"
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/lazyload.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_6.js"></script>
+  <script src="{% static 'js/microAlert_6.js' %}"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/main.css" rel="stylesheet" type="text/css">
   
@@ -959,7 +957,7 @@ $(document).on("click",".ajax-pag",function(event){
             price_sale = result['sale_price_size']
 
           }
-          indicator="size"
+          indicator="size_pcs"
 
         }
 
@@ -989,7 +987,11 @@ $(document).on("click",".ajax-pag",function(event){
         }
         var size_text=""
         if (parseInt(result['price_size']) != 0){
-          size_text = ` <span style="font-size: .8rem">за 10 см</span>`
+          size_text = ` <span style="font-size: .8rem">за 1 м</span>`
+        }
+        else if (parseInt(result['price_pcs']) != 0){
+          size_text = ` <span style="font-size: .8rem">за 1 кусок</span>`
+
         }
 template = template.replace("<favorite_class>",favorite_class)
         

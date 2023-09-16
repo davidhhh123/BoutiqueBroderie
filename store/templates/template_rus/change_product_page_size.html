@@ -396,8 +396,11 @@ in_stock "  id="in_stock_for_catrgories" class="category_class" style="    heigh
 <div style="width: 100%;position: relative;margin-top: 25px;padding-bottom: 50px;">
    {% if product.video %}<p style="font-weight: bold;padding-top: 20px;">Добавить видео </p>
  
+<p>Видео: <a href="{{ product.video.url }}" class="video_local_link" target="_blank">{{ product.video.url }}</a></p>
 
-<input type="file" name="file" id="file_inp_video"   value="{{ product.video.url }}">{% else %}
+<button onclick="deleteVideo()" style="position: absolute;">Удалить видео</button>
+<p style="margin-top: 65px">Или изменить видео</p>
+<input type="file" name="file" id="file_inp_video" style="margin-top: 30px;"   value="{{ product.video.url }}">{% else %}
   {% endif %}
 <span class="icon icon-times delete_video_file" style="font-size: 25px;color: red;display: none;"></span>
 </div>
@@ -421,7 +424,6 @@ in_stock "  id="in_stock_for_brand" class="category_class" style="    height: 40
     
     {% else %}
     {% endif %}
-    
  
 <p style="font-weight: bold;padding-top: 20px;">Такс код</p>
 <input type="Name" class="form-control" name="Name" id="Code_product_SKU" placeholder="Такс код" required="" style="width: 100%;" value="{{product.SKU_code}}">
@@ -580,7 +582,20 @@ in_stock "  id="in_stock_for_brand" class="category_class" style="    height: 40
 
 
   <script type="text/javascript">
+ var delete_video_indicator = false
+    function deleteVideo() {
+    // Get a reference to the file input element
+    var fileInput = document.getElementById('file_inp_video');
+    
+    // Reset the file input to clear the selected file
+    fileInput.value = '';
+    $(".video_local_link").attr("href", "")
+    $(".video_local_link").text("")
+    delete_video_indicator = true
 
+    
+    // Optionally, you can also update the displayed URL or take other actions as needed
+  }
     var category_deg = parseInt("{{sub_categorys_len}}")+1
     
       console.log("{{sub_categorys_len}}", "sub")
@@ -676,11 +691,10 @@ var video_link=""
 
 
       var data = new FormData()
-      if ($("#Name_color").val()!= undefined){
-        data.append("color", $("#Name_color").val())
-      }
-      if ($("#code_color").val()!= undefined){
-        data.append("color_code", $("#code_color").val())
+      
+      if ($(".option_brand:checked").length>0){
+         var Brand = $(".option_brand:checked").attr("pk")
+         data.append('Brand', Brand)
 
       }
      
@@ -717,6 +731,9 @@ var video_link=""
         data.append("catrgory_before", $("#Category_ru").attr("before_value"))
         
 
+      }
+      if (delete_video_indicator){
+        data.append("delete_video_indicator", 1)
       }
      
 

@@ -401,14 +401,21 @@ in_stock "  id="in_stock_for_catrgories" class="category_class" style="    heigh
 <div style="width: 100%;position: relative;margin-top: 25px;padding-bottom: 50px;">
    {% if product.video %}<p style="font-weight: bold;padding-top: 20px;">Добавить видео </p>
  
+<p>Видео: <a href="{{ product.video.url }}" class="video_local_link" target="_blank">{{ product.video.url }}</a></p>
 
-<input type="file" name="file" id="file_inp_video"   value="{{ product.video.url }}">{% else %}
+<button onclick="deleteVideo()" style="position: absolute;">Удалить видео</button>
+<p style="margin-top: 65px">Или изменить видео</p>
+<input type="file" name="file" id="file_inp_video" style="margin-top: 30px;"   value="{{ product.video.url }}">
+
+
+
+{% else %}
   {% endif %}
 <span class="icon icon-times delete_video_file" style="font-size: 25px;color: red;display: none;"></span>
 </div>
 {% if product.video_link %}
 <div class="video_link_field">
-<p style="font-weight: bold;padding-top: 20px;">Или ссылку на видео</p>
+<p style="font-weight: bold;padding-top: 20px;">Ссылка на видео</p>
  <input type="Text" class="form-control" name="Name" id="link_video" placeholder="link" required="" {% if product.video_link is not None %}value="{{product.video_link}}"{% else %}{% endif %}>
  </div>
  {% else %}
@@ -517,7 +524,7 @@ in_stock" id="in_stock_for_table" style="    height: 40px;
         <table class="table_all_features_counter">                
   <tbody><tr>
    
-    <th class="f2_table_name">количество</th>
+    <th class="f2_table_name">Количество</th>
    
     <th>Цена</th>
   </tr>
@@ -642,6 +649,20 @@ in_stock" id="in_stock" style="    height: 40px;
 
 
   <script type="text/javascript">
+    var delete_video_indicator = false
+    function deleteVideo() {
+    // Get a reference to the file input element
+    var fileInput = document.getElementById('file_inp_video');
+    
+    // Reset the file input to clear the selected file
+    fileInput.value = '';
+    $(".video_local_link").attr("href", "")
+    $(".video_local_link").text("")
+    delete_video_indicator = true
+
+    
+    // Optionally, you can also update the displayed URL or take other actions as needed
+  }
     var category_deg = parseInt("{{sub_categorys_len}}")+1
     
       console.log("{{sub_categorys_len}}", "sub")
@@ -713,7 +734,7 @@ selectElement('in_stock_for_catrgories', '{{ product.category_choeses.category_i
       var mass_product = $("#mass_product").val()
       var category_before_value = "{{ product.category_choeses.category_id_main }}"
       
-
+console.log(video_file, "video_file")
       
 
 
@@ -782,6 +803,9 @@ selectElement('in_stock_for_catrgories', '{{ product.category_choeses.category_i
         data.append("catrgory", catrgory)
         
 
+      }
+      if (delete_video_indicator){
+        data.append("delete_video_indicator", 1)
       }
      
 data.append("pk", "{{ product.pk }}")
