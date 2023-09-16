@@ -32,7 +32,7 @@ from django.utils import translation
 from .forms import *
 from numpy import random
 import re
-
+import decimal
 from io import BytesIO
 from django.core.files.base import ContentFile
 from django.views.generic import TemplateView
@@ -232,6 +232,7 @@ def add_order(request):
         if product_cart.indicator=="size":
             
             count = product_cart.count_size
+
             if (int(count)!=int(cart_count)):
                 count = cart_count
             
@@ -246,7 +247,10 @@ def add_order(request):
                 const_price = product_cart.product.price_size/10
                 
                 price = (count)*product_cart.product.price_size/100
+
             const_price_product = product_cart.product.price_size/10
+            if count==0 or product_cart.product.max_size < product_cart.product.min_size:
+                continue
 
             
 
@@ -268,7 +272,8 @@ def add_order(request):
             if int(cart_count) != int(count):
                 count = cart_count
 
-                    
+            if count==0 or product_cart.product.pcs== 0:
+                continue
             const_price = price
             price = count*price
             
@@ -285,6 +290,8 @@ def add_order(request):
                 
                 price = count*product_cart.product.price
             const_price_product = product_cart.product.price
+            if count==0 or product_cart.product.pcs== 0:
+                continue
             
         elif product_cart.indicator=="size_pcs":
             count = product_cart.count
@@ -298,12 +305,16 @@ def add_order(request):
                 
                 price = count*product_cart.product.price_pcs
             const_price_product = product_cart.product.price_pcs
+            if count==0 or product_cart.product.pcs== 0:
+                continue
             
             
 
             #orders = models.products_Order.objects.create(product=product_cart.product, customer=request.user.profile,count_size=count,price=price)
         else:
-            pass
+            continue
+        
+        
         if product_cart.product.sale>0:
             const_sale = product_cart.product.sale
         
@@ -649,6 +660,7 @@ def shop_products_category(request, categoryid):
 
         
         category_choeses=get_object_or_404(models.category_choeses, category_id_main=categoryid)
+        category_choeses_name = category_choeses.name
 
         if len(category_choeses.category_id)>0:
             category_main = get_object_or_404(models.category_choeses, pk=category_choeses.category_id)
@@ -709,7 +721,7 @@ def shop_products_category(request, categoryid):
             
             
             return JsonResponse({"results":statuss_se.data, "page_range":list(page_range), "favorites":list(favorites)})
-        return  render(request, "template_rus/products_all.html", {"category_choeses":category_choeses, "products":first_page, "category_main":category_main, "page_range":page_range, "categoryid":categoryid})
+        return  render(request, "template_rus/products_all.html", {"category_choeses":category_choeses, "products":first_page, "category_main":category_main, "page_range":page_range, "categoryid":categoryid, "category_choeses_name":category_choeses_name})
 
     except:
         return  redirect("accounts:home")
@@ -1138,12 +1150,15 @@ def cart_page(request):
 
     for i in cart_products:
         if i.indicator=="size":
-            print(i.count_size, i.product.price_size)
+            count_type = i.count_size
+                
+            if count_type > i.product.max_size:
+                count_type = i.product.max_size
             if i.product.sale_price_size:
-                sums+=i.count_size*i.product.sale_price_size/100
+                sums+=count_type*i.product.sale_price_size/100
             else:
 
-                sums+=i.count_size*i.product.price_size/100
+                sums+=count_type*i.product.price_size/100
         elif i.indicator=="counter":
             price=None
             
@@ -1156,29 +1171,40 @@ def cart_page(request):
                     else:
                         price = float(j.counter_price)
 
-                    
-            sums+=i.count*price
+            count_type = int(i.count)
+            
+            if count_type > int(i.product.pcs):
+                count_type = int(i.product.pcs)
+            sums+=count_type*price
             
         elif i.indicator=="size_pcs":
+            count_type = int(i.count)
+                
+            if count_type > int(i.product.pcs):
+                count_type = int(i.product.pcs)
             if i.product.sale_price_pcs:
-                sums+=i.count*i.product.sale_price_pcs
+                sums+=count_type*i.product.sale_price_pcs
             else:
 
-                sums+=i.count*i.product.price_pcs
+                sums+=count_type*i.product.price_pcs
             
         elif i.indicator=="count":
+            count_type = int(i.count)
+                
+            if count_type > int(i.product.pcs):
+                count_type = int(i.product.pcs)
             if i.product.sale_price:
-                sums+=i.count*i.product.sale_price
+                sums+=count_type*i.product.sale_price
             else:
 
-                sums+=i.count*i.product.price
+                sums+=count_type*i.product.price
             
         else:
             continue
 
         
         
-    print(sums, "sums")
+    print(sums, "sumsa")
     
     count = cart_products.count()
     max_per = models.max_cart_price.objects.filter()
@@ -1572,8 +1598,8 @@ def pay_delivery_api(request):
         last_order_id.save()
 
     else:
-        models.order_id_count.objects.create(order_id="3141911")
-        order_id = 3141911
+        models.order_id_count.objects.create(order_id="3141960")
+        order_id = 3141960
     current_site = get_current_site(request)
     confirmation_url = f'http://{current_site.domain}/api/check_payment_delyvery'
     url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/InitPayment"
@@ -1703,8 +1729,8 @@ def add_check_api(request):
             last_order_id.save()
 
         else:
-            models.order_id_count.objects.create(order_id="3141911")
-            order_id = 3141911
+            models.order_id_count.objects.create(order_id="3141960")
+            order_id = 3141960
             
         
 
@@ -1808,8 +1834,8 @@ def add_check_api(request):
             last_order_id.save()
 
         else:
-            models.order_id_count.objects.create(order_id="3141911")
-            order_id = 3141911
+            models.order_id_count.objects.create(order_id="3141960")
+            order_id = 3141960
             
 
         
@@ -1927,15 +1953,24 @@ def check_payment(request):
             
             checkout_products = get_object_or_404(models.checkout_products, order_id = resp_data["OrderID"])
             #collection add
+            
+            checkout_products.payment_id = PaymentID
             for i in checkout_products.products_Order.all():
                 if i.count_size:
-                    i.product.max_size-=(i.count_size/i.product.min_size)*10
+                    i.product.max_size-=i.count_size
+                    i.product.max_size = int(i.product.max_size)
+                    if int(i.product.max_size)<0:
+                        i.product.max_size = 0
                 else:
+                    print(i.product.pcs, "i.product.pcs", i.count)
                     all_pcs = int(i.product.pcs)-i.count
                     i.product.pcs=str(all_pcs)
-                if i.product.max_size==0 or i.product.pcs==0:
-                    i.available = False
+                    if int(i.product.pcs)<0:
+                        i.product.pcs = 0
+                if i.product.max_size<i.product.min_size or i.product.pcs==0:
+                    i.product.available = False
                 i.product.save()
+                
             if checkout_products.status=="collectionnotpay":
                 joint_indicator = 0
                 collection = get_object_or_404(models.collection, profile = request.user.profile)
@@ -2393,6 +2428,7 @@ def add_cart_product(request):
 
         profile.product_cart.add(add_product_cart)
         profile.save()
+        count = profile.product_cart.all().count()
 
         print("all_price", profile.product_cart_all_price)
         data = {
@@ -2402,6 +2438,7 @@ def add_cart_product(request):
             "price_total":profile.product_cart_all_price,
             "pk":product.pk,
             "min_size":min_size,
+            "count":count,
             "image":str(product.avatar_p)
             
            
@@ -2899,6 +2936,7 @@ def add_product_change_api(request):
     table_len_size = request.POST.get("table_len_size")
     table_len_counter = request.POST.get("table_len_counter")
     table_len_mass = request.POST.get("table_len_mass")
+    delete_video_indicator = request.POST.get("delete_video_indicator")
     
     brand_pk = request.POST.get("Brand")
     SKU_code = request.POST.get("SKU_code")
@@ -2911,6 +2949,8 @@ def add_product_change_api(request):
     video_file = request.FILES.get("video_file")
     table_len_size_pcs = request.POST.get("table_len_size_pcs")
     product = get_object_or_404(models.products, pk=int(pk))
+    if delete_video_indicator is  not None:
+        product.video = ""
     product.name_ru = name_ru
     product.name_en = name_en
     product.name_am = name_am
@@ -3424,8 +3464,80 @@ def apisearch_product(request):
 
         return JsonResponse(json.dumps(statuss_se.data),safe=False)
        
+def RefundPaymentRequest(request):
+    checkout_pk = request.POST.get("checkout_pk")
+    price = request.POST.get("price")
+    print(checkout_pk, price)
+    checkout = get_object_or_404(models.checkout_products, pk=checkout_pk)
+    paymentID = checkout.payment_id
+    url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/RefundPayment"
+    
+    myobj = {
+        "PaymentID":paymentID,
+        "Username":"3d19541048",
+        "Password":"lazY2k",
+        "Amount":decimal.Decimal(price)
+    }
+    
+        
 
 
+
+
+    r = requests.post(url = url, json = myobj)
+    checkout.status = "Refund"
+    checkout.save()
+
+      
+
+    resp_data = r.json()
+    if (resp_data["ResponseCode"]=='00'):
+        print("success")
+        
+    else:
+        print(resp_data["ResponseCode"], paymentID)
+
+
+
+    return JsonResponse("data", safe=False)
+
+
+def CancelPaymentRequest(request):
+    checkout_pk = request.POST.get("checkout_pk")
+   
+    
+    checkout = get_object_or_404(models.checkout_products, pk=checkout_pk)
+    paymentID = checkout.payment_id
+    url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/CancelPayment"
+    
+    myobj = {
+        "PaymentID":paymentID,
+        "Username":"3d19541048",
+        "Password":"lazY2k",
+        
+    }
+    
+
+
+
+
+    r = requests.post(url = url, json = myobj)
+    checkout.status = "Cancel"
+    checkout.save()
+
+      
+
+    resp_data = r.json()
+    if (resp_data["ResponseCode"]=='00'):
+        
+        
+        print("success")
+    else:
+        print(resp_data["ResponseCode"], paymentID)
+
+
+
+    return JsonResponse("data", safe=False)
 def add_checkout(request):
     step = 0
     data_form =request.POST.getlist('data')

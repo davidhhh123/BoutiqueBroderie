@@ -6,6 +6,7 @@ from . import models
 admin.site.register(models.Profile)
 admin.site.register(models.Visit)
 admin.site.register(models.order_id_count)
+admin.site.register(models.category_choeses)
 
 
 

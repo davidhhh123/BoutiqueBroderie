@@ -56,7 +56,7 @@ urlpatterns = [
     path('search/', views.search_products, name="search_products"),
     
     
-
+    
     
     
     path('add_product_page/', views.add_product_page, name="add_product_page"),
@@ -206,6 +206,8 @@ urlpatterns = [
     path("api/assembled/", views.assembled, name="assembled"),
     path("api/change_profile/", views.change_profile, name="change_profile"),
     path("api/create_joint_delivery_api/", views.create_joint_delivery_api, name="create_joint_delivery_api"),
+    path("api/RefundPaymentRequest/", views.RefundPaymentRequest, name="RefundPaymentRequest"),
+    path("api/CancelPaymentRequest/", views.CancelPaymentRequest, name="CancelPaymentRequest"),
 
     
     

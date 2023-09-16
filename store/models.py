@@ -58,11 +58,17 @@ class Profile(models.Model):
         
         for i in product:
             if i.indicator=="size":
+                count_type = i.count_size
+                
+                if count_type > i.product.max_size:
+                    count_type = i.product.max_size
+
                 if i.product.sale_price_size:
-                    sums+=(i.count_size)*i.product.sale_price_size/100
+                    sums+=(count_type)*i.product.sale_price_size/100
                 else:
 
-                    sums+=(i.count_size)*i.product.price_size/100
+                    sums+=(count_type)*i.product.price_size/100
+
             elif i.indicator=="counter":
                 price=None
                 
@@ -75,22 +81,31 @@ class Profile(models.Model):
                         else:
                             price = float(j.counter_price)
 
-                        
-                sums+=i.count*price
+                count_type = int(i.count)
+                if count_type > int(i.product.pcs):
+                    count_type = int(i.product.pcs)
+
+                sums+=count_type*price
                 print(i.count*price, "i.count*price", i.count, price)
             elif i.indicator=="size_pcs":
+                count_type = int(i.count)
+                if count_type > int(i.product.pcs):
+                    count_type = int(i.product.pcs)
                 if i.product.sale_price_pcs:
-                    sums+=i.count*i.product.sale_price_pcs
+                    sums+=count_type*i.product.sale_price_pcs
                 else:
 
-                    sums+=i.count*i.product.price_pcs
+                    sums+=count_type*i.product.price_pcs
                 print(i.product.price_pcs, "i.product.price_pcs")
             elif i.indicator=="count":
+                count_type = int(i.count)
+                if count_type > int(i.product.pcs):
+                    count_type = int(i.product.pcs)
                 if i.product.sale_price:
-                    sums+=i.count*i.product.sale_price
+                    sums+=count_type*i.product.sale_price
                 else:
 
-                    sums+=i.count*i.product.price
+                    sums+=count_type*i.product.price
                 
             else:
                 pass
@@ -511,6 +526,7 @@ class checkout_products(models.Model):
     city = models.CharField(max_length=12, default='')
     address = models.CharField(max_length=35, default='')
     index = models.CharField(max_length=6, default='')
+    payment_id =models.CharField(max_length=56, default='')
 
 
     def __str__(self):
