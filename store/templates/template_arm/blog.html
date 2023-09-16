@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <!-- saved from url=(0052)https://demo-idea.myinsales.ru/client_account/orders -->
@@ -267,7 +268,7 @@ div.im-colormask > div {
 
  
 </style>
-       
+        <!--InsalesCounter -->
        
 
 <title>Բլոգ
@@ -331,12 +332,12 @@ div.im-colormask > div {
 <div class="breadcrumb-wrapper delemeter_1">
   <ul class="breadcrumb">
     <li class="breadcrumb-item home">
-      <a class="breadcrumb-link" title="Главная" href="/">Գլխավոր</a>
+      <a class="breadcrumb-link" title="Գլխավոր" href="/">Գլխավոր</a>
     </li>
     
       <li class="breadcrumb-item">
         <span class="breadcrumb-page">
-          Բլոգ
+          <a href="/blog/">Բլոգ</a>
         </span>
       </li>
     
@@ -524,23 +525,13 @@ div.im-colormask > div {
  
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_4.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/main.css" rel="stylesheet" type="text/css">
   
  
   <script type="text/javascript">
-    var category_template = ` <div  class="shipping_all" style="" id="shipping_all`+ 0 +`"><span  class="shipping_veiw" price = "`+ 0 +`" time = "`+ 0 +`">{name}</span><div class="shipping_del_icon" ids = "`+ 0 +`"><span class="icon icon-times" style="font-size: 16px;color: red;"></span></div></div>`
-    $(".button_add_category").on("click", function(){
-      var category_name = $("#Name_product").val()
-      category_template1 = category_template.replace("{name}", category_name)
-      $(".images_view_item").append(category_template1)
-
-
-
-
-
-    })
+   
 
 var templates = `    <div class="product-preview-elem" id="collection_item{{ order.pk }}">
       <form action="#/cart_items" method="post" data-product-id="336488093" class="product-preview is-zero-count-shown without-old-price without-sku is-available">

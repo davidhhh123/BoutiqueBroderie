@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+
 {% load rate %}
 {% load mathfilters %}
 <!DOCTYPE html>
@@ -441,18 +443,134 @@ width: 100px;
       }
     }
 
+
+     .order-summary {
+      margin-bottom: 20px;
+    }
+
+    .order-summary table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .order-summary th,
+    .order-summary td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    .order-summary th {
+      background-color: #f8f8f8;
+      color: #c22738;
+    }
+
+    .order-summary td.product-name {
+      width: 40%;
+    }
+
+    .order-summary td.product-price,
+    .order-summary td.product-quantity,
+    .order-summary td.product-total {
+      text-align: start;
+    }
+
+    .order-summary td.product-total {
+      font-weight: bold;
+    }
+
+@media(max-width: 465px){
+  .order-summary{
+    max-width: calc(100% - 50px);overflow-x: auto;width: 100%;
+  }
+}
+
+   .alert_backgraud {
+            display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999999999999999;
+    background: #5353534f;
+
+        }
+
+        /* Define styles for the alert container */
+        .alert-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            position: fixed;
+            z-index: 99999999999999999;
+            
+        }
+
+        /* Style the alert heading */
+        .alert-heading {
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Style the alert message */
+        .alert-message {
+            font-size: 18px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* Style the OK button */
+        .alert-button {
+            background-color: #dd626f;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        /* Hover effect for the button */
+        .alert-button:hover {
+            background-color: #dd626f;
+        }
+         .loader-container_alert {
+            display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    z-index: 999999999999999;
+    background: #69696933;
+        }
+
+        /* Styles for the loader */
+        .loader-container_alert .loader {
+            border: 4px solid #dd626f;
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Keyframes for the loader animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
   </style>
 
   </head>
   <body class="adaptive settings_loaded" data-multi-lang="false" data-theme-template="account.orders2">
-    <noscript>
-<div class="njs-alert-overlay">
-  <div class="njs-alert-wrapper">
-    <div class="njs-alert">
-      <p></p>
-    </div>
-  </div>
-</div>
+   
 </noscript>
 
     <div class="page_layout page_layout-clear">
@@ -464,6 +582,9 @@ width: 100px;
       
       </header>
       <main>
+ 
+   
+
 
         <div class="layout layout_order">
           <div class="layout__content">
@@ -472,30 +593,70 @@ width: 100px;
              
                 
 <div class="co-checkout-block--padded">
+ 
    {% with rate=request|Get_pay_rate %}
  <div class="order-details">
-      <h2>Պատվեր #{{checkout.pk}}</h2>
-   
-      <p><strong>Վճարման Ժամանակը:</strong> {{checkout.date_ordered}}</p>
-      <p><strong>Առաքման տարբերակ:</strong>Փոստ</p>
-      <p><strong>Պատվերի գինը:</strong> {{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
-      <p><strong>Առաքմնա գինը:</strong> {{checkout.delivery_check.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
-      <p><strong>Քաշ :</strong> {{checkout.mass}} գ</p>
+   {% if request.user.is_superuser %}
+   <a href="/my_checkout_products/" style="width: 50px;height: 50px;font-size: 1.5rem;position: absolute;right: 0;cursor: pointer;text-decoration: none;">
+          <span class="icon icon-times"></span></a>
      
-      <h2>Կոնտակտային տվյալներ</h2>
-       <p><strong>Անուն ազգանուն:</strong> {{checkout.delivery_check.my_contacts_info.username}}</p>
-      <p><strong>Email:</strong>{{checkout.delivery_check.my_contacts_info.email}}</p>
-      <p><strong>Հեռախոսահամար:</strong> {{checkout.delivery_check.my_contacts_info.phone_number}}</p>
-      <p><strong>Երկիր:</strong> {{checkout.delivery_check.my_contacts_info.country}}</p>
-      <p><strong>Մարզ :</strong> {{checkout.delivery_check.my_contacts_info.state}}</p>
-      <p><strong>Բնակվելու վայր:</strong> {{checkout.delivery_check.my_contacts_info.city}}</p>
-      <p><strong>Հասցե:</strong> {{checkout.delivery_check.my_contacts_info.address}}</p>
-      <p><strong>ինդեկս:</strong> {{checkout.delivery_check.my_contacts_info.index}}</p>
+     {% else %}
+      <a href="/orders/" style="width: 50px;height: 50px;font-size: 1.5rem;position: absolute;right: 0;cursor: pointer;text-decoration: none;">
+          <span class="icon icon-times"></span></a>
+          
+      
+     {% endif %}
+      <h2>Պատվեր #{{checkout.pk}}</h2>
+      
+      <p><strong>Վճարման Ժամանակը:</strong> {{checkout.date_ordered}}</p>
+        
+      <p><strong>Առաքման տարբերակ:</strong> Փոստ</p>
+    
+     
+      <p><strong>Պատվերի գինը:</strong> {{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
+  {% if not  checkout.first_name and not checkout.delivery_check.first_name %}
+     
+       {% else %}
+        <p><strong>Առաքման գինը:</strong> {{checkout.delivery_check.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</p>
+      {% endif %}
+      <p><strong>Քաշ :</strong> {{checkout.mass}} գ</p>
+    
+     {% if not  checkout.first_name and not checkout.delivery_check.first_name %}
+     {% else %}
+      <h2>Անձնական տվյալներ</h2>
+      {% if checkout.first_name %}
+       <p><strong>Անուն:</strong> {{checkout.first_name}}</p>
+       <p><strong>ազգանուն :</strong> {{checkout.last_name}}</p>
+      <p><strong>Email:</strong> {{checkout.email}}</p>
+      <p><strong>Հեռախոսահամար:</strong> {{checkout.phone_number}}</p>
+      <p><strong>Երկիր:</strong> {{checkout.country}}</p>
+      <p><strong>Մարզ :</strong> {{checkout.state}}</p>
+      <p><strong>Բնակվելու վայր:</strong> {{checkout.city}}</p>
+      <p><strong>Հասցե:</strong> {{checkout.address}}</p>
+      <p><strong>Ինդեքս:</strong> {{checkout.index}}</p>
+      {% else %}
+       <p><strong>Անուն:</strong> {{checkout.delivery_check.first_name}}</p>
+       <p><strong>ազգանուն :</strong> {{checkout.delivery_check.last_name}}</p>
+      <p><strong>Email:</strong> {{checkout.delivery_check.email}}</p>
+      <p><strong>Հեռախոսահամար:</strong> {{checkout.delivery_check.phone_number}}</p>
+      <p><strong>Երկիր:</strong> {{checkout.delivery_check.country}}</p>
+      <p><strong>Մարզ :</strong> {{checkout.delivery_check.state}}</p>
+      <p><strong>Բնակվելու վայր:</strong> {{checkout.delivery_check.city}}</p>
+      <p><strong>Հասցե:</strong> {{checkout.delivery_check.address}}</p>
+      <p><strong>Ինդեքս:</strong> {{checkout.delivery_check.index}}</p>
+      {% endif %}
+      {% endif %}
       <h2>Պատվերի կարգավիճակ</h2>
-      <p><strong>կարգավիճակ:</strong> 
+      <p><strong>Կարգավիճակ:</strong> 
+{% if checkout.status == "Refund" %}
 
+Գումար մասնակի վերադարձ
+{% elif checkout.status == "Cancel" %}
+
+Պատվերի չեղարկում
+{% else %}
 {% if checkout.status == "send" or checkout.status == "collectionsend" %}
-            Ուղարկվել է
+             Ուղարկվել է
 {% else %}
 
 {% if checkout.delivery_check.pay_status == "dontpay" %}
@@ -512,7 +673,7 @@ width: 100px;
 չի վճարվել
  
 {% else %}
-չի վճարվել
+Պատվերի մշակում
 {% endif %}
   
 
@@ -534,16 +695,66 @@ width: 100px;
 
 {% endif %}
 
-
+{% endif %}
 
 </p>
+  {% if request.user.is_superuser %}
+  
+  <div class="order-summary">
+      <table>
+       <thead>
+  <tr>
+    <th>Ապրանք</th>
+    <th>Գին</th>
+    <th>Քանակ</th>
+    <th>Զեղչ</th>
+    <th>Գումար</th>
+  </tr>
+</thead>
+<tbody>
+
+  {% for order in checkout.products_Order.all %}
+
+  <tr>
+    <td class="product-name">{% if order.product  %}{{ order.product.name_am }}{% else %}{{ order.name_am }} {% endif %}</td>
+    <td class="product-price">
+      {% if order.count_size %}
+           
+            {{order.const_price_product|div:rate.0|div:10|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
+      {% else %}
+       {{order.const_price_product|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}
+      {% endif %}
+
+</td>
+    <td class="product-quantity">
+   {% if order.count_size %}{{ order.count_size }}սմ{% else %} {{ order.count }}{% endif %}</td>
+    <td class="product-sale">{% if order.const_sale  %}{{order.const_sale}} %{% else %}-{% endif %}</td>
+    <td class="product-total"> {{ order.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</td>
+  </tr>
+  {% endfor %}
+  
+</tbody>
+
+        <tfoot>
+          <tr>
+            <td colspan="3"><strong>Ընդհանուր գինը:</strong></td>
+            <td><strong>{{checkout.price|div:rate.0|floatformat:2}}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    {% endif %}
        <h2>Պատվերին կցված մեկնաբանություն</h2>
        <p>{{checkout.comments}}</p>
       
 
     </div>
     {% endwith %}
-     <a href="/orders/" class="button back_to_catalog" style="width: 100%;"><span class="icon icon-arrow-left"></span><span>Վերադառնալ խանութ</span></a>
+
+
+
+
+   <a href="/orders/"  class="button back_to_catalog " style="width: 100%;"><span class="icon icon-arrow-left"></span><span>Վերադառնալ խանութ</span></a>
 
 
 
@@ -573,7 +784,7 @@ width: 100px;
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_6.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts.css" rel="stylesheet" type="text/css">
    <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts_features.css" rel="stylesheet" type="text/css">
@@ -581,6 +792,90 @@ width: 100px;
     
 
   <script type="text/javascript">
+    $(".RefundPaymentRequest").on("click", function(){
+      $(".alert_backgraud").css("display", "flex")
+
+
+    })
+    $(".close_alert").on("click", function(){
+      $(".alert_backgraud").css("display", "none")
+    })
+    $(".CancelPaymentRequest").on("click", function(){
+      const response = confirm("Вы уверены?");
+
+   
+if (response == true){
+  var checkout_pk  = $(this).attr("pk")
+
+  
+  var data = new FormData()
+  data.append("checkout_pk", checkout_pk)
+   $(".loader-container_alert").css("display", "flex")
+
+
+     $.ajax({
+
+
+              
+            url: '/api/CancelPaymentRequest/',
+            method: "POST",
+            data: data,
+            success: function(data){
+               $(".loader-container_alert").css("display", "none")
+                
+                
+        
+
+            },
+            error: function(daa){$(".loader-container_alert").css("display", "none")},
+            processData: false,
+            contentType: false,
+        })
+
+
+
+}
+    })
+    $(".alert-button").on("click", function(){
+      const response = confirm("Вы уверены?");
+
+
+if (response == true){
+  var checkout_pk  = $(this).attr("pk")
+  var price  = $("#Price_product").val()
+  
+  var data = new FormData()
+  data.append("checkout_pk", checkout_pk)
+    data.append("price", price)
+     $(".loader-container_alert").css("display", "flex")
+
+     $.ajax({
+
+
+              
+            url: '/api/RefundPaymentRequest/',
+            method: "POST",
+            data: data,
+            success: function(data){
+               $(".loader-container_alert").css("display", "none")
+               $(".alert_backgraud").css("display", "none")
+                
+                
+        
+
+            },
+            error: function(daa){$(".loader-container_alert").css("display", "none")
+           $(".alert_backgraud").css("display", "none")},
+            processData: false,
+            contentType: false,
+        })
+
+
+
+}
+    })
+
+
     </script>
 <script>
   try {
@@ -1217,3 +1512,4 @@ function showCartFixedBtn(btn) {
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/theme.js" charset="utf-8"></script>
 
 </body></html>
+

@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+
 <!DOCTYPE html>
 <!-- saved from url=(0052)https://demo-idea.myinsales.ru/client_account/orders -->
 <html class="desktop landscape" style="--color-btn-bg:#7188D4; --color-btn-bg-is-dark:true; --bg:#FFFFFF; --bg-is-dark:false; --color-text: var(--color-text-dark); --color-text-minor-shade: var(--color-text-dark-minor-shade); --color-text-major-shade: var(--color-text-dark-major-shade); --color-text-half-shade: var(--color-text-dark-half-shade); --color-notice-warning-is-dark:false; --color-notice-success-is-dark:false; --color-notice-error-is-dark:false; --color-notice-info-is-dark:false; --color-form-controls-bg:var(--bg); --color-form-controls-bg-disabled:var(--bg-minor-shade); --color-form-controls-border-color:var(--bg-half-shade); --color-form-controls-color:var(--color-text); --is-editor:false; --vh:568px; --fixed-panels-bottom-offset:0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>
@@ -179,7 +181,7 @@ div.im-colormask > div {
         <!--InsalesCounter -->
      
 <title>
-Мой аккаунт
+Իմ պատվերները
 
 </title>
 
@@ -347,12 +349,12 @@ div.im-colormask > div {
     white-space: nowrap;
     position: absolute;
 }
-
-@media(max-width: 400px){
+@media(max-width: 406px){
   .item-title{
     font-size: .9rem;
   }
 }
+
 
 
 
@@ -387,20 +389,26 @@ div.im-colormask > div {
              
                 
 <div class="co-checkout-block--padded">
+ 
+ 
+  {% if checkouts %}
   
-   {% if checkouts %}
-<p style="font-weight: bold;font-size: 17px;">Իմ պատվերները</p>
-  <div class="cart__area-items">
+<h1 class="co-checkout-title co-title co-title--h1">
+                    Պատվերների պատմություն
+                  </h1>
+  <div class="cart__area-items" style="margin-top: 15px;">
     
   
  {% block content %}
  {% endblock %}
   </div>
    {% else %}
-   <p>Պատվեր չկա</p>
+   <p>Պատվերների չկան</p>
   {% endif %}
+ 
   
 </div>
+
 
               </div>
             </div>
@@ -417,7 +425,6 @@ div.im-colormask > div {
       
     </div>
 
-  
  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my-layout.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/core-css.css" rel="stylesheet" type="text/css">
   
@@ -439,12 +446,13 @@ div.im-colormask > div {
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/lazyload.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_6.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
     <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/icons.css" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts.css" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts_features.css" rel="stylesheet" type="text/css">
- <script>
+  
+<script>
   try {
   let widget = '.widget-type_system_widget_v4_header_1';
   let $widget = $('.widget-type_system_widget_v4_header_1');
@@ -456,7 +464,12 @@ $(function() {
 
   var mobilePoint = 768;
   $(document).ready(function() {
-   
+    $widget.each(function(index, el) {
+      new LazyLoad({
+        container: $(el).get(0),
+        elements_selector: '.lazyload'
+      });
+    });
 
     if ($(window).width() >= mobilePoint) {
       $(widget).find(".js-cut-list").cutList({
@@ -695,8 +708,7 @@ $(document).ready(function() {
 ;try {
   let widget = '.widget-type_system_widget_v4_preorder_1';
   let $widget = $('.widget-type_system_widget_v4_preorder_1');
-
-
+ 
 
 } catch(error) {
   console.error('Widget "widget-type_system_widget_v4_preorder_1" throwed an error: "' + error.stack + '"')
@@ -859,6 +871,8 @@ function showCartFixedBtn(btn) {
 
 
 
+
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/style.css" media="all" onload="this.media=&#39;all&#39;">
 
 
@@ -874,7 +888,6 @@ function showCartFixedBtn(btn) {
 
 
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/theme.js" charset="utf-8"></script>
-
   
 
 </body></html>

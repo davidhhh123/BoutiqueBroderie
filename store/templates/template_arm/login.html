@@ -1,8 +1,12 @@
 {% load static %}
-<!DOCTYPE html>
+{% load i18n %}
 
-<html style="--color-btn-bg:#7188D4; --color-btn-bg-is-dark:true; --bg:#FFFFFF; --bg-is-dark:false; --color-text: var(--color-text-dark); --color-text-minor-shade: var(--color-text-dark-minor-shade); --color-text-major-shade: var(--color-text-dark-major-shade); --color-text-half-shade: var(--color-text-dark-half-shade); --color-notice-warning-is-dark:false; --color-notice-success-is-dark:false; --color-notice-error-is-dark:false; --color-notice-info-is-dark:false; --color-form-controls-bg:var(--bg); --color-form-controls-bg-disabled:var(--bg-minor-shade); --color-form-controls-border-color:var(--bg-half-shade); --color-form-controls-color:var(--color-text); --is-editor:false; --vh:568px; --fixed-panels-bottom-offset:0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta data-config="{&quot;money_with_currency_format&quot;:{&quot;delimiter&quot;:&quot; &quot;,&quot;separator&quot;:&quot;.&quot;,&quot;format&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;show_price_without_cents&quot;:1},&quot;currency_code&quot;:&quot;RUR&quot;,&quot;default_currency&quot;:{&quot;title&quot;:&quot;Российский рубль&quot;,&quot;code&quot;:&quot;RUR&quot;,&quot;rate&quot;:1.0,&quot;format_string&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;price_separator&quot;:&quot;&quot;,&quot;is_default&quot;:true,&quot;price_delimiter&quot;:&quot;&quot;,&quot;show_price_with_delimiter&quot;:true,&quot;show_price_without_cents&quot;:true},&quot;facebook&quot;:{&quot;pixelActive&quot;:false,&quot;currency_code&quot;:&quot;RUB&quot;,&quot;use_variants&quot;:null},&quot;vk&quot;:{&quot;pixel_active&quot;:null,&quot;price_list_id&quot;:null},&quot;new_ya_metrika&quot;:false,&quot;ecommerce_data_container&quot;:&quot;dataLayer&quot;,&quot;common_js_version&quot;:null,&quot;vue_ui_version&quot;:null,&quot;feedback_captcha_enabled&quot;:&quot;1&quot;,&quot;account_id&quot;:1215183,&quot;hide_items_out_of_stock&quot;:false,&quot;forbid_order_over_existing&quot;:false,&quot;minimum_items_price&quot;:null,&quot;enable_comparison&quot;:true,&quot;locale&quot;:&quot;ru&quot;,&quot;client_group&quot;:null,&quot;consent_to_personal_data&quot;:{&quot;active&quot;:false,&quot;obligatory&quot;:true,&quot;description&quot;:&quot;Настоящим подтверждаю, что я ознакомлен и согласен с условиями \u003ca href=&#39;/page/oferta&#39; target=&#39;blank&#39;\u003eоферты и политики конфиденциальности\u003c/a\u003e.&quot;},&quot;recaptcha_key&quot;:&quot;6Lc0T0YUAAAAAAVNiH-_bnSC4E-YHMFTeYOqZyRx&quot;,&quot;checkout_float_order_content_block&quot;:false,&quot;sber_id_app_id&quot;:&quot;5b5a3c11-72e5-4871-8649-4cdbab3ba9a4&quot;,&quot;theme_generation&quot;:4,&quot;quick_checkout_captcha_enabled&quot;:false,&quot;max_order_lines_count&quot;:500}" name="shop-config" content=""><meta name="js-evnvironment" content="production"><meta name="default-locale" content="ru"><meta name="insales-redefined-api-methods" content="[]">
-       
+<!DOCTYPE html>
+<!-- saved from url=(0196)https://demo-idea.myinsales.ru/?_ga=2.23619514.1229686566.1677956565-1212046676.1677956565&_gl=1*l5e2xo*_ga*MTIxMjA0NjY3Ni4xNjc3OTU2NTY1*_ga_185QYQKX7V*MTY3Nzk1NjU2NS4xLjAuMTY3Nzk1NjU2NS42MC4wLjA. -->
+<html style="--color-btn-bg:#7188D4; --color-btn-bg-is-dark:true; --bg:#FFFFFF; --bg-is-dark:false; --color-text: var(--color-text-dark); --color-text-minor-shade: var(--color-text-dark-minor-shade); --color-text-major-shade: var(--color-text-dark-major-shade); --color-text-half-shade: var(--color-text-dark-half-shade); --color-notice-warning-is-dark:false; --color-notice-success-is-dark:false; --color-notice-error-is-dark:false; --color-notice-info-is-dark:false; --color-form-controls-bg:var(--bg); --color-form-controls-bg-disabled:var(--bg-minor-shade); --color-form-controls-border-color:var(--bg-half-shade); --color-form-controls-color:var(--color-text); --is-editor:false; --vh:568px; --fixed-panels-bottom-offset:0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link media="all" onload="this.media=&quot;all&quot;" rel="stylesheet" type="text/css" href="./Idea_files/jquery.modal-b7e3fb6a3704c0a2359a33962d371838618774b855128cef059add49182581c0.css"><meta data-config="{&quot;money_with_currency_format&quot;:{&quot;delimiter&quot;:&quot; &quot;,&quot;separator&quot;:&quot;.&quot;,&quot;format&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;show_price_without_cents&quot;:1},&quot;currency_code&quot;:&quot;RUR&quot;,&quot;default_currency&quot;:{&quot;title&quot;:&quot;Российский рубль&quot;,&quot;code&quot;:&quot;RUR&quot;,&quot;rate&quot;:1.0,&quot;format_string&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;price_separator&quot;:&quot;&quot;,&quot;is_default&quot;:true,&quot;price_delimiter&quot;:&quot;&quot;,&quot;show_price_with_delimiter&quot;:true,&quot;show_price_without_cents&quot;:true},&quot;facebook&quot;:{&quot;pixelActive&quot;:false,&quot;currency_code&quot;:&quot;RUB&quot;,&quot;use_variants&quot;:null},&quot;vk&quot;:{&quot;pixel_active&quot;:null,&quot;price_list_id&quot;:null},&quot;new_ya_metrika&quot;:false,&quot;ecommerce_data_container&quot;:&quot;dataLayer&quot;,&quot;common_js_version&quot;:null,&quot;vue_ui_version&quot;:null,&quot;feedback_captcha_enabled&quot;:&quot;1&quot;,&quot;account_id&quot;:1215183,&quot;hide_items_out_of_stock&quot;:false,&quot;forbid_order_over_existing&quot;:false,&quot;minimum_items_price&quot;:null,&quot;enable_comparison&quot;:true,&quot;locale&quot;:&quot;ru&quot;,&quot;client_group&quot;:null,&quot;consent_to_personal_data&quot;:{&quot;active&quot;:false,&quot;obligatory&quot;:true,&quot;description&quot;:&quot;Настоящим подтверждаю, что я ознакомлен и согласен с условиями \u003ca href=&#39;/page/oferta&#39; target=&#39;blank&#39;\u003eоферты и политики конфиденциальности\u003c/a\u003e.&quot;},&quot;recaptcha_key&quot;:&quot;6Lc0T0YUAAAAAAVNiH-_bnSC4E-YHMFTeYOqZyRx&quot;,&quot;checkout_float_order_content_block&quot;:false,&quot;sber_id_app_id&quot;:&quot;5b5a3c11-72e5-4871-8649-4cdbab3ba9a4&quot;,&quot;theme_generation&quot;:4,&quot;quick_checkout_captcha_enabled&quot;:false,&quot;max_order_lines_count&quot;:500}" name="shop-config" content=""><meta name="js-evnvironment" content="production"><meta name="default-locale" content="ru"><meta name="insales-redefined-api-methods" content="[]">
+        <!--InsalesCounter -->
+        
+        <!-- /InsalesCounter -->
 
     <!-- meta -->
 <title>Մուտք
@@ -18,8 +22,6 @@
 
 <!-- rss feed-->
 
-
-<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32275806.ico">
 
     
     
@@ -131,17 +133,16 @@
     height: 100%;
     width: 100%;
   }
-   .login_invalid{
+ .login_invalid{
   color: red;display: none;
 
  }
-
 </style>
 
 
 <!-- icons-->
-<link rel="stylesheet" href="{% static 'css/icons.css' %}">
-<style media="screen">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/icons.css">
+<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32275806.ico"><style media="screen">
   @supports (content-visibility: hidden) {
     body:not(.settings_loaded) {
       content-visibility: hidden;
@@ -174,7 +175,7 @@
       <header>
       
         <div class="layout widget-type_system_widget_v4_header_1" style="--logo-img:&#39;https://static.insales-cdn.com/files/1/7649/24960481/original/Frame.png&#39;; --logo-max-width:160px; --hide-menu-photo:false; --hide-search:false; --hide-language:false; --hide-compare:true; --hide-personal:false; --hide-favorite:false; --hide-total-price:false; --bage-bg:#7188D4; --bage-bg-is-dark:true; --bage-bg-minor-shade:#8095d9; --bage-bg-minor-shade-is-dark:true; --bage-bg-major-shade:#8ea0dd; --bage-bg-major-shade-is-dark:true; --bage-bg-half-shade:#b8c4ea; --bage-bg-half-shade-is-light:true; --bg-top-panel:#E5EBFF; --bg-top-panel-is-light:true; --bg-top-panel-minor-shade:#e5ebff; --bg-top-panel-minor-shade-is-light:true; --bg-top-panel-major-shade:#e4eaff; --bg-top-panel-major-shade-is-light:true; --bg-top-panel-half-shade:#d9e2ff; --bg-top-panel-half-shade-is-light:true; --menu-grid-list-min-width:220px; --menu-grid-list-row-gap:3rem; --menu-grid-list-column-gap:3rem; --subcollections-items-limit:10; --menu-img-ratio:1; --live-search:true; --header-wide-bg:true; --header-top-pt:0.5vw; --header-top-pb:0.5vw; --header-main-pt:1vw; --header-main-pb:2vw; --header-wide-content:false; --hide-desktop:false; --hide-mobile:false;">
-{% include 'layouts/header_arm.html' %}
+{% include 'layouts/header.html' %}
 
       
       </header>
@@ -185,6 +186,13 @@
 
 
 <!--main-->
+<style type="text/css">
+   @media screen and (max-width: 767px){
+main {
+    display: block;
+    margin-top: -65px !important;
+}}
+</style>
     <main>
         <div class="layout">
           <div class="layout__content">
@@ -196,9 +204,9 @@
                     Մուտք
                   </h1>
                 </div>
-                <div class="co-login"><div class="co-login-form_placeholder co-checkout-block--padded">
-                  <form class="co-form--login co-modal-login_form" data-use-mask="1" onSubmit="check()"><input type="hidden" name="authenticity_token" value="ZOz1dL5ImWcV4OKKiXhzHUpWNJ392kN8GYmnRvlww75Mju1NAlzzUsR0D6luJnKea-eqJvnms047NzwlgRJdYg" autocomplete="off"><div class="co-input co-input--text co-input--language co-input--nested co-input--required co-input--empty_nested"><label class="co-input-label" for="email">Մուտքանուն</label><div class="co-input-text"><input type="text" name="email" id="singin-email" class="co-input-field js-input-field" required="required"></div></div><div class="co-input co-input--text co-input--language co-input--nested co-input--required co-input--empty_nested"><label class="co-input-label" for="password">Գաղտնաբառ</label><div class="co-input-text"><input type="password" name="password" id="singin-password" class="co-input-field js-input-field" required="required"><input type="checkbox" onclick="myFunction()" style="margin-top: 15px;"> Ցույց տալ գաղտնաբառը</div>
-                      <p class="login_invalid">Մուտքանունը կամ գաղտնաբառը սխալ են</p>
+               <div class="co-login"><div class="co-login-form_placeholder co-checkout-block--padded">
+                  <form class="co-form--login co-modal-login_form" data-use-mask="1" onSubmit="check()"><input type="hidden" name="authenticity_token" value="ZOz1dL5ImWcV4OKKiXhzHUpWNJ392kN8GYmnRvlww75Mju1NAlzzUsR0D6luJnKea-eqJvnms047NzwlgRJdYg" autocomplete="off"><div class="co-input co-input--text co-input--language co-input--nested co-input--required co-input--empty_nested"><label class="co-input-label" for="email">Մուտքանուն</label><div class="co-input-text"><input type="text" name="email" id="singin-email" class="co-input-field js-input-field" required="required"></div></div><div class="co-input co-input--text co-input--language co-input--nested co-input--required co-input--empty_nested"><label class="co-input-label" for="password">Գաղտնաբառ</label><div class="co-input-text"><input type="password" name="password" id="singin-password" class="co-input-field js-input-field" required="required"><input type="checkbox" onclick="myFunction()" style="margin-top: 15px;">Ցույց տալ գաղտնաբառը </div>
+                    <p class="login_invalid">Սխալ մուտքանուն կամ գաղտնաբառ</p>
                   </div><div class="co-form-controls"><button class="co-button co-form-button js-co-login-submit btn_login" name="commit" type="submit">Մուտք</button><a class="co-button co-button--link co-form-button" href="{% url 'accounts:password_recovery_page' %}">Վերականգնել գաղտնաբառը</a><a class="co-button co-button--link co-form-button" href="{% url 'accounts:sign_up_page' %}">Գրանցվել</a></form>
                 </div></div></div><div class="co-login co-login--social_login co-checkout-block--padded"></div>
               </div>
@@ -219,9 +227,17 @@
     
     <div data-fixed-panels="bottom">
       
-    
+      
+
       
     </div>
+
+
+      
+      
+
+  
+ 
 
 
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my-layout.js"></script>
@@ -232,16 +248,14 @@
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/lazyload.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_4.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/main.css" rel="stylesheet" type="text/css">
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/main_5.js"></script>
   
 
-  
-
 <script>
-   function check() {
+  function check() {
   event.preventDefault();
   var form = document.forms["login"];
   if (form.userid.value == "pf900" && form.pswrd.value == "password") {
@@ -272,7 +286,12 @@ $(function() {
 
   var mobilePoint = 768;
   $(document).ready(function() {
-   
+    $widget.each(function(index, el) {
+      new LazyLoad({
+        container: $(el).get(0),
+        elements_selector: '.lazyload'
+      });
+    });
 
     if ($(window).width() >= mobilePoint) {
       $(widget).find(".js-cut-list").cutList({
@@ -1337,12 +1356,6 @@ $(function() {
 </script>
 
 
-  
-
-
-
-
-
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/style.css" media="all" onload="this.media=&#39;all&#39;">
 
@@ -1359,5 +1372,4 @@ $(function() {
 
 
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/theme.js" charset="utf-8"></script>
-
 </body></html>

@@ -9,35 +9,34 @@
      {% for checkout in checkouts %}
      <div class="infinite-item">
 
-  
+    
   <div class="cart-item " id="cart-item25" data-product-id="336490978" data-item-id="573211243">
       
       <a href="{% url 'accounts:orders_view' checkout.pk %}" class="item-title" style="">
+       
 
-      order_id:{{ checkout.pk }}       {% if checkout.assembled == "assembled" %}
+      order_id:{{ checkout.pk }}   
+
+
+
+       {% if checkout.assembled == "assembled" %}
       {% if checkout.status == "send" or checkout.status   == "collectionsend" %}
 
 
            
 {% else %}
 
-Պատվերը հավաքված է
+ Պատվերը հավաքված է
  {% endif %}
 
 {% else %}
-{% if checkout.status == "joint" or checkout.status == "joint_green" %}
-Համատեղ առաքում
-{% else %}
-{% endif %}
+
 
 {% endif %}
 
 
       </a>
      <a href="{% url 'accounts:order_detalis' checkout.order_id %}"   style="width: 130px;margin-top: 35px;margin-left: 15px;">Դիտել կտրոնը</a>
-
-     
-     
 
      
      
@@ -49,22 +48,28 @@
         
         
       </div>
-     
-     <div class="item-link" data-cart-item-total-price=""> 
+      <div class="item-total" data-cart-item-total-price=""> {{ checkout.price|div:rate.0|floatformat:2  }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</div>
+       <div class="item-link" data-cart-item-total-price=""> 
 
         </div>
+
       <div class="item-delete">
         
          
         
         
-        <!-- a -n  button style  -->
+       {% if checkout.status == "Refund" %}
+         <button class="button js-item-change" type="button" data-item_change="25">Գումարի մասնակի վերադարձ</button>
 
 
- 
+{% elif checkout.status == "Cancel" %}
+  <button class="button js-item-change" type="button" data-item_change="25">Պատվերը չեղարկվել է</button>
+
+
+{% else %}
 
 {% if checkout.status == "send" or checkout.status == "collectionsend" %}
-            <button class="button js-item-change" type="button" data-item_change="25">Ուղարկվել է</button>
+            <button class="button js-item-change" type="button" data-item_change="25">Ուղարկված</button>
 {% else %}
 
 {% if checkout.delivery_check.pay_status == "dontpay" %}
@@ -72,10 +77,13 @@
 {% if checkout.status == "collectionpay"  %}
 <a href="{% url 'accounts:collection_view' %}">
             <button class="button js-item-change" type="button" data-item_change="25">Վճարել առաքումը</button>  </a>
-   
+{% elif  checkout.status == "joint" and checkout.delivery_check.joint == "joint" %}
+   <button class="button js-item-change" type="button" data-item_change="25">Պատվերի մշակում</button>
     {% else %}
+   
      <a href="{% url 'accounts:checkout_delivery' checkout.delivery_check.pk %}">
             <button class="button js-item-change" type="button" data-item_change="25">Վճարել առաքումը</button>  </a><span style="margin-top: 5px;"> {{ checkout.delivery_check.price|div:rate.0|floatformat:2 }}&nbsp;{% if rate.1 == 'ARM' %}֏{% elif rate.1 == "ENG" %}${% elif rate.1 == "EUR" %}€{% else %}₽{% endif %}</span>
+   
     {% endif  %}
 
 {% else %}
@@ -83,7 +91,7 @@
 <button class="button js-item-change" type="button" data-item_change="25">Չվճարված</button>
 
 {% else %}
-<button class="button js-item-change" type="button" data-item_change="25">Պատվերի մշակում </button>
+<button class="button js-item-change" type="button" data-item_change="25">Պատվերի մշակում</button>
 {% endif %}
   
 
@@ -105,9 +113,7 @@
 
 {% endif %}
 
-
-
-
+{% endif %}
 
 
 

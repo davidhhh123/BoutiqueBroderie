@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+
 <!DOCTYPE html>
 <!-- saved from url=(0052)https://demo-idea.myinsales.ru/client_account/orders -->
 <html class="desktop landscape" style="--color-btn-bg:#7188D4; --color-btn-bg-is-dark:true; --bg:#FFFFFF; --bg-is-dark:false; --color-text: var(--color-text-dark); --color-text-minor-shade: var(--color-text-dark-minor-shade); --color-text-major-shade: var(--color-text-dark-major-shade); --color-text-half-shade: var(--color-text-dark-half-shade); --color-notice-warning-is-dark:false; --color-notice-success-is-dark:false; --color-notice-error-is-dark:false; --color-notice-info-is-dark:false; --color-form-controls-bg:var(--bg); --color-form-controls-bg-disabled:var(--bg-minor-shade); --color-form-controls-border-color:var(--bg-half-shade); --color-form-controls-color:var(--color-text); --is-editor:false; --vh:568px; --fixed-panels-bottom-offset:0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>
@@ -236,6 +238,8 @@ div.im-colormask > div {
 
 
 </style>
+        <!--InsalesCounter -->
+      
 
 <title>{{ Blog.name_am }}
 </title>
@@ -299,11 +303,11 @@ div.im-colormask > div {
 <div class="breadcrumb-wrapper delemeter_1">
   <ul class="breadcrumb">
     <li class="breadcrumb-item home">
-      <a class="breadcrumb-link" title="Главная" href="/">Գլխավոր</a>
+      <a class="breadcrumb-link" title="Գլխավոր" href="/">Գլխավոր</a>
     </li>
     
       <li class="breadcrumb-item">
-        <a class="breadcrumb-link" title="Блог" href="{% url 'accounts:blog' %}">Բլոգ</a>
+        <a class="breadcrumb-link" title="Բլոգ" href="{% url 'accounts:blog' %}">Բլոգ</a>
       </li>
       
         <li class="breadcrumb-item">
@@ -352,8 +356,6 @@ div.im-colormask > div {
 
 
 
-
-
   </div>
 </div>
 
@@ -372,13 +374,13 @@ div.im-colormask > div {
 
 
       </main>
-       {% include 'layouts/aside_arm.html' %}
-     {% include 'layouts/footer_arm.html' %}
+        {% include 'layouts/aside_arm.html' %}
+   {% include 'layouts/footer_arm.html' %}
     </div>
     
     <div data-fixed-panels="bottom">
       
- 
+  
       
     </div>
 
@@ -390,75 +392,14 @@ div.im-colormask > div {
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/lazyload.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_4.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
     <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/blog_article.css" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/froala_style.min.css" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts_features.css" rel="stylesheet" type="text/css">
-  <script type="text/javascript">
-    var category_template = ` <div  class="shipping_all" style="" id="shipping_all`+ 0 +`"><span  class="shipping_veiw" price = "`+ 0 +`" time = "`+ 0 +`">{name}</span><div class="shipping_del_icon" ids = "`+ 0 +`"><span class="icon icon-times" style="font-size: 16px;color: red;"></span></div></div>`
-    $(".button_add_category").on("click", function(){
-      var category_name = $("#Name_product").val()
-      category_template1 = category_template.replace("{name}", category_name)
-      $(".images_view_item").append(category_template1)
 
 
 
-
-
-    })
-    $(".button_add_category_ajax").on("click", function(){
-      var category_name = $("#Category_product").val()
-      var sub_categories = $(".shipping_veiw")
-      var data = new FormData()
-      
-      
-      
-      
-      if (sub_categories.length>0){
-        data.append("sub_categories_switch", 1)
-        data.append("sub_categories_length", sub_categories.length)
-        for (var i=0;i<sub_categories.length;i++){
-        
-            data.append("sub_name"+String(i), sub_categories.eq(i).text())
-
-
-        }
-        
-
-
-      }
-      console.log(category_name)
-      if (category_name.length>0){
-        data.append("category_name", category_name)
-        $.ajax({
-
-
-              
-            url: '/api/add_categories/',
-            method: "POST",
-            data: data,
-            success: function(data){
-      
-                
-
-            },
-            error: function(daa){},
-            processData: false,
-            contentType: false,
-        })
-
-      }
-
-
-        
-
-     
-
-
-
-    })
-  </script>
 <script>
   try {
   let widget = '.widget-type_system_widget_v4_header_1';
@@ -471,7 +412,12 @@ $(function() {
 
   var mobilePoint = 768;
   $(document).ready(function() {
-   
+    $widget.each(function(index, el) {
+      new LazyLoad({
+        container: $(el).get(0),
+        elements_selector: '.lazyload'
+      });
+    });
 
     if ($(window).width() >= mobilePoint) {
       $(widget).find(".js-cut-list").cutList({
@@ -688,7 +634,7 @@ if (window.location.pathname == '/' && Cookies.get('lite_preorder')) {
 ;try {
   let widget = '.widget-type_system_widget_v4_notification_add_to_cart_1';
   let $widget = $('.widget-type_system_widget_v4_notification_add_to_cart_1');
- 
+  
 
 $(document).ready(function() {
   $(widget).find(".js-hide-notification").on("click", function() {
@@ -710,8 +656,25 @@ $(document).ready(function() {
 ;try {
   let widget = '.widget-type_system_widget_v4_preorder_1';
   let $widget = $('.widget-type_system_widget_v4_preorder_1');
+  $(function() {
+ 
 
+  $(document).ready(function() {
+    $(widget).find(".js-hide-preorder").on("click", function() {
+      $(widget).removeClass("is-show-fullscreen");
+    });
 
+    $(widget).on("click", function(event) {
+      if ($(event.target).closest(widget + ' .layout__content').length) {
+        return;
+      }
+
+      $(widget).removeClass("is-show-fullscreen");
+    });
+  });
+
+ 
+});
 
 } catch(error) {
   console.error('Widget "widget-type_system_widget_v4_preorder_1" throwed an error: "' + error.stack + '"')
@@ -740,7 +703,6 @@ function showButtonOnTop(btn) {
     btn.removeClass("is-show");
   }
 }
-
 
 } catch(error) {
   console.error('Widget "widget-type_system_widget_v4_button_on_top_1" throwed an error: "' + error.stack + '"')
@@ -870,6 +832,8 @@ function showCartFixedBtn(btn) {
 </script>
 
 
+  
+
 
 
 
@@ -895,3 +859,4 @@ function showCartFixedBtn(btn) {
 
 
 </body></html>
+

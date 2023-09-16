@@ -1,4 +1,7 @@
 {% load static %}
+{% load i18n %}
+
+
 <!DOCTYPE html>
 <!-- saved from url=(0052)https://demo-idea.myinsales.ru/client_account/orders -->
 <html class="desktop landscape" style="--color-btn-bg:#7188D4; --color-btn-bg-is-dark:true; --bg:#FFFFFF; --bg-is-dark:false; --color-text: var(--color-text-dark); --color-text-minor-shade: var(--color-text-dark-minor-shade); --color-text-major-shade: var(--color-text-dark-major-shade); --color-text-half-shade: var(--color-text-dark-half-shade); --color-notice-warning-is-dark:false; --color-notice-success-is-dark:false; --color-notice-error-is-dark:false; --color-notice-info-is-dark:false; --color-form-controls-bg:var(--bg); --color-form-controls-bg-disabled:var(--bg-minor-shade); --color-form-controls-border-color:var(--bg-half-shade); --color-form-controls-color:var(--color-text); --is-editor:false; --vh:568px; --fixed-panels-bottom-offset:0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>
@@ -413,6 +416,10 @@ textarea:focus {
 </style>
         <!--InsalesCounter -->
        
+        <!-- /InsalesCounter -->
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="z5u4ZcCi96mLmA06enAYpRD2dVqvCx8HW_1QzHzkq-bn-aBcfLadnFoM4BmdLhkmMUfr4as37zV5Q8uvBIY1Og">
+    <!-- meta -->
 <title>
 Առաքում
 
@@ -421,12 +428,12 @@ textarea:focus {
 <meta name="robots" content="index,follow">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
+<meta name="format-detection" content="telephone=no">
 
 <!-- canonical url-->
 
 <!-- rss feed-->
-
 
 
 <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/32275806.ico"><style media="screen">
@@ -527,6 +534,7 @@ textarea:focus {
     {% include 'layouts/footer_arm.html' %}
     </div>
     
+    
     <div data-fixed-panels="bottom">
      
 
@@ -541,11 +549,10 @@ textarea:focus {
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/lazyload.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/jquery.cut-list.css" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_2.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert_4.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/microAlert.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/bodyScrollLock.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts.css" rel="stylesheet" type="text/css">
   <link href="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/my_accounts_features.css" rel="stylesheet" type="text/css">
- 
   <script>
     
 </script>
@@ -962,9 +969,7 @@ function showCartFixedBtn(btn) {
 </script>
 
 
-
-
-
+  
 
 
 
@@ -984,7 +989,5 @@ function showCartFixedBtn(btn) {
 
   <script src="https://cdn.jsdelivr.net/gh/davidhhh123/jsall@main/theme.js" charset="utf-8"></script>
 
-
-  
-
 </body></html>
+
