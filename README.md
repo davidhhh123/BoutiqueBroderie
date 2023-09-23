@@ -5,6 +5,8 @@ Online store selling various jewelry.
 
 
 This multifunctional site is made in python django
+there is a mobile version
+
 
 
 ![Снимок веб-страницы_23-9-2023_23818_127 0 0 1](https://github.com/davidhhh123/BoutiqueBroderie/assets/73849221/a8928b51-ea03-4d1e-bbaf-97b6e2e9826e)
